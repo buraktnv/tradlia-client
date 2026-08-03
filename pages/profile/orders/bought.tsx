@@ -1,0 +1,80 @@
+import { NextPage } from "next";
+import { useState } from "react";
+import Tabmenu from "../../../components/profile/bought/Tabmenu";
+import { ProfileLayout } from "../../../components/profile/ProfileLayout";
+import Shipped from "../../../components/profile/bought/tabs/Shipped";
+import WaitingApproval from "../../../components/profile/bought/tabs/WaitingApproval";
+import WillBeShipped from "../../../components/profile/bought/tabs/WillBeShipped";
+import ReceivedShipment from "../../../components/profile/bought/tabs/ReceivedShipment";
+import CanceledOrReturnedShops from "../../../components/profile/bought/tabs/CanceledOrReturnedShops";
+import CompletedShops from "../../../components/profile/bought/tabs/CompletedShops";
+import DateDropdown from "../../../components/profile/feedback/DateDropdown";
+import FilterDropdown from "../../../components/profile/feedback/FilterDropdown";
+import { SvgSearch } from "../../../helpers/svgs/boughtSvg";
+
+enum BOUGHT_TABS {
+  Shipped,
+  WaitingApproval,
+  WillBeShipped,
+  ReceivedShipment,
+  CanceledOrReturnedShops,
+  CompletedShops,
+}
+
+const filterList = [
+  { id: 0, title: "All", active: true },
+  { id: 1, title: "Overdue", active: false },
+  { id: 2, title: "Delivery Today", active: false },
+  { id: 3, title: "Delivery Tomorrow", active: false },
+  { id: 4, title: "Domestic Shipping", active: false },
+  { id: 5, title: "Aras Shipping", active: false },
+  { id: 6, title: "PTT Shipping", active: false },
+];
+
+const Bought: NextPage = () => {
+  const [activeTab, setActiveTab] = useState<BOUGHT_TABS>(BOUGHT_TABS.WillBeShipped);
+  return (
+    <ProfileLayout>
+      <div className="flex flex-col w-full min-h-screen px-3 xl:px-0 bg-[#F2F2F2] xl:bg-transparent">
+        <div className="filters">
+          <Tabmenu setActiveTab={setActiveTab} activeTab={activeTab} />
+        </div>
+        <div className="xl:h-[3rem] flex xl:flex-row flex-col xl:gap-0 gap-3 mt-3 xl:mt-[1.5rem] justify-between xl:pl-8 xl:mx-0 xl:border xl:border-[#00B1B265] xl:bg-[#F4F5F7] xl:rounded-full xl:mb-[1.5rem] mb-3">
+          <div className="flex justify-around xl:justify-start xl:gap-12 border rounded-full py-2 xl:py-0 border-[#00B1B265] xl:border-0">
+            <div className="flex xl:mx-8">
+              <FilterDropdown filterList={filterList} />
+            </div>
+            <div className="flex xl:mx-8">
+              <DateDropdown />
+            </div>
+          </div>
+          <div className="flex relative ring-1 rounded-full ring-[#4CBEC565] ">
+            <input
+              type="search"
+              id="search"
+              placeholder="Search"
+              className="outline-none bg-white placeholder-[#7E8096] xl:placeholder-[#4CBEC5] px-5 text-left text-[#7E8096] xl:text-[#4CBEC5]  placeholder:font-light w-full  xl:px-20 py-3 rounded-full xl:text-center"
+            />
+            <div className="absolute w-5 h-5 right-4 xl:right-10 top-3.5 text-[#4cbec5]">
+              <SvgSearch />
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col content">
+          {
+            {
+              [BOUGHT_TABS.WillBeShipped]: <WillBeShipped />,
+              [BOUGHT_TABS.Shipped]: <Shipped />,
+              [BOUGHT_TABS.WaitingApproval]: <WaitingApproval />,
+              [BOUGHT_TABS.ReceivedShipment]: <ReceivedShipment />,
+              [BOUGHT_TABS.CompletedShops]: <CompletedShops />,
+              [BOUGHT_TABS.CanceledOrReturnedShops]: <CanceledOrReturnedShops />,
+            }[activeTab]
+          }
+        </div>
+      </div>
+    </ProfileLayout>
+  );
+};
+
+export default Bought;

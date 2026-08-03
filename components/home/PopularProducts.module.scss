@@ -1,0 +1,19 @@
+@reference "../../styles/globals.css";
+
+.PopularProducts {
+  &::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    @apply relative rounded-full;
+    background: #7e809644;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    @apply rounded-full;
+    background: #7e8096;
+  }
+}

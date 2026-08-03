@@ -1,0 +1,39 @@
+@reference "./globals.css";
+
+.form-group {
+  @apply grid items-center grid-cols-7 my-2;
+}
+
+.form-group input {
+  @apply row-span-6;
+  padding: 0;
+  height: initial;
+  width: initial;
+  margin-bottom: 0;
+  display: none;
+  cursor: pointer;
+}
+
+.form-group label {
+  @apply col-span-6 relative cursor-pointer text-[#7E8096] select-none font-medium text-xs;
+}
+
+.form-group label:before {
+  content: "";
+  -webkit-appearance: none;
+  background-color: transparent;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 5px;
+  @apply border border-[#4CBEC5] w-5 h-5 rounded-md;
+}
+.form-group input + label:after {
+  content: "";
+  @apply hidden;
+}
+
+.form-group input:checked + label:after {
+  @apply bg-[#4CBEC5] block absolute left-[3px] top-[3px] w-3.5 h-3.5 rounded;
+}

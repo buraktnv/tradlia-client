@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 50" fill="none">
+  <!-- Trade/commerce mark: two abstract arrows forming an exchange -->
+  <g transform="translate(0, 0)">
+    <path d="M6 28L14 20L22 28" stroke="#4e29a2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M22 28L14 36L6 28" stroke="#4e29a2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.4"/>
+    <path d="M14 20V36" stroke="#4e29a2" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <!-- "Tradlia" text -->
+  <text x="34" y="37" font-family="Ubuntu, Arial, sans-serif" font-weight="700" font-size="28" fill="#4e29a2" letter-spacing="-0.5">Tradlia</text>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 250" fill="none">
+  <!-- Abstract "T" monogram with trade arrows integrated -->
+  <g transform="translate(225, 125)">
+    <!-- Outer ring suggesting global trade -->
+    <circle cx="0" cy="0" r="100" stroke="#4e29a2" stroke-width="3" fill="none" opacity="0.15"/>
+    <circle cx="0" cy="0" r="80" stroke="#4e29a2" stroke-width="1.5" fill="none" opacity="0.08"/>
+    <!-- Stylized "T" letterform -->
+    <path d="M-50-60H50" stroke="#4e29a2" stroke-width="24" stroke-linecap="round" opacity="0.12"/>
+    <path d="M0-60V60" stroke="#4e29a2" stroke-width="24" stroke-linecap="round" opacity="0.12"/>
+    <!-- Exchange arrows (commerce symbol) -->
+    <path d="M-40-15L-20-35L0-15" stroke="#4e29a2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M40 15L20 35L0 15" stroke="#4e29a2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+</svg>

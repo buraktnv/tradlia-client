@@ -1,0 +1,20 @@
+@reference "../../styles/globals.css";
+
+.ScrollBar {
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 10px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    @apply relative rounded-full;
+    background: #d1d6e0;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #4cbec5;
+    @apply rounded-full;
+  }
+}

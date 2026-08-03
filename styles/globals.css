@@ -1,0 +1,70 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@layer base {
+  html {
+    font-family: Ubuntu, system-ui, sans-serif;
+  }
+  body {
+    @apply w-screen overflow-x-hidden;
+  }
+  #__next {
+    @apply h-full w-full;
+  }
+
+  .btnGroupHover {
+    .svgIcon {
+      @apply invisible;
+    }
+  }
+  .btnGroupHover:hover {
+    .svgIcon {
+      @apply visible;
+    }
+  }
+}
+
+@layer components {
+  .hiddenScroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    -webkit-scrollbar: none;
+  }
+  .hiddenScroll::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* hide Input Number Arrows */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="date"] {
+  position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}

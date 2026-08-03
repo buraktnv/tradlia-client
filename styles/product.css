@@ -1,0 +1,45 @@
+@reference "./globals.css";
+
+.form-group {
+    @apply block mb-2;
+  }
+  
+  .form-group input {
+    padding: 0;
+    height: initial;
+    width: initial;
+    margin-bottom: 0;
+    display: none;
+    cursor: pointer;
+  }
+  
+  .form-group label {
+    @apply relative cursor-pointer text-[#7E8096] select-none font-medium text-xs;
+  }
+  
+  .form-group label:before {
+    content: "";
+    -webkit-appearance: none;
+    background-color: transparent;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 5px;
+    @apply border border-[#4CBEC5] w-5 h-5 rounded-md;
+  }
+  .form-group input + label:after {
+    content: "";
+    @apply hidden;
+  }
+  
+  .form-group input:checked + label:after {
+    @apply bg-[#4CBEC5] block absolute top-[3px] left-[3px] w-3.5 h-[14px] rounded;
+  }
+  .info {
+    @apply hidden;
+  }
+  
+  .card__hover:hover .info {
+    @apply block;
+  }

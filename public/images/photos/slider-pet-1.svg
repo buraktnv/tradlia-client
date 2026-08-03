@@ -1,0 +1,9 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='420' viewBox='0 0 1200 420'>
+<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0' stop-color='#84cc16'/><stop offset='1' stop-color='#bef264'/></linearGradient></defs>
+<rect width='1200' height='420' fill='url(#g)'/>
+<circle cx='600' cy='176.4' r='75.6' fill='rgba(255,255,255,0.35)'/>
+<rect x='504' y='117.60000000000001' width='192' height='117.60000000000001' rx='24' fill='rgba(255,255,255,0.85)'/>
+<rect x='546' y='96.60000000000001' width='108' height='25.2' rx='12' fill='rgba(255,255,255,0.65)'/>
+<text x='600' y='327.6' font-family='Ubuntu,Arial,sans-serif' font-size='23.1' fill='rgba(255,255,255,0.95)' text-anchor='middle' font-weight='500'>Tradlia Picks</text>
+</svg>
