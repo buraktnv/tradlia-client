@@ -9,12 +9,12 @@ export const SvgMedical: FC<any> = ({ isActive }) => (
       height="100%"
       viewBox="0 0 78.638 74.817"
       fill="#fff"
-      className={`absolute top-0 left-0 transition-opacity duration-300 group-hover:block group-hover:opacity-100 ${
-        isActive ? "opacity-100" : "opacity-0"
+      className={`absolute top-0 left-0 transition-opacity duration-300 ${
+        isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
       }`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="medical-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>
@@ -30,11 +30,11 @@ export const SvgMedical: FC<any> = ({ isActive }) => (
       width="100%"
       height="100%"
       viewBox="0 0 78.638 74.817"
-      fill="url(#linear-gradient)"
-      className={`group-hover:hidden`}
+      fill="url(#medical-grad)"
+      className={`${isActive ? "hidden" : "group-hover:hidden"}`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="medical-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>
@@ -55,12 +55,12 @@ export const SvgFamily: FC<any> = ({ isActive }) => (
       height="100%"
       viewBox="0 0 74.807 74.818"
       fill="#fff"
-      className={`absolute top-0 left-0 transition-opacity duration-300 group-hover:block group-hover:opacity-100 ${
-        isActive ? "opacity-100" : "opacity-0"
+      className={`absolute top-0 left-0 transition-opacity duration-300 ${
+        isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
       }`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="family-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>
@@ -76,11 +76,11 @@ export const SvgFamily: FC<any> = ({ isActive }) => (
       width="100%"
       height="100%"
       viewBox="0 0 74.807 74.818"
-      fill="url(#linear-gradient)"
-      className={`group-hover:hidden`}
+      fill="url(#family-grad)"
+      className={`${isActive ? "hidden" : "group-hover:hidden"}`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="family-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>
@@ -101,12 +101,12 @@ export const SvgDis: FC<any> = ({ isActive }) => (
       height="100%"
       viewBox="0 0 74.416 74.817"
       fill="#fff"
-      className={`absolute top-0 left-0 transition-opacity duration-300 group-hover:block group-hover:opacity-100 ${
-        isActive ? "opacity-100" : "opacity-0"
+      className={`absolute top-0 left-0 transition-opacity duration-300 ${
+        isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
       }`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="dental-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>
@@ -122,11 +122,11 @@ export const SvgDis: FC<any> = ({ isActive }) => (
       width="100%"
       height="100%"
       viewBox="0 0 74.416 74.817"
-      fill="url(#linear-gradient)"
-      className={`group-hover:hidden`}
+      fill="url(#dental-grad)"
+      className={`${isActive ? "hidden" : "group-hover:hidden"}`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="dental-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>
@@ -147,12 +147,12 @@ export const SvgVet: FC<any> = ({ isActive }) => (
       height="100%"
       viewBox="0 0 74.411 64.844"
       fill="#fff"
-      className={`absolute top-0 left-0 transition-opacity duration-300 group-hover:block group-hover:opacity-100 ${
-        isActive ? "opacity-100" : "opacity-0"
+      className={`absolute top-0 left-0 transition-opacity duration-300 ${
+        isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
       }`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="veterinary-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>
@@ -167,11 +167,11 @@ export const SvgVet: FC<any> = ({ isActive }) => (
       width="100%"
       height="100%"
       viewBox="0 0 74.411 64.844"
-      fill="url(#linear-gradient)"
-      className={`group-hover:hidden`}
+      fill="url(#veterinary-grad)"
+      className={`${isActive ? "hidden" : "group-hover:hidden"}`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="veterinary-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>
@@ -191,12 +191,12 @@ export const SvgHealthProduct: FC<any> = ({ isActive }) => (
       height="100%"
       viewBox="0 0 74.676 75.079"
       fill="#fff"
-      className={`absolute top-0 left-0 transition-opacity duration-300 group-hover:block group-hover:opacity-100 ${
-        isActive ? "opacity-100" : "opacity-0"
+      className={`absolute top-0 left-0 transition-opacity duration-300 ${
+        isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
       }`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="health-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>
@@ -213,11 +213,11 @@ export const SvgHealthProduct: FC<any> = ({ isActive }) => (
       width="100%"
       height="100%"
       viewBox="0 0 74.676 75.079"
-      fill="url(#linear-gradient)"
-      className={`group-hover:hidden`}
+      fill="url(#health-grad)"
+      className={`${isActive ? "hidden" : "group-hover:hidden"}`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="health-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>
@@ -239,12 +239,12 @@ export const SvgPersonalCare: FC<any> = ({ isActive }) => (
       height="100%"
       viewBox="0 0 69.83 74.818"
       fill="#fff"
-      className={`absolute top-0 left-0 transition-opacity duration-300 group-hover:block group-hover:opacity-100 ${
-        isActive ? "opacity-100" : "opacity-0"
+      className={`absolute top-0 left-0 transition-opacity duration-300 ${
+        isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
       }`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="personal-care-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>
@@ -259,11 +259,11 @@ export const SvgPersonalCare: FC<any> = ({ isActive }) => (
       width="100%"
       height="100%"
       viewBox="0 0 69.83 74.818"
-      fill="url(#linear-gradient)"
-      className={`group-hover:hidden`}
+      fill="url(#personal-care-grad)"
+      className={`${isActive ? "hidden" : "group-hover:hidden"}`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="personal-care-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>
@@ -283,12 +283,12 @@ export const SvgSupplement: FC<any> = ({ isActive }) => (
       height="100%"
       viewBox="0 0 68.628 74.763"
       fill="#fff"
-      className={`absolute top-0 left-0 transition-opacity duration-300 group-hover:block group-hover:opacity-100 ${
-        isActive ? "opacity-100" : "opacity-0"
+      className={`absolute top-0 left-0 transition-opacity duration-300 ${
+        isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
       }`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="supplements-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>
@@ -303,11 +303,11 @@ export const SvgSupplement: FC<any> = ({ isActive }) => (
       width="100%"
       height="100%"
       viewBox="0 0 68.628 74.763"
-      fill="url(#linear-gradient)"
-      className={`group-hover:hidden`}
+      fill="url(#supplements-grad)"
+      className={`${isActive ? "hidden" : "group-hover:hidden"}`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="supplements-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>
@@ -327,12 +327,12 @@ export const SvgOfficeSupply: FC<any> = ({ isActive }) => (
       height="100%"
       viewBox="0 0 68.925 74.818"
       fill="#fff"
-      className={`absolute top-0 left-0 transition-opacity duration-300 group-hover:block group-hover:opacity-100 ${
-        isActive ? "opacity-100" : "opacity-0"
+      className={`absolute top-0 left-0 transition-opacity duration-300 ${
+        isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
       }`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="office-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>
@@ -347,11 +347,11 @@ export const SvgOfficeSupply: FC<any> = ({ isActive }) => (
       width="100%"
       height="100%"
       viewBox="0 0 68.925 74.818"
-      fill="url(#linear-gradient)"
-      className={`group-hover:hidden`}
+      fill="url(#office-grad)"
+      className={`${isActive ? "hidden" : "group-hover:hidden"}`}
     >
       <defs>
-        <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+        <linearGradient id="office-grad" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
           <stop offset="0" stopColor="#66c1bf" />
           <stop offset="1" stopColor="#00a29d" />
         </linearGradient>

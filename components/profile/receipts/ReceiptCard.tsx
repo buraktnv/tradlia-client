@@ -4,10 +4,41 @@ import { SvgPrintInvoice, SvgPrintShipping, SvgShowMore } from "../../../helpers
 import MessageSellerModal from "../bought/tabs/MessageSellerModal";
 import FirmReceiptInfo from "./FirmReceiptInfo";
 import ShippingInfo from "./ShippingInfo";
+import PrintInvoice from "../_shared/PrintInvoice";
+import PrintShippingLabel from "../_shared/PrintShippingLabel";
+import { exportCsv } from "../../../helpers/exportCsv";
+import { printSection } from "../../../helpers/printSection";
 
 const ReceiptCard: FC<any> = ({ content }) => {
   const [active, setActive] = useState<boolean>(content.active || false);
   const [modal1, setModal1] = useState<boolean>(false);
+  const [showDetails, setShowDetails] = useState<boolean>(false);
+  const [printTarget, setPrintTarget] = useState<"invoice" | "shipping-label" | null>(null);
+
+  const exportProductList = () => {
+    exportCsv(
+      `Order-${content.orderID}-ProductList`,
+      ["Order No", "Product", "Brand", "Expiry", "Qty", "Price", "Amount"],
+      content.productList.map((el: any) => [
+        content.orderID,
+        el.name,
+        el.brand,
+        el.miad,
+        el.quantity,
+        el.price,
+        el.total,
+      ])
+    );
+  };
+
+  const handlePrint = (target: "invoice" | "shipping-label") => {
+    setPrintTarget(target);
+    setTimeout(() => {
+      printSection(target);
+      setPrintTarget(null);
+    }, 100);
+  };
+
   return (
     <div
       className={`flex flex-col bg-white w-full border transition ${
@@ -129,7 +160,7 @@ const ReceiptCard: FC<any> = ({ content }) => {
             content.productList.map((el: { id: any }) => <ProductCard content={el} key={el.id} />)}
           <div className="grid grid-cols-12 gap-3 xl:gap-4">
             <div className="order-3 col-span-12 col-start-1 xl:order-none xl:col-start-auto xl:col-span-4">
-              <button type="button" className="text-[13px] leading-3 xl:text-sm border-[#00B1B2] border bg-[#F4F5F7] text-[#7E8096] font-medium rounded-full xl:px-16 py-3 w-full">
+              <button type="button" onClick={exportProductList} className="text-[13px] leading-3 xl:text-sm border-[#00B1B2] border bg-[#F4F5F7] text-[#7E8096] font-medium rounded-full xl:px-16 py-3 w-full">
                 Export Product List to Excel
               </button>
             </div>
@@ -145,13 +176,13 @@ const ReceiptCard: FC<any> = ({ content }) => {
               </div>
             </div>
 
-            <button type="button" className="xl:col-span-2 col-span-6 xl:order-none order-4 bg-gradient-to-r from-[#AFCA19] to-[#52AE33] whitespace-nowrap text-white flex px-4 py-2 xl:py-3 rounded-full items-center justify-center gap-2 text-[13px] leading-3 xl:text-sm">
+            <button type="button" onClick={() => handlePrint("invoice")} className="xl:col-span-2 col-span-6 xl:order-none order-4 bg-gradient-to-r from-[#AFCA19] to-[#52AE33] whitespace-nowrap text-white flex px-4 py-2 xl:py-3 rounded-full items-center justify-center gap-2 text-[13px] leading-3 xl:text-sm">
               <div className="h-5 xl:w-5 xl:h-5">
                 <SvgPrintInvoice />
               </div>
               <h3>Print Invoice</h3>
             </button>
-            <button type="button" className="xl:col-span-2 col-span-6 xl:order-none order-5 bg-gradient-to-r whitespace-nowrap from-[#FFBE00] to-[#FF7B03] text-white flex px-4 py-2 xl:py-3 rounded-full items-center justify-center gap-2 text-[13px] leading-3 xl:text-sm">
+            <button type="button" onClick={() => handlePrint("shipping-label")} className="xl:col-span-2 col-span-6 xl:order-none order-5 bg-gradient-to-r whitespace-nowrap from-[#FFBE00] to-[#FF7B03] text-white flex px-4 py-2 xl:py-3 rounded-full items-center justify-center gap-2 text-[13px] leading-3 xl:text-sm">
               <div className="h-5 xl:w-5 xl:h-5">
                 <SvgPrintShipping />
               </div>
@@ -165,9 +196,40 @@ const ReceiptCard: FC<any> = ({ content }) => {
               Message Seller
             </button>
 
-            <button type="button" className="xl:order-none order-2 text-[13px] leading-3 xl:text-sm col-start-1 xl:col-start-auto col-span-12 xl:col-span-2 flex justify-center w-full text-[#5327A8] border border-[#5327A8] px-4 py-3 rounded-full whitespace-nowrap">
+            <button type="button" onClick={() => setShowDetails((pre) => !pre)} className="xl:order-none order-2 text-[13px] leading-3 xl:text-sm col-start-1 xl:col-start-auto col-span-12 xl:col-span-2 flex justify-center w-full text-[#5327A8] border border-[#5327A8] px-4 py-3 rounded-full whitespace-nowrap">
               Order Details
             </button>
+
+            {showDetails && (
+              <div className="order-8 col-span-12 border border-[#5327A8] rounded-xl p-3 text-xs xl:text-sm text-[#7E8096] leading-5">
+                <div className="grid gap-1 xl:grid-cols-2">
+                  <div>
+                    <b className="text-[#4CBEC5]">Order No:</b> {content.orderID}
+                  </div>
+                  <div>
+                    <b className="text-[#4CBEC5]">Order Date:</b> {content.orderDate}
+                  </div>
+                  <div>
+                    <b className="text-[#4CBEC5]">Buyer:</b> {content.customer}
+                  </div>
+                  <div>
+                    <b className="text-[#4CBEC5]">Items:</b> {content.orderPiece}
+                  </div>
+                  <div className="xl:col-span-2">
+                    <b className="text-[#4CBEC5]">Items:</b>{" "}
+                    {content.productList
+                      .map((el: any) => `${el.name} (${el.brand}) x${el.quantity}`)
+                      .join(", ")}
+                  </div>
+                  <div className="xl:col-span-2">
+                    <b className="text-[#4CBEC5]">Billing Address:</b> {content.receiptInfo?.address}
+                  </div>
+                  <div className="xl:col-span-2">
+                    <b className="text-[#4CBEC5]">Tracking No:</b> {content.shippingInfo?.trackingNumber}
+                  </div>
+                </div>
+              </div>
+            )}
 
             <button type="button" className="xl:order-none order-1 col-span-10 col-start-2 xl:col-start-auto xl:col-span-3 flex bg-gradient-to-r from-[#FF516B] to-[#FF0045] text-white py-2.5 rounded-full items-center justify-center gap-1 whitespace-nowrap px-4">
               <h3 className="text-[12px] leading-3 xl:text-sm font-medium">Order Total:</h3>
@@ -187,6 +249,8 @@ const ReceiptCard: FC<any> = ({ content }) => {
           </div>
         </div>
       )}
+      {printTarget === "invoice" && <PrintInvoice order={content} />}
+      {printTarget === "shipping-label" && <PrintShippingLabel order={content} />}
     </div>
   );
 };

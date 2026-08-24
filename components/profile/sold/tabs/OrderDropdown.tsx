@@ -27,11 +27,11 @@ const OrderDropdown: FC<any> = () => {
           </div>
         </label>
         {modal && (
-          <div className="absolute z-40 shadow-sm left-0 top-[100%] right-0 bg-white border border-[#00b2b280] rounded-3xl hidden group-hover:grid opacity-0 group-hover:opacity-100 transition-all duration-150 ease-in-out">
+          <div className="absolute z-40 shadow-sm left-0 top-[100%] right-0 bg-white border border-[#00b2b280] rounded-3xl grid opacity-100 transition-all duration-150 ease-in-out">
             <div className="flex flex-col p-1 text-sm">
               {selectList &&
                 selectList.map(({ id, title }) => (
-                  <ItemsList key={id} title={title} setState={setState} state={state} />
+                  <ItemsList key={id} title={title} setState={setState} setModal={setModal} state={state} />
                 ))}
             </div>
           </div>
@@ -41,7 +41,7 @@ const OrderDropdown: FC<any> = () => {
   );
 };
 
-const ItemsList: FC<any> = ({ title, setState, state }) => {
+const ItemsList: FC<any> = ({ title, setState, setModal, state }) => {
   return (
     <>
       <div className="flex items-center justify-center w-full px-2">
@@ -49,8 +49,10 @@ const ItemsList: FC<any> = ({ title, setState, state }) => {
           className={`font-medium w-full py-0.5 ${
             state === title ? "text-[#4CBEC5]" : "hover:text-[#4CBEC5] text-[#7E8096]"
           }`}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             setState(title);
+            setModal(false);
           }}
         >
           {title}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
+import { DEV } from "../../../helpers/config";
 import { SvgAppStore, SvgGoogleStore } from "../../../helpers/svgs/footerSvg";
 
 const Footer: FC = () => {
@@ -311,6 +312,23 @@ const Footer: FC = () => {
               </div>
             </div>
           </div>
+        </div>
+        {/* Hire-me badge: subliminal portfolio branding at the footer's bottom edge */}
+        <div className="mt-6 pt-4 border-t border-[#4CBEC5]/20 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <p className="text-xs font-ubuntu text-[#A3A9C1]">
+            Crafted by {DEV.name} · {DEV.role} ·{" "}
+            <Link href="/hire-me" className="text-[#4CBEC5] hover:underline">
+              Available for freelance
+            </Link>
+          </p>
+          <Link
+            href={DEV.upworkUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="w-max text-xs font-ubuntu text-[#4CBEC5] hover:text-white transition-colors"
+          >
+            Hire me on Upwork
+          </Link>
         </div>
       </div>
     </div>

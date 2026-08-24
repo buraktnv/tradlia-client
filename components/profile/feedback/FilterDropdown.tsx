@@ -1,15 +1,46 @@
-import { FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import styles from "./FilterDropdown.module.scss";
 
-const FilterDropdown: FC<any> = ({ filterList }) => {
+const FilterDropdown: FC<any> = ({ filterList, onSelect }) => {
+  const [open, setOpen] = useState<boolean>(false);
+  const containerRef = useRef<HTMLSpanElement>(null);
+  const [selectedId, setSelectedId] = useState<number | undefined>(() => {
+    const active = filterList?.find((f: any) => f.active);
+    return active ? active.id : filterList?.[0]?.id;
+  });
+  const selected = filterList?.find((f: any) => f.id === selectedId);
+
+  const selectItem = (item: any) => {
+    setSelectedId(item.id);
+    setOpen(false);
+    onSelect?.(item);
+  };
+
+  useEffect(() => {
+    if (!open) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open]);
+
   return (
-    <span className={`${styles.DropdownMenu} h-full`}>
-      <div className="dropdown group dropdown-hover dropdown-end">
-        <label tabIndex={0} className="flex items-center py-2 overflow-hidden cursor-pointer xl:px-2 xl:py-1">
+    <span ref={containerRef} className={`${styles.DropdownMenu} h-full`}>
+      <div className={`dropdown dropdown-end ${open ? "dropdown-open" : ""}`}>
+        <label
+          tabIndex={0}
+          onClick={() => setOpen((pre) => !pre)}
+          className="flex items-center py-2 overflow-hidden cursor-pointer xl:px-2 xl:py-1"
+        >
           <div className="xl:w-4 xl:h-4 w-[15px] h-[15px]">
             <SmartSorting />
           </div>
-          <span className="text-[#7E8096] mx-1 text-xs xl:text-sm tracking-tight">Smart Sorting</span>
+          <span className="text-[#7E8096] mx-1 text-xs xl:text-sm tracking-tight">
+            {selected?.title || "Smart Sorting"}
+          </span>
         </label>
         <div
           tabIndex={0}
@@ -23,7 +54,14 @@ const FilterDropdown: FC<any> = ({ filterList }) => {
               <span className="text-[#7E8096] mx-1 text-sm">Smart Sorting</span>
             </label>
             {filterList &&
-              filterList.map(({ id, title, active }: any) => <ItemsList key={id} title={title} active={active} />)}
+              filterList.map(({ id, title }: any) => (
+                <ItemsList
+                  key={id}
+                  title={title}
+                  active={id === selectedId}
+                  onClick={() => selectItem({ id, title })}
+                />
+              ))}
           </div>
         </div>
       </div>
@@ -31,11 +69,11 @@ const FilterDropdown: FC<any> = ({ filterList }) => {
   );
 };
 
-const ItemsList: FC<any> = ({ title, active }) => {
+const ItemsList: FC<any> = ({ title, active, onClick }) => {
   return (
     <>
       <div className="flex items-center  w-full px-2 py-0.5">
-        <button type="button" className={`  text-sm font-medium hover:text-[#4CBEC5] text-[#7E8096] ${active && "text-[#4CBEC5]"}`}>
+        <button type="button" onClick={onClick} className={`  text-sm font-medium hover:text-[#4CBEC5] text-[#7E8096] ${active && "text-[#4CBEC5]"}`}>
           {title}
         </button>
       </div>

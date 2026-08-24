@@ -3,20 +3,47 @@ import React, { FC } from "react";
 import {
   SvgCargoBox,
   SvgCargoCar,
+  SvgEczaMax,
   SvgEmptyStar,
   SvgFavorite,
+  SvgMediTome,
   SvgMinus,
   SvgPlus,
   SvgTrashCan,
 } from "../../helpers/svgs/basketSvg";
 
-const BasketCard: FC<any> = ({ content }) => {
+const SellerLogo: FC<{ logo: string }> = ({ logo }) => (
+  <div className="h-8 w-8">{logo === "pharma" ? <SvgEczaMax /> : <SvgMediTome />}</div>
+);
+
+const BasketCard: FC<any> = ({ content, onChange, onRemoveSeller, onCompleteSeller, onRemoveCampaign }) => {
+  const updateProduct = (productId: number, patch: any) => {
+    const next = {
+      ...content,
+      productCards: content.productCards.map((p: any) => (p.id === productId ? { ...p, ...patch } : p)),
+    };
+    onChange(next);
+  };
+
+  const removeProduct = (productId: number) => {
+    const remaining = content.productCards.filter((p: any) => p.id !== productId);
+    if (remaining.length === 0) {
+      onRemoveSeller(content.id);
+      return;
+    }
+    onChange({ ...content, productCards: remaining });
+  };
+
+  const selectShipping = (option: string) => {
+    onChange({ ...content, shippingOption: option });
+  };
+
   return (
     <div className="bg-white xl:bg-[#F4F5F7] rounded-xl xl:rounded-3xl px-3 mx-3 xl:mx-0 xl:px-8 py-4 border border-[#00b2b27e] grid gap-5">
       <div className="flex justify-between xl:items-center">
         <div className="flex items-center w-full gap-2 xl:w-max">
           <div className="p-2 bg-white rounded-full border border-[#00B1B2CC]">
-            <div className="w-8 h-8">{content.svg}</div>
+            <SellerLogo logo={content.logo} />
           </div>
           <div className="font-bold text-[#7E8096] text-sm">{content.firm}</div>
         </div>
@@ -27,7 +54,7 @@ const BasketCard: FC<any> = ({ content }) => {
                 <div className="xl:w-6 xl:h-6 w-[21px] h-[16px]">
                   <SvgCargoCar />
                 </div>
-                 Free Shipping Over ${content.shippingCampaign}
+                Free Shipping Over ${content.shippingCampaign}
               </div>
               <div className="w-[2px] h-6 bg-[#AFD3D2] rounded-full hidden xl:block"></div>
             </>
@@ -57,31 +84,48 @@ const BasketCard: FC<any> = ({ content }) => {
       </div>
       <div className="grid gap-3">
         {content.productCards.map((el: any) => (
-          <ProductCard key={el.id} content={el} />
+          <ProductCard
+            key={el.id}
+            content={el}
+            onChange={(patch: any) => updateProduct(el.id, patch)}
+            onRemove={() => removeProduct(el.id)}
+          />
         ))}
       </div>
-      {content.shippingCampaign ? <ShippingCampaignCard content={content} /> : ""}
-      <ShippingArea content={content} />
+      {content.shippingCampaign ? (
+        <ShippingCampaignCard content={content} onRemoveCampaign={() => onRemoveCampaign(content.id)} />
+      ) : (
+        ""
+      )}
+      <ShippingArea content={content} onSelectShipping={selectShipping} />
       <div className="bg-[#DADADACC] w-full h-[1px]"></div>
       <div className="grid grid-cols-12 gap-3 xl:grid-cols-3 xl:gap-8">
-        <button type="button" className="flex items-center col-span-6 gap-2 cursor-pointer xl:col-span-1">
+        <button
+          type="button"
+          onClick={() => onRemoveSeller(content.id)}
+          className="flex items-center col-span-6 gap-2 cursor-pointer xl:col-span-1"
+        >
           <div className="w-5 h-5">
             <SvgTrashCan />
           </div>
           <p className="font-medium text-[#7E8096] text-[12px] xl:text-sm">Remove Seller from Cart</p>
         </button>
-        <button type="button" className="rounded-full order-last col-start-3 xl:col-start-auto cursor-pointer col-span-8 xl:col-span-1 xl:order-none bg-[#4CBEC5] text-white text-[12px] xl:text-sm py-2.5 xl:py-2 font-medium">
+        <button
+          type="button"
+          onClick={() => onCompleteSeller(content.id)}
+          className="rounded-full order-last col-start-3 xl:col-start-auto cursor-pointer col-span-8 xl:col-span-1 xl:order-none bg-[#4CBEC5] text-white text-[12px] xl:text-sm py-2.5 xl:py-2 font-medium"
+        >
           Complete Only This Purchase
         </button>
         <div className="font-medium text-[#7E8096] flex gap-3 text-[12px] xl:text-sm xl:items-center justify-center xl:pl-12 col-span-6 xl:col-span-1">
-          Total: <p className="font-bold xl:text-lg">{content.total} $</p>
+          Total: <p className="font-bold xl:text-lg">{content.total.toFixed(2).replace(".", ",")} $</p>
         </div>
       </div>
     </div>
   );
 };
 
-const ShippingArea: FC<any> = ({ content }) => {
+const ShippingArea: FC<any> = ({ content, onSelectShipping }) => {
   return (
     <div className="grid xl:grid-cols-2">
       <div className="flex flex-col justify-around h-full">
@@ -99,9 +143,16 @@ const ShippingArea: FC<any> = ({ content }) => {
         </div>
       </div>
       <div className="grid items-center w-full grid-cols-2 gap-2 text-sm">
-        <label htmlFor={content.id} className="flex gap-1 xl:gap-2">
+        <label htmlFor={`shipping-domestic-${content.id}`} className="flex gap-1 xl:gap-2 cursor-pointer">
           <div className="border rounded-[5px] border-[#F59C00] w-[1.3rem] h-[1.3rem] flex items-center justify-center mt-1">
-            <input type="radio" name={"shipping" + content.id} id={content.id} className="hidden peer" />
+            <input
+              type="radio"
+              name={"shipping" + content.id}
+              id={`shipping-domestic-${content.id}`}
+              className="hidden peer"
+              checked={content.shippingOption !== "express"}
+              onChange={() => onSelectShipping("domestic")}
+            />
             <div className="w-[0.9rem] h-[0.9rem] rounded-[4px] peer-checked:bg-[#F59C00]"></div>
           </div>
           <div className="grid gap-1 py-1">
@@ -119,9 +170,16 @@ const ShippingArea: FC<any> = ({ content }) => {
           </div>
         </label>
         <div>
-          <label htmlFor={content.id + 10} className="flex gap-1 xl:gap-2">
+          <label htmlFor={`shipping-express-${content.id}`} className="flex gap-1 xl:gap-2 cursor-pointer">
             <div className="border rounded-[5px] border-[#F59C00] w-[1.3rem] h-[1.3rem] flex items-center justify-center mt-1">
-              <input type="radio" name={"shipping" + content.id} id={content.id + 10} className="hidden peer" />
+              <input
+                type="radio"
+                name={"shipping" + content.id}
+                id={`shipping-express-${content.id}`}
+                className="hidden peer"
+                checked={content.shippingOption === "express"}
+                onChange={() => onSelectShipping("express")}
+              />
               <div className="w-[0.9rem] h-[0.9rem] rounded-[4px] peer-checked:bg-[#F59C00]"></div>
             </div>
             <div className="grid gap-1 py-1">
@@ -144,7 +202,7 @@ const ShippingArea: FC<any> = ({ content }) => {
   );
 };
 
-const ShippingCampaignCard: FC<any> = ({ content }) => {
+const ShippingCampaignCard: FC<any> = ({ content, onRemoveCampaign }) => {
   const condition = content.shippingCampaign - content.total < 0;
   return (
     <div
@@ -169,7 +227,7 @@ const ShippingCampaignCard: FC<any> = ({ content }) => {
               condition ? "text-white border-white" : "text-[#7E8096]"
             }`}
           >
-             Shipping Over ${content.shippingCampaign}
+            Shipping Over ${content.shippingCampaign}
             <b className={`${condition ? "text-white" : "text-[#76B82A]"}`}> Free!</b>
           </div>
         </div>
@@ -182,7 +240,11 @@ const ShippingCampaignCard: FC<any> = ({ content }) => {
         ) : (
           <>
             Campaign Applied
-            <button type="button" className="border border-[#76B82ACC] text-[#7E8096] py-1 cursor-pointer font-medium px-4 ml-6 rounded-full xl:rounded-md">
+            <button
+              type="button"
+              onClick={onRemoveCampaign}
+              className="border border-[#76B82ACC] text-[#7E8096] py-1 cursor-pointer font-medium px-4 ml-6 rounded-full xl:rounded-md"
+            >
               Remove
             </button>
           </>
@@ -192,7 +254,11 @@ const ShippingCampaignCard: FC<any> = ({ content }) => {
   );
 };
 
-const ProductCard: FC<any> = ({ content }) => {
+const ProductCard: FC<any> = ({ content, onChange, onRemove }) => {
+  const changeCount = (count: number) => {
+    onChange({ count: Math.max(1, count) });
+  };
+
   return (
     <div
       className={`grid h-full xl:h-32 grid-cols-5 gap-4 px-3 mx-3 xl:mx-0 xl:px-7 py-5 bg-white border border-gray-200 rounded-2xl xl:rounded-[1.5rem] relative ${
@@ -223,7 +289,6 @@ const ProductCard: FC<any> = ({ content }) => {
           </p>
           <p className="text-[#7E8096] text-[12px] leading-[18px] xl:text-sm">{content.brand}</p>
         </div>
-        {/* TODO warning will be added */}
         {!content.purchasable && (
           <div className="font-medium text-[#FB295A] text-sm hidden xl:block">{content.warning}</div>
         )}
@@ -242,43 +307,55 @@ const ProductCard: FC<any> = ({ content }) => {
         <div className="flex items-center gap-5 pl-4 xl:pl-0 xl:gap-3 xl:flex-col">
           <div className="w-5 h-5">
             {content.isFavorite ? (
-              <div className="flex w-full h-full">
+              <div className="flex w-full h-full cursor-pointer" onClick={() => onChange({ isFavorite: false })}>
                 <SvgFavorite />
               </div>
             ) : (
-              <div className="flex w-full h-full">
+              <div className="flex w-full h-full cursor-pointer" onClick={() => onChange({ isFavorite: true })}>
                 <SvgEmptyStar />
               </div>
             )}
           </div>
-          <div className="w-5 h-5">
+          <div className="w-5 h-5 cursor-pointer" onClick={onRemove}>
             <SvgTrashCan />
           </div>
         </div>
         <div className="flex items-center gap-3">
           <div>
             <div className="bg-[#F4F5F9] rounded-full flex border border-[#00B1B2CC] p-0.5 xl:p-1">
-              <div className="flex items-center justify-center px-1.5 bg-white rounded-l-full">
+              <button
+                type="button"
+                onClick={() => changeCount(content.count - 1)}
+                aria-label="Decrease quantity"
+                className="flex items-center justify-center px-1.5 bg-white rounded-l-full cursor-pointer"
+              >
                 <div className="xl:w-3 w-2 h-1 xl:h-3 text-[#4CBEC5]">
                   <SvgMinus />
                 </div>
-              </div>
+              </button>
               <input
                 type="number"
                 name=""
                 id=""
-                className="xl:w-9 w-7 bg-[#F4F5F9] text-sm text-center text-[#7E8096]"
-                defaultValue={content.count}
+                min={1}
+                value={content.count}
+                onChange={(e) => changeCount(Number(e.target.value) || 1)}
+                className="xl:w-9 w-7 bg-[#F4F5F9] text-sm text-center text-[#7E8096] outline-none"
               />
-              <div className="flex items-center justify-center px-1.5 bg-white rounded-r-full">
+              <button
+                type="button"
+                onClick={() => changeCount(content.count + 1)}
+                aria-label="Increase quantity"
+                className="flex items-center justify-center px-1.5 bg-white rounded-r-full cursor-pointer"
+              >
                 <div className="xl:w-3 w-2 h-2 xl:h-3 text-[#4CBEC5]">
                   <SvgPlus />
                 </div>
-              </div>
+              </button>
             </div>
           </div>
           <div className="flex items-center justify-center text-[#7E8096] text-sm font-bold text-center w-20 xl:w-24 whitespace-nowrap">
-            <p>{content.total} $</p>
+            <p>{(content.price * content.count).toFixed(2).replace(".", ",")} $</p>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import { useState } from "react";
 import DateDropdown from "../../components/profile/feedback/DateDropdown";
 import FilterDropdown from "../../components/profile/feedback/FilterDropdown";
 import SingleFeedback from "../../components/profile/feedback/SingleFeedback";
@@ -44,13 +45,34 @@ const filterList = [
 ];
 
 const Feedback: NextPage = () => {
+  const [filter, setFilter] = useState<any>(null);
+
+  const onFilterSelect = (item: any) => {
+    setFilter(item);
+  };
+
+  const filteredList = feedBackList.filter((c: any) => {
+    if (!filter) return true;
+    // Check both the mock data and localStorage-backed answers
+    const storedAnswer = typeof window !== "undefined" ? localStorage.getItem(`feedback-answers-${c.id}`) : null;
+    const hasAnswer = !!c.answer || (!!storedAnswer && storedAnswer !== "null");
+    if (filter.title === "Answered") return hasAnswer;
+    if (filter.title === "Not Answered") return !hasAnswer;
+    if (filter.title === "1 Star") return Math.floor(c.vote) === 1;
+    if (filter.title === "2 Stars") return Math.floor(c.vote) === 2;
+    if (filter.title === "3 Stars") return Math.floor(c.vote) === 3;
+    if (filter.title === "4 Stars") return Math.floor(c.vote) === 4;
+    if (filter.title === "5 Stars") return Math.floor(c.vote) === 5;
+    return true;
+  });
+
   return (
     <ProfileLayout>
       <div className="flex flex-col w-full xl:bg-transparent bg-[#F4F5F7]">
         <div className="xl:h-[3rem] flex xl:flex-row flex-col xl:gap-0 gap-3 justify-between xl:pl-8 mx-3 xl:mx-0 xl:border xl:border-[#00B1B265] xl:bg-[#F4F5F7] xl:rounded-full xl:mb-[1.5rem] mb-2">
           <div className="flex justify-around xl:justify-start xl:gap-12 border rounded-full py-2 xl:py-0 border-[#00B1B265] xl:border-0">
             <div className="flex xl:mx-8">
-              <FilterDropdown filterList={filterList} />
+              <FilterDropdown filterList={filterList} onSelect={onFilterSelect} />
             </div>
             <div className="flex xl:mx-8">
               <DateDropdown />
@@ -68,9 +90,15 @@ const Feedback: NextPage = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-3 xl:gap-[1.5rem]">
-          {feedBackList && feedBackList.map((content) => <SingleFeedback content={content} key={content.id} />)}
-        </div>
+        {filteredList.length === 0 ? (
+          <div className="flex items-center justify-center w-full px-6 py-16 text-center text-[#7E8096]">
+            No feedback matches this filter.
+          </div>
+        ) : (
+          <div className="flex flex-col gap-3 xl:gap-[1.5rem]">
+            {filteredList.map((content) => <SingleFeedback content={content} key={content.id} />)}
+          </div>
+        )}
       </div>
     </ProfileLayout>
   );

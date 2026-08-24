@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <!-- Health category - Heart with pulse -->
+  <rect x="20" y="20" width="260" height="260" rx="30" fill="#fff0f0" stroke="#FF516B" stroke-width="4"/>
+  <!-- Heart -->
+  <path d="M150 80 Q130 50 100 80 Q70 50 60 80 Q50 90 50 110 Q50 140 100 180 Q150 140 200 110 Q250 140 250 110 Q250 90 240 80 Q230 50 200 80 Q170 50 150 80 Z" fill="#ff4444" opacity="0.2" stroke="#FF516B" stroke-width="4"/>
+  <!-- Pulse line -->
+  <path d="M60 150 L60 130 Q70 125 80 130 Q90 135 100 130 Q110 120 120 130 Q130 140 140 130 Q150 125 160 130 Q170 135 180 130 Q190 125 200 130 Q210 135 220 130" stroke="#FF516B" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Heart rate -->
+  <text x="150" y="260" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#FF516B" text-anchor="middle">72 BPM</text>
+  <!-- Cross decoration -->
+  <rect x="250" y="20" width="20" height="80" rx="4" fill="#FF516B" opacity="0.5"/>
+  <rect x="220" y="50" width="80" height="20" rx="4" fill="#FF516B" opacity="0.5"/>
+</svg>

@@ -13,9 +13,8 @@ import TopCategories from "../../home/TopCategories";
 // TODO Tradlia logo is directly inside Link as Image, this should be Link > A > Image.
 const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { asPath } = useRouter();
-  const condition = !asPath.includes("/profile");
   const router = useRouter();
+  const condition = !router.asPath.includes("/profile");
 
   useEffect(() => {
     if (condition) {
@@ -166,7 +165,5 @@ const SvgCategory: FC<any> = ({ isOpen }) => (
     </g>
   </svg>
 );
-
-// TODO Turkish character causes build error
 
 export default Navbar;

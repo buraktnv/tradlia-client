@@ -1,9 +1,11 @@
 import { NextPage } from "next";
 import React, { FC, useState } from "react";
+import { toast } from "react-toastify";
 import DateDropdown from "../../components/profile/feedback/DateDropdown";
 import FilterDropdown from "../../components/profile/feedback/FilterDropdown";
 import { ProfileLayout } from "../../components/profile/ProfileLayout";
 import SupportModal from "../../components/profile/support/SupportModal";
+import useLocalStorage from "../../helpers/hooks/useLocalStorage";
 import { SvgM, SvgPencil, SvgSearch, SvgSpeechBubble, SvgSpeechBubbleTwo } from "../../helpers/svgs/supportSvg";
 
 const cardList = [
@@ -115,11 +117,52 @@ const filterList = [
   { id: 7, title: "5 Stars", active: false },
 ];
 
+const formatNow = () => {
+  const d = new Date();
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${pad(d.getDate())}.${pad(d.getMonth() + 1)}.${d.getFullYear()} - ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+};
+
 const Support: NextPage = () => {
   const [modal, setModal] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
+  const [tickets, setTickets] = useLocalStorage<any[]>("support-tickets", cardList);
+
+  const createTicket = ({ subject, message }: { subject: string; message: string }) => {
+    const newTicket = {
+      id: Date.now(),
+      subject,
+      date: formatNow().split(" - ")[0],
+      condition: "Open",
+      active: true,
+      messages: [{ id: `m-${Date.now()}`, sender: "customer", message, date: formatNow() }],
+    };
+    setTickets((pre: any[]) => [newTicket, ...pre]);
+  };
+
+  const replyToTicket = (id: number, message: string) => {
+    setTickets((pre: any[]) =>
+      pre.map((ticket) =>
+        ticket.id === id
+          ? {
+              ...ticket,
+              messages: [
+                ...ticket.messages,
+                { id: `m-${Date.now()}-${Math.random()}`, sender: "seller", message, date: formatNow(), received: true },
+              ],
+            }
+          : ticket
+      )
+    );
+  };
+
+  const filteredTickets = (tickets ?? cardList).filter((ticket: any) =>
+    ticket.subject.toLowerCase().includes(search.trim().toLowerCase())
+  );
+
   return (
     <ProfileLayout>
-      {modal && <SupportModal setModal={setModal} />}
+      {modal && <SupportModal setModal={setModal} onCreate={createTicket} />}
       <div className="flex flex-col w-full bg-[#F2F2F2] xl:bg-transparent">
         <div className="xl:h-[3rem] flex xl:flex-row flex-col xl:gap-0 gap-3 justify-between xl:pl-8 mx-3 xl:mx-0 xl:border xl:border-[#00B1B265] xl:bg-[#F4F5F7] xl:rounded-full mb-3 xl:mb-[1.5rem]">
           <div className="flex justify-around xl:justify-start xl:gap-12 border rounded-full py-2 xl:py-0 border-[#00B1B265] xl:border-0">
@@ -135,6 +178,8 @@ const Support: NextPage = () => {
               type="search"
               id="search"
               placeholder="Search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               className="outline-none bg-white placeholder-[#7E8096] xl:placeholder-[#4CBEC5] px-5 text-left text-[#7E8096] xl:text-[#4CBEC5]  placeholder:font-light w-full  xl:px-20 py-2 rounded-full xl:text-center"
             />
             <div className="absolute w-5 h-5 right-4 xl:right-10 top-3.5 text-[#4cbec5]">
@@ -151,7 +196,13 @@ const Support: NextPage = () => {
           </button>
         </div>
         <div className="flex flex-col xl:gap-[1rem] gap-5">
-          {cardList && cardList.map((content) => <Card key={content.id} content={content} />)}
+          {filteredTickets.length > 0 ? (
+            filteredTickets.map((content: any) => <Card key={content.id} content={content} onReply={replyToTicket} />)
+          ) : (
+            <div className="rounded-2xl border border-[#00B1B265] bg-white p-10 text-center text-sm text-[#A0A2AF]">
+              No support tickets match your search.
+            </div>
+          )}
         </div>
       </div>
     </ProfileLayout>
@@ -204,8 +255,20 @@ const ClosedCard: FC<any> = ({ active, setCardState, content }) => {
     </div>
   );
 };
-const Card: FC<any> = ({ content }) => {
+const Card: FC<any> = ({ content, onReply }) => {
   const [cardState, setCardState] = useState<boolean>(content?.active || false);
+  const [reply, setReply] = useState<string>("");
+
+  const sendReply = () => {
+    if (!reply.trim()) {
+      toast.error("Please write a reply first.");
+      return;
+    }
+    onReply(content.id, reply.trim());
+    setReply("");
+    toast.success("Your reply has been sent.");
+  };
+
   return (
     <div className="flex flex-col bg-white xl:bg-[#F4F5F7] rounded-xl text-sm mx-3 xl:mx-0">
       <ClosedCard active={cardState} setCardState={setCardState} content={content} />
@@ -219,9 +282,14 @@ const Card: FC<any> = ({ content }) => {
             <input
               type="text"
               placeholder="Your Answer"
+              value={reply}
+              onChange={(e) => setReply(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") sendReply();
+              }}
               className="border border-[#00b2b291] bg-white rounded-full w-full xl:w-10/12 px-4 py-2 outline-none text-center xl:text-left"
             />
-            <button type="button" className="bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] text-white px-4 py-2 rounded-full font-bold w-full xl:w-2/12">
+            <button type="button" onClick={sendReply} className="bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] text-white px-4 py-2 rounded-full font-bold w-full xl:w-2/12">
               Send
             </button>
           </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FC, useState } from "react";
 import { SvgFavorite } from "../../../helpers/svgs/basketSvg";
 import { SvgBigger } from "../../../helpers/svgs/homeSvg";
@@ -15,7 +16,7 @@ const SingleCard: FC<any> = ({ content, deleteCard }) => {
   return (
     <>
       {modal && <RemoveConfirmModal setModal={setModal} deleteFavorites={deleteFavorites} />}
-      <div className="grid grid-cols-11 gap-3 relative group bg-white border border-[#dadada65] hover:border-[#4bbfc59c] hover:shadow-md px-6 py-3 rounded-3xl w-full transition-all ease-in-out duration-200">
+      <div className="grid grid-cols-11 gap-3 relative group bg-white border border-[#dadada65] hover:border-[#4CBEC5]/60 hover:shadow-md px-6 py-3 rounded-3xl w-full transition-all ease-in-out duration-200">
         <div className="flex items-center justify-center w-full h-full col-span-2">
           <Image className="object-contain" src={content?.image} width={120} height={100} alt={content.brand} />
         </div>
@@ -34,12 +35,12 @@ const SingleCard: FC<any> = ({ content, deleteCard }) => {
           </div>
         </div>
         <div className="flex items-center justify-center w-full col-span-3 px-6 bottom-3">
-          <button type="button" className="w-full flex items-center justify-center py-2 border border-[#f59b009c] rounded-full text-sm text-[#F59C00] font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+          <Link href="/category" className="w-full flex items-center justify-center py-2 border border-[#f59b009c] rounded-full text-sm text-[#F59C00] font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
             All Listings
             <div className="w-8 h-4">
               <SvgBigger />
             </div>
-          </button>
+          </Link>
         </div>
         <div className="flex items-center justify-end w-full gap-2">
           {content.shipping === 0 ? (

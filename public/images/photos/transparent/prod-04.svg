@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+  <linearGradient id="g-tube-prod-04" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66c1bf"/><stop offset="1" stop-color="#00a29d"/></linearGradient>
+  </defs>
+  
+  <ellipse cx="200" cy="340" rx="110" ry="20" fill="#000" opacity="0.14"/>
+  <rect x="140" y="60" width="120" height="34" rx="10" fill="#e8eaef"/>
+  <path d="M128 94 L140 94 L140 320 L260 320 L260 94 L272 94 C272 94 272 220 268 260 C264 296 258 330 258 330 L142 330 C142 330 136 296 132 260 C128 220 128 94 128 94 Z" fill="url(#g-tube-prod-04)"/>
+  <rect x="152" y="180" width="96" height="60" rx="10" fill="#ffffff" opacity="0.9"/>
+  <rect x="168" y="198" width="64" height="9" rx="4" fill="#c9ccd4"/>
+  <rect x="168" y="214" width="40" height="9" rx="4" fill="#e4e6ea"/>
+  <ellipse cx="180" cy="120" rx="9" ry="34" fill="#fff" opacity="0.35"/>
+
+</svg>

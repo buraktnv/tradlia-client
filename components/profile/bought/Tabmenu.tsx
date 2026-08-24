@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from "react";
+import { FC } from "react";
 import {
   SvgCanceledOrReturnedShops,
   SvgCompletedShops,
@@ -19,7 +19,7 @@ enum BOUGHT_TABS {
 }
 
 interface TebMenuProps {
-  setActiveTab: Dispatch<SetStateAction<BOUGHT_TABS>>;
+  setActiveTab: (tab: BOUGHT_TABS) => void;
   activeTab: BOUGHT_TABS;
 }
 

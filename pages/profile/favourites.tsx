@@ -6,6 +6,8 @@ import DateDropdown from "../../components/profile/feedback/DateDropdown";
 import FilterDropdown from "../../components/profile/feedback/FilterDropdown";
 import { ProfileLayout } from "../../components/profile/ProfileLayout";
 import { SvgFilterTabIcon1, SvgFilterTabIcon2, SvgSearch } from "../../helpers/svgs/favoriteSvg";
+import useLocalStorage from "../../helpers/hooks/useLocalStorage";
+import { HIRE_ME_COPY } from "../../helpers/config";
 
 const items: any = [
   {
@@ -143,15 +145,12 @@ const filterList = [
 ];
 
 const Favourites: NextPage = () => {
-  const [itemList, setItemList] = useState<any>(items);
+  const [itemList, setItemList] = useLocalStorage<any[]>("favourites", items);
 
   const [cardStyle, setCardStyle] = useState<any>("card");
 
   const deleteCard = (item: any) => {
-    setItemList((pre: any[]) => {
-      pre[pre.indexOf(item)].isFavorite = false;
-      return pre;
-    });
+    setItemList((pre: any[]) => pre.filter((el: any) => el.id !== item.id));
   };
 
   return (
@@ -197,22 +196,26 @@ const Favourites: NextPage = () => {
           </div>
         </div>
         {cardStyle === "list" ? (
-          <div className="flex flex-col gap-3 xl:gap-[1.5rem]">
-            {itemList &&
-              itemList.map((content: any) => (
-                <SingleCardListStyle key={content.id} content={content} deleteCard={deleteCard} />
-              ))}
-            {itemList.length === 0 && (
-              <div className="flex items-center justify-center w-full h-full">You have no favourite listings. </div>
-            )}
+          itemList.length === 0 ? (
+            <div className="flex items-center justify-center w-full px-6 py-16 text-center text-[#7E8096]">
+              {HIRE_ME_COPY.favouritesEmpty}
+            </div>
+          ) : (
+            <div className="flex flex-col gap-3 xl:gap-[1.5rem]">
+              {itemList &&
+                itemList.map((content: any) => (
+                  <SingleCardListStyle key={content.id} content={content} deleteCard={deleteCard} />
+                ))}
+            </div>
+          )
+        ) : itemList.length === 0 ? (
+          <div className="flex items-center justify-center w-full px-6 py-16 text-center text-[#7E8096]">
+            {HIRE_ME_COPY.favouritesEmpty}
           </div>
         ) : (
           <div className="grid w-full h-full grid-cols-2 gap-3 xl:gap-[1.5rem] xl:grid-cols-4">
             {itemList &&
               itemList.map((content: any) => <SingleCard key={content.id} content={content} deleteCard={deleteCard} />)}
-            {itemList.length === 0 && (
-              <div className="flex items-center justify-center w-full h-full">You have no favourite listings. </div>
-            )}
           </div>
         )}
       </div>

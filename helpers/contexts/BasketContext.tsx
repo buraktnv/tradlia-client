@@ -43,7 +43,6 @@ export const BasketProvider: FC<IBasketProviderProps> = ({ children }) => {
     const newItem = { ...item, basket_id: String(idCounter) };
     setBasket((prev) => [...prev, newItem]);
     setIdCounter((n) => n + 1);
-    setBasket((prev) => [...prev, newItem]);
     toast.info("Item added to cart.");
   };
 

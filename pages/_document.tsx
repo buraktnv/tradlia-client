@@ -1,4 +1,10 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import { DEV } from "../helpers/config";
+
+// JSX comments ({/* ... */}) are stripped at compile time and never reach the
+// served HTML, so the credit is emitted as a real HTML comment at runtime —
+// visible in the page source as a subliminal hire-me easter egg.
+const hireMeCredit = `<!-- Built with care by ${DEV.name} · Freelance availability: ${DEV.upworkUrl} -->`;
 
 export default function Document() {
   return (
@@ -11,6 +17,7 @@ export default function Document() {
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </Head>
       <body>
+        <div dangerouslySetInnerHTML={{ __html: hireMeCredit }} />
         <Main />
         <NextScript />
       </body>

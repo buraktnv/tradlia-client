@@ -17,8 +17,8 @@ const Sidebar: FC = () => {
         <p className="w-full p-2 text-lg font-semibold text-white">Tradlia</p>
       </div>
       <div className="flex flex-col w-full gap-1 px-2 mt-3 xl:mt-[1.5rem] sideItems">
-        <SingleDropdownItem />
         <SingleLinkItem url={U.URL_PROFILE_ADVERTS} icon={<Icon.SvgAnnounce />} text={"My Listings"} />
+        <SingleDropdownItem />
         <SingleLinkItem url={U.URL_PROFILE_FEEDBACK} icon={<Icon.SvgOk />} text={"Ratings and Reviews"} />
         <SingleLinkItem url={U.URL_PROFILE_MESSAGES} icon={<Icon.SvgMessage />} text={"My Messages"} />
         <SingleLinkItem url={U.URL_PROFILE_INTEGRATORS} icon={<Icon.SvgEnteg />} text={"Integrators"} />

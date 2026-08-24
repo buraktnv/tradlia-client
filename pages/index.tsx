@@ -6,6 +6,7 @@ import DiscoverCategory from "../components/home/DiscoverCategory";
 import Slider from "../components/home/Slider";
 import FilterSelection from "../components/home/FilterSelection";
 import DiscoverCategoryMobile from "../components/home/DiscoverCategoryMobile";
+import Stories from "../components/home/Stories";
 
 const Home: NextPage = () => {
   return (
@@ -15,6 +16,7 @@ const Home: NextPage = () => {
       <ProductCard />
       <DiscoverCategory />
       <DiscoverCategoryMobile />
+      <Stories />
       <PopularProducts />
       <AltCategories />
     </div>

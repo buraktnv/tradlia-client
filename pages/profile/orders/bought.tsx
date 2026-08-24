@@ -1,5 +1,6 @@
 import { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Tabmenu from "../../../components/profile/bought/Tabmenu";
 import { ProfileLayout } from "../../../components/profile/ProfileLayout";
 import Shipped from "../../../components/profile/bought/tabs/Shipped";
@@ -21,6 +22,24 @@ enum BOUGHT_TABS {
   CompletedShops,
 }
 
+const TAB_SLUGS: Record<string, BOUGHT_TABS> = {
+  shipped: BOUGHT_TABS.Shipped,
+  "waiting-approval": BOUGHT_TABS.WaitingApproval,
+  "will-be-shipped": BOUGHT_TABS.WillBeShipped,
+  received: BOUGHT_TABS.ReceivedShipment,
+  canceled: BOUGHT_TABS.CanceledOrReturnedShops,
+  completed: BOUGHT_TABS.CompletedShops,
+};
+
+const TAB_NAMES: Record<BOUGHT_TABS, string> = {
+  [BOUGHT_TABS.Shipped]: "shipped",
+  [BOUGHT_TABS.WaitingApproval]: "waiting-approval",
+  [BOUGHT_TABS.WillBeShipped]: "will-be-shipped",
+  [BOUGHT_TABS.ReceivedShipment]: "received",
+  [BOUGHT_TABS.CanceledOrReturnedShops]: "canceled",
+  [BOUGHT_TABS.CompletedShops]: "completed",
+};
+
 const filterList = [
   { id: 0, title: "All", active: true },
   { id: 1, title: "Overdue", active: false },
@@ -32,12 +51,27 @@ const filterList = [
 ];
 
 const Bought: NextPage = () => {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<BOUGHT_TABS>(BOUGHT_TABS.WillBeShipped);
+
+  useEffect(() => {
+    const slug = router.query.tab;
+    if (typeof slug === "string" && TAB_SLUGS[slug] !== undefined) {
+      setActiveTab(TAB_SLUGS[slug]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const changeTab = (tab: BOUGHT_TABS) => {
+    setActiveTab(tab);
+    router.push({ query: { ...router.query, tab: TAB_NAMES[tab] } }, undefined, { shallow: true });
+  };
+
   return (
     <ProfileLayout>
       <div className="flex flex-col w-full min-h-screen px-3 xl:px-0 bg-[#F2F2F2] xl:bg-transparent">
         <div className="filters">
-          <Tabmenu setActiveTab={setActiveTab} activeTab={activeTab} />
+          <Tabmenu setActiveTab={changeTab} activeTab={activeTab} />
         </div>
         <div className="xl:h-[3rem] flex xl:flex-row flex-col xl:gap-0 gap-3 mt-3 xl:mt-[1.5rem] justify-between xl:pl-8 xl:mx-0 xl:border xl:border-[#00B1B265] xl:bg-[#F4F5F7] xl:rounded-full xl:mb-[1.5rem] mb-3">
           <div className="flex justify-around xl:justify-start xl:gap-12 border rounded-full py-2 xl:py-0 border-[#00B1B265] xl:border-0">

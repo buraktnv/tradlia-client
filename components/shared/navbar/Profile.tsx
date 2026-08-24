@@ -18,21 +18,21 @@ const Profile: FC<any> = () => {
     profileItems: [
       {
         id: 0,
+        svg: <SvgAdverts />,
+        name: "My Listings",
+        link: "/profile/adverts",
+      },
+      {
+        id: 1,
         svg: <SvgSelledItems />,
         name: "My Sales",
         link: "/profile/orders/sold",
       },
       {
-        id: 1,
+        id: 2,
         svg: <SvgOrders />,
         name: "My Orders",
         link: "/profile/orders/bought",
-      },
-      {
-        id: 2,
-        svg: <SvgAdverts />,
-        name: "My Listings",
-        link: "/profile/adverts",
       },
       {
         id: 3,
@@ -83,7 +83,7 @@ const Profile: FC<any> = () => {
               <p className="font-medium text-[#4CBEC5]">{ProfileData.name}</p>
             </div>
             <div className="flex flex-col w-full">
-              <div className="w-full h-[1px] bg-[#4cbfc5c2] my-1"></div>
+              <div className="w-full h-[1px] bg-[#4CBEC5]/75 my-1"></div>
 
               {ProfileData.profileItems &&
                 ProfileData.profileItems.map((el) => <NotificationItem key={el.id} content={el} />)}

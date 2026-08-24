@@ -1,26 +1,17 @@
 import { FC, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { jsonCategoryList } from "../../home/jsonCategoryList";
+import { categories } from "../../../helpers/categories";
+import { categoryUrl } from "../../../helpers/urls";
 import { SvgArrow, SvgHome, SvgPlus } from "../../../helpers/svgs/navbarSvg";
-
-const subCategoryList = [
-  { id: 1, isActive: false, name: "Glass Ionomers" },
-  { id: 2, isActive: true, name: "Accessories" },
-  { id: 3, isActive: false, name: "Glasses & Face Masks" },
-  { id: 4, isActive: false, name: "Anesthesia" },
-  { id: 5, isActive: false, name: "Caps" },
-  { id: 6, isActive: false, name: "Whitening" },
-  { id: 7, isActive: false, name: "Surgical" },
-  { id: 8, isActive: false, name: "Scaling & Prophylaxis" },
-  { id: 9, isActive: false, name: "Pediatric & Prophylaxis" },
-  { id: 10, isActive: false, name: "Disinfection & Sterilization" },
-  { id: 11, isActive: false, name: "Dental Unit & Accessories" },
-  { id: 12, isActive: false, name: "Air Water Syringes" },
-];
 
 const DashboardNavigation: FC<any> = ({ setIsDashboardShown }) => {
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
+  const router = useRouter();
+  const selectedJsonCategory = jsonCategoryList.find((el) => el.id === selectedCategory);
+  const selectedCategoryItem = categories.find((c) => c.icon === selectedJsonCategory?.icon);
   return (
     <>
       <div className="absolute z-[999] inset-0 bg-gray-200 h-screen w-screen">
@@ -75,10 +66,18 @@ const DashboardNavigation: FC<any> = ({ setIsDashboardShown }) => {
                     {jsonCategoryList.filter((el) => el.id === selectedCategory)[0]?.text2}
                   </span>
                 </button>
-                {subCategoryList.map((el) => (
-                  <button type="button" className="flex items-center w-full py-1 my-1" key={el.id}>
+                {selectedCategoryItem?.subCategories.map((sub) => (
+                  <button
+                    type="button"
+                    className="flex items-center w-full py-1 my-1"
+                    key={sub.id}
+                    onClick={() => {
+                      router.push(categoryUrl(selectedCategoryItem.id, sub.id));
+                      setIsDashboardShown(false);
+                    }}
+                  >
                     <span className="invisible w-8"></span>
-                    <span className="text-left mx-2 font-base text-[#7E8096]">{el.name}</span>
+                    <span className="text-left mx-2 font-base text-[#7E8096]">{sub.name}</span>
                     <span className="ml-auto h-3 w-3 font-medium text-[#7E8096] ">
                       <SvgPlus />
                     </span>

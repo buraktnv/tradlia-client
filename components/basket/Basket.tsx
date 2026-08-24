@@ -56,24 +56,23 @@ const Recommended: any = [
   },
 ];
 
-const Basket: FC<any> = ({ setActivePage, activePage }) => {
+const Basket: FC<any> = ({ setActivePage, activePage, basketData, setBasketData }) => {
   const [recommendedList, setRecommendedList] = useState<any>(Recommended);
 
   const deleteCard = (item: any) => {
-    setRecommendedList((pre: any[]) => {
-      pre[pre.indexOf(item)].isFavorite = false;
-      return pre;
-    });
+    setRecommendedList((pre: any[]) =>
+      pre.map((el) => (el.id === item.id ? { ...el, isFavorite: false } : el))
+    );
   };
   return (
     <>
       <div>
         <div className="container grid grid-cols-12 gap-3 mx-auto mt-6 xl:gap-8">
           <div className="col-span-12 xl:col-span-9">
-            <Content />
+            <Content content={basketData} setContent={setBasketData} />
           </div>
           <div className="col-span-12 mx-3 xl:mx-0 xl:col-span-3 xl:block">
-            <Sidebar setActivePage={setActivePage} activePage={activePage} />
+            <Sidebar setActivePage={setActivePage} activePage={activePage} basketData={basketData} />
           </div>
         </div>
         <div className="container grid gap-4 px-3 py-8 mx-auto xl:py-12 xl:px-0">

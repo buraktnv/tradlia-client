@@ -408,7 +408,7 @@ const ProductCard: FC<any> = ({ content }) => {
               </div>
             </div>
             <div className="absolute top-0">
-              <div className="absolute fill-red">
+              <div className="absolute fill-red-500">
                 <SvgBanner1 />
               </div>
               <div className="relative flex flex-col top-1 left-3">

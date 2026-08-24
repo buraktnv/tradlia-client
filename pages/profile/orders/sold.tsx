@@ -1,5 +1,6 @@
 import { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Tabmenu from "../../../components/profile/sold/Tabmenu";
 import { ProfileLayout } from "../../../components/profile/ProfileLayout";
 import Shipping from "../../../components/profile/sold/tabs/Shipping";
@@ -25,6 +26,28 @@ enum SOLD_TABS {
   TroubledOrders,
 }
 
+const TAB_SLUGS: Record<string, SOLD_TABS> = {
+  "new-order": SOLD_TABS.NewOrder,
+  "will-be-shipped": SOLD_TABS.WillBeShipped,
+  shipping: SOLD_TABS.Shipping,
+  received: SOLD_TABS.ReceivedShipment,
+  completed: SOLD_TABS.CompletedShops,
+  transmitted: SOLD_TABS.TransmittedMoney,
+  canceled: SOLD_TABS.CanceledOrReturnedShops,
+  troubled: SOLD_TABS.TroubledOrders,
+};
+
+const TAB_NAMES: Record<SOLD_TABS, string> = {
+  [SOLD_TABS.NewOrder]: "new-order",
+  [SOLD_TABS.WillBeShipped]: "will-be-shipped",
+  [SOLD_TABS.Shipping]: "shipping",
+  [SOLD_TABS.ReceivedShipment]: "received",
+  [SOLD_TABS.CompletedShops]: "completed",
+  [SOLD_TABS.TransmittedMoney]: "transmitted",
+  [SOLD_TABS.CanceledOrReturnedShops]: "canceled",
+  [SOLD_TABS.TroubledOrders]: "troubled",
+};
+
 const filterList = [
   { id: 0, title: "All", active: true },
   { id: 1, title: "Overdue", active: false },
@@ -36,12 +59,27 @@ const filterList = [
 ];
 
 const Sold: NextPage = () => {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<SOLD_TABS>(SOLD_TABS.WillBeShipped);
+
+  useEffect(() => {
+    const slug = router.query.tab;
+    if (typeof slug === "string" && TAB_SLUGS[slug] !== undefined) {
+      setActiveTab(TAB_SLUGS[slug]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const changeTab = (tab: SOLD_TABS) => {
+    setActiveTab(tab);
+    router.push({ query: { ...router.query, tab: TAB_NAMES[tab] } }, undefined, { shallow: true });
+  };
+
   return (
     <ProfileLayout>
       <div className="flex flex-col w-full bg-[#F2F2F2] xl:bg-transparent px-3 xl:px-0">
         <div className="filters">
-          <Tabmenu setActiveTab={setActiveTab} activeTab={activeTab} />
+          <Tabmenu setActiveTab={changeTab} activeTab={activeTab} />
         </div>
         <div className="xl:h-[3rem] flex xl:flex-row flex-col xl:gap-0 gap-3 mt-3 xl:mt-[1rem] justify-between xl:pl-8 xl:mx-0 xl:border xl:border-[#00B1B265] xl:bg-[#F4F5F7] xl:rounded-full">
           <div className="flex justify-around xl:justify-start xl:gap-12 border rounded-full py-2 xl:py-0 border-[#00B1B265] xl:border-0">

@@ -7,7 +7,7 @@ const NavbarMobile: FC = () => {
   return (
     <div className="relative">
       <div className="navbarMobile fixed bottom-0 left-0 right-0 flex h-20 w-full z-50 drop-shadow-[0_0_5px_rgba(0,0,0,0.25)]">
-        <div className="flex h-full w-full bg-white rounded-t-[25px] p-2 border border-[#4cbfc580]">
+        <div className="flex h-full w-full bg-white rounded-t-[25px] p-2 border border-[#4CBEC5]/50">
           <div className="grid w-full grid-cols-11 gap-2">
             <div className="flex flex-col items-center justify-center col-span-2 p-1">
               <NavItemMessages />
@@ -53,12 +53,14 @@ const NavItemOrdersBasket = () => {
       className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group">
 
       <span
-        className={`w-6 h-6 relative fill-gray-600 group-hover:fill-[#4CBEC5] ${
+        className={`w-11 h-11 relative fill-gray-600 group-hover:fill-[#4CBEC5] flex items-center justify-center ${
           router.asPath === "/basket" && "fill-[#4CBEC5]"
         }`}
       >
-        <SvgBasket />
-        <div className="absolute -right-3 w-[22px] h-[22px] flex items-center justify-center text-xs text-center text-white bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] rounded-full -top-3">
+        <div className="w-6 h-6">
+          <SvgBasket />
+        </div>
+        <div className="absolute -right-2 w-[22px] h-[22px] flex items-center justify-center text-xs text-center text-white bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] rounded-full -top-2">
           3
         </div>
       </span>
@@ -82,15 +84,17 @@ const NavItemOrdersSmartBasket = () => {
       className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group">
 
       <span
-        className={`w-6 h-6 relative fill-gray-600 group-hover:fill-[#4CBEC5] ${
-          router.asPath === "/basket" && "fill-[#4CBEC5]"
+        className={`w-11 h-11 relative fill-gray-600 group-hover:fill-[#4CBEC5] flex items-center justify-center ${
+          router.asPath === "/basket/smart" && "fill-[#4CBEC5]"
         }`}
       >
-        <SvgSmartBasket />
+        <div className="w-6 h-6">
+          <SvgSmartBasket />
+        </div>
       </span>
       <span
         className={`text-[10px] text-gray-600 whitespace-nowrap group-hover:text-[#4CBEC5] ${
-          router.asPath === "/basket" && "text-[#4CBEC5]"
+          router.asPath === "/basket/smart" && "text-[#4CBEC5]"
         }`}
       >
         Smart Basket
@@ -108,15 +112,17 @@ const NavItemOrdersBought = () => {
       className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group">
 
       <span
-        className={`w-6 h-6 relative fill-gray-600 group-hover:fill-[#4CBEC5] ${
-          router.asPath === "/basket" && "fill-[#4CBEC5]"
+        className={`w-11 h-11 relative fill-gray-600 group-hover:fill-[#4CBEC5] flex items-center justify-center ${
+          router.asPath === "/profile/orders/bought" && "fill-[#4CBEC5]"
         }`}
       >
-        <SvgOrders1 />
+        <div className="w-6 h-6">
+          <SvgOrders1 />
+        </div>
       </span>
       <span
         className={`text-[10px] text-gray-600 whitespace-nowrap group-hover:text-[#4CBEC5] ${
-          router.asPath === "/basket" && "text-[#4CBEC5]"
+          router.asPath === "/profile/orders/bought" && "text-[#4CBEC5]"
         }`}
       >
         My Orders
@@ -134,18 +140,20 @@ const NavItemMessages = () => {
       className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group">
 
       <span
-        className={`w-6 h-6 relative fill-gray-600 group-hover:fill-[#4CBEC5] ${
-          router.asPath === "/basket" && "fill-[#4CBEC5]"
+        className={`w-11 h-11 relative fill-gray-600 group-hover:fill-[#4CBEC5] flex items-center justify-center ${
+          router.asPath === "/profile/messages" && "fill-[#4CBEC5]"
         }`}
       >
-        <SvgMessages1 />
-        <div className="absolute -right-3 w-[22px] h-[22px] flex items-center justify-center text-xs text-center text-white bg-gradient-to-r from-[#66C1BF] to-[#00A29D] rounded-full -top-3">
+        <div className="w-6 h-6">
+          <SvgMessages1 />
+        </div>
+        <div className="absolute -right-2 w-[22px] h-[22px] flex items-center justify-center text-xs text-center text-white bg-gradient-to-r from-[#66C1BF] to-[#00A29D] rounded-full -top-2">
           3
         </div>
       </span>
       <span
         className={`text-[10px] text-gray-600 whitespace-nowrap group-hover:text-[#4CBEC5] ${
-          router.asPath === "/basket" && "text-[#4CBEC5]"
+          router.asPath === "/profile/messages" && "text-[#4CBEC5]"
         }`}
       >
         Messages

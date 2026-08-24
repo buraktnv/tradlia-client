@@ -1,34 +1,11 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { FC, useState } from "react";
+import { useRouter } from "next/router";
 import { SvgM } from "../../helpers/svgs/homeSvg";
-import { ICategoryItem, jsonCategoryList } from "./jsonCategoryList";
+import { jsonCategoryList } from "./jsonCategoryList";
+import { categories } from "../../helpers/categories";
+import { categoryUrl } from "../../helpers/urls";
 
-interface SingleCategoryItemProps {
-  content: ICategoryItem;
-  selectedCategory: number | null;
-  setSelectedCategory: Dispatch<SetStateAction<number | null>>;
-}
-
-// TODO There are items with the same id here ???
-const SubCategoryList: any = [
-  { id: 1, isActive: false, name: "Glass Ionomers" },
-  { id: 2, isActive: false, name: "Scaling & Prophylaxis" },
-  { id: 3, isActive: true, name: "Accessories" },
-  { id: 4, isActive: false, name: "Disinfection & Sterilization" },
-  { id: 5, isActive: false, name: "Glasses and Face Masks" },
-  { id: 6, isActive: false, name: "Dental Unit & Accessories" },
-  { id: 7, isActive: false, name: "Anesthesia" },
-  { id: 8, isActive: false, name: "Air Water Syringes" },
-  { id: 9, isActive: false, name: "Caps" },
-  { id: 10, isActive: false, name: "Teeth" },
-  { id: 11, isActive: false, name: "Whitening" },
-  { id: 12, isActive: false, name: "Fillings" },
-  { id: 13, isActive: false, name: "Surgical" },
-  { id: 14, isActive: false, name: "Hand Instruments" },
-  { id: 15, isActive: false, name: "Pediatric & Prophylaxis" },
-  { id: 16, isActive: false, name: "Gloves" },
-];
-
-const TopCategories: FC<any> = ({ isOpen }) => {
+const TopCategories: FC<{ isOpen: boolean }> = ({ isOpen }) => {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
   return (
@@ -54,7 +31,6 @@ const TopCategories: FC<any> = ({ isOpen }) => {
               content={el}
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
-              SubCategoryList={SubCategoryList}
             />
           ))}
         </div>
@@ -63,8 +39,11 @@ const TopCategories: FC<any> = ({ isOpen }) => {
   );
 };
 
-const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCategory, SubCategoryList }) => {
+const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCategory }) => {
+  const router = useRouter();
   const isActive = content.id === selectedCategory;
+  const category = categories.find((c) => c.icon === content.icon);
+  const catId = category?.id;
 
   return (
     <div className="group">
@@ -74,16 +53,21 @@ const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCat
           onMouseEnter={() => {
             setSelectedCategory((pre: any) => (pre !== content.id ? content.id : null));
           }}
+          onClick={() => catId && router.push(categoryUrl(catId))}
         >
           <span
-            className={`relative h-14 w-14 p-2 rounded-2xl group-hover:bg-gradient-to-r transition duration-200 ease-in-out ${
-              isActive && "bg-gradient-to-r from-[#66c1bf] to-[#00a29d]"
+            className={`relative h-14 w-14 p-2 rounded-2xl transition duration-200 ease-in-out ${
+              isActive
+                ? "bg-gradient-to-r from-[#66c1bf] to-[#00a29d]"
+                : "group-hover:bg-gradient-to-r group-hover:from-[#66c1bf] group-hover:to-[#00a29d]"
             }`}
           >
-            <div className="absolute w-full h-full opacity-0 group-hover:opacity-100 transform duration-200 ease-in-out bg-gradient-to-r rounded-2xl group-hover:from-[#66c1bf] group-hover:to-[#00a29d] top-0 left-0"></div>
-            {/* Bg Color Transition */}
             <content.icon isActive={isActive} />
-            <span className="absolute invisible transition-shadow duration-300 ease-in-out group-hover:visible translate-y-4 bottom-0 left-2 rounded right-2 h-1 bg-gradient-to-r from-[#66c1bf] to-[#00a29d]"></span>
+            <span
+              className={`absolute transition-shadow duration-300 ease-in-out group-hover:visible translate-y-4 bottom-0 left-2 rounded right-2 h-1 bg-gradient-to-r from-[#66c1bf] to-[#00a29d] ${
+                isActive ? "visible" : "invisible group-hover:visible"
+              }`}
+            ></span>
           </span>
 
           <div
@@ -95,7 +79,6 @@ const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCat
             <p>{content.text2}</p>
           </div>
         </div>
-        <div className="absolute top-0 z-30 w-full h-16 bg-transparent"></div>
         <div
           className={`absolute z-30 top-[72px] group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 opacity-0 translate-y-10 invisible transition-all duration-300 ease-in-out flex ${content.align}`}
         >
@@ -109,16 +92,17 @@ const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCat
           <div
             className={`grid grid-cols-2 text-xs bg-white w-[450px] px-6 shadow-md font-medium text-[#6F7081] py-8 ${content.rounded[1]}`}
           >
-            {SubCategoryList.map((el: any) => (
-              <button type="button"
+            {category?.subCategories.map((sub) => (
+              <button
+                type="button"
                 className="flex items-center gap-1 cursor-pointer whitespace-nowrap btnGroupHover hover:text-[#00A29D]"
-                key={el.id}
+                key={sub.id}
+                onClick={() => catId && router.push(categoryUrl(catId, sub.id))}
               >
-                {/*  <div className={`w-6 h-3 ${el.isActive ? "visible" : "invisible"} group-hover:`}> */}
                 <div className={`w-6 h-3 svgIcon`}>
                   <SvgM />
                 </div>
-                {el.name}
+                {sub.name}
               </button>
             ))}
           </div>

@@ -1,17 +1,22 @@
-import React, { FC, useState } from "react";
-import { SvgEczaMax, SvgMediTome } from "../../helpers/svgs/basketSvg";
-import SingleCard from "../profile/favourites/SingleCard";
+import React, { FC } from "react";
+import { toast } from "react-toastify";
 import BasketCard from "./BasketCard";
 import Notification from "./Notification";
 
-const BasketCardData: any[] = [
+/**
+ * Seed data for the basket. Serializable (no JSX) so it can be persisted
+ * with useLocalStorage("basket-data") — the seller logo is resolved at
+ * render time from the `logo` field.
+ */
+export const BasketCardData: any[] = [
   {
     id: 0,
-    svg: <SvgMediTome />,
+    logo: "medi",
     firm: "MediSupply",
     shippingCampaign: 500,
     shippingCampaign2: "Same-Day Shipping if Ordered by 3:55 PM",
     minTotalPrice: 100,
+    shippingOption: "domestic",
     productCards: [
       {
         id: 1,
@@ -24,7 +29,6 @@ const BasketCardData: any[] = [
         count: 3,
         purchasable: true,
         warning: "",
-        total: 143.94,
       },
       {
         id: 2,
@@ -37,20 +41,19 @@ const BasketCardData: any[] = [
         isFavorite: true,
         purchasable: false,
         warning: "Removed\n from Listing",
-        total: 51.96,
       },
     ],
     domesticShipping: 20.9,
     expressShipping: 18.9,
-    total: 195.9,
   },
   {
     id: 3,
-    svg: <SvgEczaMax />,
+    logo: "pharma",
     firm: "PharmaMax",
     shippingCampaign: null,
     shippingCampaign2: "Same-Day Shipping if Ordered by 3:55 PM",
     minTotalPrice: 250,
+    shippingOption: "domestic",
     productCards: [
       {
         id: 4,
@@ -63,20 +66,19 @@ const BasketCardData: any[] = [
         count: 2,
         purchasable: true,
         warning: "",
-        total: 95.69,
       },
     ],
     domesticShipping: 0,
     expressShipping: 0,
-    total: 54.65,
   },
   {
     id: 5,
-    svg: <SvgMediTome />,
+    logo: "medi",
     firm: "MediSupply",
     shippingCampaign: 500,
     shippingCampaign2: "Same-Day Shipping if Ordered by 3:55 PM",
     minTotalPrice: 100,
+    shippingOption: "domestic",
     productCards: [
       {
         id: 6,
@@ -89,7 +91,6 @@ const BasketCardData: any[] = [
         count: 3,
         purchasable: true,
         warning: "",
-        total: 143.94,
       },
       {
         id: 7,
@@ -102,23 +103,77 @@ const BasketCardData: any[] = [
         isFavorite: true,
         purchasable: false,
         warning: "Removed\n from Listing",
-        total: 51.96,
       },
     ],
     domesticShipping: 0,
     expressShipping: 0,
-    total: 500.9,
   },
 ];
-const content: FC<any> = () => {
+
+const getSellerTotal = (seller: any) => {
+  const productsPrice = seller.productCards.reduce((sum: number, p: any) => sum + p.price * p.count, 0);
+  const shipping = seller.shippingOption === "express" ? seller.expressShipping : seller.domesticShipping;
+  return { productsPrice, shipping, total: productsPrice + shipping };
+};
+
+const content: FC<any> = ({ content: basketData, setContent }) => {
+  if (!basketData || basketData.length === 0) {
+    return (
+      <div className="grid gap-3 xl:gap-[1rem]">
+        <Notification />
+        <div className="rounded-2xl border border-[#00B1B265] bg-white p-10 text-center text-sm text-[#A0A2AF]">
+          Your cart is empty.
+        </div>
+      </div>
+    );
+  }
+
+  const removeSeller = (id: number) => {
+    setContent((pre: any[]) => pre.filter((seller) => seller.id !== id));
+    toast.info("Seller removed from cart.");
+  };
+
+  const completeSeller = (id: number) => {
+    const seller = basketData.find((s: any) => s.id === id);
+    setContent((pre: any[]) => pre.filter((el) => el.id !== id));
+    toast.success(`Purchase completed for ${seller?.firm ?? "the seller"}.`);
+  };
+
+  const updateSeller = (seller: any) => {
+    setContent((pre: any[]) => pre.map((s) => (s.id === seller.id ? seller : s)));
+  };
+
+  const removeCampaign = (id: number) => {
+    setContent((pre: any[]) => pre.map((s) => (s.id === id ? { ...s, shippingCampaign: null } : s)));
+    toast.info("Campaign removed.");
+  };
+
+  const clearCart = () => {
+    setContent([]);
+    toast.info("Cart cleared.");
+  };
+
+  const enriched = basketData.map((seller: any) => ({ ...seller, ...getSellerTotal(seller) }));
+
   return (
     <div className="grid gap-3 xl:gap-[1rem]">
       <Notification />
-      {BasketCardData.map((el: any) => (
-        <BasketCard content={el} key={el.id} />
+      {enriched.map((el: any) => (
+        <BasketCard
+          key={el.id}
+          content={el}
+          onChange={updateSeller}
+          onRemoveSeller={removeSeller}
+          onCompleteSeller={completeSeller}
+          onRemoveCampaign={removeCampaign}
+        />
       ))}
       <div className="flex justify-end w-full px-3 xl:px-0">
-        <button type="button" className="px-8 py-3 text-sm font-medium text-[#7E8096] bg-[#F4F5F9] border border-[#00B1B265] rounded-full">
+        <button
+          type="button"
+          onClick={clearCart}
+          className="px-8 py-3 text-sm font-medium text-[#7E8096] bg-[#F4F5F9] border border-[#00B1B265] rounded-full"
+        >
           Empty Cart
         </button>
       </div>

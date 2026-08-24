@@ -1,8 +1,21 @@
-<svg xmlns='http://www.w3.org/2000/svg' width='1400' height='420' viewBox='0 0 1400 420'>
-<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
-<stop offset='0' stop-color='#10b981'/><stop offset='1' stop-color='#6ee7b7'/></linearGradient></defs>
-<rect width='1400' height='420' fill='url(#g)'/>
-<circle cx='1148' cy='126' r='210' fill='rgba(255,255,255,0.12)'/>
-<circle cx='1260' cy='315' r='147' fill='rgba(255,255,255,0.10)'/>
-<text x='112' y='231.00000000000003' font-family='Ubuntu,Arial,sans-serif' font-size='92.4' fill='rgba(255,255,255,0.95)' font-weight='700'>Pet Care</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Medical banner background -->
+  <rect x="10" y="10" width="180" height="180" rx="20" fill="#f0f9ff" stroke="#4CBEC5" stroke-width="2"/>
+  <!-- Medical cross symbol -->
+  <rect x="92" y="60" width="16" height="80" rx="4" fill="#4CBEC5"/>
+  <rect x="60" y="92" width="80" height="16" rx="4" fill="#4CBEC5"/>
+  <!-- Stethoscope -->
+  <path d="M30 140 Q30 110 60 110 L60 90" stroke="#4CBEC5" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <circle cx="60" cy="90" r="15" fill="none" stroke="#4CBEC5" stroke-width="4"/>
+  <circle cx="60" cy="90" r="5" fill="#4CBEC5"/>
+  <!-- Heart monitor line -->
+  <path d="M120 140 L120 100 Q125 95 130 100 Q135 105 140 100 Q145 95 150 100 Q155 105 160 100" stroke="#00ff88" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Pills -->
+  <circle cx="40" cy="160" r="8" fill="#4CBEC5" opacity="0.8"/>
+  <circle cx="55" cy="160" r="8" fill="#4CBEC5" opacity="0.6"/>
+  <circle cx="70" cy="160" r="8" fill="#4CBEC5" opacity="0.4"/>
+  <!-- Syringe -->
+  <path d="M160 160 L160 120 Q160 110 170 110 L170 90" stroke="#4CBEC5" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <rect x="155" y="90" width="10" height="20" rx="2" fill="#4CBEC5" opacity="0.3"/>
+  <line x1="160" y1="90" x2="160" y2="70" stroke="#4CBEC5" stroke-width="3" stroke-linecap="round"/>
 </svg>

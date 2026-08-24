@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from "react";
+import { FC } from "react";
 import {
   SvgInTransit,
   SvgToBeShipped,
@@ -23,7 +23,7 @@ enum SOLD_TABS {
 }
 
 interface TebMenuProps {
-  setActiveTab: Dispatch<SetStateAction<SOLD_TABS>>;
+  setActiveTab: (tab: SOLD_TABS) => void;
   activeTab: SOLD_TABS;
 }
 

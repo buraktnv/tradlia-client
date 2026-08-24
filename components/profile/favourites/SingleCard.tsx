@@ -1,25 +1,24 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FC, useState } from "react";
 import { SvgEmptyStar, SvgFavorite } from "../../../helpers/svgs/basketSvg";
 import { SvgBigger } from "../../../helpers/svgs/homeSvg";
 import RemoveConfirmModal from "./RemoveConfirmModal";
+import type { SingleCardProps } from "../../../types/product";
 
 // Product copied from cart and modified
 
-const SingleCard: FC<any> = ({ content, deleteCard, favoriteCard }) => {
+const SingleCard: FC<SingleCardProps> = ({ content, deleteCard, favoriteCard }) => {
   const [modal, setModal] = useState<boolean>(false);
-  const deleteFavorites = () => null;
 
-  const makeFavorite = () => {
-    favoriteCard(content);
-    setModal(true);
-    setTimeout(() => setModal(false), 50);
+  const deleteFavorites = () => {
+    deleteCard?.(content);
   };
   return (
     <>
       {modal && <RemoveConfirmModal setModal={setModal} deleteFavorites={deleteFavorites} />}
       <div
-        className={`flex relative group flex-col group justify-between h-[240px] xl:h-[360px] border drop-shadow-lg xl:drop-shadow-none border-[#dadada65] hover:border-[#4bbfc59c] hover:shadow-lg py-4 px-4 rounded-3xl w-full transition-all ease-in-out duration-300 hover:pb-12 xl:hover:pb-16 ${
+        className={`flex relative group flex-col group justify-between h-[240px] xl:h-[360px] border drop-shadow-lg xl:drop-shadow-none border-[#dadada65] hover:border-[#4CBEC5]/60 hover:shadow-lg py-4 px-4 rounded-3xl w-full transition-all ease-in-out duration-300 hover:pb-12 xl:hover:pb-16 ${
           content.backgroundColor ? `${content.backgroundColor}` : "bg-white"
         }`}
       >
@@ -65,7 +64,7 @@ const SingleCard: FC<any> = ({ content, deleteCard, favoriteCard }) => {
                 <div
                   className="flex w-full h-full"
                   onClick={() => {
-                    makeFavorite();
+                    favoriteCard?.(content);
                   }}
                 >
                   <SvgEmptyStar />
@@ -75,12 +74,12 @@ const SingleCard: FC<any> = ({ content, deleteCard, favoriteCard }) => {
           </div>
         </div>
         <div className="absolute left-0 grid items-center invisible w-full px-4 mt-1 transition-all duration-150 ease-in-out transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 bottom-3 group-hover:visible">
-          <button type="button" className="flex items-center gap-2 justify-center px-4 py-1.5 xl:py-2 border bg-transparent border-[#f59b009c] rounded-full text-[11px] leading-3 xl:text-sm text-[#F59C00] font-medium">
+          <Link href="/category" className="flex items-center gap-2 justify-center px-4 py-1.5 xl:py-2 border bg-transparent border-[#f59b009c] rounded-full text-[11px] leading-3 xl:text-sm text-[#F59C00] font-medium">
             All Listings
             <div className="xl:w-8 w-4 h-3 xl:h-4 text-[#F59C00]">
               <SvgBigger />
             </div>
-          </button>
+          </Link>
         </div>
       </div>
     </>

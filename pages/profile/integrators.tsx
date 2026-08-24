@@ -1,139 +1,273 @@
 import { NextPage } from "next";
 import Image from "next/image";
-import { FC, useState } from "react";
+import { FC, ReactNode, useState } from "react";
+import { toast } from "react-toastify";
 import IntegratorModal from "../../components/integrator/IntegratorModal";
 import { ProfileLayout } from "../../components/profile/ProfileLayout";
+import PortalModal from "../../components/shared/PortalModal";
+import useLocalStorage from "../../helpers/hooks/useLocalStorage";
 import { SvgShowMore } from "../../helpers/svgs/entegratorSvg";
 
+interface IntegratorSettings {
+  xmlLink: string;
+  orderLink: string;
+  clientName: string;
+  clientSecretKey: string;
+  status: "Active" | "Inactive";
+}
+
+const DEFAULT_SETTINGS: IntegratorSettings = {
+  xmlLink: "",
+  orderLink: "",
+  clientName: "",
+  clientSecretKey: "",
+  status: "Active",
+};
+
 const Integrators: NextPage = () => {
-  const [select, setSelect] = useState<any>("Our Account");
+  const [settings, setSettings] = useLocalStorage<IntegratorSettings>("integrator-settings", DEFAULT_SETTINGS);
+  const [successModal, setSuccessModal] = useState<boolean>(false);
+  const [resetModal, setResetModal] = useState<boolean>(false);
+
+  const update = (key: keyof IntegratorSettings, value: string) =>
+    setSettings((prev) => ({ ...prev, [key]: value }));
+
+  const checkXmlLink = () => {
+    const link = settings.xmlLink.trim();
+    if (!link) {
+      toast.error("Please enter your Product XML link first.");
+      return;
+    }
+    toast.success("Your Product XML link is valid.");
+  };
+
+  const saveOurAccount = () => {
+    if (!settings.xmlLink.trim()) {
+      toast.error("Your Product XML link is required.");
+      return;
+    }
+    setSuccessModal(true);
+  };
+
+  const saveBiInvoice = () => {
+    if (!settings.clientName.trim() || !settings.clientSecretKey.trim()) {
+      toast.error("Client Name and Client Secret Key are required.");
+      return;
+    }
+    setSuccessModal(true);
+  };
+
+  const confirmReset = () => {
+    setSettings(DEFAULT_SETTINGS);
+    setResetModal(false);
+    toast.info("Integrator information has been reset.");
+  };
+
   return (
     <ProfileLayout>
-      <div className="border-xl xl:bg-[#F4F5F7] rounded-3xl px-4 sm:px-8 xl:py-10 mb-4 xl:mb-0 gap-6 flex flex-col text-sm">
-        <div className="flex xl:ml-2 ">
-          <label htmlFor="1" className="relative rounded-full shadow-sm bg-[#4CBEC5] w-full xl:w-1/5">
-            <select
-              id="1"
-              onChange={(e) => setSelect(e.target.value)}
-              className="w-full px-5 py-2 text-white bg-transparent rounded-full outline-none appearance-none peer xl:px-8 xl:py-3"
-            >
-              <option className="bg-[#4CBEC5]" value="Our Account">
-                Our Account
-              </option>
-              <option className="bg-[#4CBEC5]" value="Bi Invoice">
-                Bi Invoice
-              </option>
-            </select>
-            <div className="absolute w-3 h-3 text-white transition duration-300 ease-in-out transform rotate-180 peer-focus:rotate-0 right-6 top-3 xl:top-5">
-              <SvgShowMore />
-            </div>
-          </label>
+      <div className="flex flex-col gap-6">
+        <div className="grid gap-6 xl:grid-cols-2">
+          <CardPanel
+            title="Our Account"
+            subtitle="XML and order links used to sync your products."
+            content={
+              <OurAccountCard
+                settings={settings}
+                update={update}
+                onCheck={checkXmlLink}
+                onSave={saveOurAccount}
+              />
+            }
+          />
+          <CardPanel
+            title="Bi Invoice"
+            subtitle="API credentials for the Bi Invoice service."
+            content={
+              <BiInvoiceCard
+                settings={settings}
+                update={update}
+                onSave={saveBiInvoice}
+                onReset={() => setResetModal(true)}
+              />
+            }
+          />
         </div>
-        <div className="w-full space-y-2 xl:ml-2">
-          <p className="text-[#4CBEC5] xl:pl-4 font-medium ml-5">Status *</p>
-          <div className="flex">
-            <label htmlFor="2" className="relative z-10 w-full bg-white rounded-full shadow-sm xl:w-1/5">
-              <select
-                id="2"
-                defaultValue={"Inactive"}
-                className="peer px-5 xl:px-8 pr-24 py-2 xl:py-3 w-full font-medium text-[#4CBEC5] xl:text-[#A0A2AF] text-sm border border-[#00B1B2] xl:border-[#C6C6C69C] bg-transparent rounded-full outline-none appearance-none"
-              >
-                <option>Active</option>
-                <option>Inactive</option>
-              </select>
-              <div className="peer-focus:rotate-0 transform rotate-180 transition ease-in-out duration-300 absolute w-3 h-3 right-6 top-3 xl:top-5 text-[#4CBEC5]">
-                <SvgShowMore />
-              </div>
-            </label>
+        <div className="hidden xl:flex justify-center">
+          <Image
+            src="/images/photos/entegrator.svg"
+            width={480}
+            height={200}
+            alt="Entegrator illustration"
+            className="h-auto w-full max-w-xl"
+          />
+        </div>
+      </div>
+
+      {successModal && <IntegratorModal open={successModal} onClose={() => setSuccessModal(false)} />}
+
+      <PortalModal open={resetModal} onClose={() => setResetModal(false)}>
+        <div className="flex flex-col items-center gap-4 text-center">
+          <p className="text-xl font-bold text-[#4CBEC5]">Reset Information</p>
+          <p className="text-sm text-[#7E8096]">
+            Your saved integrator settings will be cleared. This action cannot be undone.
+          </p>
+          <div className="flex w-full justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => setResetModal(false)}
+              className="rounded-full border border-[#00B1B266] px-6 py-2 text-sm font-medium text-[#7E8096]"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={confirmReset}
+              className="rounded-full bg-gradient-to-r from-[#66C1BF] to-[#00A29D] px-6 py-2 text-sm font-bold text-white"
+            >
+              Reset
+            </button>
           </div>
         </div>
-        {select === "Our Account" ? <CardOne /> : <CardTwo />}
-      </div>
-      <div className="hidden xl:ml-10 xl:block">
-        <Image src="/images/photos/entegrator.svg" width={1000} height={100} alt="logo" />
-      </div>
+      </PortalModal>
     </ProfileLayout>
   );
 };
 
-const CardOne = () => (
-  <>
-    <div className="space-y-2 xl:mx-2">
-      <p className="text-[#4CBEC5] font-medium xl:px-4 ml-5">Your Product XML Link *</p>
-      <div className="relative ">
-        <input
-          type="text"
-          className="w-full py-2 text-[12px] font-medium xl:font-normal xl:text-sm xl:py-3 rounded-full shadow-sm border border-[#00B1B2] xl:border-[#C6C6C69C] outline-none px-5 xl:px-9 text-[#A0A2AF] placeholder:text-[#7E8096] xl:placeholder:text-[#A0A2AF]"
-          placeholder="https://cdn1.xmlbankasi.com/p1/lxxxvlkhzqxg/image/data/xml/tradlia.xml"
-        />
-        <div className="absolute top-[3px] right-1">
-          <button type="button" className="bg-[#4CBEC5] text-white px-8 py-1.5 xl:py-2.5 rounded-full text-sm font-medium">
-            Check
-          </button>
-        </div>
-      </div>
+const CardPanel: FC<{ title: string; subtitle: string; content: ReactNode }> = ({
+  title,
+  subtitle,
+  content,
+}) => (
+  <div className="flex flex-col gap-5 rounded-2xl border border-[#00B1B266] bg-white p-6 shadow-sm xl:p-8">
+    <div className="flex flex-col gap-1 border-b border-[#00B1B240] pb-4">
+      <h3 className="text-lg font-bold text-[#4CBEC5]">{title}</h3>
+      <p className="text-xs text-[#A0A2AF]">{subtitle}</p>
     </div>
-    <div className="space-y-2 xl:mx-2 ">
-      <p className="text-[#4CBEC5] font-medium xl:px-4 ml-5">Your Product Order Link</p>
-      <input
-        type="text"
-        className="w-full py-2 xl:py-3 rounded-full font-medium xl:font-normal text-[12px] xl:text-sm  shadow-sm border border-[#00B1B2] xl:border-[#C6C6C69C] outline-none px-5 xl:px-9 text-[#A0A2AF] placeholder:text-[#7E8096] xl:placeholder:text-[#A0A2AF]"
-        placeholder="https://www.tradlia.com/en/entegra/orders/194/tFe6xANd9Xm1WQiU"
-      />
-    </div>
-    <div className="xl:pt-6 xl:mx-6 ">
-      <p className="xl:px-4 font-extrabold text-[#FB295A]">Dear Valued Member,</p>
-      <p className="xl:px-4 xl:pr-0 py-2 xl:py-0 xl:leading-8 text-[#FB295A] my-4">
-        After receiving this Integra Order XML from TRADLIA.COM, you need to contact the Integra Support Team and share
-        the following text.
-      </p>
-      <div className="leading-5 ">
-        <p className="xl:px-4 xl:pr-0 font-bold text-[#FB295A]">
-          &ldquo;The barcodes in my Order XML are the same as the barcodes in Integra. Please match the products in my
-          Order XML with the barcodes in Integra and configure the XML
-        </p>
-        <p className="xl:px-4 font-bold text-[#FB295A]">settings accordingly.&rdquo;</p>
-      </div>
-
-      <p className="xl:px-4 text-sm text-[#FB295A] my-5">Thank you very much for your valuable cooperation.</p>
-      <p className="xl:px-4  text-[#FB295A]">www.tradlia.com</p>
-    </div>
-  </>
+    {content}
+  </div>
 );
 
-const CardTwo: FC<any> = () => {
-  const [modal, setModal] = useState(false);
-  return (
-    <>
-      {modal && <IntegratorModal setModal={setModal} />}
-      <div className="space-y-2 xl:mx-2">
-        <p className="text-[#4CBEC5] font-medium px-4 xl:ml-5">ClientName *</p>
-        <div className="relative ">
-          <input
-            type="text"
-            className="w-full py-2 xl:py-3 text-[12px] font-medium xl:font-normal xl:text-sm rounded-full  shadow-sm border border-[#00B1B2] xl:border-[#C6C6C69C] outline-none px-4 xl:px-9 text-[#A0A2AF] placeholder:text-[#7E8096] xl:placeholder:text-[#A0A2AF]"
-            placeholder="ixZUbeLpkcQzqmOH"
-          />
-        </div>
-      </div>
-      <div className="space-y-2 xl:mx-2 ">
-        <p className="text-[#4CBEC5] font-medium px-4 xl:ml-5">ClientSecretKey *</p>
+const OurAccountCard: FC<{
+  settings: IntegratorSettings;
+  update: (key: keyof IntegratorSettings, value: string) => void;
+  onCheck: () => void;
+  onSave: () => void;
+}> = ({ settings, update, onCheck, onSave }) => (
+  <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-2">
+      <label htmlFor="xmlLink" className="font-medium text-[#4CBEC5]">
+        Your Product XML Link *
+      </label>
+      <div className="relative">
         <input
+          id="xmlLink"
           type="text"
-          className="w-full py-2 xl:py-3 text-[12px] font-medium xl:font-normal xl:text-sm rounded-full  shadow-sm border border-[#00B1B2] xl:border-[#C6C6C69C] outline-none px-4 xl:px-9 text-[#A0A2AF] placeholder:text-[#7E8096] xl:placeholder:text-[#A0A2AF]"
-          placeholder="ixZUbeLpkcQzqmOH"
+          value={settings.xmlLink}
+          onChange={(e) => update("xmlLink", e.target.value)}
+          placeholder="https://cdn1.xmlbankasi.com/p1/lxxxvlkhzqxg/image/data/xml/tradlia.xml"
+          className="w-full rounded-full border border-[#00B1B2] bg-white py-2.5 pl-5 pr-24 text-sm text-[#7E8096] shadow-sm outline-none placeholder:text-[#A0A2AF] focus:border-[#4CBEC5] xl:pr-28"
         />
-      </div>
-      <div className="w-full pb-52">
-        <button type="button"
-          onClick={() => setModal(true)}
-          className="w-full xl:w-1/5 bg-gradient-to-r from-[#66C1BF] to-[#00A29D] text-white px-3 py-2 rounded-full text-base shadow-sm xl:ml-2"
+        <button
+          type="button"
+          onClick={onCheck}
+          className="absolute right-1 top-1 bottom-1 rounded-full bg-[#4CBEC5] px-6 text-sm font-medium text-white"
         >
-          Reset Information
+          Check
         </button>
       </div>
-    </>
-  );
-};
+    </div>
+    <div className="flex flex-col gap-2">
+      <label htmlFor="orderLink" className="font-medium text-[#4CBEC5]">
+        Your Product Order Link
+      </label>
+      <input
+        id="orderLink"
+        type="text"
+        value={settings.orderLink}
+        onChange={(e) => update("orderLink", e.target.value)}
+        placeholder="https://www.tradlia.com/en/entegra/orders/194/tFe6xANd9Xm1WQiU"
+        className="w-full rounded-full border border-[#00B1B2] bg-white px-5 py-2.5 text-sm text-[#7E8096] shadow-sm outline-none placeholder:text-[#A0A2AF] focus:border-[#4CBEC5]"
+      />
+    </div>
+    <div className="flex flex-col gap-2">
+      <label htmlFor="status" className="font-medium text-[#4CBEC5]">
+        Status *
+      </label>
+      <div className="relative">
+        <select
+          id="status"
+          value={settings.status}
+          onChange={(e) => update("status", e.target.value)}
+          className="w-full appearance-none rounded-full border border-[#00B1B2] bg-white px-5 py-2.5 text-sm font-medium text-[#7E8096] shadow-sm outline-none focus:border-[#4CBEC5]"
+        >
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+        <div className="pointer-events-none absolute right-5 top-3.5 h-3 w-3 rotate-180 text-[#4CBEC5]">
+          <SvgShowMore />
+        </div>
+      </div>
+    </div>
+    <button
+      type="button"
+      onClick={onSave}
+      className="self-start rounded-full bg-gradient-to-r from-[#66C1BF] to-[#00A29D] px-8 py-2.5 text-sm font-bold text-white shadow-sm"
+    >
+      Save / Update
+    </button>
+  </div>
+);
+
+const BiInvoiceCard: FC<{
+  settings: IntegratorSettings;
+  update: (key: keyof IntegratorSettings, value: string) => void;
+  onSave: () => void;
+  onReset: () => void;
+}> = ({ settings, update, onSave, onReset }) => (
+  <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-2">
+      <label htmlFor="clientName" className="font-medium text-[#4CBEC5]">
+        ClientName *
+      </label>
+      <input
+        id="clientName"
+        type="text"
+        value={settings.clientName}
+        onChange={(e) => update("clientName", e.target.value)}
+        placeholder="ixZUbeLpkcQzqmOH"
+        className="w-full rounded-full border border-[#00B1B2] bg-white px-5 py-2.5 text-sm text-[#7E8096] shadow-sm outline-none placeholder:text-[#A0A2AF] focus:border-[#4CBEC5]"
+      />
+    </div>
+    <div className="flex flex-col gap-2">
+      <label htmlFor="clientSecretKey" className="font-medium text-[#4CBEC5]">
+        ClientSecretKey *
+      </label>
+      <input
+        id="clientSecretKey"
+        type="text"
+        value={settings.clientSecretKey}
+        onChange={(e) => update("clientSecretKey", e.target.value)}
+        placeholder="ixZUbeLpkcQzqmOH"
+        className="w-full rounded-full border border-[#00B1B2] bg-white px-5 py-2.5 text-sm text-[#7E8096] shadow-sm outline-none placeholder:text-[#A0A2AF] focus:border-[#4CBEC5]"
+      />
+    </div>
+    <div className="flex flex-wrap items-center gap-3">
+      <button
+        type="button"
+        onClick={onSave}
+        className="rounded-full bg-gradient-to-r from-[#66C1BF] to-[#00A29D] px-8 py-2.5 text-sm font-bold text-white shadow-sm"
+      >
+        Save / Update
+      </button>
+      <button
+        type="button"
+        onClick={onReset}
+        className="rounded-full border border-[#FB295A80] px-8 py-2.5 text-sm font-medium text-[#FB295A]"
+      >
+        Reset Information
+      </button>
+    </div>
+  </div>
+);
 
 export default Integrators;

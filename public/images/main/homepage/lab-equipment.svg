@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Lab Equipment - Microscope -->
+  <rect x="20" y="20" width="160" height="160" rx="15" fill="#f0f9ff" stroke="#4CBEC5" stroke-width="3"/>
+  <!-- Microscope base -->
+  <rect x="50" y="120" width="100" height="20" rx="5" fill="#4CBEC5" opacity="0.3"/>
+  <!-- Microscope arm -->
+  <path d="M100 120 L100 50" stroke="#4CBEC5" stroke-width="8" stroke-linecap="round"/>
+  <!-- Microscope head -->
+  <rect x="70" y="35" width="60" height="30" rx="5" fill="#4CBEC5" opacity="0.4"/>
+  <!-- Eyepiece -->
+  <rect x="90" y="30" width="20" height="10" rx="3" fill="#4CBEC5"/>
+  <!-- Stage -->
+  <rect x="60" y="85" width="80" height="10" rx="3" fill="#4CBEC5" opacity="0.3"/>
+  <!-- Specimen slide -->
+  <rect x="80" y="70" width="40" height="15" rx="3" fill="#e0f7fa" stroke="#4CBEC5" stroke-width="2"/>
+  <!-- Light source -->
+  <circle cx="100" cy="95" r="15" fill="#fff9c4" opacity="0.8"/>
+  <circle cx="100" cy="95" r="8" fill="#4CBEC5" opacity="0.2"/>
+</svg>

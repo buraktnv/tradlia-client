@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Pharmaceutical Products - Pill bottle with pills -->
+  <rect x="60" y="40" width="80" height="140" rx="10" fill="#f0f9ff" stroke="#4CBEC5" stroke-width="3"/>
+  <rect x="65" y="45" width="70" height="20" rx="5" fill="#4CBEC5" opacity="0.3"/>
+  <rect x="65" y="155" width="70" height="15" rx="5" fill="#4CBEC5" opacity="0.3"/>
+  <!-- Pills inside -->
+  <g fill="#4CBEC5">
+    <circle cx="75" cy="80" r="10"/>
+    <circle cx="125" cy="80" r="10"/>
+    <circle cx="100" cy="110" r="10"/>
+    <circle cx="75" cy="140" r="10"/>
+    <circle cx="125" cy="140" r="10"/>
+    <circle cx="100" cy="100" r="8" fill="white" opacity="0.5"/>
+  </g>
+</svg>

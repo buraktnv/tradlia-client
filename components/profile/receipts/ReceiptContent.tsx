@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { SvgExcel, SvgDomesticCargo } from "../../../helpers/svgs/receiptSvg";
 import ReceiptCard from "./ReceiptCard";
+import { exportCsv } from "../../../helpers/exportCsv";
 
 const cardList = [
   {
@@ -224,11 +225,25 @@ const cardList = [
 ];
 
 const ReceiptContent: FC<any> = () => {
+  const exportToExcel = () => {
+    const rows = cardList.flatMap((order: any) =>
+      order.productList.map((el: any) => [
+        order.orderID,
+        order.orderDate,
+        `${el.name} ${el.brand}`,
+        el.quantity,
+        el.price,
+        el.total,
+      ])
+    );
+    exportCsv("Receipts", ["Order No", "Date", "Product", "Qty", "Price", "Total"], rows);
+  };
+
   return (
     <div className="grid w-full gap-3 xl:gap-[0.75rem] text-sm">
       {cardList && cardList.map((content) => <ReceiptCard key={content.id} content={content} />)}
       <div className="xl:bg-[#EA5B0C] text-white flex flex-col-reverse xl:flex-row justify-between items-center rounded-full gap-3 xl:gap-0 xl:pl-12 xl:px-20 xl:py-4">
-        <button type="button" className="flex items-center justify-center w-full xl:w-max gap-2 bg-[#FF3A67] xl:bg-transparent rounded-full h-10 xl:h-auto">
+        <button type="button" onClick={exportToExcel} className="flex items-center justify-center w-full xl:w-max gap-2 bg-[#FF3A67] xl:bg-transparent rounded-full h-10 xl:h-auto">
           <div className="w-6 h-6 xl:w-7 xl:h-7">
             <SvgExcel />
           </div>

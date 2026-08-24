@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Medical Devices - Heart monitor -->
+  <rect x="20" y="20" width="160" height="160" rx="15" fill="#f0f9ff" stroke="#4CBEC5" stroke-width="3"/>
+  <!-- Monitor screen -->
+  <rect x="30" y="35" width="140" height="90" rx="10" fill="#1a1a2e" stroke="#4CBEC5" stroke-width="2"/>
+  <!-- ECG line -->
+  <path d="M40 80 Q50 75 55 80 Q60 85 65 80 Q70 70 75 80 Q80 90 85 80 Q90 75 95 80 Q100 85 105 80 Q110 90 115 80 Q120 85 125 80 Q130 78 135 80 Q140 82 145 80 Q150 77 155 80" stroke="#00ff88" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Heart rate -->
+  <text x="100" y="140" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#4CBEC5" text-anchor="middle">72 BPM</text>
+  <!-- Device body -->
+  <rect x="30" y="135" width="140" height="30" rx="5" fill="#e0f7fa" stroke="#4CBEC5" stroke-width="2"/>
+  <circle cx="100" cy="150" r="8" fill="#ff4444" opacity="0.8"/>
+  <!-- Buttons -->
+  <circle cx="60" cy="150" r="6" fill="#4CBEC5" opacity="0.5"/>
+  <circle cx="140" cy="150" r="6" fill="#4CBEC5" opacity="0.5"/>
+</svg>

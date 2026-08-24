@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ProfileNavigation from "./ProfileNavigation";
@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 const HeaderMobile: FC = () => {
   const [isDashboardShown, setIsDashboardShown] = useState<boolean>(false);
   const [isProfileDropdownShown, setIsProfileDropdownShown] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState<string>("");
 
   const router = useRouter();
   const isHomepage = router.asPath === "/";
@@ -62,15 +63,26 @@ const HeaderMobile: FC = () => {
         </div>
         {isHomepage && (
           <div className="flex items-center justify-center w-full px-4">
-            <div className="relative w-full">
+            <form
+              className="relative w-full"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const query = searchValue.trim();
+                if (query) {
+                  router.push(`/search?q=${encodeURIComponent(query)}`);
+                }
+              }}
+            >
               <span className="absolute flex items-center justify-center h-full pl-4">
                 <Image src={"/images/navbar/searchIcon.svg"} width={16} height={16} alt="search" />
               </span>
               <input
                 className="w-full text-sm border px-12 py-3 rounded-full border-[#66bebc] focus:outline-none font-light"
                 placeholder="search product name, barcode, brand or member"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
               />
-            </div>
+            </form>
           </div>
         )}
       </div>

@@ -1,7 +1,30 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { SmileFace, SvgEmptyStar, SvgStar } from "../../../helpers/svgs/feedbackSvg";
+import useLocalStorage from "../../../helpers/hooks/useLocalStorage";
 
 const SingleFeedback: FC<any> = ({ content }) => {
+  const [storedAnswer, setStoredAnswer] = useLocalStorage<string | null>(
+    `feedback-answers-${content.id}`,
+    content.answer ?? null
+  );
+  const [draft, setDraft] = useState<string>("");
+  const [editing, setEditing] = useState<boolean>(false);
+  const [showDetails, setShowDetails] = useState<boolean>(false);
+
+  const hasAnswer = !!storedAnswer;
+
+  const sendAnswer = () => {
+    if (!draft.trim()) return;
+    setStoredAnswer(draft.trim());
+    setDraft("");
+    setEditing(false);
+  };
+
+  const startEdit = () => {
+    setDraft(storedAnswer ?? "");
+    setEditing(true);
+  };
+
   return (
     <div>
       <div className="grid grid-cols-1 px-4 py-2 mx-3 bg-white border xl:px-4 xl:gap-3 xl:grid-cols-7 rounded-3xl xl:bg-transparent xl:mx-0">
@@ -11,7 +34,7 @@ const SingleFeedback: FC<any> = ({ content }) => {
               <span className="xl:w-6 xl:h-6 w-4 h-4 text-[#8dbe22]">
                 <SmileFace />
               </span>
-              <p className="text-[#7E8096] xl:text-sm text-[10.5px] leading-3 whitespace-nowrap -tracking-wide">
+              <p className="text-[#7E8096] xl:text-sm text-[10.5px] leading-3 -tracking-wide">
                 The product was as described
               </p>
             </div>
@@ -19,7 +42,7 @@ const SingleFeedback: FC<any> = ({ content }) => {
               <div className="xl:w-6 xl:h-6 w-4 h-4 text-[#8dbe22]">
                 <SmileFace />
               </div>
-              <p className="text-[#7E8096] xl:text-sm text-[10.5px] leading-3 whitespace-nowrap -tracking-wide">
+              <p className="text-[#7E8096] xl:text-sm text-[10.5px] leading-3 -tracking-wide">
                 The store took care in product packaging
               </p>
             </div>
@@ -27,7 +50,7 @@ const SingleFeedback: FC<any> = ({ content }) => {
               <span className="xl:w-6 xl:h-6 w-4 h-4 text-[#8dbe22]">
                 <SmileFace />
               </span>
-              <p className="text-[#7E8096] xl:text-sm text-[10.5px] leading-3 whitespace-nowrap -tracking-wide">
+              <p className="text-[#7E8096] xl:text-sm text-[10.5px] leading-3 -tracking-wide">
                 I am satisfied with the store's communication
               </p>
             </div>
@@ -63,23 +86,26 @@ const SingleFeedback: FC<any> = ({ content }) => {
         </div>
         <div
           className={`flex flex-col col-span-4 gap-2 pt-1 xl:pt-2 xl:gap-4 xl:px-4 xl:my-4 ${
-            !content.answer && "xl:justify-between"
+            !hasAnswer && "xl:justify-between"
           }`}
         >
           <div>
             <p className="text-[#4CBEC5] font-bold text-sm xl:text-base py-1 xl:py-2">{content.name}</p>
-            <div className="text-[#7E8096] text-xs xl:text-sm bg-[#F4F5F7] border rounded-r-2xl rounded-b-2xl xl:w-max px-2 xl:px-3 py-2 xl:mr-4">
+            <div className="text-[#7E8096] text-xs xl:text-sm bg-[#F4F5F7] border rounded-r-2xl rounded-b-2xl max-w-full break-words px-2 xl:px-3 py-2 xl:mr-4">
               {content.feedback}
             </div>
           </div>
           <div className="flex items-end text-xs xl:pr-4 xl:text-sm">
-            {content.answer ? (
-              <p className="text-[#7E8096] bg-[#E4F5F7] w-max ml-auto px-4 py-2 rounded-l-2xl rounded-b-2xl">
-                {content.answer}
+            {hasAnswer && !editing ? (
+              <p className="text-[#7E8096] bg-[#E4F5F7] max-w-full break-words ml-auto px-4 py-2 rounded-l-2xl rounded-b-2xl">
+                {storedAnswer}
               </p>
             ) : (
               <input
                 type="text"
+                value={draft}
+                onChange={(e) => setDraft(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && sendAnswer()}
                 className="w-full outline-none placeholder:text-[#7E8096] text-[#7E8096] border rounded-full px-6 py-2 xl:py-2 mt-2 xl:h-10"
                 placeholder="Your Answer"
               />
@@ -88,18 +114,37 @@ const SingleFeedback: FC<any> = ({ content }) => {
         </div>
         <div className="flex justify-between gap-20 py-2 xl:my-2 xl:px-0 xl:gap-0 xl:flex-col">
           <div className="text-[#7E8096] text-sm text-center hidden xl:block">{content.date}</div>
-          <button type="button" className="border border-[#fb295a98] text-xs xl:text-sm font-bold xl:font-normal -tracking-wide text-[#FB295A] py-2 xl:py-2 rounded-full w-full xl:h-10">
+          <button type="button" onClick={() => setShowDetails((pre) => !pre)} className="border border-[#fb295a98] text-xs xl:text-sm font-bold xl:font-normal -tracking-wide text-[#FB295A] py-2 xl:py-2 rounded-full w-full xl:h-10">
             Order Details
           </button>
 
-          {content.answer ? (
-            <button type="button" className="border bg-gradient-to-r from-[#66BEBC] to-[#009F9A] text-white text-xs xl:text-sm font-bold xl:font-normal px-4 py-2 rounded-full w-full xl:h-10">
+          {hasAnswer && !editing ? (
+            <button type="button" onClick={startEdit} className="border bg-gradient-to-r from-[#66BEBC] to-[#009F9A] text-white text-xs xl:text-sm font-bold xl:font-normal px-4 py-2 rounded-full w-full xl:h-10">
               Edit
             </button>
           ) : (
-            <button type="button" className="bg-gradient-to-r from-[#FFBE00] text-xs xl:text-sm to-[#FF7B03] text-white px-3 py-2 rounded-full font-bold xl:font-normal w-full xl:h-10">
+            <button type="button" onClick={sendAnswer} className="bg-gradient-to-r from-[#FFBE00] text-xs xl:text-sm to-[#FF7B03] text-white px-3 py-2 rounded-full font-bold xl:font-normal w-full xl:h-10">
               Send
             </button>
+          )}
+
+          {showDetails && (
+            <div className="w-full border border-[#5327A8] rounded-xl p-3 text-xs text-[#7E8096] leading-5">
+              <div className="grid gap-1">
+                <div>
+                  <b className="text-[#4CBEC5]">Customer:</b> {content.name}
+                </div>
+                <div>
+                  <b className="text-[#4CBEC5]">Date:</b> {content.date}
+                </div>
+                <div>
+                  <b className="text-[#4CBEC5]">Rating:</b> {String(content.vote).replace(".", ",")}
+                </div>
+                <div>
+                  <b className="text-[#4CBEC5]">Feedback:</b> {content.feedback}
+                </div>
+              </div>
+            </div>
           )}
         </div>
       </div>

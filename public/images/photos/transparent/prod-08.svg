@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+  <linearGradient id="g-syr-prod-08" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66c1bf"/><stop offset="1" stop-color="#00a29d"/></linearGradient>
+  </defs>
+  
+  <ellipse cx="200" cy="345" rx="130" ry="18" fill="#000" opacity="0.14"/>
+  <path d="M176 70 L224 70 L224 92 L176 92 Z" fill="#e8eaef"/>
+  <path d="M176 92 L224 92 L224 180 L176 180 Z" fill="url(#g-syr-prod-08)" opacity="0.95"/>
+  <path d="M196 70 L204 70 L204 92 L196 92 Z" fill="#5b5f6a"/>
+  <rect x="184" y="180" width="32" height="96" rx="8" fill="#ffffff" opacity="0.9"/>
+  <rect x="188" y="190" width="24" height="70" rx="6" fill="url(#g-syr-prod-08)"/>
+  <path d="M196 276 L204 276 L204 330 L196 330 Z" fill="#e8eaef"/>
+  <path d="M196 330 L212 342 L188 342 Z" fill="#d9dce3"/>
+  <ellipse cx="192" cy="120" rx="5" ry="24" fill="#fff" opacity="0.4"/>
+
+</svg>

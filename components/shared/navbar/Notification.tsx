@@ -73,7 +73,7 @@ const Notification: FC<any> = () => {
 const NotificationItem: FC<any> = ({ content }) => {
   return (
     <div>
-      <div className="w-full h-[1px] bg-[#4cbfc5c2]"></div>
+      <div className="w-full h-[1px] bg-[#4CBEC5]/75"></div>
       <div className="pt-1.5 pb-3">
         <div className="font-medium text-[#4CBEC5] text-base leading-relaxed tracking-tight">{content.title}</div>
         <div className="text-[#7E8096] leading-snug text-[0.8rem]">{content.message}</div>

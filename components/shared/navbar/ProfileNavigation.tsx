@@ -15,6 +15,14 @@ import {
 const profileMenuList = [
   {
     id: 1,
+    url: U.URL_PROFILE_ADVERTS,
+    icon: <Icon.SvgAnnounce />,
+    text: "My Listings",
+    submenu: true,
+    subItems: ["Add New", "Bulk Add Listings", "Published", "Unpublished", "Pending Approval"],
+  },
+  {
+    id: 2,
     url: U.URL_PROFILE_ORDERS_BOUGHT,
     icon: <Icon.SvgOrder />,
     text: "My Orders",
@@ -29,7 +37,7 @@ const profileMenuList = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     url: U.URL_PROFILE_ORDERS_SOLD,
     icon: <Icon.SvgOrder />,
     text: "My Sales",
@@ -44,14 +52,6 @@ const profileMenuList = [
       "Cancellations & Returns",
       "Problematic Orders",
     ],
-  },
-  {
-    id: 3,
-    url: U.URL_PROFILE_ADVERTS,
-    icon: <Icon.SvgAnnounce />,
-    text: "My Listings",
-    submenu: true,
-    subItems: ["Add New", "Bulk Add Listings", "Published", "Unpublished", "Pending Approval"],
   },
   { id: 4, url: U.URL_PROFILE_FEEDBACK, icon: <Icon.SvgOk />, text: "Ratings & Reviews", submenu: false, subItems: [] },
   { id: 5, url: U.URL_PROFILE_MESSAGES, icon: <Icon.SvgMessage />, text: "My Messages", submenu: false, subItems: [] },

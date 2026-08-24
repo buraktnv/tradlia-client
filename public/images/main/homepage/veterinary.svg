@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Veterinary - Paw print with cross -->
+  <rect x="20" y="20" width="160" height="160" rx="15" fill="#f0f9ff" stroke="#4CBEC5" stroke-width="3"/>
+  <!-- Paw pad -->
+  <ellipse cx="100" cy="90" rx="35" ry="25" fill="#e0f7fa" stroke="#4CBEC5" stroke-width="3"/>
+  <!-- Toes -->
+  <ellipse cx="60" cy="70" rx="15" ry="12" fill="#e0f7fa" stroke="#4CBEC5" stroke-width="2"/>
+  <ellipse cx="100" cy="55" rx="15" ry="12" fill="#e0f7fa" stroke="#4CBEC5" stroke-width="2"/>
+  <ellipse cx="140" cy="70" rx="15" ry="12" fill="#e0f7fa" stroke="#4CBEC5" stroke-width="2"/>
+  <!-- Medical cross on paw -->
+  <rect x="92" cy="75" width="16" height="50" rx="4" fill="#4CBEC5"/>
+  <rect x="75" cy="92" width="50" height="16" rx="4" fill="#4CBEC5"/>
+  <!-- Stethoscope -->
+  <path d="M40 140 Q40 120 70 120 L70 100" stroke="#4CBEC5" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <circle cx="70" cy="100" r="12" fill="none" stroke="#4CBEC5" stroke-width="3"/>
+  <circle cx="70" cy="100" r="4" fill="#4CBEC5"/>
+</svg>

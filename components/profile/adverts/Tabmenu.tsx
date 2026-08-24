@@ -23,7 +23,7 @@ interface TebMenuProps {
 
 const Tabmenu: FC<TebMenuProps> = ({ setActiveTab, activeTab }) => {
   return (
-    <div className="grid grid-cols-2 gap-2 px-3 xl:grid-cols-5 xl:p-[0.25rem] rounded-[1.3rem] border-transparent xl:border xl:border-[#00b2b265] w-full">
+    <div className="grid grid-cols-3 gap-2 px-3 xl:grid-cols-5 xl:p-[0.25rem] rounded-[1.3rem] border-transparent xl:border xl:border-[#00b2b265] w-full">
       <TabItemWithNumbers
         text={"Add New Listing"}
         icon={<SvgNewAdvert />}

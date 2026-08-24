@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+  <linearGradient id="g-dental-prod-11" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66c1bf"/><stop offset="1" stop-color="#00a29d"/></linearGradient>
+  </defs>
+  
+  <ellipse cx="200" cy="345" rx="140" ry="20" fill="#000" opacity="0.14"/>
+  <rect x="120" y="270" width="160" height="60" rx="16" fill="#eef0f4"/>
+  <rect x="136" y="284" width="128" height="32" rx="10" fill="#ffffff"/>
+  <path d="M170 160 L196 160 L192 280 L174 280 Z" fill="url(#g-dental-prod-11)"/>
+  <rect x="220" y="190" width="46" height="90" rx="10" fill="#ffffff"/>
+  <rect x="228" y="200" width="30" height="60" rx="6" fill="url(#g-dental-prod-11)"/>
+  <path d="M222 186 L264 186 L264 194 L222 194 Z" fill="#5b5f6a"/>
+
+</svg>

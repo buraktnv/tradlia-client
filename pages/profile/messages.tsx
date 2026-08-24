@@ -1,9 +1,12 @@
 import { NextPage } from "next";
+import { useState } from "react";
 import DateDropdown from "../../components/profile/feedback/DateDropdown";
 import FilterDropdown from "../../components/profile/feedback/FilterDropdown";
 import SingleMessageItem from "../../components/profile/messages/SingleMessageItem";
 import { ProfileLayout } from "../../components/profile/ProfileLayout";
 import { SvgSearch } from "../../helpers/svgs/messageSvg";
+import useLocalStorage from "../../helpers/hooks/useLocalStorage";
+import { HIRE_ME_COPY } from "../../helpers/config";
 
 const filterList = [
   { id: 0, title: "All Messages", active: true },
@@ -171,13 +174,46 @@ const messageContentList = [
 ];
 
 const Messages: NextPage = () => {
+  const [view, setView] = useState<"inbox" | "archived">("inbox");
+  const [archivedIds, setArchivedIds] = useLocalStorage<number[]>("messages-archived", []);
+  const [subjectFilter, setSubjectFilter] = useState<string | null>(null);
+
+  const archive = (id: number) => {
+    setArchivedIds((pre: number[]) => (pre.includes(id) ? pre : [...pre, id]));
+  };
+
+  const restore = (id: number) => {
+    setArchivedIds((pre: number[]) => pre.filter((x) => x !== id));
+  };
+
+  const onFilterSelect = (item: any) => {
+    if (item.title === "All Messages") {
+      setSubjectFilter(null);
+    } else if (item.title === "Read Messages") {
+      setSubjectFilter("read");
+    } else if (item.title === "Unread Messages") {
+      setSubjectFilter("unread");
+    } else {
+      setSubjectFilter(item.title);
+    }
+  };
+
+  const visibleList = messageContentList
+    .filter((c) => (view === "archived" ? archivedIds.includes(c.id) : !archivedIds.includes(c.id)))
+    .filter((c) => {
+      if (!subjectFilter) return true;
+      if (subjectFilter === "read") return c.active;
+      if (subjectFilter === "unread") return !c.active;
+      return c.subject === subjectFilter;
+    });
+
   return (
     <ProfileLayout>
       <div className="flex flex-col w-full">
         <div className="xl:h-[3rem] flex xl:flex-row flex-col xl:gap-0 gap-3 justify-between xl:pl-8 mx-3 xl:mx-0 xl:border xl:border-[#00B1B265] xl:bg-[#F4F5F7] xl:rounded-full mb-3 xl:mb-[1.5rem]">
           <div className="flex justify-around xl:justify-start xl:gap-12 border rounded-full py-2 xl:py-0 border-[#00B1B265] xl:border-0">
             <div className="flex xl:mx-8">
-              <FilterDropdown filterList={filterList} />
+              <FilterDropdown filterList={filterList} onSelect={onFilterSelect} />
             </div>
             <div className="flex xl:mx-8">
               <DateDropdown />
@@ -195,10 +231,45 @@ const Messages: NextPage = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-full gap-3 xl:gap-[1.5rem]">
-          {messageContentList &&
-            messageContentList.map((content) => <SingleMessageItem key={content.id} content={content} />)}
+        <div className="flex gap-2 px-3 mb-3 xl:mb-[1.5rem] xl:px-0">
+          <button type="button"
+            onClick={() => setView("inbox")}
+            className={`px-6 py-2 rounded-full border text-sm transition ${
+              view === "inbox"
+                ? "bg-[#4CBEC5] border-[#4CBEC5] text-white"
+                : "bg-white border-[#00B1B265] text-[#7E8096]"
+            }`}
+          >
+            Inbox
+          </button>
+          <button type="button"
+            onClick={() => setView("archived")}
+            className={`px-6 py-2 rounded-full border text-sm transition ${
+              view === "archived"
+                ? "bg-[#4CBEC5] border-[#4CBEC5] text-white"
+                : "bg-white border-[#00B1B265] text-[#7E8096]"
+            }`}
+          >
+            Archived
+          </button>
         </div>
+        {visibleList.length === 0 ? (
+          <div className="flex items-center justify-center w-full h-full px-6 py-16 text-center text-[#7E8096]">
+            {view === "archived" ? "No archived messages." : HIRE_ME_COPY.messagesEmpty}
+          </div>
+        ) : (
+          <div className="flex flex-col w-full gap-3 xl:gap-[1.5rem]">
+            {visibleList.map((content) => (
+              <SingleMessageItem
+                key={content.id}
+                content={content}
+                onArchive={archive}
+                onRestore={restore}
+                archived={view === "archived"}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </ProfileLayout>
   );

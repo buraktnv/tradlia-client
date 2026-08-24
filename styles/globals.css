@@ -68,3 +68,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 details summary::-webkit-details-marker {
   display: none;
 }
+
+/* Print only the target [data-print-area] node (see helpers/printSection.ts) */
+@media print {
+  body.printing,
+  body.printing * {
+    visibility: hidden !important;
+  }
+  body.printing [data-print-area],
+  body.printing [data-print-area] * {
+    visibility: visible !important;
+  }
+  body.printing [data-print-area] {
+    position: absolute !important;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}

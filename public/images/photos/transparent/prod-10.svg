@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+  <linearGradient id="g-therm-prod-10" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66c1bf"/><stop offset="1" stop-color="#00a29d"/></linearGradient>
+  </defs>
+  
+  <ellipse cx="200" cy="345" rx="120" ry="18" fill="#000" opacity="0.14"/>
+  <rect x="186" y="60" width="28" height="200" rx="14" fill="#ffffff"/>
+  <rect x="190" y="120" width="20" height="110" rx="10" fill="url(#g-therm-prod-10)"/>
+  <circle cx="200" cy="292" r="30" fill="url(#g-therm-prod-10)"/>
+  <circle cx="200" cy="292" r="14" fill="#ffffff" opacity="0.5"/>
+  <rect x="170" y="64" width="60" height="8" rx="4" fill="#c9ccd4"/>
+  <rect x="170" y="80" width="60" height="8" rx="4" fill="#e4e6ea"/>
+
+</svg>

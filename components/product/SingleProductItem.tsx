@@ -19,7 +19,7 @@ const SingleProductItem: FC<any> = ({ content, unfavoriteCard, favoriteCard }) =
   return (
     <>
       {modal && <RemoveConfirmModal setModal={setModal} deleteFavorites={deleteFavorites} />}
-      <div className="flex relative group flex-col group justify-between h-72 xl:h-[360px] bg-[#F4F5F9] border border-[#dadada65] hover:border-[#4bbfc59c] hover:shadow-lg py-4 px-4 rounded-3xl w-full transition-all ease-in-out duration-300 hover:pb-14 xl:hover:pb-16">
+      <div className="flex relative group flex-col group justify-between h-72 xl:h-[360px] bg-[#F4F5F9] border border-[#dadada65] hover:border-[#4CBEC5]/60 hover:shadow-lg py-4 px-4 rounded-3xl w-full transition-all ease-in-out duration-300 hover:pb-14 xl:hover:pb-16">
         <div className="flex flex-col">
           <div className="flex flex-col text-[#7E8096]">
             <h5 className="text-xs xl:text-base">{content.brand}</h5>

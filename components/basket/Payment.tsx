@@ -1,13 +1,32 @@
 import Link from "next/link";
 import React, { FC, useState } from "react";
-import { SvgActiveCardBg, SvgShowMore } from "../../helpers/svgs/basketSvg";
+import { toast } from "react-toastify";
+import { SvgActiveCardBg, SvgConfirmedOrder, SvgShowMore } from "../../helpers/svgs/basketSvg";
 import Sidebar from "./Sidebar";
 
-const Payment: FC<any> = ({ setActivePage, activePage }) => {
+const Payment: FC<any> = ({ setActivePage, activePage, basketData, setBasketData }) => {
   const [agreementShowFull, setAgreementShowFull] = useState<boolean>(false);
   const [state, setState] = useState<any>(1);
+  const [agreed, setAgreed] = useState<boolean>(false);
+  const [card, setCard] = useState({ cardNumber: "", cardName: "", cardExpiry: "", cardCvv: "" });
   const tradliaSalesAgreement =
     "ARTICLE 1- PARTIES TO THE AGREEMENT \n \n SELLER:\n Title: TRADLIA Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, doloribus nihil tempore animi dolorum, unde quaerat corporis rerum dolores nesciunt ab? Tempore ipsa a eligendi voluptas reprehenderit! Sit, velit animi!";
+
+  const paymentReady =
+    agreed &&
+    card.cardNumber.trim() !== "" &&
+    card.cardName.trim() !== "" &&
+    card.cardExpiry.trim() !== "" &&
+    card.cardCvv.trim() !== "";
+
+  const finalizePayment = () => {
+    if (!paymentReady) return;
+    setState(3);
+    toast.success("Payment completed successfully!");
+    // Clear the cart after successful payment
+    if (setBasketData) setBasketData([]);
+  };
+
   return (
     <div className="container grid grid-cols-12 gap-8 px-3 xl:px-0 mx-auto mt-6 min-h-[80vh]">
       <div className="flex flex-col col-span-12 xl:col-span-9 ">
@@ -44,8 +63,40 @@ const Payment: FC<any> = ({ setActivePage, activePage }) => {
           </div>
         ) : state === 2 ? (
           <div className="grid gap-5">
-            <div className="bg-white xl:bg-[#F4F5F9] rounded-2xl xl:rounded-3xl px-3 py-5 h-56">
-              <div className="text-[#7E8096] font-bold pl-6 pt-4">Pay by Credit Card</div>
+            <div className="bg-white xl:bg-[#F4F5F9] rounded-2xl xl:rounded-3xl px-3 py-5">
+              <div className="text-[#7E8096] font-bold pl-6 pt-4 pb-3">Pay by Credit Card</div>
+              <div className="grid gap-3 px-3 xl:px-6">
+                <input
+                  type="text"
+                  placeholder="Card Number"
+                  value={card.cardNumber}
+                  onChange={(e) => setCard({ ...card, cardNumber: e.target.value })}
+                  className="rounded-full border border-[#00B1B266] bg-white px-5 py-3 text-sm text-[#7E8096] shadow-sm outline-none placeholder:text-[#A0A2AF] focus:border-[#4CBEC5]"
+                />
+                <input
+                  type="text"
+                  placeholder="Name on Card"
+                  value={card.cardName}
+                  onChange={(e) => setCard({ ...card, cardName: e.target.value })}
+                  className="rounded-full border border-[#00B1B266] bg-white px-5 py-3 text-sm text-[#7E8096] shadow-sm outline-none placeholder:text-[#A0A2AF] focus:border-[#4CBEC5]"
+                />
+                <div className="grid grid-cols-2 gap-3">
+                  <input
+                    type="text"
+                    placeholder="Expiry Date (MM/YY)"
+                    value={card.cardExpiry}
+                    onChange={(e) => setCard({ ...card, cardExpiry: e.target.value })}
+                    className="rounded-full border border-[#00B1B266] bg-white px-5 py-3 text-sm text-[#7E8096] shadow-sm outline-none placeholder:text-[#A0A2AF] focus:border-[#4CBEC5]"
+                  />
+                  <input
+                    type="text"
+                    placeholder="CVV"
+                    value={card.cardCvv}
+                    onChange={(e) => setCard({ ...card, cardCvv: e.target.value })}
+                    className="rounded-full border border-[#00B1B266] bg-white px-5 py-3 text-sm text-[#7E8096] shadow-sm outline-none placeholder:text-[#A0A2AF] focus:border-[#4CBEC5]"
+                  />
+                </div>
+              </div>
             </div>
             <div className="bg-white xl:bg-[#F4F5F9] rounded-2xl xl:rounded-3xl xl:px-[2rem] px-3 py-5">
               <div className="text-[#7E8096] font-bold pl-6 pt-4 pb-3">Sales Agreement</div>
@@ -67,9 +118,16 @@ const Payment: FC<any> = ({ setActivePage, activePage }) => {
                 </div>
               </div>
               <div className="px-3 py-4">
-                <label htmlFor={"salesAgreement"} className="flex items-center gap-2">
+                <label htmlFor={"salesAgreement"} className="flex items-center gap-2 cursor-pointer">
                   <div className="border rounded-[5px] border-[#4CBEC5] w-5 h-5 flex items-center justify-center">
-                    <input type="checkbox" name="" id={"salesAgreement"} className="hidden peer" />
+                    <input
+                      type="checkbox"
+                      name=""
+                      id={"salesAgreement"}
+                      className="hidden peer"
+                      checked={agreed}
+                      onChange={(e) => setAgreed(e.target.checked)}
+                    />
                     <div className="w-3.5 h-3.5 rounded-[4px] peer-checked:bg-[#4CBEC5]"></div>
                   </div>
                   <p className="font-bold text-[#4CBEC5] text-[11px] xl:text-sm">
@@ -77,15 +135,87 @@ const Payment: FC<any> = ({ setActivePage, activePage }) => {
                   </p>
                 </label>
               </div>
+              <div className="px-3 pb-3">
+                <button
+                  type="button"
+                  disabled={!paymentReady}
+                  onClick={finalizePayment}
+                  className={`w-full rounded-full py-3 text-base font-bold text-white transition-colors ${
+                    paymentReady
+                      ? "bg-gradient-to-r from-[#66C1BF] to-[#00A29D] cursor-pointer"
+                      : "bg-[#CCCFDD] cursor-not-allowed"
+                  }`}
+                >
+                  Complete Payment
+                </button>
+              </div>
             </div>
           </div>
         ) : (
-          "..."
+          <CompleteOrder basketData={basketData} onDone={() => setActivePage(() => "basket")} />
         )}
       </div>
       <div className="col-span-12 xl:col-span-3">
-        <Sidebar setActivePage={setActivePage} activePage={activePage} />
+        <Sidebar setActivePage={setActivePage} activePage={activePage} basketData={basketData} />
       </div>
+    </div>
+  );
+};
+
+const CompleteOrder: FC<any> = ({ basketData, onDone }) => {
+  const sellers: any[] = basketData ?? [];
+  const pieces = sellers.reduce(
+    (sum, seller) => sum + seller.productCards.reduce((a: number, p: any) => a + p.count, 0),
+    0
+  );
+  const shipping = sellers.reduce(
+    (sum, seller) =>
+      sum + (seller.shippingOption === "express" ? seller.expressShipping : seller.domesticShipping),
+    0
+  );
+  const productsPrice = sellers.reduce(
+    (sum, seller) => sum + seller.productCards.reduce((a: number, p: any) => a + p.price * p.count, 0),
+    0
+  );
+  const total = shipping + productsPrice;
+  const fmt = (value: number) => `${value.toFixed(2).replace(".", ",")} $`;
+
+  return (
+    <div className="flex flex-col gap-5">
+      <div className="flex flex-col items-center gap-3 rounded-2xl border border-[#00B1B265] bg-white p-8 text-center shadow-sm">
+        <div className="h-20 w-20 text-[#4CBEC5]">
+          <SvgConfirmedOrder />
+        </div>
+        <p className="text-2xl font-bold text-[#4CBEC5]">Order Completed!</p>
+        <p className="text-sm text-[#7E8096]">
+          Thank you for your purchase. Your order has been placed successfully and a confirmation has been sent to
+          your e-mail address.
+        </p>
+      </div>
+      <div className="rounded-2xl border border-[#00B1B265] bg-white p-6 text-sm shadow-sm">
+        <p className="mb-3 font-bold text-[#4CBEC5]">Order Summary</p>
+        <div className="flex flex-col gap-2 font-medium text-[#7E8096]">
+          <div className="flex justify-between">
+            <p>Products ({pieces} pieces)</p>
+            <p className="font-bold">{fmt(productsPrice)}</p>
+          </div>
+          <div className="flex justify-between">
+            <p>Shipping</p>
+            <p className="font-bold">{fmt(shipping)}</p>
+          </div>
+          <div className="mt-2 flex justify-between border-t border-[#00B1B240] pt-2 text-base">
+            <p className="font-bold text-[#4CBEC5]">Total</p>
+            <p className="font-bold text-[#4CBEC5]">{fmt(total)}</p>
+          </div>
+        </div>
+      </div>
+      <button
+        type="button"
+        onClick={onDone}
+        className="self-center rounded-full bg-gradient-to-r from-[#66C1BF] to-[#00A29D] px-10 py-3 text-sm font-bold text-white shadow-md"
+      >
+        Continue Shopping
+      </button>
     </div>
   );
 };

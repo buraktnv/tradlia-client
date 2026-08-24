@@ -1,5 +1,6 @@
 import { FC } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 interface IFilterItem {
   id: number;
@@ -15,81 +16,81 @@ const FilterSelection: FC<any> = () => {
     {
       id: 1,
       text1: "Best Sellers",
-      icon: "/images/giftIcon.svg",
+      icon: "/images/filter-best-sellers.svg",
       iconClass: "bg-gradient-to-r from-[#FF516B] to-[#FF0045]",
       textClass: "text-[#E8336E]",
       bgItem: "hidden",
     },
     {
       id: 2,
-      text1: "BEST CATEGORY",
-      icon: "/images/Group399.svg",
+      text1: "Best Category",
+      icon: "/images/filter-best-category.svg",
       iconClass: "bg-gradient-to-r from-[#FFBE00] to-[#FF7B03]",
       textClass: "text-[#F59C00]",
       bgItem: "hidden",
     },
     {
       id: 3,
-      text1: "WOUND CARE PRODUCTS",
-      icon: "/images/photos/product-10.svg",
+      text1: "Wound Care",
+      icon: "/images/filter-wound-care.svg",
       iconClass: "bg-gradient-to-r from-[#66C1BF] to-[#00A29D]",
       textClass: "text-[#4CBEC5]",
       bgItem: "hidden",
     },
     {
       id: 4,
-      text1: "MEDISUPPLY",
-      icon: "/images/Group415.svg",
-      iconClass: "",
-      textClass: "text-[#7E8096]",
+      text1: "MediSupply",
+      icon: "/images/filter-medisupply.svg",
+      iconClass: "bg-gradient-to-r from-[#4CBEC5] to-[#5327A8]",
+      textClass: "text-[#4CBEC5]",
       bgItem: "",
     },
     {
       id: 5,
-      text1: "PHARMADIRECT",
-      icon: "/images/Group447.svg",
-      iconClass: "",
-      textClass: "text-[#7E8096]",
+      text1: "PharmaDirect",
+      icon: "/images/filter-pharmadirect.svg",
+      iconClass: "bg-gradient-to-r from-[#FF516B] to-[#FF0045]",
+      textClass: "text-[#FF516B]",
       bgItem: "",
     },
     {
       id: 6,
-      text1: "WHOLESALEX",
-      icon: "/images/Group415.svg",
-      iconClass: "",
-      textClass: "text-[#7E8096]",
+      text1: "WholesaleX",
+      icon: "/images/filter-wholesalex.svg",
+      iconClass: "bg-gradient-to-r from-[#FFBE00] to-[#FF7B03]",
+      textClass: "text-[#F59C00]",
       bgItem: "",
     },
     {
       id: 7,
-      text1: "NATUREMED",
-      icon: "/images/Group447.svg",
-      iconClass: "",
-      textClass: "text-[#7E8096]",
+      text1: "NatureMed",
+      icon: "/images/filter-naturemed.svg",
+      iconClass: "bg-gradient-to-r from-[#86BC25] to-[#6BAF1A]",
+      textClass: "text-[#86BC25]",
       bgItem: "",
     },
     {
       id: 8,
-      text1: "MEDINEED",
-      icon: "/images/Group415.svg",
-      iconClass: "",
-      textClass: "text-[#7E8096]",
+      text1: "MediNeed",
+      icon: "/images/filter-medineed.svg",
+      iconClass: "bg-gradient-to-r from-[#FF516B] to-[#FF0045]",
+      textClass: "text-[#FF516B]",
       bgItem: "",
     },
     {
       id: 9,
-      text1: "HEALTHHUB",
-      icon: "/images/Group454.svg",
-      iconClass: "",
-      textClass: "text-[#7E8096]",
+      text1: "HealthHub",
+      icon: "/images/filter-healthhub.svg",
+      iconClass: "bg-gradient-to-r from-[#4CBEC5] to-[#5327A8]",
+      textClass: "text-[#4CBEC5]",
       bgItem: "",
     },
     {
       id: 10,
-      text1: "PHARMADEPOT",
-      icon: "/images/Group430.svg",
-      iconClass: "",
-      textClass: "text-[#7E8096]",
+      text1: "PharmaDepot",
+      icon: "/images/filter-pharmadepot.svg",
+      iconClass: "bg-gradient-to-r from-[#FFBE00] to-[#FF7B03]",
+      textClass: "text-[#F59C00]",
       bgItem: "",
     },
   ];
@@ -108,8 +109,13 @@ const FilterSelection: FC<any> = () => {
 };
 
 const SingleFilterItem: FC<{ content: IFilterItem }> = ({ content }) => {
+  const router = useRouter();
   return (
-    <span className="flex flex-col items-center justify-start w-full h-full cursor-pointer basis-1/5 min-w-[20%] xl:min-w-fit group">
+    <button
+      type="button"
+      onClick={() => router.push("/category")}
+      className="flex flex-col items-center justify-start w-full h-full cursor-pointer basis-1/5 min-w-[20%] xl:min-w-fit group"
+    >
       <span
         className={`${content.iconClass} relative rounded-full flex items-center justify-center xl:p-4 p-2.5 xl:h-24 xl:w-24 h-16 w-16 border-[4px] border-[#F4F5F7]`}
       >
@@ -125,7 +131,7 @@ const SingleFilterItem: FC<{ content: IFilterItem }> = ({ content }) => {
       >
         {content.text1}
       </span>
-    </span>
+    </button>
   );
 };
 

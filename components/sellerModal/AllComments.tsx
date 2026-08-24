@@ -1,5 +1,6 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { SvgFilledStar, SvgStar, SvgStore } from "../../helpers/svgs/sellerSvg";
+import PortalModal from "../shared/PortalModal";
 import styles from "../shared/ScrollBar.module.scss";
 
 const comments: any = [
@@ -76,73 +77,54 @@ const comments: any = [
 ];
 
 const AllComments: FC<any> = ({ setModal1 }) => {
-  const [fade, setFade] = useState<boolean>(false);
-  useEffect(() => {
-    setFade(true);
-  }, []);
   return (
-    <div className="absolute top-0 left-0 z-10 w-screen h-screen text-sm">
-      <div
-        className={`bg-[#000000be] fixed top-0 bottom-0 left-0 right-0 transition-opacity duration-300 ease-in-out z-20 ${
-          fade ? "opacity-100" : "opacity-0"
-        }`}
-        onClick={() => {
-          setFade(false);
-          setTimeout(() => setModal1(() => false), 300);
-        }}
-      ></div>
-      <div className="flex items-center justify-center w-full h-full px-2 my-16 xl:px-0 xl:my-0">
-        <div
-          className={`bg-white p-10 flex flex-col items-center justify-center gap-5 h-4/5 rounded-3xl z-20 transition-all duration-300 ease-in-out ${
-            fade ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
-          }`}
+    <PortalModal open onClose={() => setModal1(false)} panelClassName="px-6 xl:px-10 py-6">
+      <div className="flex flex-col items-center gap-5 text-sm">
+        <button type="button"
+          onClick={() => setModal1(false)}
+          className="flex items-center justify-center text-[#F9B000] text-lg font-medium border border-[#f59b0065] rounded-full w-full py-2"
         >
-          <button type="button"
-            onClick={() => setModal1(false)}
-            className="flex items-center justify-center text-[#F9B000] text-lg font-medium border border-[#f59b0065] rounded-full w-full py-2"
-          >
-            Store Reviews
-          </button>
+          Store Reviews
+        </button>
 
-          <div className="flex flex-col justify-center w-full space-y-3">
-            <div className="flex gap-5">
-              <div className="flex items-center gap-3">
-                <div className="w-16 h-16 p-3 text-[#66c1c0ad] bg-[#F4F5F9] xl:bg-white rounded-full border border-[#66c1c0ad]">
-                  <SvgStore />
-                </div>
-                <div className="flex flex-col">
-                  <p className="text-lg text-[#7E8096] font-semibold">Tradlia</p>
+        <div className="flex flex-col justify-center w-full space-y-3">
+          <div className="flex gap-5">
+            <div className="flex items-center gap-3">
+              <div className="w-16 h-16 p-3 text-[#66c1c0ad] bg-[#F4F5F9] xl:bg-white rounded-full border border-[#66c1c0ad]">
+                <SvgStore />
+              </div>
+              <div className="flex flex-col">
+                <p className="text-lg text-[#7E8096] font-semibold">Tradlia</p>
 
-                  <div className="flex items-center justify-center w-full gap-2">
-                    <div className="w-4 h-4 text-[#F9B000]">
-                      <SvgFilledStar />
-                    </div>
-                    <div className="w-4 h-4 text-[#F9B000]">
-                      <SvgFilledStar />
-                    </div>
-                    <div className="w-4 h-4 text-[#F9B000]">
-                      <SvgFilledStar />
-                    </div>
-                    <div className="w-4 h-4 text-[#F9B000]">
-                      <SvgFilledStar />
-                    </div>
-                    <div className="w-4 h-4 text-[#F9B000]">
-                      <SvgStar />
-                    </div>
-                    <div className="flex text-md font-bold text-[#F9B000]">4,1</div>
+                <div className="flex items-center justify-center w-full gap-2">
+                  <div className="w-4 h-4 text-[#F9B000]">
+                    <SvgFilledStar />
                   </div>
+                  <div className="w-4 h-4 text-[#F9B000]">
+                    <SvgFilledStar />
+                  </div>
+                  <div className="w-4 h-4 text-[#F9B000]">
+                    <SvgFilledStar />
+                  </div>
+                  <div className="w-4 h-4 text-[#F9B000]">
+                    <SvgFilledStar />
+                  </div>
+                  <div className="w-4 h-4 text-[#F9B000]">
+                    <SvgStar />
+                  </div>
+                  <div className="flex text-md font-bold text-[#F9B000]">4,1</div>
                 </div>
               </div>
             </div>
           </div>
-          <div className={`h-full flex flex-col pr-6 overflow-y-scroll ${styles.ScrollBar}`}>
-            {comments.map((comment: any) => (
-              <ProductCard comment={comment} key={comment.id} />
-            ))}
-          </div>
+        </div>
+        <div className={`flex flex-col w-full h-[45vh] pr-6 overflow-y-scroll ${styles.ScrollBar}`}>
+          {comments.map((comment: any) => (
+            <ProductCard comment={comment} key={comment.id} />
+          ))}
         </div>
       </div>
-    </div>
+    </PortalModal>
   );
 };
 const ProductCard: FC<any> = ({ comment }) => {

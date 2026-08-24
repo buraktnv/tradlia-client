@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- WholesaleX - Wholesale box -->
+  <circle cx="50" cy="50" r="45" fill="#fef9e7" stroke="#FFBE00" stroke-width="3"/>
+  <rect x="25" y="35" width="50" height="45" rx="5" fill="none" stroke="#FFBE00" stroke-width="3"/>
+  <rect x="30" y="40" width="40" height="12" rx="3" fill="#FFBE00" opacity="0.3"/>
+  <path d="M50 25 L50 35" stroke="#FFBE00" stroke-width="3" stroke-linecap="round"/>
+  <rect x="25" y="35" width="50" height="5" rx="2" fill="#FFBE00" opacity="0.2"/>
+</svg>

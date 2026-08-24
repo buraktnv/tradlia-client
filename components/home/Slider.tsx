@@ -1,191 +1,223 @@
-import { FC, useLayoutEffect, useState } from "react";
+import { FC, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper/types";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
 
 interface SliderImage {
   id: number;
   text1: string;
   text2: string;
-  img1: string;
+  /** slider-bar asset used as the soft background disc */
   url: string;
+  /** transparent product image used as the slide visual */
+  product: string;
+  category: string;
+  /** value for the /category?cat=… link */
+  type: string;
 }
+
+// Medical/Pharma themed slider content using public domain health icons
 const photos: SliderImage[] = [
   {
     id: 1,
-    text1: "All Your \nFurry Friend's",
-    text2: "Every \nNeed",
-    img1: "/images/main/homepage/pet-slider.svg",
-    url: "/images/photos/slider-pet-1.svg",
+    text1: "Quality Medical\nSupplies",
+    text2: "At Wholesale\nPrices",
+    url: "/images/main/homepage/slider-bar-1.svg",
+    product: "/images/photos/transparent/prod-13.svg",
+    category: "Medical Supplies",
+    type: "medical",
   },
   {
     id: 2,
-    text1: "All Your \nFurry Friend's2",
-    text2: "Every \nNeed2",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Pharmaceutical\nProducts",
+    text2: "Direct from\nManufacturers",
     url: "/images/main/homepage/slider-bar-2.svg",
+    product: "/images/photos/transparent/prod-07.svg",
+    category: "Pharmaceuticals",
+    type: "family",
   },
   {
     id: 3,
-    text1: "All Your \nFurry Friend's3",
-    text2: "Every \nNeed3",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Lab Equipment\n& Diagnostics",
+    text2: "Certified &\nReliable",
     url: "/images/main/homepage/slider-bar-3.svg",
+    product: "/images/photos/transparent/prod-10.svg",
+    category: "Lab Equipment",
+    type: "medical",
   },
   {
     id: 4,
-    text1: "All Your \nFurry Friend's4",
-    text2: "Every \nNeed4",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Personal Care\n& Wellness",
+    text2: "Trusted Brands\nfor Your Health",
     url: "/images/main/homepage/slider-bar-4.svg",
+    product: "/images/photos/transparent/prod-02.svg",
+    category: "Personal Care",
+    type: "personal-care",
   },
   {
     id: 5,
-    text1: "All Your \nFurry Friend's5",
-    text2: "Every \nNeed5",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Medical Devices\n& Instruments",
+    text2: "FDA Approved\nQuality Assured",
     url: "/images/main/homepage/slider-bar-5.svg",
+    product: "/images/photos/transparent/prod-12.svg",
+    category: "Medical Devices",
+    type: "health",
   },
   {
     id: 6,
-    text1: "All Your \nFurry Friend's6",
-    text2: "Every \nNeed6",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Veterinary\nProducts",
+    text2: "Animal Health\nSolutions",
     url: "/images/main/homepage/slider-bar-6.svg",
+    product: "/images/photos/transparent/prod-04.svg",
+    category: "Veterinary",
+    type: "veterinary",
   },
   {
     id: 7,
-    text1: "All Your \nFurry Friend's7",
-    text2: "Every \nNeed7",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Dental Supplies\n& Equipment",
+    text2: "Professional Grade\nfor Clinics",
     url: "/images/main/homepage/slider-bar-7.svg",
+    product: "/images/photos/transparent/prod-11.svg",
+    category: "Dental",
+    type: "dental",
   },
   {
     id: 8,
-    text1: "All Your \nFurry Friend's8",
-    text2: "Every \nNeed8",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Orthopedic &\nRehabilitation",
+    text2: "Recovery\nSolutions",
     url: "/images/main/homepage/slider-bar-8.svg",
+    product: "/images/photos/transparent/prod-01.svg",
+    category: "Orthopedic",
+    type: "health",
   },
   {
     id: 9,
-    text1: "All Your \nFurry Friend's9",
-    text2: "Every \nNeed9",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Hospital &\nClinical Furniture",
+    text2: "Ergonomic\nDesign",
     url: "/images/main/homepage/slider-bar-9.svg",
+    product: "/images/photos/transparent/prod-16.svg",
+    category: "Hospital Furniture",
+    type: "office",
   },
   {
     id: 10,
-    text1: "All Your \nFurry Friend's10",
-    text2: "Every \nNeed10",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Digital Health\n& Telemedicine",
+    text2: "Modern\nHealthcare Tech",
     url: "/images/main/homepage/slider-bar-10.svg",
+    product: "/images/photos/transparent/prod-03.svg",
+    category: "Digital Health",
+    type: "health",
   },
 ];
 
 const Slider: FC = () => {
-  const [activeImage, setActiveImage] = useState<SliderImage>(photos[0]);
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const swiperRef = useRef<SwiperType | null>(null);
+  // Guard against missing lookups so the slider never crashes on bad indexes.
+  const activeImage = photos[activeIndex] ?? photos[0];
 
-  const minSwipeDistance = 50;
-
-  useLayoutEffect(() => {
-    let timer: NodeJS.Timeout | null = null;
-
-    timer = setTimeout(() => {
-      if (activeImage.id !== 10) setActiveImage(photos[activeImage.id]);
-      else setActiveImage(photos[0]);
-    }, 4000);
-
-    return () => {
-      timer && clearTimeout(timer);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeImage]);
-
-  const changeElement = (item: number) => {
-    setActiveImage(photos.filter((el) => el.id === Number(item))[0]);
-  };
-
-  const onTouchStart = (e: any) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e: any) => setTouchEnd(e.targetTouches[0].clientX);
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-    if (isLeftSwipe) {
-      if (activeImage.id !== 10) setActiveImage(photos[activeImage.id]);
-      else setActiveImage(photos[0]);
-    }
-    if (isRightSwipe) {
-      if (activeImage.id !== 1) setActiveImage(photos[Number(activeImage.id) - Number(2)]);
-      else setActiveImage(photos[9]);
-    }
+  const goToSlide = (index: number) => {
+    swiperRef.current?.slideToLoop(index);
   };
 
   return (
     <>
       <div className="relative flex flex-col px-5 bg-white xl:px-3">
         <div className="bg-[#F4F5F9] absolute w-[100%] h-[60%] left-0 bottom-0"></div>
-        <div
-          className="container relative mx-auto mb-6 xl:mb-0"
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
-        >
+        <div className="container relative mx-auto mb-6 xl:mb-0">
           <div className="absolute flex w-full h-full rounded-full">
             <div className="relative w-full h-full xl:h-[400px] drop-shadow-md">
               <Image src="/images/main/homepage/photoBg.svg" alt="bg" fill sizes="100vw" className="rounded-3xl" />
             </div>
           </div>
-          <div className="flex xl:w-full rounded-[1rem] xl:rounded-[2rem] h-[200px] w-[341px] xl:h-[400px]">
-            <div className="z-10 xl:p-2 xl:m-1 m-1 w-1/2 xl:w-[35%]">
-              <div className="h-full xl:w-full flex flex-col justify-between xl:justify-center xl:rounded-[2.5rem] rounded-[1.3rem] pl-1 pr-3 py-4 xl:p-0 bg-white">
-                <div className="xl:text-4xl leading-5 text-[19px] font-light xl:tracking-normal tracking-tighter text-[#7E8096] mx-3 xl:ml-14">
-                  <p className="whitespace-pre">{activeImage.text1}</p>
+          <button
+            type="button"
+            aria-label="Previous slide"
+            onClick={() => swiperRef.current?.slidePrev()}
+            className="absolute left-3 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 shadow-md backdrop-blur transition hover:bg-white xl:flex"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-5 w-5 text-[#4CBEC5]">
+              <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            aria-label="Next slide"
+            onClick={() => swiperRef.current?.slideNext()}
+            className="absolute right-3 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 shadow-md backdrop-blur transition hover:bg-white xl:flex"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-5 w-5 text-[#4CBEC5]">
+              <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <Swiper
+            modules={[Autoplay]}
+            loop
+            speed={600}
+            autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+            className="w-[341px] xl:w-full"
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+          >
+            {photos.map((el) => (
+              <SwiperSlide key={el.id}>
+                <div className="relative flex h-[200px] w-[341px] xl:h-[400px] xl:w-full">
+                  <div className="z-10 xl:p-2 xl:m-1 m-1 w-1/2 xl:w-[35%]">
+                    <div className="h-full xl:w-full flex flex-col justify-between xl:justify-center xl:rounded-[2.5rem] rounded-[1.3rem] pl-1 pr-3 py-4 xl:p-0 bg-white/95 xl:bg-transparent">
+                      <div className="xl:text-4xl leading-5 text-[19px] font-light xl:tracking-normal tracking-tighter text-[#7E8096] mx-3 xl:ml-14">
+                        <p className="whitespace-pre">{el.text1}</p>
 
-                  <div className="xl:text-5xl text-[22px] font-bold text-[#4CBEC5]">
-                    <span className="whitespace-pre">{activeImage.text2}</span>
+                        <div className="xl:text-5xl text-[22px] font-bold text-[#4CBEC5]">
+                          <span className="whitespace-pre">{el.text2}</span>
+                        </div>
+                        <div className="hidden px-10 xl:flex">
+                          <Image src="/images/main/secondSection/heartBeat.svg" alt="Heart Beat" height={36} width={36} />
+                        </div>
+                      </div>
+                      <div className="m-1 mx-3 xl:ml-14">
+                        <Link
+                          href={`/category?cat=${el.type}`}
+                          className="xl:px-8 px-2 py-1 xl:py-2 text-[10px] xl:text-xl cursor-pointer mt-2 font-light drop-shadow-lg text-white bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] rounded-3xl col-span-3"
+                        >
+                          Shop {el.category}
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                  <div className="hidden px-10 xl:flex">
-                    <Image src="/images/main/secondSection/heartBeat.svg" alt="Heart Beat" height={36} width={36} />
+                  <div className="relative grow">
+                    {/* slider-bar asset used as a soft background disc */}
+                    <div className="absolute right-[2%] xl:right-[6%] top-1/2 -translate-y-1/2 pointer-events-none opacity-25 blur-2xl">
+                      <div className="relative w-[200px] h-[200px] xl:w-[400px] xl:h-[400px]">
+                        <Image src={el.url} alt="" fill sizes="100vw" className="rounded-full" />
+                      </div>
+                    </div>
+                    {/* transparent product hero */}
+                    <div className="absolute right-[12%] xl:right-[20%] top-1/2 -translate-y-1/2">
+                      <div className="relative w-[140px] h-[140px] xl:w-[300px] xl:h-[300px]">
+                        <Image
+                          src={el.product}
+                          alt={el.category}
+                          fill
+                          sizes="100vw"
+                          className="object-contain drop-shadow-xl"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="m-1 mx-3 xl:ml-14">
-                  <button type="button" className="xl:px-8 px-2 py-1 xl:py-2 text-[10px] xl:text-xl cursor-pointer mt-2 font-light drop-shadow-lg text-white bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] rounded-3xl">
-                    Start Shopping
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-start justify-around py-4 pr-3 bg-transparent xl:pr-0 xl:items-center xl:pl-36 grow">
-              <div className="absolute top-12 left-[25%] xl:left-[20%] z-10 xl:-top-8">
-                <div className="xl:w-[500px] w-[164px] h-[120px] xl:h-[420px]">
-                  <Image
-                    className="object-contain"
-                    src="/images/main/homepage/pet-slider.svg"
-                    fill sizes="100vw"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="h-full">
-                <div className="relative w-32 h-32 xl:w-[400px] xl:h-[320px]">
-                  <Image className="object-contain" src={activeImage.url} fill sizes="100vw" alt="activeImage" />
-                </div>
-              </div>
-            </div>
-          </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
         <div className="container hidden mx-auto xl:block">
           <div className="flex justify-around px-[2.5rem] py-6 mx-auto space-x-6 overflow-x-auto">
-            {photos.map((el) => (
-              <button type="button" key={el.id} className={`p-2 relative group cursor-pointer`} onClick={() => setActiveImage(el)}>
+            {photos.map((el, index) => (
+              <button type="button" key={el.id} className={`p-2 relative group cursor-pointer`} onClick={() => goToSlide(index)}>
                 <div
                   className={`absolute top-0 left-0 w-full h-full transform transition-all duration-300 ease-in-out group ${
                     activeImage.url === el.url ? "block" : "opacity-0 group-hover:opacity-100"
@@ -205,62 +237,16 @@ const Slider: FC = () => {
         </div>
         <div className="container block mx-auto xl:hidden">
           <div className="relative flex justify-center w-full gap-2 py-2 pb-8">
-            <button type="button"
-              onClick={() => changeElement(1)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 1 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(2)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 2 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(3)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 3 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(4)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 4 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(5)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 5 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(6)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 6 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(7)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 7 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(8)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 8 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(9)}
-              className={`rounded-full p-1 border border-[#4CBEC5] ${activeImage.id === 9 && "bg-[#4CBEC5]"}`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(10)}
-              className={`rounded-full p-1 border border-[#4CBEC5] ${activeImage.id === 10 && "bg-[#4CBEC5]"}`}
-            ></button>
+            {photos.map((el, index) => (
+              <button
+                type="button"
+                key={el.id}
+                onClick={() => goToSlide(index)}
+                className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
+                  activeIndex === index && "bg-[#4CBEC5]"
+                }`}
+              ></button>
+            ))}
           </div>
         </div>
       </div>

@@ -76,7 +76,7 @@ const Notification: FC<any> = () => {
 const MessageItem: FC<any> = ({ content }) => {
   return (
     <div className="py-1 cursor-pointer">
-      <div className="w-full h-[1px] bg-[#4cbfc5c2]"></div>
+      <div className="w-full h-[1px] bg-[#4CBEC5]/75"></div>
       <div className="pt-1.5 pb-3">
         <div className="flex items-center gap-1 py-1">
           <div className="flex justify-center items-center h-8 w-8 border rounded-full bg-[#F2F2F2] border-[#4CBEC5]">
