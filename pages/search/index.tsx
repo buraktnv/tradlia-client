@@ -8,7 +8,7 @@ import useLocalStorage from "../../helpers/hooks/useLocalStorage";
 import { HIRE_ME_COPY } from "../../helpers/config";
 import type { SingleCardContent } from "../../types/product";
 
-const RECENT_SEARCHES_KEY = "medifoniRecentSearches";
+const RECENT_SEARCHES_KEY = "tradliaRecentSearches";
 
 const toCardContent = (product: CatalogProduct): SingleCardContent => {
   const category = getCategoryById(product.categoryId);
