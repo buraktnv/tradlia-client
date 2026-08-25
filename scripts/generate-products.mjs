@@ -23,125 +23,242 @@ const shadow = (cx, cy, rx, ry, opacity = 0.14) =>
 const grad = (id, [from, to]) =>
   `<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${from}"/><stop offset="1" stop-color="${to}"/></linearGradient>`;
 
-/** Simple rounded bottle with cap, label band and highlight. */
-function bottle(cap = "#ffffff", label = "#ffffff") {
+/** Stacked double-wall shipping boxes with tape seams and labels. */
+function boxes() {
   return `
-  ${shadow(200, 340, 120, 22)}
-  <rect x="170" y="52" width="60" height="38" rx="8" fill="${cap}"/>
-  <rect x="180" y="44" width="40" height="12" rx="4" fill="${cap}"/>
-  <path d="M150 90 C150 90 148 150 148 200 C148 280 152 330 152 330 L248 330 C248 330 252 280 252 200 C252 150 250 90 250 90 Z" fill="url(#g-bottle)"/>
-  <rect x="138" y="150" width="124" height="70" rx="10" fill="${label}" opacity="0.92"/>
-  <rect x="160" y="172" width="80" height="10" rx="5" fill="#b9bcc4"/>
-  <rect x="160" y="190" width="52" height="10" rx="5" fill="#e4e6ea"/>
-  <ellipse cx="180" cy="110" rx="10" ry="46" fill="#fff" opacity="0.35"/>
+  ${shadow(200, 352, 130, 20)}
+  <rect x="108" y="236" width="184" height="108" rx="12" fill="url(#g-boxes)"/>
+  <line x1="200" y1="236" x2="200" y2="344" stroke="#ffffff" stroke-width="5" opacity="0.3"/>
+  <rect x="192" y="236" width="16" height="108" fill="#ffffff" opacity="0.25"/>
+  <rect x="128" y="286" width="64" height="34" rx="6" fill="#ffffff" opacity="0.92"/>
+  <rect x="138" y="296" width="44" height="7" rx="3.5" fill="#c9ccd4"/>
+  <rect x="138" y="308" width="28" height="7" rx="3.5" fill="#e4e6ea"/>
+  <rect x="126" y="142" width="148" height="100" rx="12" fill="url(#g-boxes)"/>
+  <line x1="200" y1="142" x2="200" y2="242" stroke="#ffffff" stroke-width="5" opacity="0.3"/>
+  <rect x="193" y="142" width="14" height="100" fill="#ffffff" opacity="0.25"/>
+  <rect x="144" y="176" width="52" height="28" rx="6" fill="#ffffff" opacity="0.92"/>
+  <rect x="152" y="186" width="36" height="8" rx="4" fill="#c9ccd4"/>
 `;
 }
 
-/** Jar with lid. */
-function jar(lid = "#ffffff") {
+/** Stretch-film roll (pallet wrap) with loose trailing sheet. */
+function palletWrap() {
   return `
-  ${shadow(200, 340, 130, 22)}
-  <rect x="120" y="70" width="160" height="46" rx="14" fill="${lid}"/>
-  <rect x="134" y="58" width="132" height="14" rx="7" fill="${lid}"/>
-  <path d="M130 116 C130 116 126 180 126 230 C126 300 132 340 132 340 L268 340 C268 340 274 300 274 230 C274 180 270 116 270 116 Z" fill="url(#g-jar)"/>
-  <rect x="140" y="170" width="120" height="66" rx="10" fill="#ffffff" opacity="0.9"/>
-  <rect x="158" y="190" width="84" height="10" rx="5" fill="#c9ccd4"/>
-  <rect x="158" y="208" width="56" height="10" rx="5" fill="#e4e6ea"/>
-  <ellipse cx="185" cy="140" rx="12" ry="40" fill="#fff" opacity="0.3"/>
+  ${shadow(200, 348, 118, 20)}
+  <circle cx="200" cy="200" r="96" fill="url(#g-wrap)"/>
+  <circle cx="200" cy="200" r="72" fill="none" stroke="#ffffff" stroke-width="6" opacity="0.25"/>
+  <circle cx="200" cy="200" r="46" fill="none" stroke="#ffffff" stroke-width="6" opacity="0.18"/>
+  <circle cx="200" cy="200" r="28" fill="#f6f7f9"/>
+  <path d="M292 236 C322 268 318 306 292 330 C278 342 262 344 252 336" fill="none" stroke="url(#g-wrap)" stroke-width="18" stroke-linecap="round" opacity="0.95"/>
+  <ellipse cx="164" cy="150" rx="26" ry="48" fill="#fff" opacity="0.25" transform="rotate(-28 164 150)"/>
 `;
 }
 
-/** Box (cardboard) with flap lines. */
-function box() {
+/** Wood screws with cross-recess heads and threaded shafts. */
+function screws() {
+  const screw = (x, y, rot, len = 150) => {
+    const threads = Array.from({ length: 5 }, (_, i) => {
+      const yy = y + 34 + i * 18;
+      const hw = Math.max(4, 16 - 12 * ((yy - (y + 20)) / (len - 20)));
+      return `<line x1="${x - hw}" y1="${yy}" x2="${(x + hw * 0.7).toFixed(1)}" y2="${yy + 4}" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/>`;
+    }).join("");
+    return `
+    <g transform="rotate(${rot} ${x} ${y})">
+      <rect x="${x - 26}" y="${y}" width="52" height="20" rx="9" fill="url(#g-screws)"/>
+      <line x1="${x - 11}" y1="${y + 10}" x2="${x + 11}" y2="${y + 10}" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+      <line x1="${x}" y1="${y + 3}" x2="${x}" y2="${y + 17}" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+      <path d="M${x - 16} ${y + 20} L${x + 16} ${y + 20} L${x + 4} ${y + len} L${x - 4} ${y + len} Z" fill="url(#g-screws)"/>
+      ${threads}
+    </g>`;
+  };
   return `
-  ${shadow(200, 345, 130, 20)}
-  <path d="M150 110 L250 110 L260 130 L260 330 L140 330 L140 130 Z" fill="url(#g-box)"/>
-  <rect x="140" y="130" width="120" height="40" rx="4" fill="#ffffff" opacity="0.92"/>
-  <rect x="158" y="142" width="70" height="8" rx="4" fill="#c9ccd4"/>
-  <rect x="158" y="156" width="46" height="8" rx="4" fill="#e4e6ea"/>
-  <rect x="150" y="185" width="100" height="120" rx="8" fill="#ffffff" opacity="0.16"/>
-  <circle cx="200" cy="245" r="26" fill="#ffffff" opacity="0.35"/>
+  ${shadow(200, 350, 120, 20)}
+  ${screw(146, 118, -22)}
+  ${screw(252, 132, 20)}
+  ${screw(199, 104, 0, 168)}
 `;
 }
 
-/** Tube (ointment/cream). */
-function tube() {
+/** Hex bolts with full heads and threaded shanks. */
+function bolts() {
+  const bolt = (x, y, rot, len = 150) => {
+    const threads = Array.from({ length: 7 }, (_, i) => {
+      const yy = y + 38 + i * 13;
+      if (yy > y + len - 24) return "";
+      return `<line x1="${x - 15}" y1="${yy}" x2="${x + 10}" y2="${yy + 3}" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/>`;
+    }).join("");
+    return `
+    <g transform="rotate(${rot} ${x} ${y})">
+      <polygon points="${x - 30},${y} ${x - 15},${y - 24} ${x + 15},${y - 24} ${x + 30},${y} ${x + 15},${y + 24} ${x - 15},${y + 24}" fill="url(#g-bolts)"/>
+      <polygon points="${x - 15},${y - 13} ${x}, ${y - 20} ${x + 15},${y - 13} ${x + 15},${y - 5} ${x - 15},${y - 5}" fill="#ffffff" opacity="0.3"/>
+      <rect x="${x - 15}" y="${y + 24}" width="30" height="${len - 40}" fill="url(#g-bolts)"/>
+      <path d="M${x - 15} ${y + len - 16} L${x + 15} ${y + len - 16} L${x + 6} ${y + len} L${x - 6} ${y + len} Z" fill="url(#g-bolts)"/>
+      ${threads}
+    </g>`;
+  };
   return `
-  ${shadow(200, 340, 110, 20)}
-  <rect x="140" y="60" width="120" height="34" rx="10" fill="#e8eaef"/>
-  <path d="M128 94 L140 94 L140 320 L260 320 L260 94 L272 94 C272 94 272 220 268 260 C264 296 258 330 258 330 L142 330 C142 330 136 296 132 260 C128 220 128 94 128 94 Z" fill="url(#g-tube)"/>
-  <rect x="152" y="180" width="96" height="60" rx="10" fill="#ffffff" opacity="0.9"/>
-  <rect x="168" y="198" width="64" height="9" rx="4" fill="#c9ccd4"/>
-  <rect x="168" y="214" width="40" height="9" rx="4" fill="#e4e6ea"/>
-  <ellipse cx="180" cy="120" rx="9" ry="34" fill="#fff" opacity="0.35"/>
+  ${shadow(200, 350, 120, 20)}
+  ${bolt(150, 110, -20)}
+  ${bolt(248, 124, 16)}
+  ${bolt(199, 96, 0, 168)}
 `;
 }
 
-/** Spray bottle. */
-function spray() {
+/** Coiled CAT6 network cable with RJ45 plug on the tail. */
+function cable() {
   return `
-  ${shadow(200, 345, 110, 20)}
-  <rect x="182" y="70" width="36" height="26" rx="6" fill="#5b5f6a"/>
-  <rect x="196" y="46" width="8" height="26" rx="4" fill="#5b5f6a"/>
-  <path d="M170 96 C170 96 162 150 162 210 C162 280 168 340 168 340 L232 340 C232 340 238 280 238 210 C238 150 230 96 230 96 Z" fill="url(#g-spray)"/>
-  <rect x="152" y="150" width="96" height="60" rx="10" fill="#ffffff" opacity="0.92"/>
-  <rect x="168" y="170" width="64" height="9" rx="4" fill="#c9ccd4"/>
-  <rect x="168" y="186" width="40" height="9" rx="4" fill="#e4e6ea"/>
-  <ellipse cx="180" cy="120" rx="8" ry="30" fill="#fff" opacity="0.35"/>
+  ${shadow(200, 350, 110, 18)}
+  <circle cx="188" cy="188" r="80" fill="none" stroke="url(#g-cable)" stroke-width="30"/>
+  <circle cx="188" cy="188" r="50" fill="none" stroke="url(#g-cable)" stroke-width="24" opacity="0.9"/>
+  <circle cx="188" cy="188" r="24" fill="none" stroke="#5b5f6a" stroke-width="12" opacity="0.5"/>
+  <path d="M128 148 A78 78 0 0 1 180 110" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" opacity="0.3"/>
+  <path d="M252 244 C292 272 296 310 276 334" fill="none" stroke="url(#g-cable)" stroke-width="16" stroke-linecap="round"/>
+  <rect x="256" y="322" width="38" height="48" rx="7" fill="#5b5f6a"/>
+  <rect x="266" y="330" width="18" height="10" rx="3" fill="#ffbe00"/>
+  <rect x="264" y="370" width="22" height="14" rx="4" fill="#30333b"/>
 `;
 }
 
-/** Drop bottle (eye drops). */
-function drops() {
+/** Sensor PCB module with temperature probe tip on a lead. */
+function sensorModule() {
   return `
-  ${shadow(200, 345, 100, 18)}
-  <path d="M200 60 L214 92 L186 92 Z" fill="#ffffff"/>
-  <rect x="180" y="92" width="40" height="16" rx="6" fill="#ffffff"/>
-  <path d="M168 108 C168 108 160 170 160 225 C160 290 168 340 168 340 L232 340 C232 340 240 290 240 225 C240 170 232 108 232 108 Z" fill="url(#g-drops)"/>
-  <rect x="150" y="160" width="100" height="58" rx="10" fill="#ffffff" opacity="0.92"/>
-  <rect x="168" y="180" width="64" height="9" rx="4" fill="#c9ccd4"/>
-  <rect x="168" y="196" width="40" height="9" rx="4" fill="#e4e6ea"/>
-  <ellipse cx="182" cy="130" rx="8" ry="30" fill="#fff" opacity="0.35"/>
+  ${shadow(200, 345, 112, 16)}
+  <path d="M200 150 L200 116" stroke="#5b5f6a" stroke-width="7" stroke-linecap="round"/>
+  <rect x="184" y="58" width="32" height="60" rx="15" fill="#c9ccd4"/>
+  <rect x="184" y="72" width="32" height="8" fill="#8fa0aa"/>
+  <rect x="118" y="150" width="164" height="126" rx="12" fill="url(#g-sensor)"/>
+  <circle cx="136" cy="168" r="5" fill="#f6f7f9" stroke="#5b5f6a" stroke-width="3"/>
+  <circle cx="264" cy="168" r="5" fill="#f6f7f9" stroke="#5b5f6a" stroke-width="3"/>
+  <circle cx="136" cy="258" r="5" fill="#f6f7f9" stroke="#5b5f6a" stroke-width="3"/>
+  <circle cx="264" cy="258" r="5" fill="#f6f7f9" stroke="#5b5f6a" stroke-width="3"/>
+  <rect x="168" y="182" width="64" height="44" rx="6" fill="#30333b"/>
+  <line x1="158" y1="192" x2="168" y2="192" stroke="#8fa0aa" stroke-width="4"/>
+  <line x1="158" y1="204" x2="168" y2="204" stroke="#8fa0aa" stroke-width="4"/>
+  <line x1="158" y1="216" x2="168" y2="216" stroke="#8fa0aa" stroke-width="4"/>
+  <line x1="232" y1="192" x2="242" y2="192" stroke="#8fa0aa" stroke-width="4"/>
+  <line x1="232" y1="204" x2="242" y2="204" stroke="#8fa0aa" stroke-width="4"/>
+  <line x1="232" y1="216" x2="242" y2="216" stroke="#8fa0aa" stroke-width="4"/>
+  <rect x="160" y="240" width="80" height="8" rx="4" fill="#ffffff" opacity="0.7"/>
+  <rect x="176" y="254" width="48" height="8" rx="4" fill="#ffffff" opacity="0.4"/>
 `;
 }
 
-/** Pills jar (wide, round). */
-function pills() {
+/** Safety helmet (EN397 hard hat) with dome, brim and ribs. */
+function hardHat() {
   return `
-  ${shadow(200, 345, 120, 22)}
-  <rect x="140" y="90" width="120" height="34" rx="12" fill="#ffffff"/>
-  <path d="M132 124 C132 124 126 190 126 240 C126 310 134 345 134 345 L266 345 C266 345 274 310 274 240 C274 190 268 124 268 124 Z" fill="url(#g-pills)"/>
-  <ellipse cx="172" cy="200" rx="22" ry="13" fill="#ffbe00" opacity="0.9"/>
-  <ellipse cx="220" cy="240" rx="20" ry="12" fill="#ffffff" opacity="0.85"/>
-  <ellipse cx="200" cy="300" rx="24" ry="14" fill="#5327A8" opacity="0.75"/>
-  <ellipse cx="182" cy="150" rx="10" ry="26" fill="#fff" opacity="0.3"/>
+  ${shadow(200, 348, 122, 18)}
+  <ellipse cx="200" cy="254" rx="116" ry="26" fill="url(#g-hat)"/>
+  <path d="M104 250 C104 148 146 88 200 88 C254 88 296 148 296 250 Z" fill="url(#g-hat)"/>
+  <path d="M156 102 C138 152 132 202 134 248" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" opacity="0.3"/>
+  <path d="M244 102 C262 152 268 202 266 248" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" opacity="0.3"/>
+  <path d="M200 90 L200 250" stroke="#ffffff" stroke-width="9" opacity="0.22"/>
+  <rect x="182" y="198" width="36" height="26" rx="6" fill="#ffffff" opacity="0.9"/>
+  <rect x="190" y="207" width="20" height="8" rx="4" fill="#c9ccd4"/>
 `;
 }
 
-/** Adjustable wrench. */
-function wrench() {
+/** Cordless combi drill with battery pack and chuck bit. */
+function drill() {
   return `
-  ${shadow(200, 345, 130, 18)}
-  <mask id="jaw-cut">
-    <rect x="0" y="0" width="400" height="400" fill="#ffffff"/>
-    <rect x="262" y="98" width="170" height="60" transform="rotate(-45 262 128)" fill="#000000"/>
-  </mask>
-  <circle cx="262" cy="128" r="58" fill="url(#g-wrench)" mask="url(#jaw-cut)"/>
-  <path d="M150 292 L238 204" stroke="url(#g-wrench)" stroke-width="48" stroke-linecap="round"/>
-  <rect x="150" y="234" width="20" height="52" rx="10" transform="rotate(-45 160 260)" fill="#ffffff" opacity="0.35"/>
-  <circle cx="238" cy="128" r="10" fill="#ffffff" opacity="0.35"/>
+  ${shadow(200, 352, 120, 18)}
+  <rect x="300" y="176" width="44" height="12" rx="6" fill="#8fa0aa"/>
+  <rect x="262" y="166" width="40" height="32" rx="6" fill="#5b5f6a"/>
+  <line x1="272" y1="170" x2="272" y2="194" stroke="#ffffff" stroke-width="3" opacity="0.25"/>
+  <line x1="282" y1="170" x2="282" y2="194" stroke="#ffffff" stroke-width="3" opacity="0.25"/>
+  <line x1="292" y1="170" x2="292" y2="194" stroke="#ffffff" stroke-width="3" opacity="0.25"/>
+  <rect x="146" y="298" width="64" height="42" rx="8" fill="#5b5f6a"/>
+  <rect x="158" y="336" width="12" height="8" rx="3" fill="#30333b"/>
+  <rect x="186" y="336" width="12" height="8" rx="3" fill="#30333b"/>
+  <path d="M150 214 L206 214 L196 300 L160 300 Z" fill="url(#g-drill)"/>
+  <rect x="208" y="222" width="14" height="26" rx="6" fill="#30333b"/>
+  <rect x="118" y="150" width="150" height="68" rx="24" fill="url(#g-drill)"/>
+  <rect x="134" y="162" width="26" height="8" rx="4" fill="#ffffff" opacity="0.35"/>
+  <rect x="134" y="178" width="26" height="8" rx="4" fill="#ffffff" opacity="0.35"/>
+  <rect x="134" y="194" width="26" height="8" rx="4" fill="#ffffff" opacity="0.35"/>
+  <rect x="172" y="176" width="70" height="26" rx="6" fill="#ffffff" opacity="0.92"/>
+  <rect x="182" y="185" width="46" height="8" rx="4" fill="#c9ccd4"/>
 `;
 }
 
-/** Mask (box of face masks). */
-function mask() {
+/** Digital caliper with LCD slider, jaws and thumb roller. */
+function caliper() {
   return `
-  ${shadow(200, 345, 120, 20)}
-  <rect x="140" y="100" width="120" height="240" rx="14" fill="url(#g-mask)"/>
-  <path d="M176 140 Q200 122 224 140 L224 260 Q200 278 176 260 Z" fill="#ffffff"/>
-  <path d="M176 140 Q200 158 224 140 L224 190 Q200 208 176 190 Z" fill="#e8eaef"/>
-  <rect x="162" y="280" width="76" height="10" rx="5" fill="#ffffff" opacity="0.6"/>
-  <rect x="162" y="298" width="52" height="10" rx="5" fill="#ffffff" opacity="0.35"/>
+  ${shadow(200, 340, 140, 16)}
+  <rect x="70" y="214" width="210" height="6" rx="3" fill="#8fa0aa" opacity="0.7"/>
+  <rect x="54" y="192" width="292" height="18" rx="8" fill="url(#g-caliper)"/>
+  ${Array.from({ length: 12 }, (_, i) => `<line x1="${74 + i * 24}" y1="195" x2="${74 + i * 24}" y2="207" stroke="#ffffff" stroke-width="3" opacity="0.5"/>`).join("")}
+  <rect x="54" y="142" width="56" height="50" rx="8" fill="url(#g-caliper)"/>
+  <rect x="104" y="142" width="6" height="50" fill="#5b5f6a" opacity="0.5"/>
+  <rect x="228" y="250" width="48" height="40" rx="8" fill="url(#g-caliper)"/>
+  <rect x="228" y="250" width="6" height="40" fill="#5b5f6a" opacity="0.5"/>
+  <rect x="206" y="168" width="78" height="84" rx="10" fill="url(#g-caliper)"/>
+  <rect x="216" y="178" width="58" height="30" rx="5" fill="#dff5ea" stroke="#5b5f6a" stroke-width="2"/>
+  <rect x="224" y="188" width="28" height="9" rx="3" fill="#1f7a5a"/>
+  <rect x="258" y="188" width="10" height="9" rx="3" fill="#9fd8bf"/>
+  <circle cx="288" cy="210" r="11" fill="#5b5f6a"/>
+  <line x1="282" y1="203" x2="294" y2="217" stroke="#ffffff" stroke-width="3" opacity="0.3"/>
+`;
+}
+
+/** Handheld TRMS multimeter body with dial and probe leads. */
+function multimeter() {
+  return `
+  ${shadow(200, 348, 112, 18)}
+  <path d="M164 300 C142 322 142 336 154 352 L154 368" fill="none" stroke="#2f3138" stroke-width="9" stroke-linecap="round"/>
+  <path d="M236 300 C258 322 258 336 246 352 L246 368" fill="none" stroke="#e03131" stroke-width="9" stroke-linecap="round"/>
+  <rect x="124" y="54" width="152" height="252" rx="24" fill="url(#g-meter)"/>
+  <rect x="131" y="61" width="138" height="238" rx="18" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.2"/>
+  <rect x="146" y="76" width="108" height="50" rx="9" fill="#dff5ea" stroke="#5b5f6a" stroke-width="2"/>
+  <rect x="156" y="92" width="54" height="14" rx="3" fill="#1f7a5a"/>
+  <rect x="216" y="92" width="10" height="14" rx="3" fill="#9fd8bf"/>
+  <rect x="156" y="112" width="20" height="6" rx="3" fill="#5b5f6a" opacity="0.5"/>
+  <rect x="160" y="230" width="80" height="8" rx="4" fill="#ffffff" opacity="0.5"/>
+  <circle cx="163" cy="262" r="10" fill="#2f3138"/>
+  <circle cx="200" cy="262" r="10" fill="#f0f1f5" stroke="#5b5f6a" stroke-width="3"/>
+  <circle cx="237" cy="262" r="10" fill="#e03131"/>
+  <circle cx="200" cy="180" r="36" fill="#f0f1f5" stroke="#5b5f6a" stroke-width="5"/>
+  <circle cx="174" cy="162" r="3" fill="#5b5f6a"/>
+  <circle cx="200" cy="154" r="3" fill="#5b5f6a"/>
+  <circle cx="226" cy="162" r="3" fill="#5b5f6a"/>
+  <circle cx="232" cy="192" r="3" fill="#5b5f6a"/>
+  <line x1="200" y1="180" x2="222" y2="160" stroke="#ff7b03" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="200" cy="180" r="7" fill="#30333b"/>
+`;
+}
+
+/** Wrapped A4 paper ream with label band and page edges. */
+function paperReam() {
+  return `
+  ${shadow(200, 350, 122, 20)}
+  <rect x="130" y="126" width="140" height="10" rx="5" fill="#ffffff" opacity="0.85"/>
+  <rect x="126" y="134" width="148" height="10" rx="5" fill="#ffffff" opacity="0.85"/>
+  <rect x="122" y="142" width="156" height="10" rx="5" fill="#ffffff" opacity="0.85"/>
+  <rect x="116" y="150" width="168" height="190" rx="8" fill="url(#g-paper)"/>
+  <rect x="116" y="214" width="168" height="58" fill="#ffffff" opacity="0.93"/>
+  <rect x="136" y="232" width="90" height="10" rx="5" fill="#c9ccd4"/>
+  <rect x="136" y="250" width="58" height="10" rx="5" fill="#e4e6ea"/>
+  <line x1="124" y1="290" x2="276" y2="290" stroke="#ffffff" stroke-width="3" opacity="0.25"/>
+  <line x1="124" y1="304" x2="276" y2="304" stroke="#ffffff" stroke-width="3" opacity="0.25"/>
+  <line x1="124" y1="318" x2="276" y2="318" stroke="#ffffff" stroke-width="3" opacity="0.25"/>
+`;
+}
+
+/** Fan of three gel pens with caps, clips and tips. */
+function pens() {
+  const pen = (px, py, rot) => `
+    <g transform="rotate(${rot} ${px} ${py})">
+      <rect x="${px - 11}" y="${py}" width="22" height="46" rx="9" fill="#30333b"/>
+      <rect x="${px + 3}" y="${py + 6}" width="8" height="32" rx="4" fill="#ffffff" opacity="0.3"/>
+      <rect x="${px - 11}" y="${py + 46}" width="22" height="116" rx="6" fill="url(#g-pens)"/>
+      <rect x="${px - 11}" y="${py + 140}" width="22" height="18" rx="6" fill="#30333b" opacity="0.85"/>
+      <path d="M${px - 8} ${py + 158} L${px + 8} ${py + 158} L${px + 3} ${py + 182} L${px - 3} ${py + 182} Z" fill="#30333b"/>
+      <circle cx="${px}" cy="${py + 185}" r="3.5" fill="#8fa0aa"/>
+    </g>`;
+  return `
+  ${shadow(200, 350, 120, 18)}
+  ${pen(146, 110, -18)}
+  ${pen(200, 96, 0)}
+  ${pen(254, 110, 18)}
 `;
 }
 
@@ -202,7 +319,7 @@ function highbay() {
 `;
 }
 
-/** Gloves box. */
+/** Work gloves dispenser box with glove icon. */
 function gloves() {
   return `
   ${shadow(200, 345, 120, 20)}
@@ -216,27 +333,27 @@ function gloves() {
 }
 
 const PRODUCTS = [
-  { name: "prod-01", draw: () => bottle() },
-  { name: "prod-02", draw: () => jar() },
-  { name: "prod-03", draw: () => box() },
-  { name: "prod-04", draw: () => tube() },
-  { name: "prod-05", draw: () => spray() },
-  { name: "prod-06", draw: () => drops() },
-  { name: "prod-07", draw: () => pills() },
-  { name: "prod-08", draw: () => wrench() },
-  { name: "prod-09", draw: () => mask() },
+  { name: "prod-01", draw: () => boxes() },
+  { name: "prod-02", draw: () => palletWrap() },
+  { name: "prod-03", draw: () => screws() },
+  { name: "prod-04", draw: () => bolts() },
+  { name: "prod-05", draw: () => cable() },
+  { name: "prod-06", draw: () => sensorModule() },
+  { name: "prod-07", draw: () => hardHat() },
+  { name: "prod-08", draw: () => gloves() },
+  { name: "prod-09", draw: () => drill() },
   { name: "prod-10", draw: () => grinder() },
   { name: "prod-11", draw: () => breaker() },
   { name: "prod-12", draw: () => highbay() },
-  { name: "prod-13", draw: () => gloves() },
-  { name: "prod-14", draw: () => bottle() },
-  { name: "prod-15", draw: () => jar() },
-  { name: "prod-16", draw: () => box() },
+  { name: "prod-13", draw: () => caliper() },
+  { name: "prod-14", draw: () => multimeter() },
+  { name: "prod-15", draw: () => paperReam() },
+  { name: "prod-16", draw: () => pens() },
 ];
 
 let count = 0;
 for (const { name, draw } of PRODUCTS) {
-  const gradientIds = ["g-bottle", "g-jar", "g-box", "g-tube", "g-spray", "g-drops", "g-pills", "g-wrench", "g-mask", "g-grinder", "g-breaker", "g-bay", "g-gloves"];
+  const gradientIds = ["g-boxes", "g-wrap", "g-screws", "g-bolts", "g-cable", "g-sensor", "g-hat", "g-drill", "g-grinder", "g-breaker", "g-bay", "g-gloves", "g-caliper", "g-meter", "g-paper", "g-pens"];
   const used = gradientIds.filter((id) => draw().includes(`url(#${id})`));
   const defs = used
     .map((id, i) => {

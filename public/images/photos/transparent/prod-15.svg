@@ -1,15 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
   <defs>
-  <linearGradient id="g-jar-prod-15" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66c1bf"/><stop offset="1" stop-color="#00a29d"/></linearGradient>
+  <linearGradient id="g-paper-prod-15" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66c1bf"/><stop offset="1" stop-color="#00a29d"/></linearGradient>
   </defs>
   
-  <ellipse cx="200" cy="340" rx="130" ry="22" fill="#000" opacity="0.14"/>
-  <rect x="120" y="70" width="160" height="46" rx="14" fill="#ffffff"/>
-  <rect x="134" y="58" width="132" height="14" rx="7" fill="#ffffff"/>
-  <path d="M130 116 C130 116 126 180 126 230 C126 300 132 340 132 340 L268 340 C268 340 274 300 274 230 C274 180 270 116 270 116 Z" fill="url(#g-jar-prod-15)"/>
-  <rect x="140" y="170" width="120" height="66" rx="10" fill="#ffffff" opacity="0.9"/>
-  <rect x="158" y="190" width="84" height="10" rx="5" fill="#c9ccd4"/>
-  <rect x="158" y="208" width="56" height="10" rx="5" fill="#e4e6ea"/>
-  <ellipse cx="185" cy="140" rx="12" ry="40" fill="#fff" opacity="0.3"/>
+  <ellipse cx="200" cy="350" rx="122" ry="20" fill="#000" opacity="0.14"/>
+  <rect x="130" y="126" width="140" height="10" rx="5" fill="#ffffff" opacity="0.85"/>
+  <rect x="126" y="134" width="148" height="10" rx="5" fill="#ffffff" opacity="0.85"/>
+  <rect x="122" y="142" width="156" height="10" rx="5" fill="#ffffff" opacity="0.85"/>
+  <rect x="116" y="150" width="168" height="190" rx="8" fill="url(#g-paper-prod-15)"/>
+  <rect x="116" y="214" width="168" height="58" fill="#ffffff" opacity="0.93"/>
+  <rect x="136" y="232" width="90" height="10" rx="5" fill="#c9ccd4"/>
+  <rect x="136" y="250" width="58" height="10" rx="5" fill="#e4e6ea"/>
+  <line x1="124" y1="290" x2="276" y2="290" stroke="#ffffff" stroke-width="3" opacity="0.25"/>
+  <line x1="124" y1="304" x2="276" y2="304" stroke="#ffffff" stroke-width="3" opacity="0.25"/>
+  <line x1="124" y1="318" x2="276" y2="318" stroke="#ffffff" stroke-width="3" opacity="0.25"/>
 
 </svg>

@@ -1,14 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
   <defs>
-  <linearGradient id="g-pills-prod-07" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66c1bf"/><stop offset="1" stop-color="#00a29d"/></linearGradient>
+  <linearGradient id="g-hat-prod-07" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66c1bf"/><stop offset="1" stop-color="#00a29d"/></linearGradient>
   </defs>
   
-  <ellipse cx="200" cy="345" rx="120" ry="22" fill="#000" opacity="0.14"/>
-  <rect x="140" y="90" width="120" height="34" rx="12" fill="#ffffff"/>
-  <path d="M132 124 C132 124 126 190 126 240 C126 310 134 345 134 345 L266 345 C266 345 274 310 274 240 C274 190 268 124 268 124 Z" fill="url(#g-pills-prod-07)"/>
-  <ellipse cx="172" cy="200" rx="22" ry="13" fill="#ffbe00" opacity="0.9"/>
-  <ellipse cx="220" cy="240" rx="20" ry="12" fill="#ffffff" opacity="0.85"/>
-  <ellipse cx="200" cy="300" rx="24" ry="14" fill="#5327A8" opacity="0.75"/>
-  <ellipse cx="182" cy="150" rx="10" ry="26" fill="#fff" opacity="0.3"/>
+  <ellipse cx="200" cy="348" rx="122" ry="18" fill="#000" opacity="0.14"/>
+  <ellipse cx="200" cy="254" rx="116" ry="26" fill="url(#g-hat-prod-07)"/>
+  <path d="M104 250 C104 148 146 88 200 88 C254 88 296 148 296 250 Z" fill="url(#g-hat-prod-07)"/>
+  <path d="M156 102 C138 152 132 202 134 248" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" opacity="0.3"/>
+  <path d="M244 102 C262 152 268 202 266 248" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" opacity="0.3"/>
+  <path d="M200 90 L200 250" stroke="#ffffff" stroke-width="9" opacity="0.22"/>
+  <rect x="182" y="198" width="36" height="26" rx="6" fill="#ffffff" opacity="0.9"/>
+  <rect x="190" y="207" width="20" height="8" rx="4" fill="#c9ccd4"/>
 
 </svg>
