@@ -40,7 +40,7 @@ const BasketDropdown: FC = () => {
           </div>
           <div className="list">
             {basket.length > 0 ? (
-              basket.map((el) => <ItemsList key={el.id} content={el} />)
+              basket.map((el) => <ItemsList key={el.basket_id} content={el} />)
             ) : (
               <div className="text-sm font-medium text-center text-ink-muted py-2">Your cart is currently empty</div>
             )}

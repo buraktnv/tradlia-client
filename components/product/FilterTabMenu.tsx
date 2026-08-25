@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { SvgSearch } from "../../helpers/svgs/favoriteSvg";
+import { SvgSearch } from "../../helpers/svgs/product";
 import DateDropdown from "../profile/feedback/DateDropdown";
 import FilterDropdown from "../profile/feedback/FilterDropdown";
 
@@ -14,25 +14,26 @@ const filterList = [
 
 const FilterTabMenu: FC<any> = () => {
   return (
-    <div className="xl:h-[3rem] flex xl:flex-row flex-col xl:gap-0 gap-3 justify-between xl:pl-8 xl:mx-0 xl:border xl:border-[#00B1B265] xl:bg-[#F4F5F7] xl:rounded-full mb-3 xl:mb-[1.5rem]">
-      <div className="flex justify-around xl:justify-start xl:gap-12 border rounded-full py-2 xl:py-0 border-[#00B1B265] xl:border-0">
-        <div className="flex xl:mx-8">
+    <div className="xl:h-[3rem] flex xl:flex-row flex-col gap-3 justify-between mb-3 xl:mb-[1.5rem]">
+      <div className="flex items-center justify-around xl:justify-start xl:gap-12 border border-line rounded-card py-1.5 px-2 xl:border-0 xl:p-0">
+        <div className="flex xl:mx-6">
           <FilterDropdown filterList={filterList} />
         </div>
-        <div className="flex xl:mx-8">
+        <div className="flex xl:mx-6">
           <DateDropdown />
         </div>
       </div>
-      <div className="flex relative ring-1 rounded-full ring-[#4CBEC565] ">
+      <div className="flex relative w-full xl:w-80">
         <input
           type="search"
           id="search"
           placeholder="Search"
-          className="outline-none bg-white placeholder-[#7E8096] xl:placeholder-[#4CBEC5] px-5 text-left text-[#7E8096] xl:text-[#4CBEC5] placeholder:font-light w-full xl:px-20 py-3 rounded-full xl:text-center"
+          aria-label="Search listings"
+          className="w-full outline-none bg-surface border border-line rounded-pill placeholder:text-ink-muted text-ink px-5 pr-10 py-2 text-sm transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
         />
-        <div className="absolute w-5 h-5 right-5 xl:right-10 top-3.5 text-[#4cbec5]">
+        <span className="absolute w-4 h-4 right-4 top-2.5 text-ink-muted" aria-hidden="true">
           <SvgSearch />
-        </div>
+        </span>
       </div>
     </div>
   );
