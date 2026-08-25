@@ -5,7 +5,7 @@ const FileDropzone: FC = () => {
 
   return (
     <>
-      <div className="relative bg-white xl:bg-[#FCFCFC] rounded-3xl row-span-3 py-2 xl:w-full xl:h-auto w-[46%] h-[45%] mx-auto">
+      <div className="relative rounded-card bg-surface xl:bg-canvas row-span-3 py-2 xl:w-full xl:h-auto w-[46%] h-[45%] mx-auto">
         <input
           type="file"
           onChange={(e) => setFiles(e.target.files?.[0])}
@@ -24,14 +24,14 @@ const FileDropzone: FC = () => {
             </>
           ) : (
             <>
-              <div className="absolute xl:w-full text-center top-3 text-xs xl:text-base font-medium text-[#A0A2AF]">Add product image</div>
+              <div className="absolute xl:w-full text-center top-3 text-xs xl:text-base font-medium text-ink-muted">Add product image</div>
               <div className="flex items-center justify-center xl:w-full h-full">
-                <div className="w-8 h-8 xl:w-12 xl:h-12 ">
+                <div className="h-8 w-8 fill-current text-brand-400 xl:h-12 xl:w-12 ">
                   <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 55 55">
                     <path
                       d="M5993.275,748.25h18.618V729.637a4.416,4.416,0,0,1,4.415-4.416h.1a4.416,4.416,0,0,1,4.415,4.416V748.25h18.618a4.416,4.416,0,0,1,4.416,4.415h0a4.416,4.416,0,0,1-4.416,4.416h-18.618v18.725a4.415,4.415,0,0,1-4.415,4.415h-.1a4.415,4.415,0,0,1-4.415-4.415V757.081h-18.618a4.416,4.416,0,0,1-4.416-4.416h0A4.416,4.416,0,0,1,5993.275,748.25Z"
                       transform="translate(-5988.859 -725.221)"
-                      fill="#00b1b2"
+                      fill="currentColor"
                     />
                   </svg>
                 </div>
@@ -40,7 +40,7 @@ const FileDropzone: FC = () => {
           )}
         </div>
       </div>
-      <div className="h-full text-sm text-[#7E8096] text-center mt-2">
+      <div className="h-full text-sm text-ink-muted text-center mt-2">
         You can upload images by dragging and dropping them into the area above or by clicking the + button.
       </div>
     </>

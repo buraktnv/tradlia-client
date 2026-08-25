@@ -1,35 +1,32 @@
 import React, { FC } from "react";
 
-const TabItem: FC<any> = ({ tab, activeTab, setActiveTab, style, text, icon, number }) => {
+const TabItemWithNumbers: FC<any> = ({ tab, activeTab, setActiveTab, text, icon, number }) => {
+  const isActive = activeTab === tab;
+  const hasNumber = number !== undefined && number !== null && String(number).length > 0;
   return (
-    <div className="h-full sm:h-[2.4rem] col-span-1 cursor-pointer select-none group" onClick={() => setActiveTab(tab)}>
-      <div
-        className={`flex gap-2 h-full bg-white px-3 xl:px-4 items-center w-full rounded-[1.3rem] py-3 transition-all duration-150 ease-in-out ${
-          activeTab === tab
-            ? `${style.bgColor} text-white shadow-md`
-            : `${style.hoverBG} group-hover:text-white group-hover:shadow-md ${style.icon}`
-        }`}
-      >
-        <div className={`col-span-1 flex`}>
-          <div className="w-4 h-4 sm:w-6 sm:h-6">{icon}</div>
-        </div>
-        <div
-          className={`col-span-5 tracking-tight whitespace-nowrap xl:col-span-3 text-[11px] leading-3 sm:text-sm xl:block flex gap-2 justify-between items-center font-medium xl:text-[0.9rem] transition-all duration-150 ease-in-out text-center ${
-            activeTab === tab ? "text-white" : `group-hover:text-white xl:text-[#7E8096] ${style.text}`
+    <button
+      type="button"
+      aria-pressed={isActive}
+      onClick={() => setActiveTab(tab)}
+      className={`flex w-full select-none items-center gap-2.5 rounded-card border px-3 py-2.5 text-left transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
+        isActive
+          ? "border-brand-300 bg-brand-50 text-brand-700 shadow-card"
+          : "border-line bg-surface text-ink-soft hover:border-brand-200 hover:bg-brand-50/40 hover:text-ink"
+      }`}
+    >
+      <span className={`h-5 w-5 shrink-0 fill-current ${isActive ? "" : "text-ink-muted"}`}>{icon}</span>
+      <span className={`flex-1 truncate text-sm ${isActive ? "font-medium" : ""}`}>{text}</span>
+      {hasNumber && (
+        <span
+          className={`inline-flex min-w-[1.75rem] items-center justify-center rounded-pill px-1.5 py-0.5 font-display text-xs tabular-nums ${
+            isActive ? "bg-brand-100 text-brand-700" : "bg-canvas text-ink-muted"
           }`}
         >
-          {text}
-          <p
-            className={`text-center text-sm whitespace-pre-line leading-none ${
-              activeTab === tab ? `text-white` : `group-hover:text-white ${style.number}`
-            }`}
-          >
-            {number}
-          </p>
-        </div>
-      </div>
-    </div>
+          {number}
+        </span>
+      )}
+    </button>
   );
 };
 
-export default TabItem;
+export default TabItemWithNumbers;

@@ -92,15 +92,15 @@ const InfoPage: FC<{ title: string; intro: string }> = ({ title, intro }) => {
       <Head>
         <title>{`${title} | Tradlia`}</title>
       </Head>
-      <div className="container px-4 py-10 mx-auto xl:px-10 max-w-3xl">
-        <h1 className="text-2xl font-bold text-[#4CBEC5] mb-4">{title}</h1>
-        <p className="text-[#7E8096] font-medium mb-6">{intro}</p>
+      <div className="mx-auto max-w-3xl px-4 py-12 xl:px-10"><article className="rounded-card border border-line bg-surface p-6 shadow-card sm:p-10">
+        <h1 className="mb-3 font-display text-2xl font-bold text-ink sm:text-3xl">{title}</h1>
+        <p className="font-display text-xs uppercase tracking-wider text-ink-muted mb-8">{intro}</p>
         {[1, 2, 3].map((section) => (
           <div key={section} className="mb-6">
-            <h2 className="text-lg font-bold text-[#7E8096] mb-2">
+            <h2 className="mb-2 font-display text-lg font-bold text-brand-600">
               {section}. Overview
             </h2>
-            <p className="text-sm leading-6 text-[#7E8096]">
+            <p className="text-sm leading-6 text-ink-soft">
               This is placeholder content for the {title.toLowerCase()} page of the Tradlia demo
               storefront. In a production deployment this section would contain the full legal or
               informational text for this topic. The layout, typography and navigation you see here
@@ -108,9 +108,10 @@ const InfoPage: FC<{ title: string; intro: string }> = ({ title, intro }) => {
             </p>
           </div>
         ))}
-        <Link href="/" className="inline-block mt-4 text-sm font-bold text-[#F39200] hover:underline">
+        <div className="mt-8 border-t border-line pt-6"><Link href="/" className="inline-flex items-center gap-1.5 rounded-pill border border-line px-5 py-2 text-sm font-medium text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-300 hover:bg-brand-50/40 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400">
           ← Back to homepage
-        </Link>
+        </Link></div>
+      </article>
       </div>
     </>
   );

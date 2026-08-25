@@ -215,18 +215,17 @@ const SellMovements: FC<any> = () => {
     <div className="grid gap-3 xl:gap-[0.75rem]">
       {cardList && cardList.map((content) => <ReceiptCard key={content.id} content={content} />)}
 
-      <div className="xl:bg-[#E8336E] text-white flex flex-col-reverse xl:flex-row justify-between items-center rounded-full gap-3 xl:gap-0 xl:pl-12 xl:px-20 xl:py-4">
-        <button type="button" onClick={exportToExcel} className="flex items-center justify-center w-full xl:w-max gap-2 bg-[#FF3A67] xl:bg-transparent rounded-full h-10 xl:h-auto">
-          <div className="w-6 h-6 xl:w-7 xl:h-7">
+      <div className="flex flex-col-reverse items-center justify-between gap-3 rounded-card border border-line bg-surface px-4 py-3 shadow-card sm:flex-row sm:px-6">
+        <button type="button" aria-label="Export list to Excel" onClick={exportToExcel} className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-pill border border-line px-4 text-sm font-medium text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-300 hover:bg-brand-50/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 sm:w-max">
+          <span className="h-5 w-5 fill-current text-brand-600">
             <SvgExcel />
-          </div>
-          <div className="flex">
-            Export to <h3 className="pl-1 font-bold">Excel</h3>
-          </div>
+          </span>
+          <span>Export to <b>Excel</b></span>
         </button>
-        <div className="flex gap-2 text-base items-center w-full xl:w-max justify-center bg-[#EA5B0C] xl:bg-transparent rounded-full h-10 xl:h-auto">
-          Total: <h3 className="font-bold">${totalPayment}</h3>
-        </div>
+        <p className="flex items-center justify-center gap-2 text-base text-ink-soft">
+          Total:
+          <span className="font-display font-bold text-lg tabular-nums text-ink">${totalPayment}</span>
+        </p>
       </div>
     </div>
   );

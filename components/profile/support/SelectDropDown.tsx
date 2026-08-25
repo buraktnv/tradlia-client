@@ -30,7 +30,7 @@ const SelectDropDown: FC<any> = ({ onSelect }) => {
     <div className="relative text-sm text-center">
       <button type="button" onClick={() => setOpen((pre) => !pre)} className="w-full outline-none">
         <div
-          className={`relative flex justify-center px-3 py-3 rounded-full border border-[#00b2b280] bg-[#F4F5F7] text-light text-center text-[#7E8096] ${
+          className={`relative flex justify-center rounded-pill border border-line bg-canvas px-4 py-3 text-center text-sm text-ink-soft transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 ${
             state !== DEFAULT_LABEL && "font-bold"
           }`}
         >
@@ -41,7 +41,7 @@ const SelectDropDown: FC<any> = ({ onSelect }) => {
         </div>
       </button>
       {open && (
-        <div className="absolute z-40 left-0 top-[100%] right-0 bg-white border border-[#00b2b280] rounded-3xl shadow-sm grid transition-all duration-150 ease-in-out">
+        <div className="absolute left-0 right-0 top-[100%] z-40 grid overflow-hidden rounded-card border border-line bg-surface shadow-pop">
           <div className="flex flex-col p-1">
             {selectList &&
               selectList.map(({ id, title }) => (
@@ -61,7 +61,7 @@ const ItemsList: FC<any> = ({ title, state, onClick }) => {
         <button
           type="button"
           className={`font-medium w-full py-0.5 ${
-            state === title ? "text-[#4CBEC5]" : "hover:text-[#4CBEC5] text-[#7E8096]"
+            state === title ? "font-medium text-brand-600" : "text-ink-soft hover:text-brand-600"
           }`}
           onClick={onClick}
         >

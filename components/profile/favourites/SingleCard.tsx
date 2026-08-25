@@ -18,13 +18,13 @@ const SingleCard: FC<SingleCardProps> = ({ content, deleteCard, favoriteCard }) 
     <>
       {modal && <RemoveConfirmModal setModal={setModal} deleteFavorites={deleteFavorites} />}
       <div
-        className={`flex relative group flex-col group justify-between h-[240px] xl:h-[360px] border drop-shadow-lg xl:drop-shadow-none border-[#dadada65] hover:border-[#4CBEC5]/60 hover:shadow-lg py-4 px-4 rounded-3xl w-full transition-all ease-in-out duration-300 hover:pb-12 xl:hover:pb-16 ${
-          content.backgroundColor ? `${content.backgroundColor}` : "bg-white"
-        }`}
+        className={`relative flex group flex-col justify-between h-[240px] rounded-card border px-4 py-4 shadow-card transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none w-full hover:border-brand-300 hover:pb-12 focus-within:border-brand-300 xl:h-[360px] xl:hover:pb-16 ${
+          content.backgroundColor ? `${content.backgroundColor}` : "bg-surface"
+        } border-line`}
       >
         <div className="flex flex-col text-[11px] xl:text-base">
-          <div className="flex flex-col text-[#7E8096]">
-            <h5 className="font-bold">{content.name}</h5>
+          <div className="flex flex-col text-ink-muted">
+            <h5 className="font-medium text-ink">{content.name}</h5>
             <h3>{content.brand}</h3>
           </div>
         </div>
@@ -34,10 +34,10 @@ const SingleCard: FC<SingleCardProps> = ({ content, deleteCard, favoriteCard }) 
           </div>
         </div>
         <div className="z-0 flex items-end justify-between">
-          <div className="text-sm leading-4 xl:leading-normal xl:text-xl font-bold text-[#6F7081]">
+          <div className="font-display text-sm leading-4 tabular-nums xl:leading-normal xl:text-xl font-bold text-ink">
             {`${content.price.toFixed(2)}`.replace(".", ",")} $ <br />
             {content.advertCount > 0 && (
-              <p className="text-[9px] leading-[7px] xl:text-xs font-normal text-[#7E8096] whitespace-nowrap">
+              <p className="text-[9px] leading-[7px] tabular-nums xl:text-xs font-normal text-ink-muted whitespace-nowrap">
                 starting from <strong> {content.advertCount} listings</strong>
               </p>
             )}
@@ -74,9 +74,9 @@ const SingleCard: FC<SingleCardProps> = ({ content, deleteCard, favoriteCard }) 
           </div>
         </div>
         <div className="absolute left-0 grid items-center invisible w-full px-4 mt-1 transition-all duration-150 ease-in-out transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 bottom-3 group-hover:visible">
-          <Link href="/category" className="flex items-center gap-2 justify-center px-4 py-1.5 xl:py-2 border bg-transparent border-[#f59b009c] rounded-full text-[11px] leading-3 xl:text-sm text-[#F59C00] font-medium">
+          <Link href="/category" className="inline-flex items-center justify-center gap-2 rounded-pill border bg-surface border-line px-4 py-1.5 text-[11px] leading-3 xl:text-sm text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-300 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 xl:py-2">
             All Listings
-            <div className="xl:w-8 w-4 h-3 xl:h-4 text-[#F59C00]">
+            <div className="h-3 w-4 fill-current xl:h-4 xl:w-8 text-brand-600">
               <SvgBigger />
             </div>
           </Link>

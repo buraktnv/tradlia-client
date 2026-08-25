@@ -63,7 +63,7 @@ const Sidebar: FC = () => {
 
 const SingleLinkItem: FC<any> = ({ url, icon, text }) => {
   const router = useRouter();
-  const isActive = router.asPath === url;
+  const isActive = router.pathname === url;
   return (
     <Link
       href={url}
@@ -78,7 +78,7 @@ const SingleLinkItem: FC<any> = ({ url, icon, text }) => {
 
 const SingleDropdownItem: FC<any> = () => {
   const router = useRouter();
-  const activePath = router.asPath;
+  const activePath = router.pathname;
   const condition =
     activePath === U.URL_PROFILE_ORDERS_SOLD || activePath === U.URL_PROFILE_ORDERS_BOUGHT;
   return (
@@ -106,7 +106,7 @@ const SingleDropdownItem: FC<any> = () => {
 
 const SubLink: FC<{ url: string; label: string }> = ({ url, label }) => {
   const router = useRouter();
-  const isActive = router.asPath === url;
+  const isActive = router.pathname === url;
   return (
     <Link
       href={url}

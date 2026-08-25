@@ -55,12 +55,13 @@ const Bought: NextPage = () => {
   const [activeTab, setActiveTab] = useState<BOUGHT_TABS>(BOUGHT_TABS.WillBeShipped);
 
   useEffect(() => {
+    if (!router.isReady) return;
     const slug = router.query.tab;
     if (typeof slug === "string" && TAB_SLUGS[slug] !== undefined) {
       setActiveTab(TAB_SLUGS[slug]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [router.isReady]);
 
   const changeTab = (tab: BOUGHT_TABS) => {
     setActiveTab(tab);
@@ -69,27 +70,27 @@ const Bought: NextPage = () => {
 
   return (
     <ProfileLayout>
-      <div className="flex flex-col w-full min-h-screen px-3 xl:px-0 bg-[#F2F2F2] xl:bg-transparent">
+      <div className="flex flex-col w-full min-h-screen px-3 xl:px-0 bg-canvas xl:bg-transparent">
         <div className="filters">
           <Tabmenu setActiveTab={changeTab} activeTab={activeTab} />
         </div>
-        <div className="xl:h-[3rem] flex xl:flex-row flex-col xl:gap-0 gap-3 mt-3 xl:mt-[1.5rem] justify-between xl:pl-8 xl:mx-0 xl:border xl:border-[#00B1B265] xl:bg-[#F4F5F7] xl:rounded-full xl:mb-[1.5rem] mb-3">
-          <div className="flex justify-around xl:justify-start xl:gap-12 border rounded-full py-2 xl:py-0 border-[#00B1B265] xl:border-0">
-            <div className="flex xl:mx-8">
+        <div className="mt-3 mb-3 flex flex-col justify-between gap-3 rounded-card border border-line bg-surface p-2 shadow-card sm:flex-row sm:items-center xl:my-[1.5rem] xl:h-auto">
+          <div className="flex flex-wrap items-center justify-around gap-2 py-1 sm:justify-start xl:gap-8">
+            <div className="flex xl:px-2">
               <FilterDropdown filterList={filterList} />
             </div>
-            <div className="flex xl:mx-8">
+            <div className="flex xl:px-2">
               <DateDropdown />
             </div>
           </div>
-          <div className="flex relative ring-1 rounded-full ring-[#4CBEC565] ">
+          <div className="relative flex rounded-full ring-1 ring-brand-200 transition duration-200 focus-within:ring-2 focus-within:ring-brand-400/40">
             <input
               type="search"
               id="search"
               placeholder="Search"
-              className="outline-none bg-white placeholder-[#7E8096] xl:placeholder-[#4CBEC5] px-5 text-left text-[#7E8096] xl:text-[#4CBEC5]  placeholder:font-light w-full  xl:px-20 py-3 rounded-full xl:text-center"
+              className="h-10 w-full rounded-full bg-surface px-5 text-left text-sm text-ink outline-none placeholder:font-light placeholder:text-ink-muted focus-visible:outline-none sm:w-64 xl:w-72"
             />
-            <div className="absolute w-5 h-5 right-4 xl:right-10 top-3.5 text-[#4cbec5]">
+            <div className="absolute w-5 h-5 right-4 xl:right-10 top-3.5 text-brand-500">
               <SvgSearch />
             </div>
           </div>

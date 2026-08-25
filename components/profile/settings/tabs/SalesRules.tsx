@@ -2,34 +2,34 @@ import React, { FC } from "react";
 
 const SalesRules: FC<any> = () => {
   return (
-    <div className="xl:bg-[#F4F5F7] rounded-3xl px-4 xl:px-8 xl:py-12 grid gap-8 select-none text-sm">
-      <div className="grid xl:hidden grid-cols-2 xl:grid-cols-5 col-span-3 gap-x-2 xl:gap-x-10 gap-y-3 xl:gap-y-6 start text-[#7E8096]">
-        <label htmlFor="retail-chains" className="order-1 h-max bg-white shadow-lg rounded-3xl border border-[#C6C6C665]">
+    <div className="rounded-card border border-line bg-surface shadow-card rounded-3xl px-4 xl:px-8 xl:py-12 grid gap-8 select-none text-sm">
+      <div className="grid xl:hidden grid-cols-2 xl:grid-cols-5 col-span-3 gap-x-2 xl:gap-x-10 gap-y-3 xl:gap-y-6 start text-ink-muted">
+        <label htmlFor="retail-chains" className="order-1 h-max rounded-card border border-line bg-surface shadow-card">
           <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
             <input type="checkbox" id="retail-chains" className="hidden peer" />
-            <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+            <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgStorefront />
             </div>
-            <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
+            <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
               Retail Chains{"\n"}&nbsp;
             </h3>
-            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
               <div className="w-3 h-3">
                 <SvgCheckMark />
               </div>
             </div>
           </div>
         </label>
-        <label htmlFor="workshops" className="order-2 h-max bg-white shadow-lg rounded-3xl border border-[#C6C6C665]">
+        <label htmlFor="workshops" className="order-2 h-max rounded-card border border-line bg-surface shadow-card">
           <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
             <input type="checkbox" className="hidden peer" id="workshops" />
-            <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+            <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgWrench />
             </div>
-            <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
+            <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
               Workshops{"\n"}&nbsp;
             </h3>
-            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
               <div className="w-3 h-3">
                 <SvgCheckMark />
               </div>
@@ -38,17 +38,17 @@ const SalesRules: FC<any> = () => {
         </label>
         <label
           htmlFor="tradespeople"
-          className="order-3 h-max bg-white shadow-lg rounded-3xl border border-[#C6C6C665]"
+          className="order-3 h-max rounded-card border border-line bg-surface shadow-card"
         >
           <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
             <input type="checkbox" className="hidden peer" id="tradespeople" />
-            <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+            <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgHardHat />
             </div>
-            <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
+            <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
               Tradespeople
             </h3>
-            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
               <div className="w-3 h-3">
                 <SvgCheckMark />
               </div>
@@ -57,17 +57,17 @@ const SalesRules: FC<any> = () => {
         </label>
         <label
           htmlFor="facility-service-providers"
-          className="order-4 xl:order-6 bg-white shadow-lg rounded-3xl border border-[#C6C6C665]"
+          className="order-4 xl:order-6 rounded-card border border-line bg-surface shadow-card"
         >
           <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
             <input type="checkbox" className="hidden peer" id="facility-service-providers" />
-            <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+            <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgFacilityServiceProviders />
             </div>
-            <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
+            <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
               Facility Service{"\n"}Providers
             </h3>
-            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
               <div className="w-3 h-3">
                 <SvgCheckMark />
               </div>
@@ -76,17 +76,17 @@ const SalesRules: FC<any> = () => {
         </label>
         <label
           htmlFor="without-gln-uts-code"
-          className="order-7 -mt-8 mb-8 bg-white shadow-lg rounded-3xl border border-[#C6C6C665]"
+          className="order-7 -mt-8 mb-8 rounded-card border border-line bg-surface shadow-card"
         >
           <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
             <input type="checkbox" className="hidden peer" id="without-gln-uts-code" />
-            <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+            <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgGLN_UTSCode />
             </div>
-            <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
+            <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
               Without {"\n"}GLN-UTS Code
             </h3>
-            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
               <div className="w-3 h-3">
                 <SvgCheckMark />
               </div>
@@ -95,17 +95,17 @@ const SalesRules: FC<any> = () => {
         </label>
         <label
           htmlFor="warehouses-manufacturers"
-          className="order-8 bg-white shadow-lg rounded-3xl border border-[#C6C6C665]"
+          className="order-8 rounded-card border border-line bg-surface shadow-card"
         >
           <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
             <input type="checkbox" className="hidden peer" id="warehouses-manufacturers" />
-            <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+            <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgWarehouse />
             </div>
-            <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
+            <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
               Warehouses and {"\n"}Manufacturers
             </h3>
-            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
               <div className="w-3 h-3">
                 <SvgCheckMark />
               </div>
@@ -114,27 +114,27 @@ const SalesRules: FC<any> = () => {
         </label>
         <label
           htmlFor="Contractors"
-          className="order-5 xl:order-4 bg-white shadow-lg rounded-3xl border border-[#C6C6C665] h-max"
+          className="order-5 xl:order-4 rounded-card border border-line bg-surface shadow-card h-max"
         >
           <div className="flex flex-col items-center justify-center gap-4 px-6 py-4 ">
             <input type="checkbox" className="hidden peer" id="Contractors" />
-            <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+            <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgVest />
             </div>
-            <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
+            <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
               Contractors
             </h3>
-            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
               <div className="w-3 h-3">
                 <SvgCheckMark />
               </div>
             </div>
-            <div className="w-full h-2 border-t border-[#00b2b2b2] "></div>
+            <div className="w-full h-2 border-t border-line "></div>
 
             <div className="flex flex-col gap-3">
               <label htmlFor="individual" className="flex items-center gap-1 cursor-pointer">
                 <input type="checkbox" name="individual" id="individual" className="hidden peer" />
-                <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+                <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                   <div className="w-3 h-3">
                     <SvgCheckMark />
                   </div>
@@ -143,7 +143,7 @@ const SalesRules: FC<any> = () => {
               </label>
               <label htmlFor="corporate" className="flex items-center gap-1 cursor-pointer">
                 <input type="checkbox" name="corporate" id="corporate" className="hidden peer" />
-                <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+                <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                   <div className="w-3 h-3">
                     <SvgCheckMark />
                   </div>
@@ -155,26 +155,26 @@ const SalesRules: FC<any> = () => {
         </label>
         <label
           htmlFor="procurement-teams"
-          className="order-6 xl:order-5 bg-white shadow-lg rounded-3xl border border-[#C6C6C665] h-max"
+          className="order-6 xl:order-5 rounded-card border border-line bg-surface shadow-card h-max"
         >
           <div className="flex flex-col items-center justify-center gap-4 px-6 py-4">
             <input type="checkbox" className="hidden peer" id="procurement-teams" />
-            <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+            <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgBadge />
             </div>
-            <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
-              Health {"\n"}Professionals
+            <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
+              Procurement {"\n"}Teams
             </h3>
-            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+            <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
               <div className="w-3 h-3">
                 <SvgCheckMark />
               </div>
             </div>
-            <div className="w-full border-t border-[#00b2b2b2] rounded h-2"></div>
+            <div className="w-full border-t border-line rounded h-2"></div>
             <div className="flex flex-col gap-3">
               <label htmlFor="buyers" className="flex items-center gap-1 cursor-pointer">
                 <input type="checkbox" name="buyers" id="buyers" className="hidden peer" />
-                <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+                <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                   <div className="w-3 h-3">
                     <SvgCheckMark />
                   </div>
@@ -183,7 +183,7 @@ const SalesRules: FC<any> = () => {
               </label>
               <label htmlFor="planners" className="flex items-center gap-1 cursor-pointer">
                 <input type="checkbox" name="planners" id="planners" className="hidden peer" />
-                <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+                <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                   <div className="w-3 h-3">
                     <SvgCheckMark />
                   </div>
@@ -192,7 +192,7 @@ const SalesRules: FC<any> = () => {
               </label>
               <label htmlFor="managers" className="flex items-center gap-1 cursor-pointer">
                 <input type="checkbox" name="managers" id="managers" className="hidden peer" />
-                <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+                <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                   <div className="w-3 h-3">
                     <SvgCheckMark />
                   </div>
@@ -204,20 +204,20 @@ const SalesRules: FC<any> = () => {
         </label>
       </div>
       <div className="hidden w-full xl:flex">
-        <div className="grow grid grid-cols-3 gap-x-2 xl:gap-x-10 gap-y-3 xl:gap-y-6 start text-[#7E8096]">
+        <div className="grow grid grid-cols-3 gap-x-2 xl:gap-x-10 gap-y-3 xl:gap-y-6 start text-ink-muted">
           <label
             htmlFor="retail-chains-2"
-            className="col-span-1 order-1 h-max bg-white shadow-lg rounded-3xl border border-[#C6C6C665]"
+            className="col-span-1 order-1 h-max rounded-card border border-line bg-surface shadow-card"
           >
             <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
               <input type="checkbox" id="retail-chains-2" className="hidden peer" />
-              <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+              <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgStorefront />
               </div>
-              <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
+              <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
                 Retail Chains{"\n"}&nbsp;
               </h3>
-              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                 <div className="w-3 h-3">
                   <SvgCheckMark />
                 </div>
@@ -226,17 +226,17 @@ const SalesRules: FC<any> = () => {
           </label>
           <label
             htmlFor="workshops-2"
-            className="col-span-1 order-2 h-max bg-white shadow-lg rounded-3xl border border-[#C6C6C665]"
+            className="col-span-1 order-2 h-max rounded-card border border-line bg-surface shadow-card"
           >
             <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
               <input type="checkbox" className="hidden peer" id="workshops-2" />
-              <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+              <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgWrench />
               </div>
-              <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
+              <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
                 Workshops{"\n"}&nbsp;
               </h3>
-              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                 <div className="w-3 h-3">
                   <SvgCheckMark />
                 </div>
@@ -245,17 +245,17 @@ const SalesRules: FC<any> = () => {
           </label>
           <label
             htmlFor="tradespeople-2"
-            className="col-span-1 order-3 h-max bg-white shadow-lg rounded-3xl border border-[#C6C6C665]"
+            className="col-span-1 order-3 h-max rounded-card border border-line bg-surface shadow-card"
           >
             <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
               <input type="checkbox" className="hidden peer" id="tradespeople-2" />
-              <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+              <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgHardHat />
               </div>
-              <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
+              <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
                 Tradespeople
               </h3>
-              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                 <div className="w-3 h-3">
                   <SvgCheckMark />
                 </div>
@@ -264,17 +264,17 @@ const SalesRules: FC<any> = () => {
           </label>
           <label
             htmlFor="facility-service-providers-2"
-            className="col-span-1 order-4 xl:order-6 bg-white shadow-lg rounded-3xl border border-[#C6C6C665]"
+            className="col-span-1 order-4 xl:order-6 rounded-card border border-line bg-surface shadow-card"
           >
             <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
               <input type="checkbox" className="hidden peer" id="facility-service-providers-2" />
-              <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+              <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgFacilityServiceProviders />
               </div>
-              <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
+              <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
                 Facility Service{"\n"}Providers
               </h3>
-              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                 <div className="w-3 h-3">
                   <SvgCheckMark />
                 </div>
@@ -283,17 +283,17 @@ const SalesRules: FC<any> = () => {
           </label>
           <label
             htmlFor="without-gln-uts-code-2"
-            className="order-7 bg-white shadow-lg rounded-3xl border border-[#C6C6C665]"
+            className="order-7 rounded-card border border-line bg-surface shadow-card"
           >
             <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
               <input type="checkbox" className="hidden peer" id="without-gln-uts-code-2" />
-              <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+              <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgGLN_UTSCode />
               </div>
-              <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
+              <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
                 Without {"\n"}GLN-UTS Code
               </h3>
-              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                 <div className="w-3 h-3">
                   <SvgCheckMark />
                 </div>
@@ -302,17 +302,17 @@ const SalesRules: FC<any> = () => {
           </label>
           <label
             htmlFor="warehouses-manufacturers-2"
-            className="order-8 bg-white shadow-lg rounded-3xl border border-[#C6C6C665]"
+            className="order-8 rounded-card border border-line bg-surface shadow-card"
           >
             <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
               <input type="checkbox" className="hidden peer" id="warehouses-manufacturers-2" />
-              <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+              <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgWarehouse />
               </div>
-              <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
+              <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
                 Warehouses and {"\n"}Manufacturers
               </h3>
-              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                 <div className="w-3 h-3">
                   <SvgCheckMark />
                 </div>
@@ -320,33 +320,33 @@ const SalesRules: FC<any> = () => {
             </div>
           </label>
         </div>
-        <div className="grow ml-10 grid grid-cols-2 gap-x-2 xl:gap-x-10 gap-y-3 xl:gap-y-6 start text-[#7E8096]">
+        <div className="grow ml-10 grid grid-cols-2 gap-x-2 xl:gap-x-10 gap-y-3 xl:gap-y-6 start text-ink-muted">
           <label
             htmlFor="Contractors-2"
-            className="order-5 xl:order-4 bg-white shadow-lg rounded-3xl border border-[#C6C6C665] h-max"
+            className="order-5 xl:order-4 rounded-card border border-line bg-surface shadow-card h-max"
           >
             <div className="flex flex-col items-center justify-center gap-4 px-6 py-4 ">
               <input type="checkbox" className="hidden peer" id="Contractors-2" />
-              <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+              <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgVest />
               </div>
-              <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
+              <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
                 Contractors
               </h3>
-              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                 <div className="w-3 h-3">
                   <SvgCheckMark />
                 </div>
               </div>
               <div
-                className="w-full h-2 border-t border-[#00b2b2b2]
+                className="w-full h-2 border-t border-line
               "
               ></div>
 
               <div className="flex flex-col gap-3">
                 <label htmlFor="individual-2" className="flex items-center gap-1 cursor-pointer">
                   <input type="checkbox" name="individual" id="individual-2" className="hidden peer" />
-                  <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+                  <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                     <div className="w-3 h-3">
                       <SvgCheckMark />
                     </div>
@@ -355,7 +355,7 @@ const SalesRules: FC<any> = () => {
                 </label>
                 <label htmlFor="corporate-2" className="flex items-center gap-1 cursor-pointer">
                   <input type="checkbox" name="corporate" id="corporate-2" className="hidden peer" />
-                  <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+                  <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                     <div className="w-3 h-3">
                       <SvgCheckMark />
                     </div>
@@ -367,26 +367,26 @@ const SalesRules: FC<any> = () => {
           </label>
           <label
             htmlFor="procurement-teams-2"
-            className="order-6 xl:order-5 bg-white shadow-lg rounded-3xl border border-[#C6C6C665] h-max"
+            className="order-6 xl:order-5 rounded-card border border-line bg-surface shadow-card h-max"
           >
             <div className="flex flex-col items-center justify-center gap-4 px-6 py-4">
               <input type="checkbox" className="hidden peer" id="procurement-teams-2" />
-              <div className="w-16 h-20 peer-checked:text-[#4CBEC5]">
+              <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgBadge />
               </div>
-              <h3 className="text-center peer-checked:text-[#5E4F9C]  mb-4 font-bold whitespace-pre-line">
-                Health {"\n"}Professionals
-              </h3>
-              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+              <h3 className="text-center peer-checked:text-brand-700  mb-4 font-bold whitespace-pre-line">
+            Procurement {"\n"}Teams
+          </h3>
+              <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                 <div className="w-3 h-3">
                   <SvgCheckMark />
                 </div>
               </div>
-              <div className="w-full border-t border-[#00b2b2b2] h-2"></div>
+              <div className="w-full border-t border-line h-2"></div>
               <div className="flex flex-col gap-3">
                 <label htmlFor="buyers-2" className="flex items-center gap-1 cursor-pointer">
                   <input type="checkbox" name="buyers" id="buyers-2" className="hidden peer" />
-                  <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+                  <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                     <div className="w-3 h-3">
                       <SvgCheckMark />
                     </div>
@@ -395,7 +395,7 @@ const SalesRules: FC<any> = () => {
                 </label>
                 <label htmlFor="planners-2" className="flex items-center gap-1 cursor-pointer">
                   <input type="checkbox" name="planners" id="planners-2" className="hidden peer" />
-                  <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+                  <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                     <div className="w-3 h-3">
                       <SvgCheckMark />
                     </div>
@@ -404,7 +404,7 @@ const SalesRules: FC<any> = () => {
                 </label>
                 <label htmlFor="managers-2" className="flex items-center gap-1 cursor-pointer">
                   <input type="checkbox" name="managers" id="managers-2" className="hidden peer" />
-                  <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-[#00B1B2] rounded-md peer-checked:bg-[#5E4F9C] peer-checked:border-transparent">
+                  <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                     <div className="w-3 h-3">
                       <SvgCheckMark />
                     </div>
@@ -417,7 +417,7 @@ const SalesRules: FC<any> = () => {
         </div>
       </div>
       <div className="flex justify-center w-full col-span-3 xl:col-span-1 xl:flex-none xl:justify-start xl:mt-10">
-        <button type="button" className="font-medium xl:font-bold bg-[#5E4F9C] text-white px-10 py-3 rounded-full text-base">
+        <button type="button" className="font-medium xl:font-bold bg-brand-600 text-white px-10 py-3 rounded-full text-base">
           Save Changes
         </button>
       </div>

@@ -16,9 +16,9 @@ const TopluIslemDropdown: FC<any> = ({ setOpenModal2 }) => {
       <div className="relative text-sm dropdown group dropdown-hover dropdown-end">
         <label
           tabIndex={0}
-          className="bg-gradient-to-r from-[#00A29D] to-[#66C1BF] pl-3 pr-8 w-full lg:px-24 py-4 lg:py-4 outline-none group-hover:text-white rounded-full group-hover:cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 rounded-pill bg-brand-400 pl-3 pr-8 w-full py-3 outline-none transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:bg-brand-500 group-hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 lg:w-max lg:px-6"
         >
-          <span className="text-xs text-white xl:text-sm lg:font-semibold">Bulk Action</span>
+          <span className="text-xs font-medium text-white xl:text-sm">Bulk Action</span>
           <div className="absolute duration-100 top-1 right-2 lg:right-7 group-hover:rotate-180">
             <div className="w-3 h-3 lg:w-4 lg:h-4">
               <SmartSorting />
@@ -27,7 +27,7 @@ const TopluIslemDropdown: FC<any> = ({ setOpenModal2 }) => {
         </label>
         <div
           tabIndex={0}
-          className="dropdown-content left-0 top-[2rem] lg:top-[2rem] bg-white border border-[#66bebc] shadow rounded-3xl lg:w-full w-max"
+          className="dropdown-content left-0 top-[2rem] lg:top-[2rem] bg-white border border-brand-200 shadow-pop rounded-card lg:w-full w-max"
         >
           <div className="flex flex-col p-4 gap-[0.25rem]">
             {filterList &&
@@ -47,7 +47,7 @@ const ItemsList: FC<any> = ({ title, setOpenModal2 }) => {
           onClick={() => {
             setOpenModal2(true);
           }}
-          className={`text-sm font-normal hover:text-[#4CBEC5] text-[#7E8096] `}
+          className={`text-sm font-normal hover:text-brand-600 text-ink-soft `}
         >
           {title}
         </button>

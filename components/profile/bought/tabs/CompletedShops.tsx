@@ -218,7 +218,7 @@ const cardList = [
 const CompletedShops: FC = () => {
   return (
     <div className="grid gap-3 xl:gap-[0.75rem]">
-      {cardList && cardList.map((content) => <BoughtCard key={content.id} content={content} />)}
+      {cardList && cardList.map((content) => <BoughtCard key={content.id} content={content} status="completed" />)}
     </div>
   );
 };

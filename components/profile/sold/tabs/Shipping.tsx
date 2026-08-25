@@ -192,7 +192,7 @@ const cardList = [
 const Shipped: FC = () => {
   return (
     <div className="flex flex-col gap-3 xl:gap-[0.75rem]">
-      {cardList && cardList.map((content) => <BoughtCard key={content.id} content={content} />)}
+      {cardList && cardList.map((content) => <BoughtCard key={content.id} content={content} status="in-transit" />)}
     </div>
   );
 };

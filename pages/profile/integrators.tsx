@@ -107,22 +107,22 @@ const Integrators: NextPage = () => {
 
       <PortalModal open={resetModal} onClose={() => setResetModal(false)}>
         <div className="flex flex-col items-center gap-4 text-center">
-          <p className="text-xl font-bold text-[#4CBEC5]">Reset Information</p>
-          <p className="text-sm text-[#7E8096]">
+          <p className="font-display text-xl font-bold text-ink">Reset Information</p>
+          <p className="text-sm text-ink-soft">
             Your saved integrator settings will be cleared. This action cannot be undone.
           </p>
           <div className="flex w-full justify-center gap-3">
             <button
               type="button"
               onClick={() => setResetModal(false)}
-              className="rounded-full border border-[#00B1B266] px-6 py-2 text-sm font-medium text-[#7E8096]"
+              className="rounded-pill border border-line px-6 py-2 text-sm font-medium text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-canvas focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
             >
               Cancel
             </button>
             <button
               type="button"
               onClick={confirmReset}
-              className="rounded-full bg-gradient-to-r from-[#66C1BF] to-[#00A29D] px-6 py-2 text-sm font-bold text-white"
+              className="rounded-full bg-brand-400 px-6 py-2 text-sm font-bold text-white"
             >
               Reset
             </button>
@@ -138,10 +138,10 @@ const CardPanel: FC<{ title: string; subtitle: string; content: ReactNode }> = (
   subtitle,
   content,
 }) => (
-  <div className="flex flex-col gap-5 rounded-2xl border border-[#00B1B266] bg-white p-6 shadow-sm xl:p-8">
-    <div className="flex flex-col gap-1 border-b border-[#00B1B240] pb-4">
-      <h3 className="text-lg font-bold text-[#4CBEC5]">{title}</h3>
-      <p className="text-xs text-[#A0A2AF]">{subtitle}</p>
+  <div className="flex flex-col gap-5 rounded-card border border-line bg-surface p-6 shadow-card xl:p-8">
+    <div className="flex flex-col gap-1 border-b border-line pb-4">
+      <h3 className="font-display text-lg font-bold text-ink">{title}</h3>
+      <p className="font-display text-xs uppercase tracking-wider text-ink-muted">{subtitle}</p>
     </div>
     {content}
   </div>
@@ -155,7 +155,7 @@ const OurAccountCard: FC<{
 }> = ({ settings, update, onCheck, onSave }) => (
   <div className="flex flex-col gap-5">
     <div className="flex flex-col gap-2">
-      <label htmlFor="xmlLink" className="font-medium text-[#4CBEC5]">
+      <label htmlFor="xmlLink" className="font-medium text-ink">
         Your Product XML Link *
       </label>
       <div className="relative">
@@ -165,19 +165,19 @@ const OurAccountCard: FC<{
           value={settings.xmlLink}
           onChange={(e) => update("xmlLink", e.target.value)}
           placeholder="https://cdn1.xmlbankasi.com/p1/lxxxvlkhzqxg/image/data/xml/tradlia.xml"
-          className="w-full rounded-full border border-[#00B1B2] bg-white py-2.5 pl-5 pr-24 text-sm text-[#7E8096] shadow-sm outline-none placeholder:text-[#A0A2AF] focus:border-[#4CBEC5] xl:pr-28"
+          className="w-full rounded-card border border-line bg-surface py-2.5 pl-5 pr-24 text-sm text-ink outline-none transition-colors duration-200 placeholder:text-ink-muted focus:border-brand-400 focus-visible:ring-2 focus-visible:ring-brand-400/30 xl:pr-28"
         />
         <button
           type="button"
           onClick={onCheck}
-          className="absolute right-1 top-1 bottom-1 rounded-full bg-[#4CBEC5] px-6 text-sm font-medium text-white"
+          className="bottom-1 right-1 top-1 absolute rounded-pill bg-brand-400 px-6 text-sm font-medium text-white transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
         >
           Check
         </button>
       </div>
     </div>
     <div className="flex flex-col gap-2">
-      <label htmlFor="orderLink" className="font-medium text-[#4CBEC5]">
+      <label htmlFor="orderLink" className="font-medium text-ink">
         Your Product Order Link
       </label>
       <input
@@ -186,11 +186,11 @@ const OurAccountCard: FC<{
         value={settings.orderLink}
         onChange={(e) => update("orderLink", e.target.value)}
         placeholder="https://www.tradlia.com/en/entegra/orders/194/tFe6xANd9Xm1WQiU"
-        className="w-full rounded-full border border-[#00B1B2] bg-white px-5 py-2.5 text-sm text-[#7E8096] shadow-sm outline-none placeholder:text-[#A0A2AF] focus:border-[#4CBEC5]"
+        className="w-full rounded-card border border-line bg-surface px-5 py-2.5 text-sm text-ink outline-none transition-colors duration-200 placeholder:text-ink-muted focus:border-brand-400 focus-visible:ring-2 focus-visible:ring-brand-400/30"
       />
     </div>
     <div className="flex flex-col gap-2">
-      <label htmlFor="status" className="font-medium text-[#4CBEC5]">
+      <label htmlFor="status" className="font-medium text-ink">
         Status *
       </label>
       <div className="relative">
@@ -198,12 +198,12 @@ const OurAccountCard: FC<{
           id="status"
           value={settings.status}
           onChange={(e) => update("status", e.target.value)}
-          className="w-full appearance-none rounded-full border border-[#00B1B2] bg-white px-5 py-2.5 text-sm font-medium text-[#7E8096] shadow-sm outline-none focus:border-[#4CBEC5]"
+          className="w-full appearance-none rounded-card border border-line bg-surface px-5 py-2.5 text-sm font-medium text-ink outline-none transition-colors duration-200 focus:border-brand-400 focus-visible:ring-2 focus-visible:ring-brand-400/30"
         >
           <option value="Active">Active</option>
           <option value="Inactive">Inactive</option>
         </select>
-        <div className="pointer-events-none absolute right-5 top-3.5 h-3 w-3 rotate-180 text-[#4CBEC5]">
+        <div className="pointer-events-none absolute right-5 top-3.5 h-3 w-3 rotate-180 text-brand-500">
           <SvgShowMore />
         </div>
       </div>
@@ -211,7 +211,7 @@ const OurAccountCard: FC<{
     <button
       type="button"
       onClick={onSave}
-      className="self-start rounded-full bg-gradient-to-r from-[#66C1BF] to-[#00A29D] px-8 py-2.5 text-sm font-bold text-white shadow-sm"
+      className="self-start rounded-full bg-brand-400 px-8 py-2.5 text-sm font-bold text-white shadow-sm"
     >
       Save / Update
     </button>
@@ -226,7 +226,7 @@ const BiInvoiceCard: FC<{
 }> = ({ settings, update, onSave, onReset }) => (
   <div className="flex flex-col gap-5">
     <div className="flex flex-col gap-2">
-      <label htmlFor="clientName" className="font-medium text-[#4CBEC5]">
+      <label htmlFor="clientName" className="font-medium text-ink">
         ClientName *
       </label>
       <input
@@ -235,11 +235,11 @@ const BiInvoiceCard: FC<{
         value={settings.clientName}
         onChange={(e) => update("clientName", e.target.value)}
         placeholder="ixZUbeLpkcQzqmOH"
-        className="w-full rounded-full border border-[#00B1B2] bg-white px-5 py-2.5 text-sm text-[#7E8096] shadow-sm outline-none placeholder:text-[#A0A2AF] focus:border-[#4CBEC5]"
+        className="w-full rounded-card border border-line bg-surface px-5 py-2.5 text-sm text-ink outline-none transition-colors duration-200 placeholder:text-ink-muted focus:border-brand-400 focus-visible:ring-2 focus-visible:ring-brand-400/30"
       />
     </div>
     <div className="flex flex-col gap-2">
-      <label htmlFor="clientSecretKey" className="font-medium text-[#4CBEC5]">
+      <label htmlFor="clientSecretKey" className="font-medium text-ink">
         ClientSecretKey *
       </label>
       <input
@@ -248,21 +248,21 @@ const BiInvoiceCard: FC<{
         value={settings.clientSecretKey}
         onChange={(e) => update("clientSecretKey", e.target.value)}
         placeholder="ixZUbeLpkcQzqmOH"
-        className="w-full rounded-full border border-[#00B1B2] bg-white px-5 py-2.5 text-sm text-[#7E8096] shadow-sm outline-none placeholder:text-[#A0A2AF] focus:border-[#4CBEC5]"
+        className="w-full rounded-card border border-line bg-surface px-5 py-2.5 text-sm text-ink outline-none transition-colors duration-200 placeholder:text-ink-muted focus:border-brand-400 focus-visible:ring-2 focus-visible:ring-brand-400/30"
       />
     </div>
     <div className="flex flex-wrap items-center gap-3">
       <button
         type="button"
         onClick={onSave}
-        className="rounded-full bg-gradient-to-r from-[#66C1BF] to-[#00A29D] px-8 py-2.5 text-sm font-bold text-white shadow-sm"
+        className="rounded-full bg-brand-400 px-8 py-2.5 text-sm font-bold text-white shadow-sm"
       >
         Save / Update
       </button>
       <button
         type="button"
         onClick={onReset}
-        className="rounded-full border border-[#FB295A80] px-8 py-2.5 text-sm font-medium text-[#FB295A]"
+        className="rounded-pill border border-dangerTint bg-dangerTint px-8 py-2.5 text-sm font-medium text-dangerDark transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:brightness-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
       >
         Reset Information
       </button>

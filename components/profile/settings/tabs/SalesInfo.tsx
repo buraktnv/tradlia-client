@@ -3,17 +3,17 @@ import InputAddvert from "../../commonComponents/InputAddvert";
 
 const SalesInfo: FC = () => {
   return (
-    <div className="xl:bg-[#F4F5F7] rounded-3xl w-full h-full text-sm xl:p-[2rem]">
+    <div className="rounded-card border border-line bg-surface shadow-card rounded-3xl w-full h-full text-sm xl:p-[2rem]">
       <div className="flex flex-col xl:gap-[1.5rem] gap-6 leading-4">
         <div className="relative grid items-center w-full xl:w-full xl:mx-0 xl:grid-cols-2 ">
           <div className="space-y-1">
-            <label htmlFor="1" className="font-medium  text-[#A0A2AF] ml-3.5 xl:ml-10">
+            <label htmlFor="1" className="font-medium  text-ink-muted ml-3.5 xl:ml-10">
               Bank Name*
             </label>
             <div className="relative w-full group">
               <select
                 id="1"
-                className="peer appearance-none w-full xl:pr-0 xl:w-full h-full bg-white group-hover:text-[#4CBEC5] xl:px-3 px-[17px] py-3 xl:pl-10 outline-none font-medium xl:font-semibold text-[#7E8096] xl:text-[#A0A2AF] rounded-full drop-shadow-input-shadow xl:py-3.5"
+                className="peer appearance-none w-full xl:pr-0 xl:w-full h-full bg-white group-hover:text-brand-600 xl:px-3 px-[17px] py-3 xl:pl-10 outline-none font-medium xl:font-semibold text-ink-muted xl:text-ink-muted rounded-full drop-shadow-input-shadow xl:py-3.5"
               >
                 <option>First National Bank</option>
               </select>
@@ -22,8 +22,8 @@ const SalesInfo: FC = () => {
                 width="100%"
                 height="100%"
                 viewBox="0 0 26.883 15.423"
-                fill="#a0a2af"
-                className="peer-focus:rotate-0 transform transition ease-in-out duration-300 rotate-180 absolute right-4 xl:top-3.5 xl:right-2 top-3 w-4 h-4 mr-4  group-hover:fill-[#4CBEC5]"
+                fill="currentColor"
+                className="peer-focus:rotate-0 transform transition ease-in-out duration-300 rotate-180 absolute right-4 xl:top-3.5 xl:right-2 top-3 w-4 h-4 mr-4  group-hover:fill-brand-500"
               >
                 <path
                   id="Path_1096"
@@ -38,7 +38,7 @@ const SalesInfo: FC = () => {
 
         <div className="grid items-center w-full grid-cols-1 xl:grid-cols-2 xl:mx-0">
           <div className="grid space-y-1 xl:block">
-            <label className=" font-medium text-[#A0A2AF] ml-3.5 xl:ml-10">Branch Name*</label>
+            <label className=" font-medium text-ink-muted ml-3.5 xl:ml-10">Branch Name*</label>
 
             <InputAddvert
               placeholder="New York"
@@ -49,7 +49,7 @@ const SalesInfo: FC = () => {
         </div>
         <div className="grid items-center w-full grid-cols-1 xl:grid-cols-2 xl:mx-0">
           <div className="space-y-1">
-            <label className="font-medium  text-[#A0A2AF] ml-3.5 xl:ml-10">Bank Account Name*</label>
+            <label className="font-medium  text-ink-muted ml-3.5 xl:ml-10">Bank Account Name*</label>
 
             <InputAddvert
               placeholder="James Anderson"
@@ -60,7 +60,7 @@ const SalesInfo: FC = () => {
         </div>
         <div className="grid items-center w-full grid-cols-1 xl:grid-cols-2 xl:mx-0">
           <div className="space-y-1">
-            <label className=" font-medium text-[#A0A2AF] ml-3.5 xl:ml-10">IBAN*</label>
+            <label className=" font-medium text-ink-muted ml-3.5 xl:ml-10">IBAN*</label>
 
             <InputAddvert
               placeholder="US12 3456 7890 1234 5678 90"
@@ -70,7 +70,7 @@ const SalesInfo: FC = () => {
           </div>
         </div>
         <div className="flex justify-center sm:justify-start sm:flex-none">
-          <button type="button" className="font-medium xl:font-bold px-8 xl:px-11 py-3 rounded-full bg-[#4CBEC5] text-white text-sm">
+          <button type="button" className="font-medium xl:font-bold px-8 xl:px-11 py-3 rounded-full bg-brand-400 text-white text-sm">
             Save Changes
           </button>
         </div>

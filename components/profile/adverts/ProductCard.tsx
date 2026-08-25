@@ -12,12 +12,12 @@ const ProductCard: FC<AdvertProductCardProps> = ({ content, setOpenModal, listTy
   const badges = (
     <div className="flex flex-wrap gap-1">
       {content.green && (
-        <span className="px-2 py-0.5 text-[10px] font-bold text-white bg-[#66C1BF] rounded">
+        <span className="rounded-pill bg-brand-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand-700">
           FEATURED
         </span>
       )}
       {content.red && (
-        <span className="px-2 py-0.5 text-[10px] font-bold text-white bg-[#FF516B] rounded">
+        <span className="rounded-pill bg-dangerTint px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-dangerDark">
           BEST PRICE
         </span>
       )}
@@ -28,7 +28,7 @@ const ProductCard: FC<AdvertProductCardProps> = ({ content, setOpenModal, listTy
     <button
       type="button"
       onClick={() => setOpenModal(true)}
-      className="flex flex-col items-center text-[#86bc25] hover:opacity-80 transition-opacity"
+      className="flex flex-col items-center rounded-pill text-successDark transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-success focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
     >
       <SvgImg3 />
       <span className="text-xs font-medium leading-tight mt-0.5">Detailed Update</span>
@@ -37,9 +37,9 @@ const ProductCard: FC<AdvertProductCardProps> = ({ content, setOpenModal, listTy
 
   const checkbox = (
     <label htmlFor={contentId} className="flex items-center cursor-pointer flex-shrink-0">
-      <div className="border rounded-[7px] border-[#CCCCCC96] bg-white w-5 h-5 flex items-center justify-center">
+      <div className="flex h-5 w-5 items-center justify-center rounded-md border border-line bg-surface transition-colors duration-200">
         <input type="checkbox" id={contentId} className="hidden peer" />
-        <div className="w-4 h-4 rounded-[5px] peer-checked:bg-[#4CBEC5]"></div>
+        <div className="h-3.5 w-3.5 rounded-sm peer-checked:bg-brand-400"></div>
       </div>
     </label>
   );
@@ -47,7 +47,7 @@ const ProductCard: FC<AdvertProductCardProps> = ({ content, setOpenModal, listTy
   // --- Mobile card ---
   if (mobile) {
     return (
-      <div className="relative border border-[#DADADA] rounded-2xl p-3 bg-white">
+      <div className="relative rounded-card border border-line bg-surface p-3 shadow-card">
         <div className="flex gap-3">
           <div className="flex flex-col items-center gap-2 flex-shrink-0">
             {checkbox}
@@ -64,24 +64,24 @@ const ProductCard: FC<AdvertProductCardProps> = ({ content, setOpenModal, listTy
           <div className="flex-1 flex flex-col gap-1.5 min-w-0">
             {badges}
             <div>
-              <h4 className="font-bold text-sm text-[#333]">{content.name}</h4>
-              <p className="text-xs text-[#7E8096]">{content.brand}</p>
-              <p className="text-xs text-[#4CBEC5] mt-0.5">
+              <h4 className="font-bold text-sm text-ink">{content.name}</h4>
+              <p className="text-xs text-ink-muted">{content.brand}</p>
+              <p className="text-xs text-brand-600 mt-0.5">
                 <span className="font-semibold">{content.info}</span> and up, 250 listings
               </p>
             </div>
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs">
               <span>
-                <span className="text-[#4CBEC5] font-medium">Expiry:</span>{" "}
-                <span className="text-[#7E8096]">{content.miad}</span>
+                <span className="text-brand-600 font-medium">Expiry:</span>{" "}
+                <span className="text-ink-muted">{content.miad}</span>
               </span>
               <span>
-                <span className="text-[#4CBEC5] font-medium">Qty:</span>{" "}
-                <span className="text-[#7E8096]">{content.quantity}</span>
+                <span className="text-brand-600 font-medium">Qty:</span>{" "}
+                <span className="text-ink-muted">{content.quantity}</span>
               </span>
               <span>
-                <span className="text-[#4CBEC5] font-medium">Price:</span>{" "}
-                <span className="text-[#7E8096]">${content.price}</span>
+                <span className="text-brand-600 font-medium">Price:</span>{" "}
+                <span className="text-ink-muted">${content.price}</span>
               </span>
             </div>
             <div className="mt-1">{updateButton}</div>
@@ -94,7 +94,7 @@ const ProductCard: FC<AdvertProductCardProps> = ({ content, setOpenModal, listTy
   // --- Grid view (listType === 1, compact card) ---
   if (listType === 1) {
     return (
-      <div className="flex flex-col border border-[#DADADA] rounded-2xl p-3 bg-white gap-2 h-full">
+      <div className="flex flex-col rounded-card border border-line bg-surface p-3 shadow-card gap-2 h-full">
         <div className="flex items-center justify-between">
           {checkbox}
           {badges}
@@ -109,13 +109,13 @@ const ProductCard: FC<AdvertProductCardProps> = ({ content, setOpenModal, listTy
           />
         </div>
         <div>
-          <h4 className="font-bold text-sm text-[#333]">{content.name}</h4>
-          <p className="text-xs text-[#7E8096]">{content.brand}</p>
+          <h4 className="font-bold text-sm text-ink">{content.name}</h4>
+          <p className="text-xs text-ink-muted">{content.brand}</p>
         </div>
-        <div className="text-xs text-[#7E8096]">
+        <div className="text-xs text-ink-muted">
           Expiry: <span className="font-medium">{content.miad}</span>
         </div>
-        <div className="flex justify-between text-xs text-[#7E8096]">
+        <div className="flex justify-between text-xs text-ink-muted">
           <span>
             Qty: <span className="font-medium">{content.quantity}</span>
           </span>
@@ -130,7 +130,7 @@ const ProductCard: FC<AdvertProductCardProps> = ({ content, setOpenModal, listTy
 
   // --- Desktop list view (default) ---
   return (
-    <div className="flex items-center gap-4 border border-[#DADADA] rounded-2xl px-4 py-3 bg-white">
+    <div className="flex items-center gap-4 rounded-card border border-line bg-surface px-4 py-3 shadow-card">
       {/* Checkbox + image */}
       <div className="flex items-center gap-3 flex-shrink-0">
         {checkbox}
@@ -148,24 +148,24 @@ const ProductCard: FC<AdvertProductCardProps> = ({ content, setOpenModal, listTy
       {/* Product info */}
       <div className="flex-1 min-w-0">
         {badges}
-        <h4 className="font-bold text-sm text-[#333] truncate">{content.name}</h4>
-        <p className="text-xs text-[#7E8096] truncate">{content.brand}</p>
-        <p className="text-xs text-[#4CBEC5] mt-0.5">
+        <h4 className="font-bold text-sm text-ink truncate">{content.name}</h4>
+        <p className="text-xs text-ink-muted truncate">{content.brand}</p>
+        <p className="text-xs text-brand-600 mt-0.5">
           <span className="font-semibold">{content.info}</span> and up, 250 listings
         </p>
       </div>
 
       {/* Expiry date */}
       <div className="flex flex-col items-center w-24 flex-shrink-0">
-        <h3 className="text-[#4CBEC5] font-medium text-xs">Expiry Date</h3>
-        <p className="text-[#7E8096] font-medium text-sm mt-1">{content.miad}</p>
+        <h3 className="text-brand-600 font-medium text-xs">Expiry Date</h3>
+        <p className="text-ink-muted font-medium text-sm mt-1">{content.miad}</p>
       </div>
 
       {/* Quantity */}
       <div className="flex flex-col items-center w-24 flex-shrink-0">
-        <h3 className="text-[#4CBEC5] font-medium text-xs">Quantity</h3>
+        <h3 className="text-brand-600 font-medium text-xs">Quantity</h3>
         <input
-          className="text-[#7E8096] outline-none font-medium text-center w-full border rounded-full py-1 mt-1 border-[#00B1B2] bg-[#F4F5F7]"
+          className="text-ink-muted outline-none font-medium text-center w-full border rounded-full py-1 mt-1 border-line bg-canvas"
           type="number"
           defaultValue={content.quantity}
         />
@@ -173,9 +173,9 @@ const ProductCard: FC<AdvertProductCardProps> = ({ content, setOpenModal, listTy
 
       {/* Price */}
       <div className="flex flex-col items-center w-28 flex-shrink-0">
-        <h3 className="text-[#4CBEC5] font-medium text-xs">Price</h3>
+        <h3 className="text-brand-600 font-medium text-xs">Price</h3>
         <input
-          className="text-[#7E8096] outline-none font-medium text-center w-full border rounded-full py-1 px-2 mt-1 border-[#00B1B2] bg-[#F4F5F7]"
+          className="text-ink-muted outline-none font-medium text-center w-full border rounded-full py-1 px-2 mt-1 border-line bg-canvas"
           type="number"
           defaultValue={content.price}
         />

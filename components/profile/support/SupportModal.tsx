@@ -28,7 +28,7 @@ const SupportModal: FC<SupportModalProps> = ({ setModal, onCreate }) => {
 
   return (
     <PortalModal open onClose={() => setModal(false)} panelClassName="flex flex-col gap-4">
-      <div className="border border-[#00b2b280] px-6 py-3 text-center text-lg text-[#4CBEC5] rounded-full">
+      <div className="rounded-pill border border-brand-200 bg-brand-50 px-6 py-3 text-center font-display text-lg font-medium text-brand-700">
         Create New Support Request
       </div>
       <SelectDropDown onSelect={setSubject} />
@@ -41,12 +41,12 @@ const SupportModal: FC<SupportModalProps> = ({ setModal, onCreate }) => {
         placeholder={"Your Message"}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        className="border rounded-[1.3rem] p-4 mt-4 outline-none text-[#7E8096]"
+        className="rounded-card border border-line bg-surface p-4 text-sm text-ink outline-none transition-colors duration-200 placeholder:text-ink-muted focus:border-brand-400 focus-visible:ring-2 focus-visible:ring-brand-400/30 mt-4"
       ></textarea>
       <button
         type="button"
         onClick={handleCreate}
-        className="w-full bg-gradient-to-r from-[#66C1BF] to-[#00A29D] text-white rounded-full py-2 font-bold text-lg"
+        className="w-full rounded-pill bg-brand-400 py-2.5 font-semibold text-white transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
       >
         Create
       </button>

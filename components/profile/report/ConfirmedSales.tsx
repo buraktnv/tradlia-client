@@ -50,24 +50,24 @@ const ConfirmedSales: FC<any> = () => {
 
   return (
     <div>
-      <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-[#00B1B265] bg-[#F4F5F7] px-4 py-3 lg:flex-row lg:items-center lg:justify-between xl:my-[1.5rem]">
+      <div className="mt-4 flex flex-col gap-3 rounded-card border border-line bg-surface px-4 py-3 shadow-card lg:flex-row lg:items-center lg:justify-between xl:my-[1.5rem]">
         <div className="w-full lg:w-52">
-          <InputSelect textColor="text-[#4CBEC5]" value={range} onChange={(e: any) => handleRange(e.target.value)}>
+          <InputSelect textColor="text-ink-muted" value={range} onChange={(e: any) => handleRange(e.target.value)}>
             <option>Last 7 days</option>
             <option>Last 30 days</option>
             <option>Last 90 days</option>
           </InputSelect>
         </div>
         <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
-          <div className="flex items-center gap-2 rounded-full border border-[#c6c6c627] bg-white px-2 shadow-md">
+          <div className="flex items-center gap-2 rounded-pill border border-line bg-surface px-2 shadow-card">
             <InputDate
-              textColor="text-[#4CBEC5]"
+              textColor="text-ink-muted"
               value={toInputDate(startDate)}
               onChange={(e: any) => setStartDate(fromInputDate(e.target.value))}
             />
-            <div className="h-6 w-px rounded-full bg-[#4CBEC580]"></div>
+            <div className="h-6 w-px rounded-full bg-line"></div>
             <InputDate
-              textColor="text-[#4CBEC5]"
+              textColor="text-ink-muted"
               value={toInputDate(endDate)}
               onChange={(e: any) => setEndDate(fromInputDate(e.target.value))}
             />
@@ -75,27 +75,27 @@ const ConfirmedSales: FC<any> = () => {
           <button
             type="button"
             onClick={applyFilter}
-            className="whitespace-nowrap rounded-full bg-[#4CBEC5] px-5 py-2 text-sm font-bold text-white"
+            className="whitespace-nowrap rounded-pill bg-brand-400 px-5 py-2 text-sm font-semibold text-white transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
           >
             Apply
           </button>
         </div>
       </div>
-      <div className="h-72 w-full md:h-80">
-        <ChartChard data={chartData} strokeColor={"#4CBEC5"} />
+      <div className="mt-4 h-72 w-full rounded-card border border-line bg-surface p-2 shadow-card md:h-80 md:p-4">
+        <ChartChard data={chartData} />
       </div>
-      <div className="mt-4 w-full overflow-hidden rounded-2xl border border-[#CCCCCCcc] bg-white">
-        <table className="w-full text-left text-sm text-[#7E8096]">
-          <thead className="bg-[#F4F5F7] text-xs uppercase tracking-wide text-[#A0A2AF]">
-            <tr className="border-b border-[#CCCCCCa1]">
+      <div className="mt-4 w-full overflow-hidden rounded-card border border-line bg-surface shadow-card">
+        <table className="w-full text-left text-sm text-ink-soft">
+          <thead className="bg-canvas text-xs uppercase tracking-wider text-ink-muted font-medium">
+            <tr className="border-b border-line">
               <th className="py-3 pl-4 font-bold xl:pl-8">
-                <span className="mr-3 inline-block h-3 w-3 rounded bg-[#4CBEC5]"></span>Date
+                <span className="mr-2 inline-block h-2 w-2 rounded-full bg-brand-400" aria-hidden="true"></span>Date
               </th>
               <th className="py-3 pl-4 font-bold xl:pl-8">
-                <span className="mr-3 inline-block h-3 w-3 rounded bg-[#4CBEC5]"></span>Sales Quantity
+                <span className="mr-2 inline-block h-2 w-2 rounded-full bg-brand-400" aria-hidden="true"></span>Sales Quantity
               </th>
               <th className="py-3 pl-4 font-bold xl:pl-8">
-                <span className="mr-3 inline-block h-3 w-3 rounded bg-[#4CBEC5]"></span>Sales Amount
+                <span className="mr-2 inline-block h-2 w-2 rounded-full bg-brand-400" aria-hidden="true"></span>Sales Amount
               </th>
             </tr>
           </thead>
@@ -104,7 +104,7 @@ const ConfirmedSales: FC<any> = () => {
               tableData.map((el: any, i: number) => <TableRow content={el} key={i} />)
             ) : (
               <tr>
-                <td colSpan={3} className="py-8 text-center text-[#A0A2AF]">
+                <td colSpan={3} className="py-10 text-center text-sm text-ink-muted">
                   No records for the selected period.
                 </td>
               </tr>
@@ -113,28 +113,31 @@ const ConfirmedSales: FC<any> = () => {
         </table>
       </div>
       <div className="mt-4 flex justify-end">
-        <div className="flex items-center gap-3 rounded-full bg-[#4CBEC5] px-6 py-3 text-white">
-          Total: <p className="text-xl font-bold whitespace-nowrap">{DataConfirmedSales.total} $</p>
+        <div className="flex items-center justify-end mt-4">
+          <div className="flex items-center gap-3 rounded-pill bg-ink px-6 py-3 text-white">
+            <span className="text-sm text-white/70">Total</span>
+            <p className="font-display text-xl font-bold whitespace-nowrap tabular-nums">{DataConfirmedSales.total} $</p>
+          </div>
         </div>
       </div>
-      <div className="flex flex-col gap-3 py-5 lg:flex-row">
+      <div className="grid w-full gap-3 py-5 lg:flex lg:flex-row">
         <StatCard
           icon={<SvgConfirmedSales />}
-          iconClass="text-[#EA5B0C]"
+          iconClass="text-brand-600"
           title="Confirmed Sales"
           value={`${DataConfirmedSales.confirmedPurchase} $`}
           sub={`${DataConfirmedSales.confirmedPurchaseQuantity} pcs`}
         />
         <StatCard
           icon={<SvgDidntShipped />}
-          iconClass="text-[#4CBEC5]"
+          iconClass="text-amber-500"
           title="Unshipped"
           value={`${DataConfirmedSales.didntShipped} $`}
           sub={`${DataConfirmedSales.didntShippedQuantity} pcs`}
         />
         <StatCard
           icon={<SvgCanceledOrReturned />}
-          iconClass="text-[#E8336E]"
+          iconClass="text-danger"
           title="Cancelled and Returned"
           value={`${DataConfirmedSales.canceledOrReturned} $`}
           sub={`${DataConfirmedSales.canceledOrReturnedQuantity} pcs`}
@@ -151,12 +154,12 @@ const StatCard: FC<{ icon: any; iconClass: string; title: string; value: string;
   value,
   sub,
 }) => (
-  <div className="flex w-full items-center gap-4 rounded-2xl border border-[#CCCCCCcc] bg-white p-5 shadow-sm">
-    <div className={`flex h-12 w-12 shrink-0 items-center justify-center p-3 ${iconClass}`}>{icon}</div>
-    <div className="min-w-0 text-[#7E8096]">
-      <p className="truncate font-bold">{title}</p>
-      <p className="truncate text-xl font-bold text-[#4CBEC5]">{value}</p>
-      <p className="font-medium">{sub}</p>
+  <div className="flex w-full items-center gap-4 rounded-card border border-line bg-surface p-5 shadow-card">
+    <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-card bg-canvas p-3 ${iconClass}`}>{icon}</div>
+    <div className="min-w-0 text-ink-soft">
+      <p className="font-display text-xs uppercase tracking-wider text-ink-muted">{title}</p>
+      <p className="truncate font-display text-xl font-bold tabular-nums text-ink">{value}</p>
+      <p className="font-medium tabular-nums">{sub}</p>
     </div>
   </div>
 );
@@ -184,10 +187,10 @@ const DataConfirmedSales = {
 
 const TableRow: FC<any> = ({ content }) => {
   return (
-    <tr className="border-b border-[#CCCCCCa1] last:border-0">
-      <td className="py-[0.6rem] pl-4 xl:pl-8">{content.date}</td>
-      <td className="py-[0.6rem] pl-4 font-medium xl:pl-8">{content.quantity} Products</td>
-      <td className="py-[0.6rem] pl-4 font-bold xl:pl-8">{content.total} $</td>
+    <tr className="border-b border-line transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none last:border-0 hover:bg-brand-50/40">
+      <td className="py-3 pl-4 tabular-nums xl:pl-6">{content.date}</td>
+      <td className="py-3 pl-4 font-medium tabular-nums xl:pl-6">{content.quantity} Products</td>
+      <td className="py-3 pl-4 font-semibold tabular-nums text-ink xl:pl-6">{content.total} $</td>
     </tr>
   );
 };

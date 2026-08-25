@@ -1,29 +1,21 @@
 import React, { FC } from "react";
 
-const TabItem: FC<any> = ({ tab, activeTab, setActiveTab, style, text, icon }) => {
+const TabItem: FC<any> = ({ tab, activeTab, setActiveTab, text, icon }) => {
+  const isActive = activeTab === tab;
   return (
-    <div className="items-center col-span-1 cursor-pointer select-none group" onClick={() => setActiveTab(tab)}>
-      <div
-        className={`grid grid-cols-6 xl:grid-cols-4 px-2.5 h-10 xl:h-[2.4rem] items-center w-full gap-2 rounded-full xl:py-1.5 transition-all duration-150 ease-in-out ${
-          style?.extraClass
-        } ${
-          activeTab === tab
-            ? String(`${style.bgColor} text-white shadow-md`)
-            : String(`${style.hoverBG} group-hover:text-white bg-white group-hover:shadow-md ${style.text}`)
-        }`}
-      >
-        <div className={`col-span-1 flex w-full justify-center`}>
-          <span className="w-[18px] h-[18px] xl:w-6 xl:h-6">{icon}</span>
-        </div>
-        <h3
-          className={`col-span-5 xl:col-span-3 ml-1 font-medium text-[11px] leading-3 xl:text-[0.8rem] transition-all duration-150 ease-in-out ${
-            activeTab === tab ? "text-white" : "group-hover:text-white xl:text-[#7E8096]"
-          }`}
-        >
-          {text}
-        </h3>
-      </div>
-    </div>
+    <button
+      type="button"
+      aria-pressed={isActive}
+      onClick={() => setActiveTab(tab)}
+      className={`flex w-full select-none items-center gap-2.5 rounded-card border px-3 py-2.5 text-left transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
+        isActive
+          ? "border-brand-300 bg-brand-50 text-brand-700"
+          : "border-line bg-surface text-ink-soft hover:border-brand-200 hover:bg-brand-50/40 hover:text-ink"
+      }`}
+    >
+      <span className={`h-5 w-5 shrink-0 fill-current ${isActive ? "" : "text-ink-muted"}`}>{icon}</span>
+      <span className={`truncate text-sm ${isActive ? "font-medium" : ""}`}>{text}</span>
+    </button>
   );
 };
 

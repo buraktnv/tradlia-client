@@ -10,7 +10,7 @@ const UpdateProduct: FC<any> = ({ setOpenModal }) => {
   return (
     <div className="absolute top-0 bottom-0 left-0 right-0 z-10 w-full h-full md:fixed">
       <div
-        className={`bg-[#000000be] fixed top-0 bottom-0 left-0 right-0 transition-opacity duration-300 ease-in-out z-20 ${
+        className={`bg-ink/60 backdrop-blur-sm fixed top-0 bottom-0 left-0 right-0 transition-opacity duration-300 ease-in-out z-20 ${
           fade ? "opacity-100" : "opacity-0"
         }`}
         onClick={() => {
@@ -20,13 +20,13 @@ const UpdateProduct: FC<any> = ({ setOpenModal }) => {
       ></div>
       <div className="flex items-center justify-center w-full h-full">
         <div
-          className={`bg-[#F2F2F2] xl:bg-[#ffff] flex flex-col items-center w- justify-center gap-3 rounded-3xl py-6 xl:px-8 z-20 transition-all duration-300 ease-in-out ${
+          className={`z-20 mx-auto flex max-h-[90vh] w-[92%] flex-col items-center justify-center gap-4 overflow-y-auto rounded-card bg-surface p-5 shadow-modal transition-all duration-300 ease-in-out xl:w-full xl:max-w-xl xl:p-8 ${
             fade ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
           }`}
         >
           <button type="button"
             onClick={() => setOpenModal(false)}
-            className=" text-[#86BC25] text-lg border border-[#86BC25] rounded-full w-[90%] xl:w-full py-1 xl:py-2 xl:pr-11"
+            className="w-full rounded-pill border border-success py-2 text-lg font-medium text-successDark transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
           >
             Update Listing
           </button>
@@ -36,11 +36,11 @@ const UpdateProduct: FC<any> = ({ setOpenModal }) => {
               <Image src="/images/photos/product-3.svg" width={120} height={100} alt="image" />
             </div>
             <div className="flex flex-col w-full space-y-5">
-              <div className="text-[#7E8096] xl:flex xl:w-96 px-3 xl:px-7  mb-6 whitespace-nowrap xl:mb-6">
+              <div className="mb-4 whitespace-nowrap px-2 text-sm text-ink-soft xl:flex xl:w-96 xl:px-4">
                 <strong>TorqueMax Wood Screws </strong> 4×40 (500 Count)
               </div>
               <div className="justify-end hidden space-x-4 xl:flex">
-                <select className="peer relative appearance-none xl:bg-[#FCFCFC] w-[96%] py-2 text-[#7E8096] text-lg font-semibold px-4 xl:px-[13px] outline-none rounded-full border border-[#00B1B265] drop-shadow-input-shadow">
+                <select aria-label="Barcode" className="peer relative w-full appearance-none rounded-pill border border-line bg-canvas px-4 py-2 font-medium text-ink outline-none transition-colors duration-200 focus:border-brand-400 xl:pr-10">
                   <option>8690742310639</option>
                 </select>
 
@@ -49,19 +49,19 @@ const UpdateProduct: FC<any> = ({ setOpenModal }) => {
                   width="100%"
                   height="100%"
                   viewBox="0 0 26.883 15.423"
-                  className="peer-focus:rotate-0 transform transition ease-in-out duration-300 rotate-180 absolute w-4 h-4 bottom-[69.5%] right-[9%] "
+                  className="pointer-events-none absolute bottom-[69.5%] right-[9%] h-4 w-4 rotate-180 text-brand-500 transition duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none peer-focus:rotate-0"
                 >
                   <path
                     d="M1631.237,761.246a1.984,1.984,0,0,0,2.8,0l10.058-10.058,6.125,6.125,3.933,3.933a1.982,1.982,0,0,0,2.8-2.8l-11.46-11.459a1.981,1.981,0,0,0-2.8,0l-11.46,11.459A1.983,1.983,0,0,0,1631.237,761.246Z"
                     transform="translate(-1630.656 -746.402)"
-                    fill="#00B1B2"
+                    fill="currentColor"
                   />
                 </svg>
               </div>
             </div>
           </div>
           <div className="flex space-x-4 xl:hidden w-[90%] xl:w-full xl:px-">
-            <select className="peer relative appearance-none w-full  py-2 text-[#7E8096] font-medium px-4 outline-none rounded-full border border-[#00B1B265] ">
+            <select aria-label="Barcode" className="peer relative w-full appearance-none rounded-pill border border-line bg-surface px-4 py-2 font-medium text-ink outline-none transition-colors duration-200 focus:border-brand-400">
               <option>8690742310639</option>
             </select>
 
@@ -70,18 +70,18 @@ const UpdateProduct: FC<any> = ({ setOpenModal }) => {
               width="100%"
               height="100%"
               viewBox="0 0 26.883 15.423"
-              className="peer-focus:rotate-0 transform transition ease-in-out duration-300 rotate-180 absolute w-4 h-4 top-[25%] right-[12%] "
+              className="pointer-events-none absolute right-[12%] top-[25%] h-4 w-4 rotate-180 text-brand-500 transition duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none peer-focus:rotate-0"
             >
               <path
                 d="M1631.237,761.246a1.984,1.984,0,0,0,2.8,0l10.058-10.058,6.125,6.125,3.933,3.933a1.982,1.982,0,0,0,2.8-2.8l-11.46-11.459a1.981,1.981,0,0,0-2.8,0l-11.46,11.459A1.983,1.983,0,0,0,1631.237,761.246Z"
                 transform="translate(-1630.656 -746.402)"
-                fill="#00B1B2"
+                fill="currentColor"
               />
             </svg>
           </div>
           <div className="grid xl:grid-cols-3 gap-4 w-[90%] xl:w-full">
             <div className="relative col-span-1">
-              <select className="peer xl:bg-[#FCFCFC] appearance-none w-full lock p-2.5 xl:p-3 px-4 outline-none font-normal xl:text-sm xl:text-[#A0A2AF] text-xs text-[#707070] border rounded-full drop-shadow-input-shadow">
+              <select aria-label="Expiry date" className="peer w-full appearance-none rounded-pill border border-line bg-canvas p-2.5 px-4 text-xs outline-none transition-colors duration-200 focus:border-brand-400 xl:p-3 xl:text-sm">
                 <option>Expiry Date</option>
               </select>
 
@@ -90,12 +90,12 @@ const UpdateProduct: FC<any> = ({ setOpenModal }) => {
                 width="100%"
                 height="100%"
                 viewBox="0 0 26.883 15.423"
-                className="peer-focus:rotate-0 transform transition ease-in-out duration-300 rotate-180 absolute w-4 h-4 right-8 top-3.5 "
+                className="pointer-events-none absolute right-8 top-3.5 h-4 w-4 rotate-180 text-brand-500 transition duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none peer-focus:rotate-0"
               >
                 <path
                   d="M1631.237,761.246a1.984,1.984,0,0,0,2.8,0l10.058-10.058,6.125,6.125,3.933,3.933a1.982,1.982,0,0,0,2.8-2.8l-11.46-11.459a1.981,1.981,0,0,0-2.8,0l-11.46,11.459A1.983,1.983,0,0,0,1631.237,761.246Z"
                   transform="translate(-1630.656 -746.402)"
-                  fill="#a0a2af"
+                  fill="currentColor"
                 />
               </svg>
             </div>
@@ -103,11 +103,11 @@ const UpdateProduct: FC<any> = ({ setOpenModal }) => {
               <InputAddvert
                 placeholder="Stock"
                 type="number"
-                separate="rounded-full px-4 placeholder:text-xs xl:placeholder:text-sm placeholder:text-[#707070] xl:placeholder:text-[#A0A2AF] xl:placeholder:bg-[#FCFCFC] drop-shadow-input-shadow "
+                separate="rounded-pill border border-line bg-canvas px-4 placeholder:text-xs xl:placeholder:text-sm placeholder:text-ink-muted drop-shadow-input-shadow "
               />
             </div>
             <div className="relative col-span-1 ">
-              <select className="peer appearance-none w-full lock p-2.5 xl:p-3 px-4 outline-none font-normal xl:text-sm xl:text-[#A0A2AF] text-xs text-[#707070]  rounded-full drop-shadow-input-shadow border">
+              <select aria-label="Currency" className="peer w-full appearance-none rounded-pill border border-line bg-canvas p-2.5 px-4 text-xs outline-none transition-colors duration-200 focus:border-brand-400 xl:p-3 xl:text-sm">
                 <option>Currency</option>
               </select>
               <svg
@@ -115,12 +115,12 @@ const UpdateProduct: FC<any> = ({ setOpenModal }) => {
                 width="100%"
                 height="100%"
                 viewBox="0 0 26.883 15.423"
-                className="absolute w-4 h-4 mt-1 mr-4 transition duration-300 ease-in-out transform rotate-180 peer-focus:rotate-0 right-2 top-3"
+                className="pointer-events-none absolute right-2 top-3 h-4 w-4 rotate-180 text-brand-500 transition duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none peer-focus:rotate-0"
               >
                 <path
                   d="M1631.237,761.246a1.984,1.984,0,0,0,2.8,0l10.058-10.058,6.125,6.125,3.933,3.933a1.982,1.982,0,0,0,2.8-2.8l-11.46-11.459a1.981,1.981,0,0,0-2.8,0l-11.46,11.459A1.983,1.983,0,0,0,1631.237,761.246Z"
                   transform="translate(-1630.656 -746.402)"
-                  fill="#a0a2af"
+                  fill="currentColor"
                 />
               </svg>
             </div>
@@ -130,21 +130,21 @@ const UpdateProduct: FC<any> = ({ setOpenModal }) => {
               <InputAddvert
                 placeholder="Price"
                 type="number"
-                separate="rounded-full px-4 placeholder:text-xs xl:placeholder:text-sm placeholder:text-[#707070] xl:placeholder:text-[#A0A2AF]"
+                separate="rounded-pill border border-line bg-canvas px-4 placeholder:text-xs xl:placeholder:text-sm placeholder:text-ink-muted"
               />
             </div>
             <div className="col-span-3 xl:col-span-1">
               <InputAddvert
                 placeholder="My Purchase Price"
                 type="number"
-                separate="rounded-full px-4 placeholder:text-xs xl:placeholder:text-sm placeholder:text-[#707070] xl:placeholder:text-[#A0A2AF]"
+                separate="rounded-pill border border-line bg-canvas px-4 placeholder:text-xs xl:placeholder:text-sm placeholder:text-ink-muted"
               />
             </div>
             <div className="col-span-3 xl:col-span-1">
               <InputAddvert
                 placeholder="Max Sale Quantity"
                 type="number"
-                separate="rounded-full px-4 placeholder:text-xs xl:placeholder:text-sm placeholder:text-[#707070] xl:placeholder:text-[#A0A2AF]"
+                separate="rounded-pill border border-line bg-canvas px-4 placeholder:text-xs xl:placeholder:text-sm placeholder:text-ink-muted"
               />
             </div>
 
@@ -153,16 +153,16 @@ const UpdateProduct: FC<any> = ({ setOpenModal }) => {
                 placeholder="Listing Description"
                 rows={4}
                 cols={6}
-                className="flex cursor-pointer w-full px-4 py-2 border outline-none rounded-3xl placeholder:text-xs xl:placeholder:text-sm placeholder:text-[#707070] xl:placeholder:text-[#A0A2AF]"
+                className="flex cursor-pointer w-full px-4 py-2 border outline-none rounded-3xl placeholder:text-xs xl:placeholder:text-sm placeholder:text-ink-muted"
               ></textarea>
             </div>
 
             <label
-              className="flex cursor-pointer xl:justify-center pl-3 xl:pl-0 col-span-1 border border-[#FB295A] py-2 xl:py-3 rounded-full gap-4 xl:gap-2 text-[#707070] xl:text-[#A0A2AF] w-[325%] xl:w-[120%]"
+              className="col-span-1 flex w-full cursor-pointer items-center gap-3 rounded-pill border border-dangerTint bg-dangerTint px-4 py-2.5 text-sm font-medium text-dangerDark transition-colors duration-200 focus-within:ring-2 focus-within:ring-brand-400/30 xl:w-max"
               htmlFor="20"
             >
               <input type="checkbox" id="20" name="" className="hidden peer" />
-              <div className="w-6 h-6 rounded-lg peer-checked:bg-[#FB295A] text-transparent peer-checked:text-white border border-[#FB295A]"></div>
+              <div className="h-5 w-5 shrink-0 rounded-md border border-danger peer-checked:bg-danger peer-checked:[&]:text-transparent"></div>
               <p className="flex items-center text-sm whitespace-nowrap xl:flex-none">Feature Listing</p>
             </label>
           </div>
@@ -171,7 +171,7 @@ const UpdateProduct: FC<any> = ({ setOpenModal }) => {
               onClick={() => {
                 setOpenModal(false);
               }}
-              className="bg-[#86BC25] cursor-pointer py-2 xl:py-3 px-8 xl:px-6 rounded-full text-sm font-medium text-white"
+              className="cursor-pointer rounded-pill bg-success px-6 py-2.5 text-sm font-semibold text-white transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-successDark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
             >
               Update Listing
             </button>
@@ -179,7 +179,7 @@ const UpdateProduct: FC<any> = ({ setOpenModal }) => {
               onClick={() => {
                 setOpenModal(false);
               }}
-              className="border cursor-pointer border-[#86BC25] xl:py-3 px-16 xl:px-4 rounded-full font-medium text-sm text-[#7E8096]"
+              className="cursor-pointer rounded-pill border border-line px-4 py-2.5 font-medium text-sm text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-canvas focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
             >
               Unpublish Listing
             </button>

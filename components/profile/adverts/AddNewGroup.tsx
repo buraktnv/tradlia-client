@@ -93,43 +93,43 @@ const AddNewGroup: FC = () => {
   return (
     <div className="grid gap-4 text-sm">
       {openModal && <Modal setOpenModal={setOpenModal} />}
-      <div className="flex justify-between w-full px-6 xl:px-2 py-1 rounded-full border border-[#00B1B265] bg-[#F4F5F7]">
+      <div className="flex justify-between w-full px-6 xl:px-2 py-1 rounded-full border border-line bg-canvas">
         <div className="flex w-full h-10 sm:justify-around xl:justify-between gap-28 xl:gap-6 xl:px-6">
           <FilterDropdown filterList={filterList} />
           <DateDropdown />
         </div>
 
         <div className="hidden gap-2 text-sm font-medium xl:flex">
-          <button type="button" className="bg-gradient-to-r from-[#66C1BF] to-[#00A29D] text-white px-4 py-2 rounded-full">
+          <button type="button" className="bg-gradient-to-r from-brand-400 to-brand-500 text-white px-4 py-2 rounded-full">
             Excel Standards
           </button>
-          <button type="button" className="bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] text-white px-4 py-2 rounded-full">
+          <button type="button" className="bg-gradient-to-r from-amber-400 to-amber-500 text-white px-4 py-2 rounded-full">
             Sample Excel File
           </button>
           <button type="button"
             onClick={() => setOpenModal(true)}
-            className="bg-gradient-to-r from-[#FF516B] to-[#FF0045] text-white px-4 py-2 rounded-full"
+            className="bg-gradient-to-r from-danger to-dangerDark text-white px-4 py-2 rounded-full"
           >
             Upload File
           </button>
         </div>
       </div>
       <div className="flex justify-center gap-2 mx-2 text-sm font-medium xl:hidden">
-        <button type="button" className="bg-gradient-to-r from-[#66C1BF] to-[#00A29D] text-white px-2 py-2 rounded-2xl">
+        <button type="button" className="bg-gradient-to-r from-brand-400 to-brand-500 text-white px-2 py-2 rounded-2xl">
           Excel Standards
         </button>
-        <button type="button" className="bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] text-white px-2  py-2 rounded-2xl">
+        <button type="button" className="bg-gradient-to-r from-amber-400 to-amber-500 text-white px-2  py-2 rounded-2xl">
           Sample Excel File
         </button>
         <button type="button"
           onClick={() => setOpenModal(true)}
-          className="bg-gradient-to-r from-[#FF516B] to-[#FF0045] text-white px-6 py-2 rounded-2xl"
+          className="bg-gradient-to-r from-danger to-dangerDark text-white px-6 py-2 rounded-2xl"
         >
           Upload File
         </button>
       </div>
       <div>
-        <div className="bg-[#7E8096] text-white font-bold grid grid-cols-2 xl:grid-cols-9 py-2 px-8 rounded-full">
+        <div className="bg-canvas font-medium text-ink-muted text-sm grid grid-cols-2 xl:grid-cols-9 py-2.5 px-6 rounded-card">
           <div className="col-span-1 xl:col-span-2">File</div>
           <div className="col-span-1 xl:col-span-2 xl:pl-6">Creation Date</div>
           <div className="hidden text-center xl:block">Total</div>
@@ -146,8 +146,8 @@ const AddNewGroup: FC = () => {
 
 const Item: FC<any> = ({ content }) => {
   return (
-    <div className="grid grid-cols-2 xl:grid-cols-9 px-8 py-2 font-medium text-[#7E8096] rounded-full cursor-pointer ">
-      <div className="col-span-1 xl:col-span-2 text-[#4CBEC5]">{content.name}</div>
+    <div className="grid grid-cols-2 xl:grid-cols-9 px-8 py-2 font-medium text-ink-soft rounded-full cursor-pointer ">
+      <div className="col-span-1 xl:col-span-2 text-brand-600">{content.name}</div>
       <div className="col-span-1 xl:col-span-2 xl:pl-6">{content.creationDate}</div>
       <div className="hidden text-center xl:block">{content.total}</div>
       <div className="hidden text-center xl:block">{content.uploaded}</div>
@@ -160,16 +160,16 @@ const Item: FC<any> = ({ content }) => {
 const Modal: FC<any> = ({ setOpenModal }) => {
   return (
     <div className="absolute top-0 left-0 z-20 flex items-center justify-center w-full h-full">
-      <div onClick={() => setOpenModal(false)} className="absolute w-full h-full bg-[#000000BE] "></div>
+      <div onClick={() => setOpenModal(false)} className="absolute w-full h-full bg-ink/60 backdrop-blur-sm "></div>
       <div className="z-20 flex flex-col items-center py-8 space-y-6 bg-white border w-max rounded-3xl xl:p-8">
         <button type="button"
           onClick={() => setOpenModal(false)}
-          className=" text-[#FB295A] xl:text-lg border border-[#FB295A65] rounded-full w-[80%] xl:w-full py-0.5 xl:py-1"
+          className=" text-dangerDark xl:text-lg border border-dangerTint rounded-full w-[80%] xl:w-full py-0.5 xl:py-1"
         >
           Bulk Add Products via Excel
         </button>
 
-        <div className="w-[25%] h-15 text-[#FF0045]">
+        <div className="w-[25%] h-15 text-danger">
           <SvgDownload />
         </div>
 
@@ -177,7 +177,7 @@ const Modal: FC<any> = ({ setOpenModal }) => {
           <div className="flex flex-col w-full">
             <button type="button"
               onClick={() => setOpenModal(false)}
-              className="py-0.5 xl:py-1  text-white text-lg bg-gradient-to-r from-[#FF516B] to-[#FF0045] font-semibold border rounded-full w-[80%] xl:w-full ml-8 xl:ml-0"
+              className="py-0.5 xl:py-1  text-white text-lg bg-gradient-to-r from-danger to-dangerDark font-semibold border rounded-full w-[80%] xl:w-full ml-8 xl:ml-0"
             >
               Upload File
             </button>
@@ -185,7 +185,7 @@ const Modal: FC<any> = ({ setOpenModal }) => {
           <div className=" w-[50%]">
             <button type="button"
               onClick={() => setOpenModal(false)}
-              className="py-0.5 xl:py-1 text-white text-lg bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] font-medium rounded-full w-full"
+              className="py-0.5 xl:py-1 text-white text-lg bg-gradient-to-r from-amber-400 to-amber-500 font-medium rounded-full w-full"
             >
               Start Process
             </button>

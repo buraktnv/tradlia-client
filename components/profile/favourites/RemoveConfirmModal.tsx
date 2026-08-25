@@ -11,19 +11,19 @@ const RemoveConfirmModal: FC<any> = ({ setModal, deleteFavorites }) => {
             <SvgWarning />
           </div>
         </div>
-        <div className="text-2xl text-center whitespace-pre-line text-[#FB295A] font-bold">
+        <div className="font-display text-2xl font-bold text-center whitespace-pre-line text-dangerDark">
           Remove from {"\n"}Favourites?
         </div>
-        <div className="text-[#7E8096] text-center text-base">This Action Cannot Be Undone!</div>
+        <div className="text-ink-soft text-center text-base">This Action Cannot Be Undone!</div>
         <div className="grid w-full grid-cols-2 gap-2">
           <button type="button"
-            className="px-10 py-2 border border-[#00B1B29c] rounded-full text-[#7E8096] font-medium"
+            className="rounded-pill border border-line px-10 py-2 font-medium text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-canvas focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
             onClick={() => setModal(false)}
           >
             No
           </button>
           <button type="button"
-            className="px-10 py-2 bg-gradient-to-r from-[#FF3A67] to-[#FF003C] border border-transparent text-white rounded-full font-medium"
+            className="rounded-pill bg-danger px-10 py-2 font-semibold text-white transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-dangerDark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
             onClick={() => {
               deleteFavorites();
               setModal(false);
