@@ -10,7 +10,6 @@ import { NavbarDropboxIcon, SvgSmartBasket } from "../../../helpers/svgs/navbarS
 import { useRouter } from "next/router";
 import TopCategories from "../../home/TopCategories";
 
-// TODO Tradlia logo is directly inside Link as Image, this should be Link > A > Image.
 const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
@@ -31,7 +30,6 @@ const Navbar: FC = () => {
           <div className="grid grid-cols-6 gap-5">
             <div className="relative flex w-11/12 col-span-1">
               <Link href="/">
-                {/* Here an A tag should wrap the Image tag */}
                 <Image
                   src={"/images/navbar/tradlia.svg"}
                   className="left-0 object-contain cursor-pointer"

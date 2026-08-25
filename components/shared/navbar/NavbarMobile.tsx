@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import { FC } from "react";
 import { SvgBasket, SvgMessages1, SvgOrders1, SvgSmartBasket } from "../../../helpers/svgs/navbarSvg";
 
+const isActiveRoute = (asPath: string, route: string) => asPath.split("?")[0] === route;
+
 const NavbarMobile: FC = () => {
   return (
     <div className="relative">
@@ -47,14 +49,15 @@ const NavbarMobile: FC = () => {
 
 const NavItemOrdersBasket = () => {
   const router = useRouter();
+  const route = "/basket";
   return (
     <Link
-      href="/basket"
+      href={route}
       className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group">
 
       <span
         className={`w-11 h-11 relative fill-gray-600 group-hover:fill-[#4CBEC5] flex items-center justify-center ${
-          router.asPath === "/basket" && "fill-[#4CBEC5]"
+          isActiveRoute(router.asPath, route) && "fill-[#4CBEC5]"
         }`}
       >
         <div className="w-6 h-6">
@@ -66,7 +69,7 @@ const NavItemOrdersBasket = () => {
       </span>
       <span
         className={`text-[10px] text-gray-600 whitespace-nowrap group-hover:text-[#4CBEC5] ${
-          router.asPath === "/basket" && "text-[#4CBEC5]"
+          isActiveRoute(router.asPath, route) && "text-[#4CBEC5]"
         }`}
       >
         My Cart
@@ -78,14 +81,15 @@ const NavItemOrdersBasket = () => {
 
 const NavItemOrdersSmartBasket = () => {
   const router = useRouter();
+  const route = "/basket/smart";
   return (
     <Link
-      href="/basket/smart"
+      href={route}
       className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group">
 
       <span
         className={`w-11 h-11 relative fill-gray-600 group-hover:fill-[#4CBEC5] flex items-center justify-center ${
-          router.asPath === "/basket/smart" && "fill-[#4CBEC5]"
+          isActiveRoute(router.asPath, route) && "fill-[#4CBEC5]"
         }`}
       >
         <div className="w-6 h-6">
@@ -94,7 +98,7 @@ const NavItemOrdersSmartBasket = () => {
       </span>
       <span
         className={`text-[10px] text-gray-600 whitespace-nowrap group-hover:text-[#4CBEC5] ${
-          router.asPath === "/basket/smart" && "text-[#4CBEC5]"
+          isActiveRoute(router.asPath, route) && "text-[#4CBEC5]"
         }`}
       >
         Smart Basket
@@ -106,14 +110,15 @@ const NavItemOrdersSmartBasket = () => {
 
 const NavItemOrdersBought = () => {
   const router = useRouter();
+  const route = "/profile/orders/bought";
   return (
     <Link
-      href="/profile/orders/bought"
+      href={route}
       className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group">
 
       <span
         className={`w-11 h-11 relative fill-gray-600 group-hover:fill-[#4CBEC5] flex items-center justify-center ${
-          router.asPath === "/profile/orders/bought" && "fill-[#4CBEC5]"
+          isActiveRoute(router.asPath, route) && "fill-[#4CBEC5]"
         }`}
       >
         <div className="w-6 h-6">
@@ -122,7 +127,7 @@ const NavItemOrdersBought = () => {
       </span>
       <span
         className={`text-[10px] text-gray-600 whitespace-nowrap group-hover:text-[#4CBEC5] ${
-          router.asPath === "/profile/orders/bought" && "text-[#4CBEC5]"
+          isActiveRoute(router.asPath, route) && "text-[#4CBEC5]"
         }`}
       >
         My Orders
@@ -134,14 +139,15 @@ const NavItemOrdersBought = () => {
 
 const NavItemMessages = () => {
   const router = useRouter();
+  const route = "/profile/messages";
   return (
     <Link
-      href="/profile/messages"
+      href={route}
       className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group">
 
       <span
         className={`w-11 h-11 relative fill-gray-600 group-hover:fill-[#4CBEC5] flex items-center justify-center ${
-          router.asPath === "/profile/messages" && "fill-[#4CBEC5]"
+          isActiveRoute(router.asPath, route) && "fill-[#4CBEC5]"
         }`}
       >
         <div className="w-6 h-6">
@@ -153,7 +159,7 @@ const NavItemMessages = () => {
       </span>
       <span
         className={`text-[10px] text-gray-600 whitespace-nowrap group-hover:text-[#4CBEC5] ${
-          router.asPath === "/profile/messages" && "text-[#4CBEC5]"
+          isActiveRoute(router.asPath, route) && "text-[#4CBEC5]"
         }`}
       >
         Messages
