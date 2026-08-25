@@ -18,9 +18,9 @@ const SingleProductItem: FC<any> = ({ content, unfavoriteCard, favoriteCard }) =
   return (
     <>
       {modal && <RemoveConfirmModal setModal={setModal} deleteFavorites={deleteFavorites} />}
-      <article className="group relative flex flex-col justify-between h-72 xl:h-[360px] w-full bg-surface rounded-card shadow-card border border-line hover:border-brand-300 hover:shadow-pop transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none py-4 px-4 hover:pb-16">
+      <article className="group relative flex flex-col justify-between h-72 xl:h-[360px] w-full bg-surface rounded-card shadow-card border border-line hover:border-brand-300 hover:shadow-pop transition-[border-color,box-shadow,padding] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none py-4 px-4 hover:pb-16">
         <div className="flex flex-col gap-0.5">
-          <h5 className="text-xs text-ink-muted truncate">{content.brand}</h5>
+          <p className="text-xs text-ink-soft truncate">{content.brand}</p>
           <h3 className="text-sm font-semibold xl:text-base text-ink line-clamp-1">{content.name}</h3>
         </div>
         <div className="flex w-full h-full p-3">
@@ -67,7 +67,7 @@ const SingleProductItem: FC<any> = ({ content, unfavoriteCard, favoriteCard }) =
             </button>
           </div>
         </div>
-        <div className="absolute left-0 grid items-center invisible w-full px-4 opacity-0 bottom-3 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none">
+        <div className="absolute left-0 grid items-center invisible w-full px-4 opacity-0 bottom-3 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-[opacity,visibility] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none">
           <Link
             href={"/product"}
             className="select-none flex items-center gap-2 justify-center px-4 py-2 rounded-pill border border-line bg-surface text-sm font-medium text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-300 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"

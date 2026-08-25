@@ -12,6 +12,7 @@ export default function Document() {
     <Html lang="en" className={`${display.variable} ${body.variable}`}>
       <Head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="theme-color" content="#F4F8F9" />
       </Head>
       <body>
         <div dangerouslySetInnerHTML={{ __html: hireMeCredit }} />

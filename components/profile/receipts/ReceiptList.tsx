@@ -35,7 +35,7 @@ const ReceiptList: FC = () => {
     <div className="px-3 xl:px-[1.5rem] py-3 xl:py-[3rem] rounded-card border border-line bg-surface shadow-card xl:p-6 text-sm mt-3 xl:mt-[1.5rem]">
       <div className="grid gap-8 xl:gap-4 xl:grid-cols-3">
         <div className="grid grid-cols-3 gap-2 xl:pr-8 xl:pl-4 xl:block">
-          <div className="grid gap-2 col-span-3 text-sm text-ink-muted xl:pr-8 xl:pl-4 px-2">
+          <div className="grid gap-2 col-span-3 text-sm text-ink-soft xl:pr-8 xl:pl-4 px-2">
             <h3 className="font-bold text-[15px] leading-[17px]">Shipping Invoices</h3>
             <p className="h-full text-xs xl:text-sm xl:h-28">
               You can download the monthly e-invoices issued for the shipping fees you have paid from this section.
@@ -59,12 +59,12 @@ const ReceiptList: FC = () => {
             </div>
           </label>
 
-          <button type="button" onClick={() => download("Shipping Invoice", months.shipping, "24.90 $")} className="transition ease-in-out duration-150 drop-shadow-input-shadow px-6 py-2 xl:py-3.5 rounded-full bg-transparent font-bold xl:text-ink-muted border border-line xl:my-4 xl:mx-4 hover:text-white  from-brand-400 to-brand-500 hover:border-transparent">
+          <button type="button" onClick={() => download("Shipping Invoice", months.shipping, "24.90 $")} className="transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none drop-shadow-input-shadow px-6 py-2 xl:py-3.5 rounded-full bg-transparent font-bold xl:text-ink-soft border border-line xl:my-4 xl:mx-4 hover:text-white hover:bg-gradient-to-r from-brand-400 to-brand-500 hover:border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400">
             Download
           </button>
         </div>
         <div className="grid grid-cols-3 gap-2 xl:pr-8 xl:pl-4 xl:block">
-          <div className="grid gap-2 col-span-3 text-sm text-ink-muted xl:pr-8 xl:pl-4 px-2">
+          <div className="grid gap-2 col-span-3 text-sm text-ink-soft xl:pr-8 xl:pl-4 px-2">
             <h3 className="font-bold text-[15px] leading-[17px]">Service Fee Invoices</h3>
             <p className="h-full text-xs xl:text-sm xl:h-28">
               You can download the monthly service fee e-invoices issued for your product sales from this section.
@@ -87,12 +87,12 @@ const ReceiptList: FC = () => {
               <SvgShowMore />
             </div>
           </label>
-          <button type="button" onClick={() => download("Service Fee Invoice", months.service, "12.50 $")} className="transition ease-in-out duration-150 drop-shadow-input-shadow px-6 py-2 xl:py-3.5 rounded-full bg-transparent font-bold xl:text-ink-muted border border-line xl:my-4 xl:mx-4 xl:bg-none hover:text-white bg-gradient-to-r text-white  hover:bg-amber-500 hover:border-transparent">
+          <button type="button" onClick={() => download("Service Fee Invoice", months.service, "12.50 $")} className="transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none drop-shadow-input-shadow px-6 py-2 xl:py-3.5 rounded-full bg-transparent font-bold xl:text-ink-soft border border-line xl:my-4 xl:mx-4 xl:bg-none text-white bg-gradient-to-r hover:bg-amber-500 hover:border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400">
             Download
           </button>
         </div>
         <div className="grid grid-cols-3 gap-2 xl:pr-8 xl:pl-4 xl:block">
-          <div className="grid gap-2 col-span-3 text-sm text-ink-muted xl:pr-8 xl:pl-4 px-2">
+          <div className="grid gap-2 col-span-3 text-sm text-ink-soft xl:pr-8 xl:pl-4 px-2">
             <h3 className="font-bold text-[15px] leading-[17px]">Shipping Deduction Invoices</h3>
             <p className="h-full text-xs xl:text-sm xl:h-28">
               The shipping costs of campaigns you run using the Tradlia code are deducted from your receivable amount.
@@ -117,7 +117,7 @@ const ReceiptList: FC = () => {
             </div>
           </label>
 
-          <button type="button" onClick={() => download("Shipping Deduction Invoice", months.deduction, "8.75 $")} className="transition ease-in-out duration-150 drop-shadow-input-shadow px-6 py-2 xl:py-3.5 rounded-full bg-transparent font-bold xl:text-ink-muted border border-line xl:my-4 xl:mx-4 hover:text-white  from-brand-400 to-brand-500 hover:border-transparent">
+          <button type="button" onClick={() => download("Shipping Deduction Invoice", months.deduction, "8.75 $")} className="transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none drop-shadow-input-shadow px-6 py-2 xl:py-3.5 rounded-full bg-transparent font-bold xl:text-ink-soft border border-line xl:my-4 xl:mx-4 hover:text-white hover:bg-gradient-to-r from-brand-400 to-brand-500 hover:border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400">
             Download
           </button>
         </div>

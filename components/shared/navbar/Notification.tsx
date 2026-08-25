@@ -37,10 +37,13 @@ const Notification: FC<any> = () => {
         >
           <SvgNotifications />
           <span className="pulse-dot absolute top-0 -right-1 bg-danger" aria-hidden="true" />
+          <span role="status" className="sr-only">
+            Notifications, {notificationCount} unread
+          </span>
         </button>
 
         <div
-          className={`relative invisible top-4 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none z-[99]`}
+          className={`relative invisible top-4 opacity-0 group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-opacity duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none z-[99]`}
         >
           <div className="absolute w-56 h-8 right-1 -top-4"></div>
           <div className="absolute right-1 -top-3">
@@ -59,13 +62,11 @@ const Notification: FC<any> = () => {
               {notificationList && notificationList.map((el) => <NotificationItem key={el.id} content={el} />)}
             </div>
             <div className="flex justify-center w-full py-1 pt-2">
-              <Link href={"/notifications"} className="w-full">
-                <button
-                  type="button"
-                  className="cursor-pointer select-none text-sm bg-brand-600 rounded-pill text-white px-2 py-2 w-full font-semibold transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
-                >
-                  Show All Notifications
-                </button>
+              <Link
+                href={"/notifications"}
+                className="cursor-pointer select-none block text-sm text-center bg-brand-600 rounded-pill text-white px-2 py-2 w-full font-semibold transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+              >
+                Show All Notifications
               </Link>
             </div>
           </div>

@@ -26,12 +26,14 @@ const HeaderMobile: FC = () => {
             <button
               type="button"
               aria-label="Open categories menu"
-              className="relative mx-3 mb-2 w-7 h-7 text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-full"
+              className="relative mx-1 flex h-11 w-11 items-center justify-center text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-full"
               onClick={() => setIsDashboardShown(true)}
             >
-              <SvgDashboard />
+              <span className="block w-7 h-7">
+                <SvgDashboard />
+              </span>
             </button>
-            <span className="invisible w-8 h-8 mx-3" />
+            <span className="invisible w-4 h-8" />
           </div>
           <div className="flex flex-col items-center justify-center col-span-1 p-1">
             <Link href="/" aria-label="Tradlia home">
@@ -48,8 +50,12 @@ const HeaderMobile: FC = () => {
             </Link>
           </div>
           <div className="flex items-center justify-center col-span-1 p-1">
-            <Link href="/notifications" aria-label="Notifications, 3 unread" className="flex mb-2 cursor-pointer select-none">
-              <span className="relative w-6 h-6 mx-3 text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600">
+            <Link
+              href="/notifications"
+              aria-label="Notifications, 3 unread"
+              className="flex h-11 w-11 items-center justify-center cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-full"
+            >
+              <span className="relative w-6 h-6 text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none">
                 <SvgNotifications />
                 <span className="pulse-dot absolute top-0 -right-2 bg-danger" aria-hidden="true" />
               </span>
@@ -58,10 +64,12 @@ const HeaderMobile: FC = () => {
             <button
               type="button"
               aria-label="Open profile menu"
-              className="relative w-8 h-8 mx-3 mb-2 rounded-full overflow-hidden border border-line transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+              className="relative flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
               onClick={() => setIsProfileDropdownShown(true)}
             >
-              <Image src={"/images/navbar/iconPersonal.svg"} fill sizes="32px" alt="" />
+              <span className="relative block w-8 h-8 overflow-hidden rounded-full border border-line">
+                <Image src={"/images/navbar/iconPersonal.svg"} fill sizes="32px" alt="" />
+              </span>
             </button>
           </div>
         </nav>
@@ -82,8 +90,10 @@ const HeaderMobile: FC = () => {
                 <Image src={"/images/navbar/searchIcon.svg"} width={16} height={16} alt="" />
               </span>
               <input
-                className="w-full text-sm border px-12 py-3 rounded-pill bg-canvas border-transparent text-ink placeholder:text-ink-muted focus:outline-none focus:border-brand-400 focus:bg-surface transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none font-light"
-                placeholder="search product name, barcode, brand or member"
+                type="search"
+                autoComplete="off"
+                className="w-full text-sm border px-12 py-3 rounded-pill bg-canvas border-transparent text-ink placeholder:text-ink-muted focus:outline-none focus:border-brand-400 focus:bg-surface focus-visible:ring-2 focus-visible:ring-brand-400 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none font-light"
+                placeholder="Search product, barcode, brand or member…"
                 aria-label="Search products"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}

@@ -28,7 +28,7 @@ const SingleCard: FC<SingleCardProps> = ({ content, deleteCard, favoriteCard }) 
             <h3>{content.brand}</h3>
           </div>
         </div>
-        <div className="w-full h-full p-1 transition-all duration-300 ease-in-out xl:p-6 xl:group-hover:p-2">
+        <div className="w-full h-full p-1 transition-[padding] duration-300 ease-in-out xl:p-6 xl:group-hover:p-2">
           <div className="relative w-full h-full">
             <Image className="object-contain" src={content?.image} fill sizes="100vw" alt={content.brand} />
           </div>
@@ -73,7 +73,7 @@ const SingleCard: FC<SingleCardProps> = ({ content, deleteCard, favoriteCard }) 
             </div>
           </div>
         </div>
-        <div className="absolute left-0 grid items-center invisible w-full px-4 mt-1 transition-all duration-150 ease-in-out transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 bottom-3 group-hover:visible">
+        <div className="absolute left-0 grid items-center invisible w-full px-4 mt-1 transition-[opacity,transform,visibility] duration-150 ease-in-out translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 bottom-3 group-hover:visible">
           <Link href="/category" className="inline-flex items-center justify-center gap-2 rounded-pill border bg-surface border-line px-4 py-1.5 text-[11px] leading-3 xl:text-sm text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-300 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 xl:py-2">
             All Listings
             <div className="h-3 w-4 fill-current xl:h-4 xl:w-8 text-brand-600">

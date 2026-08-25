@@ -17,7 +17,7 @@ const activeItem = "bg-brand-50 text-brand-700 border-brand-400 font-medium";
 const inactiveItem = "border-transparent text-ink-soft hover:text-ink hover:bg-canvas";
 
 const SectionLabel: FC<{ children: React.ReactNode }> = ({ children }) => (
-  <h2 className="px-3 pb-1 pt-4 font-display text-xs uppercase tracking-wider text-ink-muted first-of-type:pt-1">
+  <h2 className="px-3 pb-1 pt-4 font-display text-xs uppercase tracking-wider text-ink-soft first-of-type:pt-1">
     {children}
   </h2>
 );
@@ -31,7 +31,7 @@ const Sidebar: FC = () => {
         </div>
         <div>
           <p className="font-display text-lg font-bold leading-tight text-ink">Tradlia</p>
-          <p className="font-display text-xs uppercase tracking-wider text-ink-muted">Seller Dashboard</p>
+          <p className="font-display text-xs uppercase tracking-wider text-ink-soft">Seller Dashboard</p>
         </div>
       </div>
 

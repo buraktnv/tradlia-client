@@ -94,7 +94,7 @@ const InfoPage: FC<{ title: string; intro: string }> = ({ title, intro }) => {
       </Head>
       <div className="mx-auto max-w-3xl px-4 py-12 xl:px-10"><article className="rounded-card border border-line bg-surface p-6 shadow-card sm:p-10">
         <h1 className="mb-3 font-display text-2xl font-bold text-ink sm:text-3xl">{title}</h1>
-        <p className="font-display text-xs uppercase tracking-wider text-ink-muted mb-8">{intro}</p>
+        <p className="font-display text-xs uppercase tracking-wider text-ink-soft mb-8">{intro}</p>
         {[1, 2, 3].map((section) => (
           <div key={section} className="mb-6">
             <h2 className="mb-2 font-display text-lg font-bold text-brand-600">

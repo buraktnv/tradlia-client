@@ -21,8 +21,10 @@ const SearchInput: FC = () => {
         <Image src={"/images/navbar/searchIcon.svg"} width={16} height={16} alt="" />
       </span>
       <input
-        className="drop-shadow-input-shadow h-10 w-full text-sm border px-11 pr-24 rounded-pill border-line bg-surface text-ink placeholder:text-ink-muted focus:outline-none focus:border-brand-400 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
-        placeholder="search product name, barcode, brand or member"
+        type="search"
+        autoComplete="off"
+        className="drop-shadow-input-shadow h-10 w-full text-sm border px-11 pr-24 rounded-pill border-line bg-surface text-ink placeholder:text-ink-muted focus:outline-none focus:border-brand-400 focus-visible:ring-2 focus-visible:ring-brand-400 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
+        placeholder="Search product, barcode, brand or member…"
         aria-label="Search products"
         value={value}
         onChange={(e) => setValue(e.target.value)}

@@ -59,6 +59,9 @@ const NavItemOrdersBasket = () => {
       aria-label={`My Cart, 3 items`}
       className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 rounded-card"
     >
+      <span role="status" className="sr-only">
+        Cart, 3 items
+      </span>
       <span
         className={`w-11 h-11 relative fill-ink-soft group-hover:fill-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none flex items-center justify-center ${
           isActiveRoute(router.asPath, route) && "fill-brand-600"
@@ -155,7 +158,9 @@ const NavItemMessages = () => {
       aria-label="Messages, 3 unread"
       className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 rounded-card"
     >
-
+      <span role="status" className="sr-only">
+        Messages, 3 unread
+      </span>
       <span
         className={`w-11 h-11 relative fill-ink-soft group-hover:fill-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none flex items-center justify-center ${
           isActiveRoute(router.asPath, route) && "fill-brand-600"

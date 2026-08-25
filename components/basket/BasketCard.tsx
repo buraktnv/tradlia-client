@@ -17,7 +17,7 @@ const SellerLogo: FC<{ logo: string }> = ({ logo }) => (
 );
 
 const stepperButtonClass =
-  "flex items-center justify-center px-1.5 bg-surface rounded-pill cursor-pointer border border-line hover:border-brand-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none";
+  "flex items-center justify-center w-9 h-9 xl:w-7 xl:h-7 bg-surface rounded-pill cursor-pointer border border-line hover:border-brand-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none";
 
 const BasketCard: FC<any> = ({ content, onChange, onRemoveSeller, onCompleteSeller, onRemoveCampaign }) => {
   const updateProduct = (productId: number, patch: any) => {
@@ -147,7 +147,7 @@ const ShippingArea: FC<any> = ({ content, onSelectShipping }) => {
           className="bg-line rounded-pill xl:w-4/5 h-4 overflow-hidden"
         >
           <div
-            className={`bg-gradient-to-r h-full rounded-pill transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none ${
+            className={`bg-gradient-to-r h-full rounded-pill transition-[width] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none ${
               campaignReached ? "w-4/5 from-amber-400 to-amber-500" : "w-full from-success to-successDark"
             }`}
           ></div>
@@ -163,11 +163,11 @@ const ShippingArea: FC<any> = ({ content, onSelectShipping }) => {
               type="radio"
               name={"shipping" + content.id}
               id={`shipping-domestic-${content.id}`}
-              className="hidden peer focus-visible:ring-2 focus-visible:ring-brand-400"
+              className="sr-only peer"
               checked={content.shippingOption !== "express"}
               onChange={() => onSelectShipping("domestic")}
             />
-            <div className="w-[0.9rem] h-[0.9rem] rounded-sm peer-checked:bg-amber-500"></div>
+            <div className="w-[0.9rem] h-[0.9rem] rounded-sm peer-checked:bg-amber-500 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-400"></div>
           </div>
           <div className="grid gap-1 py-1">
             <div className="font-semibold text-ink-soft flex gap-1 xl:text-sm text-[10px] leading-[10px] whitespace-nowrap">
@@ -190,11 +190,11 @@ const ShippingArea: FC<any> = ({ content, onSelectShipping }) => {
                 type="radio"
                 name={"shipping" + content.id}
                 id={`shipping-express-${content.id}`}
-                className="hidden peer focus-visible:ring-2 focus-visible:ring-brand-400"
+                className="sr-only peer"
                 checked={content.shippingOption === "express"}
                 onChange={() => onSelectShipping("express")}
               />
-              <div className="w-[0.9rem] h-[0.9rem] rounded-sm peer-checked:bg-amber-500"></div>
+              <div className="w-[0.9rem] h-[0.9rem] rounded-sm peer-checked:bg-amber-500 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-400"></div>
             </div>
             <div className="grid gap-1 py-1">
               <div className="font-semibold text-ink-soft flex gap-1 xl:text-sm text-[10px] leading-[10px] whitespace-nowrap">
@@ -290,13 +290,13 @@ const ProductCard: FC<any> = ({ content, onChange, onRemove }) => {
           <div className="border rounded-md border-brand-400 bg-surface w-6 h-6 flex items-center justify-center">
             <input
               type="checkbox"
-              name=""
+              name={`select-${content.id}`}
               id={content.id}
               aria-label={`Select ${content.name.replace("\n", " ")}`}
-              className="hidden peer focus-visible:ring-2 focus-visible:ring-brand-400 disabled:cursor-not-allowed"
+              className="sr-only peer"
               disabled={!content.purchasable}
             />
-            <div className="w-4 h-4 rounded-sm peer-checked:bg-brand-400"></div>
+            <div className="w-4 h-4 rounded-sm peer-checked:bg-brand-400 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-400"></div>
           </div>
         </label>
         <div className="w-full h-full pl-2 py-1.5 flex justify-center">
@@ -306,7 +306,7 @@ const ProductCard: FC<any> = ({ content, onChange, onRemove }) => {
         </div>
       </div>
       <div className="flex col-span-3 gap-2 text-sm xl:col-span-1 xl:block">
-        <p className="uppercase tracking-wide text-ink-muted font-medium text-[11px]">Product</p>
+        <p className="uppercase tracking-wide text-ink-soft font-medium text-[11px]">Product</p>
         <div>
           <p className="font-semibold text-ink whitespace-pre-line xl:leading-snug xl:text-sm text-[12px] leading-[18px]">
             {content.name}
@@ -324,11 +324,11 @@ const ProductCard: FC<any> = ({ content, onChange, onRemove }) => {
       </div>
       <div className="flex flex-col col-span-2 col-start-3 xl:justify-between xl:flex-row xl:col-span-1 xl:col-start-auto">
         <div className="flex gap-3 xl:flex-col">
-          <p className="uppercase tracking-wide text-ink-muted font-medium text-[11px]">Expiry</p>
+          <p className="uppercase tracking-wide text-ink-soft font-medium text-[11px]">Expiry</p>
           <div className="text-ink-soft xl:font-medium text-[12px] leading-[18px] xl:text-sm">{content.miad}</div>
         </div>
         <div className="flex gap-3 xl:flex-col">
-          <p className="uppercase tracking-wide text-ink-muted font-medium text-[11px]">Price</p>
+          <p className="uppercase tracking-wide text-ink-soft font-medium text-[11px]">Price</p>
           <div className="text-ink-soft xl:font-medium text-[12px] leading-[18px] xl:text-sm tabular-nums">
             {content.price}
           </div>
@@ -339,7 +339,7 @@ const ProductCard: FC<any> = ({ content, onChange, onRemove }) => {
           <button
             type="button"
             aria-label={content.isFavorite ? "Remove from favourites" : "Add to favourites"}
-            className="w-5 h-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-pill"
+            className="flex items-center justify-center w-9 h-9 -m-2 p-2 box-content focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-pill"
             onClick={() => onChange({ isFavorite: !content.isFavorite })}
           >
             <div className="flex w-full h-full">
@@ -349,7 +349,7 @@ const ProductCard: FC<any> = ({ content, onChange, onRemove }) => {
           <button
             type="button"
             aria-label="Remove item"
-            className="w-5 h-5 text-ink-muted hover:text-danger focus-visible:text-danger focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-pill transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
+            className="flex items-center justify-center w-9 h-9 -m-2 p-2 box-content text-ink-muted hover:text-danger focus-visible:text-danger focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-pill transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
             onClick={onRemove}
           >
             <div className="w-full h-full">

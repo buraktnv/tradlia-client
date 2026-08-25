@@ -81,10 +81,10 @@ const Sidebar: FC<any> = ({ setActivePage, activePage, basketData }) => {
           <div className="bg-brand-400 rounded-pill flex h-full">
             <input
               type="text"
-              name=""
-              id=""
+              name="coupon-code"
+              id="coupon-code"
               aria-label="Enter coupon code"
-              placeholder="Enter Coupon Code"
+              placeholder="Enter Coupon Code…"
               value={coupon}
               onChange={(e) => setCoupon(e.target.value)}
               onKeyDown={(e) => {
@@ -103,8 +103,8 @@ const Sidebar: FC<any> = ({ setActivePage, activePage, basketData }) => {
           <div className="bg-brand-400 rounded-pill flex w-full h-full">
             <div className="relative flex w-3/4">
               <select
-                name=""
-                id=""
+                name="discount-coupon"
+                id="discount-coupon"
                 aria-label="Select discount coupon"
                 value={discount}
                 onChange={(e) => setDiscount(e.target.value)}

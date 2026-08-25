@@ -5,6 +5,7 @@ import type { Swiper as SwiperType } from "swiper/types";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import useMediaQuery from "../../helpers/hooks/useMediaQuery";
+import usePrefersReducedMotion from "../../helpers/hooks/usePrefersReducedMotion";
 import SingleCard from "../profile/favourites/SingleCard";
 import { jsonCategoryList } from "./jsonCategoryList";
 import { categories } from "../../helpers/categories";
@@ -119,6 +120,7 @@ const AltCategories = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const swiperRef = useRef<SwiperType | null>(null);
   const mobile = !useMediaQuery("(min-width: 768px)");
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // Mobile starts collapsed (4 items) until "Show More" is pressed.
   useEffect(() => {
@@ -155,7 +157,11 @@ const AltCategories = () => {
           slidesPerView={3}
           spaceBetween={8}
           loop
-          autoplay={{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+          autoplay={
+            prefersReducedMotion
+              ? false
+              : { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }
+          }
           breakpoints={{
             768: { slidesPerView: 4, spaceBetween: 12 },
             1024: { slidesPerView: 6, spaceBetween: 16 },
@@ -186,7 +192,7 @@ const AltCategories = () => {
               aria-label={`Go to category page ${page + 1}`}
               aria-current={activePage === page ? "true" : undefined}
               onClick={() => swiperRef.current?.slideToLoop(page * 3)}
-              className={`h-2 cursor-pointer rounded-pill transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
+              className={`h-2 cursor-pointer rounded-pill transition-[width,background-color] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
                 activePage === page ? "w-6 bg-brand-400" : "w-2 bg-line hover:bg-ink-muted"
               }`}
             ></button>
@@ -219,9 +225,12 @@ const AltCategories = () => {
 const SingleCategoryItem: FC<any> = ({ content, href, selectedCategory, setSelectedCategory }) => {
   const isActive = content.id === selectedCategory;
   return (
-    <Link href={href} className="focus-visible:outline-none">
+    <Link
+      href={href}
+      className="block rounded-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+    >
       <div
-        className={`relative flex flex-col items-center w-full h-full group cursor-pointer rounded-card py-5 px-3 xl:px-8 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
+        className={`relative flex flex-col items-center w-full h-full group cursor-pointer rounded-card py-5 px-3 xl:px-8 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none ${
           isActive ? "bg-brand-100" : "hover:bg-brand-50"
         }`}
         onClick={() => setSelectedCategory(content.id)}

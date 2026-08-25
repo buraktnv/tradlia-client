@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { useRouter } from "next/router";
+import Link from "next/link";
 import { SvgM } from "../../helpers/svgs/homeSvg";
 import { jsonCategoryList } from "./jsonCategoryList";
 import { categories } from "../../helpers/categories";
@@ -34,7 +34,6 @@ const TopCategories: FC<{ isOpen: boolean }> = ({ isOpen }) => {
 };
 
 const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCategory }) => {
-  const router = useRouter();
   const isActive = content.id === selectedCategory;
   const category = categories.find((c) => c.icon === content.icon);
   const catId = category?.id;
@@ -42,12 +41,15 @@ const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCat
   return (
     <div className="group shrink-0">
       <div className="relative">
-        <button
-          type="button"
+        <Link
+          href={catId ? categoryUrl(catId) : "/category"}
           onMouseEnter={() => {
             setSelectedCategory((pre: any) => (pre !== content.id ? content.id : null));
           }}
-          onClick={() => catId && router.push(categoryUrl(catId))}
+          onFocus={() => {
+            setSelectedCategory((pre: any) => (pre !== content.id ? content.id : null));
+          }}
+          onClick={() => setSelectedCategory(content.id)}
           className="flex items-center gap-3 text-left rounded-card px-2 py-1.5 cursor-pointer transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
         >
           <span
@@ -68,9 +70,9 @@ const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCat
             <p>{content.text1}</p>
             <p>{content.text2}</p>
           </span>
-        </button>
+        </Link>
         <div
-          className={`absolute z-30 top-full pt-3 ${content.align ?? ""} invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none flex`}
+          className={`absolute z-30 top-full pt-3 ${content.align ?? ""} invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0 transition-[opacity,transform,visibility] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none flex`}
         >
           <div className="flex overflow-hidden rounded-card shadow-pop bg-surface border border-line">
             <div className="hidden lg:flex w-24 shrink-0 bg-brand-600 px-2 items-center justify-center text-white relative">
@@ -85,17 +87,16 @@ const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCat
             </div>
             <div className="grid grid-cols-2 text-xs bg-surface w-[450px] max-w-[80vw] px-6 py-6 font-medium gap-x-4">
               {category?.subCategories.map((sub) => (
-                <button
-                  type="button"
+                <Link
                   className="flex items-center gap-1.5 cursor-pointer whitespace-nowrap btnGroupHover rounded-pill px-2 py-1.5 my-0.5 text-left text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
                   key={sub.id}
-                  onClick={() => catId && router.push(categoryUrl(catId, sub.id))}
+                  href={catId ? categoryUrl(catId, sub.id) : "/category"}
                 >
                   <div className={`w-6 h-3 svgIcon text-brand-500`}>
                     <SvgM />
                   </div>
                   {sub.name}
-                </button>
+                </Link>
               ))}
             </div>
           </div>

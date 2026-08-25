@@ -54,7 +54,8 @@ const Content: FC<any> = ({ items, setSidebar }) => {
             <input
               type="search"
               id="search"
-              placeholder="Search in category"
+              autoComplete="off"
+              placeholder="Search in category…"
               aria-label="Search in category"
               className="w-full outline-none bg-surface border border-line rounded-pill placeholder:text-ink-muted text-ink px-5 pr-10 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-300"
             />

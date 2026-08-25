@@ -72,7 +72,7 @@ const Profile: FC<any> = () => {
           <span className="pulse-dot absolute bottom-0 right-0 bg-success" aria-hidden="true" />
         </button>
         <div
-          className={`relative invisible top-4 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none z-[99]`}
+          className={`relative invisible top-4 opacity-0 group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-opacity duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none z-[99]`}
         >
           <div className="absolute w-56 h-8 right-1 -top-4"></div>
           <div className="absolute right-1 -top-3">
@@ -94,13 +94,11 @@ const Profile: FC<any> = () => {
                 ProfileData.profileItems.map((el) => <NotificationItem key={el.id} content={el} />)}
             </div>
             <div className="flex justify-center w-full py-1 pt-2 border-t border-line mt-2">
-              <Link href={"/notifications"} className="w-full">
-                <button
-                  type="button"
-                  className="cursor-pointer select-none text-sm border border-line rounded-pill text-ink px-2 py-2 w-full font-semibold transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-danger hover:text-danger focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
-                >
-                  Secure Logout
-                </button>
+              <Link
+                href={"/notifications"}
+                className="cursor-pointer select-none block text-sm text-center border border-line rounded-pill text-ink px-2 py-2 w-full font-semibold transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-danger hover:text-danger focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+              >
+                Secure Logout
               </Link>
             </div>
           </div>

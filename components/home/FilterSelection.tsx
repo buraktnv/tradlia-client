@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface IFilterItem {
   id: number;
@@ -36,24 +36,22 @@ const FilterSelection: FC<any> = () => {
 };
 
 const SingleFilterItem: FC<{ content: IFilterItem }> = ({ content }) => {
-  const router = useRouter();
   return (
-    <button
-      type="button"
-      onClick={() => router.push("/category")}
+    <Link
+      href="/category"
       className="group flex flex-col items-center justify-start shrink-0 basis-1/5 min-w-[20%] xl:basis-auto xl:min-w-fit cursor-pointer rounded-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
     >
       <span
-        className={`relative flex items-center justify-center h-16 w-16 xl:h-20 xl:w-20 p-3 bg-surface border border-line shadow-card group-hover:border-brand-300 group-hover:shadow-pop transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-focus-visible:border-brand-300 rounded-pill`}
+        className={`relative flex items-center justify-center h-16 w-16 xl:h-20 xl:w-20 p-3 bg-surface border border-line shadow-card group-hover:border-brand-300 group-hover:shadow-pop transition-[border-color,box-shadow] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-focus-visible:border-brand-300 rounded-pill`}
       >
         <span className="relative w-full h-full transition-transform duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:scale-110">
           <Image src={content.icon} fill sizes="80px" alt="" aria-hidden="true" />
         </span>
       </span>
-      <span className="mt-2 mb-1 font-display text-[10px] xl:text-xs font-semibold uppercase tracking-wider text-ink-muted text-center leading-3 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:text-brand-700 group-focus-visible:text-brand-700">
+      <span className="mt-2 mb-1 font-display text-[10px] xl:text-xs font-semibold uppercase tracking-wider text-ink-soft text-center leading-3 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:text-brand-700 group-focus-visible:text-brand-700">
         {content.text1}
       </span>
-    </button>
+    </Link>
   );
 };
 

@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import PortalModal from "../shared/PortalModal";
+import usePrefersReducedMotion from "../../helpers/hooks/usePrefersReducedMotion";
 import { categories } from "../../helpers/categories";
 import type { ICategory } from "../../helpers/categories";
 
@@ -68,6 +69,7 @@ const Stories: FC = () => {
   const [openCategory, setOpenCategory] = useState<ICategory | null>(null);
   const [slideIndex, setSlideIndex] = useState<number>(0);
   const [progress, setProgress] = useState<number>(0);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const products = openCategory ? storyProducts[openCategory.id] ?? fallbackProducts : [];
   const current = products[slideIndex] ?? products[0];
@@ -75,27 +77,42 @@ const Stories: FC = () => {
   // Restart the progress bar animation for the active slide.
   useEffect(() => {
     setProgress(0);
+    if (prefersReducedMotion) return;
     const raf = requestAnimationFrame(() => {
       requestAnimationFrame(() => setProgress(100));
     });
     return () => cancelAnimationFrame(raf);
-  }, [slideIndex, openCategory]);
+  }, [slideIndex, openCategory, prefersReducedMotion]);
 
   // Auto-advance the story every 4 seconds (matches the progress bar duration).
   useEffect(() => {
-    if (!openCategory || products.length === 0) return;
+    if (!openCategory || products.length === 0 || prefersReducedMotion) return;
     const timer = setTimeout(() => {
       setSlideIndex((i) => (i + 1) % products.length);
     }, 4000);
     return () => clearTimeout(timer);
-  }, [openCategory, slideIndex, products.length]);
+  }, [openCategory, slideIndex, products.length, prefersReducedMotion]);
+
+  const goToSlide = (offset: number) => {
+    if (!openCategory || products.length === 0) return;
+    setSlideIndex((i) => (i + offset + products.length) % products.length);
+  };
 
   const handleTap = (e: React.MouseEvent) => {
     if (!openCategory || products.length === 0) return;
     const x = e.clientX;
     const mid = window.innerWidth / 2;
-    if (x < mid) setSlideIndex((i) => (i - 1 + products.length) % products.length);
-    else setSlideIndex((i) => (i + 1) % products.length);
+    goToSlide(x < mid ? -1 : 1);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      goToSlide(-1);
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      goToSlide(1);
+    }
   };
 
   return (
@@ -136,10 +153,16 @@ const Stories: FC = () => {
             {/* progress bars */}
             <div className="flex gap-1 px-4 pt-4">
               {products.map((_p, i) => (
-                <div key={i} className="h-[3px] flex-1 bg-surface/30 rounded-full overflow-hidden">
+                <div
+                  key={i}
+                  className="h-[3px] flex-1 bg-surface/30 rounded-full overflow-hidden"
+                  aria-hidden="true"
+                >
                   <div
-                    className="h-full bg-surface rounded-full transition-[width] duration-[4000ms] ease-linear"
-                    style={{ width: i < slideIndex ? "100%" : i === slideIndex ? `${progress}%` : "0%" }}
+                    className={`h-full bg-surface rounded-full ${
+                      prefersReducedMotion ? "" : "transition-[width] duration-[4000ms] ease-linear"
+                    }`}
+                    style={{ width: i < slideIndex || prefersReducedMotion ? "100%" : i === slideIndex ? `${progress}%` : "0%" }}
                   />
                 </div>
               ))}
@@ -168,8 +191,15 @@ const Stories: FC = () => {
                 </svg>
               </button>
             </div>
-            {/* story slide — tap left/right halves to navigate */}
-            <div className="flex-1 flex flex-col items-center justify-center px-8 pb-10 cursor-pointer select-none" onClick={handleTap}>
+            {/* story slide — tap left/right halves or use arrow keys / buttons to navigate */}
+            <div
+              className="flex-1 flex flex-col items-center justify-center px-8 pb-10 cursor-pointer select-none"
+              onClick={handleTap}
+              onKeyDown={handleKeyDown}
+              role="group"
+              aria-label={`Story slide ${slideIndex + 1} of ${products.length}`}
+              tabIndex={0}
+            >
               {current ? (
                 <>
                   <div className="relative w-56 h-56 xl:w-80 xl:h-80">
@@ -192,6 +222,34 @@ const Stories: FC = () => {
                 <p className="text-surface/60">No products in this category yet.</p>
               )}
             </div>
+            {/* keyboard/tap navigation for the story */}
+            {products.length > 1 && (
+              <div className="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-3">
+                <button
+                  type="button"
+                  aria-label="Previous story"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-surface/10 text-surface hover:bg-surface/20 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+                  onClick={() => goToSlide(-1)}
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5" aria-hidden="true">
+                    <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+                <span className="text-surface/60 text-xs tabular-nums" aria-hidden="true">
+                  {slideIndex + 1} / {products.length}
+                </span>
+                <button
+                  type="button"
+                  aria-label="Next story"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-surface/10 text-surface hover:bg-surface/20 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+                  onClick={() => goToSlide(1)}
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5" aria-hidden="true">
+                    <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </div>
+            )}
           </div>
         )}
       </PortalModal>

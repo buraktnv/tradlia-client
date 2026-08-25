@@ -161,7 +161,7 @@ const UpdateProduct: FC<any> = ({ setOpenModal }) => {
               className="col-span-1 flex w-full cursor-pointer items-center gap-3 rounded-pill border border-dangerTint bg-dangerTint px-4 py-2.5 text-sm font-medium text-dangerDark transition-colors duration-200 focus-within:ring-2 focus-within:ring-brand-400/30 xl:w-max"
               htmlFor="20"
             >
-              <input type="checkbox" id="20" name="" className="hidden peer" />
+              <input type="checkbox" id="20" name="" className="sr-only peer" />
               <div className="h-5 w-5 shrink-0 rounded-md border border-danger peer-checked:bg-danger peer-checked:[&]:text-transparent"></div>
               <p className="flex items-center text-sm whitespace-nowrap xl:flex-none">Feature Listing</p>
             </label>

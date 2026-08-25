@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import usePrefersReducedMotion from "../../helpers/hooks/usePrefersReducedMotion";
 
 interface SliderImage {
   id: number;
@@ -98,6 +99,7 @@ const photos: SliderImage[] = [
 const Slider: FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const swiperRef = useRef<SwiperType | null>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const goToSlide = (index: number) => {
     swiperRef.current?.slideToLoop(index);
@@ -137,7 +139,11 @@ const Slider: FC = () => {
             modules={[Autoplay]}
             loop
             speed={600}
-            autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+            autoplay={
+              prefersReducedMotion
+                ? false
+                : { delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }
+            }
             className="w-[341px] xl:w-full"
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
@@ -203,7 +209,7 @@ const Slider: FC = () => {
                 aria-label={`Show slide ${index + 1}: ${el.category}`}
                 aria-current={activeIndex === index ? "true" : undefined}
                 onClick={() => goToSlide(index)}
-                className={`shrink-0 cursor-pointer rounded-card border px-4 py-2.5 text-left transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
+                className={`shrink-0 cursor-pointer rounded-card border px-4 py-2.5 text-left transition-[border-color,background-color,box-shadow] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
                   activeIndex === index
                     ? "border-brand-400 bg-brand-50 shadow-card"
                     : "border-line bg-surface hover:border-brand-300"
@@ -236,7 +242,7 @@ const Slider: FC = () => {
                 aria-label={`Go to slide ${index + 1}`}
                 aria-current={activeIndex === index ? "true" : undefined}
                 onClick={() => goToSlide(index)}
-                className={`h-2 cursor-pointer rounded-pill transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
+                className={`h-2 cursor-pointer rounded-pill transition-[width,background-color] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
                   activeIndex === index ? "w-6 bg-brand-400" : "w-2 bg-line hover:bg-ink-muted"
                 }`}
               ></button>

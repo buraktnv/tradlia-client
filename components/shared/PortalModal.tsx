@@ -75,7 +75,7 @@ const PortalModal: FC<PortalModalProps> = ({ open, onClose, children, panelClass
       <div
         ref={panelRef}
         tabIndex={-1}
-        className={`relative max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-card bg-surface p-6 shadow-modal outline-none ${panelClassName}`}
+        className={`relative max-h-[92vh] w-full max-w-lg overflow-y-auto overscroll-contain rounded-card bg-surface p-6 shadow-modal outline-none ${panelClassName}`}
       >
         {children}
       </div>

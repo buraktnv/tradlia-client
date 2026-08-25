@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import usePrefersReducedMotion from "../../helpers/hooks/usePrefersReducedMotion";
 import ProductCardBase from "./ProductCardBase";
 import type { HomeProductItem } from "../../types/product";
 
@@ -159,6 +160,7 @@ const PopularProducts: FC<any> = () => {
   const [itemList, setItemList] = useState<HomeProductItem[]>(items);
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const swiperRef = useRef<SwiperType | null>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const deleteCard = (item: HomeProductItem) => {
     setItemList((pre: HomeProductItem[]) => {
@@ -186,7 +188,11 @@ const PopularProducts: FC<any> = () => {
           slidesPerView={2}
           spaceBetween={16}
           loop
-          autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+          autoplay={
+            prefersReducedMotion
+              ? false
+              : { delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }
+          }
           breakpoints={{
             640: { slidesPerView: 3 },
             1024: { slidesPerView: 4 },

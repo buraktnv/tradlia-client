@@ -27,7 +27,8 @@ const FilterTabMenu: FC<any> = () => {
         <input
           type="search"
           id="search"
-          placeholder="Search"
+          autoComplete="off"
+          placeholder="Search…"
           aria-label="Search listings"
           className="w-full outline-none bg-surface border border-line rounded-pill placeholder:text-ink-muted text-ink px-5 pr-10 py-2 text-sm transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
         />

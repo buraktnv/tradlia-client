@@ -41,9 +41,12 @@ const Notification: FC<any> = () => {
         >
           <SvgMessages />
           <span className="pulse-dot absolute -top-1 -right-1 bg-danger" aria-hidden="true" />
+          <span role="status" className="sr-only">
+            Messages, {messageCount} unread
+          </span>
         </button>
         <div
-          className={`relative invisible top-4 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none z-[99]`}
+          className={`relative invisible top-4 opacity-0 group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-opacity duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none z-[99]`}
         >
           <div className="absolute w-56 h-8 right-1 -top-4"></div>
           <div className="absolute right-1 -top-3">
@@ -62,13 +65,11 @@ const Notification: FC<any> = () => {
               {messageList && messageList.map((el) => <MessageItem key={el.id} content={el} />)}
             </div>
             <div className="flex justify-center w-full py-1 pt-2">
-              <Link href={"/profile/messages"} className="w-full">
-                <button
-                  type="button"
-                  className="cursor-pointer select-none text-sm bg-brand-600 w-full rounded-pill text-white px-2 py-2 font-semibold transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
-                >
-                  View All Messages
-                </button>
+              <Link
+                href={"/profile/messages"}
+                className="cursor-pointer select-none block text-sm text-center bg-brand-600 w-full rounded-pill text-white px-2 py-2 font-semibold transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+              >
+                View All Messages
               </Link>
             </div>
           </div>
@@ -87,11 +88,11 @@ const MessageItem: FC<any> = ({ content }) => {
             <SvgMarket />
           </div>
         </div>
-        <div className="text-ink-muted text-xs font-medium">{content.seller}</div>
+        <div className="text-ink-soft text-xs font-medium">{content.seller}</div>
       </div>
       <div className="font-display text-sm font-semibold leading-relaxed tracking-tight text-ink">{content.title}</div>
       <div className="text-ink-soft text-xs">{content.message}</div>
-      <div className="flex text-[11px] text-ink-muted leading-relaxed mt-0.5">
+      <div className="flex text-[11px] text-ink-soft leading-relaxed mt-0.5">
         <p className="font-semibold">{content.date}</p>
         <p>- {content.hour}</p>
       </div>

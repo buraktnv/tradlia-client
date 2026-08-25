@@ -124,7 +124,7 @@ const content: FC<any> = ({ content: basketData, setContent }) => {
         <Notification />
         <div className="rounded-card border border-dashed border-line bg-surface p-10 text-center">
           <p className="font-display text-base font-semibold text-ink">Your cart is empty.</p>
-          <p className="mt-2 text-sm text-ink-muted">{HIRE_ME_COPY.searchEmpty}</p>
+          <p className="mt-2 text-sm text-ink-soft">{HIRE_ME_COPY.searchEmpty}</p>
         </div>
       </div>
     );

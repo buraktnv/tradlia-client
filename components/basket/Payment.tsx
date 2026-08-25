@@ -77,7 +77,12 @@ const Payment: FC<any> = ({ setActivePage, activePage, basketData, setBasketData
               <div className="grid gap-3">
                 <input
                   type="text"
-                  placeholder="Card Number"
+                  name="cc-number"
+                  inputMode="numeric"
+                  autoComplete="cc-number"
+                  spellCheck={false}
+                  maxLength={19}
+                  placeholder="Card Number…"
                   aria-label="Card Number"
                   value={card.cardNumber}
                   onChange={(e) => setCard({ ...card, cardNumber: e.target.value })}
@@ -85,7 +90,9 @@ const Payment: FC<any> = ({ setActivePage, activePage, basketData, setBasketData
                 />
                 <input
                   type="text"
-                  placeholder="Name on Card"
+                  name="cc-name"
+                  autoComplete="cc-name"
+                  placeholder="Name on Card…"
                   aria-label="Name on Card"
                   value={card.cardName}
                   onChange={(e) => setCard({ ...card, cardName: e.target.value })}
@@ -94,7 +101,12 @@ const Payment: FC<any> = ({ setActivePage, activePage, basketData, setBasketData
                 <div className="grid grid-cols-2 gap-3">
                   <input
                     type="text"
-                    placeholder="Expiry Date (MM/YY)"
+                    name="cc-exp"
+                    inputMode="numeric"
+                    autoComplete="cc-exp"
+                    spellCheck={false}
+                    maxLength={5}
+                    placeholder="Expiry Date MM/YY…"
                     aria-label="Expiry Date"
                     value={card.cardExpiry}
                     onChange={(e) => setCard({ ...card, cardExpiry: e.target.value })}
@@ -102,7 +114,12 @@ const Payment: FC<any> = ({ setActivePage, activePage, basketData, setBasketData
                   />
                   <input
                     type="text"
-                    placeholder="CVV"
+                    name="cc-csc"
+                    inputMode="numeric"
+                    autoComplete="cc-csc"
+                    spellCheck={false}
+                    maxLength={4}
+                    placeholder="CVV…"
                     aria-label="CVV"
                     value={card.cardCvv}
                     onChange={(e) => setCard({ ...card, cardCvv: e.target.value })}
@@ -114,7 +131,7 @@ const Payment: FC<any> = ({ setActivePage, activePage, basketData, setBasketData
             <div className="bg-surface rounded-card shadow-card border border-line xl:px-[2rem] px-3 py-5">
               <h2 className="font-display font-semibold text-ink pl-3 pt-2 pb-4">Sales Agreement</h2>
               <div className="relative flex justify-between items-center bg-canvas border border-line rounded-card px-3 xl:px-6 pt-5 pb-2 text-[12px] xl:text-sm">
-                <p className="whitespace-pre-line font-medium text-ink-muted pr-10">
+                <p className="whitespace-pre-line font-medium text-ink-soft pr-10">
                   {tradliaSalesAgreement.slice(0, !agreementShowFull ? 60 : tradliaSalesAgreement.length)}
                 </p>
                 <button
@@ -138,13 +155,13 @@ const Payment: FC<any> = ({ setActivePage, activePage, basketData, setBasketData
                   <div className="border rounded-md border-brand-400 w-5 h-5 flex items-center justify-center shrink-0 bg-surface">
                     <input
                       type="checkbox"
-                      name=""
+                      name="salesAgreement"
                       id={"salesAgreement"}
-                      className="hidden peer focus-visible:ring-2 focus-visible:ring-brand-400"
+                      className="sr-only peer"
                       checked={agreed}
                       onChange={(e) => setAgreed(e.target.checked)}
                     />
-                    <div className="w-3.5 h-3.5 rounded-sm peer-checked:bg-brand-400"></div>
+                    <div className="w-3.5 h-3.5 rounded-sm peer-checked:bg-brand-400 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-400"></div>
                   </div>
                   <p className="font-semibold text-brand-600 text-[11px] xl:text-sm">
                     &quot;I Have Read and Accept the Sales Agreement&quot;
@@ -205,7 +222,7 @@ const CompleteOrder: FC<any> = ({ basketData, onDone }) => {
         </p>
       </div>
       <div className="rounded-card border border-line bg-surface p-6 shadow-card">
-        <p className="mb-3 font-display text-sm uppercase tracking-wider text-ink-muted">Order Summary</p>
+        <p className="mb-3 font-display text-sm uppercase tracking-wider text-ink-soft">Order Summary</p>
         <div className="flex flex-col gap-2 font-medium text-ink-soft tabular-nums">
           <div className="flex justify-between">
             <p>Products ({pieces} pieces)</p>
@@ -230,28 +247,28 @@ const CompleteOrder: FC<any> = ({ basketData, onDone }) => {
 
 const ActiveCard: FC<any> = ({ name }) => {
   return (
-    <div className="relative flex items-center justify-between sm:justify-center sm:px-12 px-3 text-[10px] leading-3 sm:text-sm py-3.5 cursor-pointer">
+    <span className="relative flex items-center justify-between sm:justify-center sm:px-12 px-3 text-[10px] leading-3 sm:text-sm py-3.5 cursor-pointer">
       <div className="absolute -top-0.5 left-0 sm:w-[100%] w-[108px] h-[50px] sm:h-[4rem]">
         <SvgActiveCardBg />
       </div>
       <div className="text-brand-800 z-30 font-semibold">{name}</div>
-    </div>
+    </span>
   );
 };
 
 const FinishedCard: FC<any> = ({ name }) => {
   return (
-    <div className="flex items-center justify-center sm:px-12 px-2 text-[10px] leading-3 sm:text-sm py-2 sm:h-[3rem] text-white bg-brand-400 rounded-pill">
+    <span className="flex items-center justify-center sm:px-12 px-2 text-[10px] leading-3 sm:text-sm py-2 sm:h-[3rem] text-white bg-brand-400 rounded-pill">
       <div className="font-semibold">{name}</div>
-    </div>
+    </span>
   );
 };
 
 const Card: FC<any> = ({ name }) => {
   return (
-    <div className="flex items-center justify-center sm:px-12 px-2 text-[10px] leading-3 sm:text-sm py-2 sm:h-[3rem] text-ink-soft border border-line bg-surface rounded-pill">
+    <span className="flex items-center justify-center sm:px-12 px-2 text-[10px] leading-3 sm:text-sm py-2 sm:h-[3rem] text-ink-soft border border-line bg-surface rounded-pill">
       <div className="font-medium">{name}</div>
-    </div>
+    </span>
   );
 };
 
@@ -352,51 +369,69 @@ const ReceiptInfo: FC<any> = ({ content }) => {
 };
 
 const StateOne: FC<any> = ({ setState }) => (
-  <div className="flex items-center justify-center mb-6 cursor-pointer xl:gap-6">
-    <div onClick={() => setState(1)}>
-      <ActiveCard name="Delivery Information" />
-    </div>
-    <div className="w-6 xl:w-16 xl:h-2 h-1 border border-line bg-brand-400 rounded-pill"></div>
-    <div onClick={() => setState(2)}>
-      <Card name="Payment Information" />
-    </div>
-    <div className="w-6 xl:w-16 xl:h-2 h-1 border border-line rounded-pill"></div>
-    <div onClick={() => setState(3)}>
-      <Card name="Complete Order" />
-    </div>
-  </div>
+  <ol className="flex items-center justify-center mb-6 xl:gap-6" aria-label="Checkout steps">
+    <li aria-current="step">
+      <button type="button" onClick={() => setState(1)}>
+        <ActiveCard name="Delivery Information" />
+      </button>
+    </li>
+    <li aria-hidden="true" className="w-6 xl:w-16 xl:h-2 h-1 border border-line bg-brand-400 rounded-pill"></li>
+    <li>
+      <button type="button" onClick={() => setState(2)}>
+        <Card name="Payment Information" />
+      </button>
+    </li>
+    <li aria-hidden="true" className="w-6 xl:w-16 xl:h-2 h-1 border border-line rounded-pill"></li>
+    <li>
+      <button type="button" onClick={() => setState(3)}>
+        <Card name="Complete Order" />
+      </button>
+    </li>
+  </ol>
 );
 
 const StateTwo: FC<any> = ({ setState }) => (
-  <div className="flex items-center justify-center mb-6 cursor-pointer xl:gap-6">
-    <div onClick={() => setState(1)}>
-      <FinishedCard name="Delivery Information" />
-    </div>
-    <div className="w-6 xl:w-16 xl:h-2 h-1 border border-line bg-brand-400 rounded-pill"></div>
-    <div onClick={() => setState(2)}>
-      <ActiveCard name="Payment Information" />
-    </div>
-    <div className="w-6 xl:w-16 xl:h-2 h-1 border border-line rounded-pill"></div>
-    <div onClick={() => setState(3)}>
-      <Card name="Complete Order" />
-    </div>
-  </div>
+  <ol className="flex items-center justify-center mb-6 xl:gap-6" aria-label="Checkout steps">
+    <li>
+      <button type="button" onClick={() => setState(1)}>
+        <FinishedCard name="Delivery Information" />
+      </button>
+    </li>
+    <li aria-hidden="true" className="w-6 xl:w-16 xl:h-2 h-1 border border-line bg-brand-400 rounded-pill"></li>
+    <li aria-current="step">
+      <button type="button" onClick={() => setState(2)}>
+        <ActiveCard name="Payment Information" />
+      </button>
+    </li>
+    <li aria-hidden="true" className="w-6 xl:w-16 xl:h-2 h-1 border border-line rounded-pill"></li>
+    <li>
+      <button type="button" onClick={() => setState(3)}>
+        <Card name="Complete Order" />
+      </button>
+    </li>
+  </ol>
 );
 
 const StateThree: FC<any> = ({ setState }) => (
-  <div className="flex items-center justify-center mb-6 cursor-pointer xl:gap-6">
-    <div onClick={() => setState(1)}>
-      <FinishedCard name="Delivery Information" />
-    </div>
-    <div className="w-6 xl:w-16 xl:h-2 h-1 border border-line bg-brand-400 rounded-pill"></div>
-    <div onClick={() => setState(2)}>
-      <FinishedCard name="Payment Information" />
-    </div>
-    <div className="w-6 xl:w-16 xl:h-2 h-1 border border-line bg-brand-400 rounded-pill"></div>
-    <div onClick={() => setState(3)}>
-      <ActiveCard name="Complete Order" />
-    </div>
-  </div>
+  <ol className="flex items-center justify-center mb-6 xl:gap-6" aria-label="Checkout steps">
+    <li>
+      <button type="button" onClick={() => setState(1)}>
+        <FinishedCard name="Delivery Information" />
+      </button>
+    </li>
+    <li aria-hidden="true" className="w-6 xl:w-16 xl:h-2 h-1 border border-line bg-brand-400 rounded-pill"></li>
+    <li>
+      <button type="button" onClick={() => setState(2)}>
+        <FinishedCard name="Payment Information" />
+      </button>
+    </li>
+    <li aria-hidden="true" className="w-6 xl:w-16 xl:h-2 h-1 border border-line bg-brand-400 rounded-pill"></li>
+    <li aria-current="step">
+      <button type="button" onClick={() => setState(3)}>
+        <ActiveCard name="Complete Order" />
+      </button>
+    </li>
+  </ol>
 );
 
 export default Payment;

@@ -28,7 +28,7 @@ const Shipment: FC<any> = () => {
         </div>
         <div className="flex items-center gap-4 px-5 xl:px-10">
           <label htmlFor="shipping_campaign_1">
-            <input type="checkbox" name="shipping_campaign_1" id="shipping_campaign_1" className="hidden peer" />
+            <input type="checkbox" name="shipping_campaign_1" id="shipping_campaign_1" className="sr-only peer" />
             <div className="flex items-center cursor-pointer text-transparent peer-checked:text-white justify-center w-6 h-6 border border-success rounded-md peer-checked:bg-success peer-checked:border-transparent">
               <div className="w-3.5 h-3.5">
                 <SvgCheckMark />
@@ -48,7 +48,7 @@ const Shipment: FC<any> = () => {
         </div>
         <div className="flex items-center gap-4 px-5 xl:px-10">
           <label htmlFor="shipping_campaign_2">
-            <input type="checkbox" name="shipping_campaign_2" id="shipping_campaign_2" className="hidden peer" />
+            <input type="checkbox" name="shipping_campaign_2" id="shipping_campaign_2" className="sr-only peer" />
 
             <div className="flex items-center cursor-pointer text-transparent peer-checked:text-white justify-center w-6 h-6 border border-success rounded-md peer-checked:bg-success peer-checked:border-transparent">
               <div className="w-3.5 h-3.5">
@@ -188,7 +188,7 @@ const ShippingCompanySelection: FC<any> = (props: any) => {
       <div className="flex justify-center h-12 xl:items-center">
         <label htmlFor={props.id}>
           <div className="relative grid items-center justify-center grid-cols-5 gap-4 group ">
-            <input type="checkbox" name={props.id} id={props.id} className="hidden peer" />
+            <input type="checkbox" name={props.id} id={props.id} className="sr-only peer" />
             <div className="col-span-2 mr-4 xl:mr-8">
               <ShippingCompanyIcon id={props.id} />
             </div>

@@ -56,7 +56,7 @@ const SoldCard: FC<any> = ({ content, status }: { content: any; status?: OrderSt
           <OrderStatusChip status={status} />
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs leading-5 text-ink-muted">{content.orderDate}</span>
+          <span className="text-xs leading-5 text-ink-soft">{content.orderDate}</span>
           <button type="button"
             aria-expanded={active}
             aria-label={active ? "Collapse order" : "Expand order"}
@@ -75,7 +75,7 @@ const SoldCard: FC<any> = ({ content, status }: { content: any; status?: OrderSt
         <div className="relative col-span-6 mr-5 row-span-2 flex gap-0.5 px-3 border-r border-line xl:hidden">
           {content.productList.length > 3 && (
             <div className="absolute -right-3.5 top-0 flex h-full items-center justify-center">
-              <div className="flex h-7 w-7 items-center justify-center rounded-full border border-line bg-surface text-[13px] leading-[15px] text-ink-muted tabular-nums">
+              <div className="flex h-7 w-7 items-center justify-center rounded-full border border-line bg-surface text-[13px] leading-[15px] text-ink-soft tabular-nums">
                 +{content.productList.length - 3}
               </div>
             </div>
@@ -93,7 +93,7 @@ const SoldCard: FC<any> = ({ content, status }: { content: any; status?: OrderSt
         </div>
 
         <div className={`col-span-6 flex xl:col-span-2 ${!active && "items-end"}`}>
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] leading-4 text-ink-muted xl:text-sm">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] leading-4 text-ink-soft xl:text-sm">
             <span>Order No:</span>
             <span className="font-display font-bold text-brand-600">{content.orderID}</span>
             {active && (
@@ -103,17 +103,17 @@ const SoldCard: FC<any> = ({ content, status }: { content: any; status?: OrderSt
           </div>
         </div>
         <div className="col-span-1 hidden xl:block">
-          <div className="flex items-center text-sm text-ink-muted">
+          <div className="flex items-center text-sm text-ink-soft">
             Buyer:<span className="px-1 font-medium text-brand-600"> {content.customer} </span>
           </div>
         </div>
         <div className="col-span-2 hidden xl:block">
-          <div className="flex items-center justify-center text-sm text-ink-muted">
+          <div className="flex items-center justify-center text-sm text-ink-soft">
             Ordered:<span className="px-1 font-medium tabular-nums text-ink"> {content.orderDate} </span>
           </div>
         </div>
         <div className={`col-span-2 flex justify-between xl:col-span-1 xl:items-center xl:gap-4 ${active ? "col-span-2" : "col-span-4"}`}>
-          <div className="flex items-center whitespace-nowrap gap-1 text-[13px] leading-4 text-ink-muted xl:text-sm">
+          <div className="flex items-center whitespace-nowrap gap-1 text-[13px] leading-4 text-ink-soft xl:text-sm">
             <span>Total</span>
             <span className="font-bold tabular-nums text-ink">{content.total} $</span>
           </div>
@@ -159,7 +159,7 @@ const SoldCard: FC<any> = ({ content, status }: { content: any; status?: OrderSt
               </button>
             </div>
 
-            <div className="order-0 col-span-6 col-start-3 flex flex-col gap-2 pl-12 text-[13px] leading-4 text-ink-muted xl:order-none xl:col-span-3 xl:col-start-10 xl:text-sm">
+            <div className="order-0 col-span-6 col-start-3 flex flex-col gap-2 pl-12 text-[13px] leading-4 text-ink-soft xl:order-none xl:col-span-3 xl:col-start-10 xl:text-sm">
               <div className="grid grid-cols-2 gap-1">
                 <h3 className="text-right">Discount:</h3>
                 <h3 className="px-1 font-medium tabular-nums text-ink">{content.discount}$</h3>
@@ -259,19 +259,19 @@ const ProductCard: FC<any> = ({ content }) => {
       </div>
       <div className="col-span-8 grid grid-cols-1 gap-1 xl:col-span-6 xl:grid-cols-6">
         <div className="grid grid-cols-5 justify-start gap-2 xl:col-span-2 xl:flex xl:flex-col xl:py-2">
-          <h3 className="font-display text-xs uppercase tracking-wider text-ink-muted xl:text-left xl:text-sm xl:normal-case xl:tracking-normal">Product</h3>
+          <h3 className="font-display text-xs uppercase tracking-wider text-ink-soft xl:text-left xl:text-sm xl:normal-case xl:tracking-normal">Product</h3>
           <div className="col-span-4 text-[12px] leading-[18px] text-ink-soft xl:text-sm">
             <h4 className="font-medium text-ink"> {content?.name}</h4> {content?.brand}
           </div>
         </div>
         <div className="grid grid-cols-5 justify-start gap-2 xl:flex xl:flex-col xl:py-2">
-          <h3 className="font-display text-xs uppercase tracking-wider text-ink-muted xl:text-left xl:text-sm xl:normal-case xl:tracking-normal">Expiry</h3>
+          <h3 className="font-display text-xs uppercase tracking-wider text-ink-soft xl:text-left xl:text-sm xl:normal-case xl:tracking-normal">Expiry</h3>
           <p className="col-span-4 font-medium text-[12px] leading-[18px] text-ink-soft tabular-nums xl:text-sm">
             {content?.miad}
           </p>
         </div>
         <div className="grid grid-cols-5 items-center justify-start gap-2 xl:flex xl:flex-col xl:px-4 xl:py-2">
-          <h3 className="font-display text-xs uppercase tracking-wider text-ink-muted xl:px-2 xl:text-sm xl:normal-case xl:tracking-normal">Qty</h3>
+          <h3 className="font-display text-xs uppercase tracking-wider text-ink-soft xl:px-2 xl:text-sm xl:normal-case xl:tracking-normal">Qty</h3>
           <div className="col-span-2 flex xl:justify-center">
             <input
               aria-label="Quantity"
@@ -283,7 +283,7 @@ const ProductCard: FC<any> = ({ content }) => {
           </div>
         </div>
         <div className="grid grid-cols-5 justify-start gap-2 xl:flex xl:flex-col xl:px-2 xl:py-2">
-          <h3 className="font-display text-xs uppercase tracking-wider text-ink-muted xl:text-left xl:text-sm xl:normal-case xl:tracking-normal">Price</h3>
+          <h3 className="font-display text-xs uppercase tracking-wider text-ink-soft xl:text-left xl:text-sm xl:normal-case xl:tracking-normal">Price</h3>
           <div className="col-span-4 flex w-full">
             <input
               aria-label="Price"
@@ -295,7 +295,7 @@ const ProductCard: FC<any> = ({ content }) => {
           </div>
         </div>
         <div className="grid grid-cols-5 justify-start gap-2 xl:flex xl:flex-col xl:py-2">
-          <h3 className="font-display text-xs uppercase tracking-wider text-ink-muted xl:text-left xl:text-sm xl:normal-case xl:tracking-normal">Amount</h3>
+          <h3 className="font-display text-xs uppercase tracking-wider text-ink-soft xl:text-left xl:text-sm xl:normal-case xl:tracking-normal">Amount</h3>
           <p className="col-span-4 font-medium text-[12px] leading-[18px] text-ink-soft tabular-nums xl:text-sm">
             {content?.total}
           </p>

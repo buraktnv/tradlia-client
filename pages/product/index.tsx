@@ -214,7 +214,7 @@ const Product: NextPage = () => {
   const scrollToElement = (item: string) => {
     slideDiv?.current?.scrollTo({
       left: document.getElementById(item)?.offsetLeft,
-      behavior: "smooth",
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
     });
     setActiveItem(item);
   };
@@ -237,7 +237,7 @@ const Product: NextPage = () => {
   const scrollToElement2 = (item: string) => {
     slideDiv2?.current?.scrollTo({
       left: document.getElementById(item)?.offsetLeft,
-      behavior: "smooth",
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
     });
     setActiveItem2(item);
   };
@@ -262,7 +262,7 @@ const Product: NextPage = () => {
             <li>
               <Link
                 href="/"
-                className="text-ink-muted hover:text-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
+                className="text-ink-soft hover:text-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
               >
                 Home
               </Link>
@@ -271,7 +271,7 @@ const Product: NextPage = () => {
             <li>
               <Link
                 href={`/category?cat=${category?.id ?? "tools"}`}
-                className="text-ink-muted hover:text-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
+                className="text-ink-soft hover:text-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
               >
                 {categoryLabel ?? "Tools & Fasteners"}
               </Link>
@@ -377,7 +377,7 @@ const Product: NextPage = () => {
             </div>
             {/* Mobile Products */}
             <div
-              className={`xl:hidden flex py-8 mx-auto w-full overflow-y-hidden overflow-x-auto gap-x-8 snap-mandatory scroll-smooth snap-x`}
+              className={`xl:hidden flex py-8 mx-auto w-full overflow-y-hidden overflow-x-auto gap-x-8 snap-mandatory scroll-smooth motion-reduce:scroll-auto snap-x`}
               ref={slideDiv}
               onScroll={scrollEvent}
             >
@@ -423,7 +423,7 @@ const Product: NextPage = () => {
             </div>
             {/* Mobile Products */}
             <div
-              className={`xl:hidden flex py-8 mx-auto w-full overflow-y-hidden overflow-x-auto gap-x-8 snap-mandatory scroll-smooth snap-x`}
+              className={`xl:hidden flex py-8 mx-auto w-full overflow-y-hidden overflow-x-auto gap-x-8 snap-mandatory scroll-smooth motion-reduce:scroll-auto snap-x`}
               ref={slideDiv2}
               onScroll={scrollEvent2}
             >

@@ -224,7 +224,7 @@ const MatchMeter: FC<{ ratio: number }> = ({ ratio }) => (
       className="h-2 w-full overflow-hidden rounded-pill bg-line"
     >
       <div
-        className="h-full rounded-pill bg-gradient-to-r from-brand-400 to-brand-600 transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
+        className="h-full rounded-pill bg-gradient-to-r from-brand-400 to-brand-600 transition-[width] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
         style={{ width: `${ratio}%` }}
       ></div>
     </div>

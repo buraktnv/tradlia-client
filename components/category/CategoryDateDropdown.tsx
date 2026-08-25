@@ -16,8 +16,8 @@ const DateDropdown: FC<any> = () => {
   return (
     <span className={styles.DropdownMenu}>
       <div className="dropdown group dropdown-hover dropdown-end">
-        <label
-          tabIndex={0}
+        <button
+          type="button"
           aria-haspopup="true"
           aria-label="Sort by date"
           className="flex items-center px-2 py-1 overflow-hidden rounded-pill cursor-pointer text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
@@ -26,18 +26,18 @@ const DateDropdown: FC<any> = () => {
             <DateSorting />
           </div>
           <span className="mx-1 text-[11px] leading-3 xl:text-sm">Sort by Date</span>
-        </label>
+        </button>
         <div
           tabIndex={0}
           className="dropdown-content -top-2 -left-[17px] bg-surface border border-line shadow-pop rounded-card w-max text-sm px-4 py-2"
         >
           <div className="flex flex-col">
-            <label tabIndex={0} className="flex mb-3 items-center px-2 py-[3px] overflow-hidden rounded-pill font-display text-xs uppercase tracking-wider text-ink-muted">
+            <div className="flex mb-3 items-center px-2 py-[3px] overflow-hidden rounded-pill font-display text-xs uppercase tracking-wider text-ink-muted" aria-hidden="true">
               <div className="w-4 h-4 mr-1 text-current">
                 <DateSorting />
               </div>
               <span>Sort by Date</span>
-            </label>
+            </div>
             {filterList &&
               filterList.map(({ id, title, active }) => <ItemsList key={id} title={title} active={active} />)}
           </div>

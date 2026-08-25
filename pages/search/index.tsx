@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import Link from "next/link";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import ProductCardBase from "../../components/home/ProductCardBase";
@@ -61,7 +62,7 @@ const Search: NextPage = () => {
             "All products"
           )}
         </h1>
-        <p className="text-xs text-ink-muted">
+        <p className="text-xs text-ink-soft" role="status">
           {results.length} product{results.length === 1 ? "" : "s"} found
         </p>
       </div>
@@ -85,20 +86,19 @@ const Search: NextPage = () => {
       ) : (
         <div className="py-16 px-6 text-center rounded-card border border-dashed border-line bg-surface">
           <p className="font-display text-base font-semibold text-ink">No matching products</p>
-          <p className="mt-1 text-sm text-ink-muted">{HIRE_ME_COPY.searchEmpty}</p>
-          <button
-            type="button"
-            onClick={() => router.push("/category")}
+          <p className="mt-1 text-sm text-ink-soft">{HIRE_ME_COPY.searchEmpty}</p>
+          <Link
+            href="/category"
             className="mt-4 inline-flex items-center bg-brand-600 text-white rounded-pill px-4 py-1.5 text-sm font-medium transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
           >
             Browse all products
-          </button>
+          </Link>
         </div>
       )}
 
       {recentSearches.length > 0 && (
         <div className="mt-10">
-          <h3 className="mb-3 font-display text-xs uppercase tracking-wider text-ink-muted">Recent searches</h3>
+          <h3 className="mb-3 font-display text-xs uppercase tracking-wider text-ink-soft">Recent searches</h3>
           <div className="flex flex-wrap gap-2">
             {recentSearches.map((term) => (
               <button

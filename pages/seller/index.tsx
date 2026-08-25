@@ -334,7 +334,7 @@ const OnlineAdverts: FC<any> = ({ setSidebar }) => {
 
 const ProductCard: FC<any> = ({ content }) => {
   return (
-    <article className="grid xl:grid-cols-7 gap-2 bg-surface rounded-card shadow-card border border-line hover:border-brand-300 hover:shadow-pop transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none px-4 xl:px-6 py-3 w-full relative xl:h-[10rem]">
+    <article className="grid xl:grid-cols-7 gap-2 bg-surface rounded-card shadow-card border border-line hover:border-brand-300 hover:shadow-pop transition-[border-color,box-shadow] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none px-4 xl:px-6 py-3 w-full relative xl:h-[10rem]">
       <div className="relative flex gap-1 xl:static xl:self-start">
         {content.red === true && content.green === true && (
           <div className="absolute -top-4 -left-5 z-10" aria-hidden="true">

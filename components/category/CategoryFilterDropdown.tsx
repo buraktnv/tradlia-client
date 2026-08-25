@@ -5,8 +5,8 @@ const FilterDropdown: FC<any> = ({ filterList }) => {
   return (
     <span className={styles.DropdownMenu}>
       <div className="dropdown group dropdown-hover dropdown-end">
-        <label
-          tabIndex={0}
+        <button
+          type="button"
           aria-haspopup="true"
           aria-label="Change sorting"
           className="flex items-center px-2 py-1 overflow-hidden rounded-pill cursor-pointer text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
@@ -15,18 +15,18 @@ const FilterDropdown: FC<any> = ({ filterList }) => {
             <SmartSorting />
           </div>
           <span className="mx-1 text-[11px] leading-3 xl:text-sm">Smart Sorting</span>
-        </label>
+        </button>
         <div
           tabIndex={0}
           className="dropdown-content -top-3 -left-[17px] bg-surface border border-line shadow-pop rounded-card w-max text-sm px-4 py-2"
         >
           <div className="flex flex-col">
-            <label tabIndex={0} className="flex items-center mb-3 px-2 py-[3px] overflow-hidden rounded-pill font-display text-xs uppercase tracking-wider text-ink-muted">
+            <div className="flex items-center mb-3 px-2 py-[3px] overflow-hidden rounded-pill font-display text-xs uppercase tracking-wider text-ink-muted" aria-hidden="true">
               <div className="xl:w-4 w-3.5 h-3.5 xl:h-4 mr-1 text-current">
                 <SmartSorting />
               </div>
               <span>Sort</span>
-            </label>
+            </div>
             {filterList &&
               filterList.map(({ id, title, active }: any) => <ItemsList key={id} title={title} active={active} />)}
           </div>

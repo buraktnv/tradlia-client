@@ -83,14 +83,13 @@ const Navbar: FC = () => {
               )}
             </div>
             <div className="flex items-center justify-end w-full col-span-1 gap-4">
-              <button
-                type="button"
+              <Link
+                href="/product"
                 aria-label="Browse all products"
-                onClick={() => router.push("/product")}
-                className="w-[26px] h-[26px] mt-1 cursor-pointer text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 rounded-full"
+                className="flex items-center justify-center w-[26px] h-[26px] mt-1 cursor-pointer text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 rounded-full"
               >
                 <NavbarDropboxIcon />
-              </button>
+              </Link>
               <Notification />
               <Messages />
               <BasketDropdown />

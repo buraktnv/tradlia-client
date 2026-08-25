@@ -181,7 +181,7 @@ const Footer: FC = () => {
                 <span className="h-4 w-9">
                   <span className="flex text-xs text-brand-300">
                     Tel:
-                    <Link href="+1 (555) 023-4567" target="_blank" rel="noreferrer" className={linkClass}>
+                    <Link href="tel:+15550234567" target="_blank" rel="noreferrer" className={linkClass}>
 
                       <p className="select-none cursor-pointer text-xs w-40 mx-1">
                         +1 (555) 012-3456
@@ -195,7 +195,7 @@ const Footer: FC = () => {
                 <span>
                   <span className="flex">
                     <Image src="/images/footer/whatsapp.svg" width={22} height={20} alt="" aria-hidden="true" />
-                    <Link href="+1 (555) 023-4567" target="_blank" rel="noreferrer" className={linkClass}>
+                    <Link href="tel:+15550234567" target="_blank" rel="noreferrer" className={linkClass}>
 
                       <p className="select-none cursor-pointer text-xs w-40 mx-1 pt-1">
                         +1 (555) 023-4567

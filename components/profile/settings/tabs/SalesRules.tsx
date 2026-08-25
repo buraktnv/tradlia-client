@@ -6,7 +6,7 @@ const SalesRules: FC<any> = () => {
       <div className="grid xl:hidden grid-cols-2 xl:grid-cols-5 col-span-3 gap-x-2 xl:gap-x-10 gap-y-3 xl:gap-y-6 start text-ink-muted">
         <label htmlFor="retail-chains" className="order-1 h-max rounded-card border border-line bg-surface shadow-card">
           <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
-            <input type="checkbox" id="retail-chains" className="hidden peer" />
+            <input type="checkbox" id="retail-chains" className="sr-only peer" />
             <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgStorefront />
             </div>
@@ -22,7 +22,7 @@ const SalesRules: FC<any> = () => {
         </label>
         <label htmlFor="workshops" className="order-2 h-max rounded-card border border-line bg-surface shadow-card">
           <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
-            <input type="checkbox" className="hidden peer" id="workshops" />
+            <input type="checkbox" className="sr-only peer" id="workshops" />
             <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgWrench />
             </div>
@@ -41,7 +41,7 @@ const SalesRules: FC<any> = () => {
           className="order-3 h-max rounded-card border border-line bg-surface shadow-card"
         >
           <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
-            <input type="checkbox" className="hidden peer" id="tradespeople" />
+            <input type="checkbox" className="sr-only peer" id="tradespeople" />
             <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgHardHat />
             </div>
@@ -60,7 +60,7 @@ const SalesRules: FC<any> = () => {
           className="order-4 xl:order-6 rounded-card border border-line bg-surface shadow-card"
         >
           <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
-            <input type="checkbox" className="hidden peer" id="facility-service-providers" />
+            <input type="checkbox" className="sr-only peer" id="facility-service-providers" />
             <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgFacilityServiceProviders />
             </div>
@@ -79,7 +79,7 @@ const SalesRules: FC<any> = () => {
           className="order-7 -mt-8 mb-8 rounded-card border border-line bg-surface shadow-card"
         >
           <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
-            <input type="checkbox" className="hidden peer" id="without-gln-uts-code" />
+            <input type="checkbox" className="sr-only peer" id="without-gln-uts-code" />
             <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgGLN_UTSCode />
             </div>
@@ -98,7 +98,7 @@ const SalesRules: FC<any> = () => {
           className="order-8 rounded-card border border-line bg-surface shadow-card"
         >
           <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
-            <input type="checkbox" className="hidden peer" id="warehouses-manufacturers" />
+            <input type="checkbox" className="sr-only peer" id="warehouses-manufacturers" />
             <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgWarehouse />
             </div>
@@ -117,7 +117,7 @@ const SalesRules: FC<any> = () => {
           className="order-5 xl:order-4 rounded-card border border-line bg-surface shadow-card h-max"
         >
           <div className="flex flex-col items-center justify-center gap-4 px-6 py-4 ">
-            <input type="checkbox" className="hidden peer" id="Contractors" />
+            <input type="checkbox" className="sr-only peer" id="Contractors" />
             <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgVest />
             </div>
@@ -133,7 +133,7 @@ const SalesRules: FC<any> = () => {
 
             <div className="flex flex-col gap-3">
               <label htmlFor="individual" className="flex items-center gap-1 cursor-pointer">
-                <input type="checkbox" name="individual" id="individual" className="hidden peer" />
+                <input type="checkbox" name="individual" id="individual" className="sr-only peer" />
                 <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                   <div className="w-3 h-3">
                     <SvgCheckMark />
@@ -142,7 +142,7 @@ const SalesRules: FC<any> = () => {
                 Individual
               </label>
               <label htmlFor="corporate" className="flex items-center gap-1 cursor-pointer">
-                <input type="checkbox" name="corporate" id="corporate" className="hidden peer" />
+                <input type="checkbox" name="corporate" id="corporate" className="sr-only peer" />
                 <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                   <div className="w-3 h-3">
                     <SvgCheckMark />
@@ -158,7 +158,7 @@ const SalesRules: FC<any> = () => {
           className="order-6 xl:order-5 rounded-card border border-line bg-surface shadow-card h-max"
         >
           <div className="flex flex-col items-center justify-center gap-4 px-6 py-4">
-            <input type="checkbox" className="hidden peer" id="procurement-teams" />
+            <input type="checkbox" className="sr-only peer" id="procurement-teams" />
             <div className="w-16 h-20 peer-checked:text-brand-600">
               <SvgBadge />
             </div>
@@ -173,7 +173,7 @@ const SalesRules: FC<any> = () => {
             <div className="w-full border-t border-line rounded h-2"></div>
             <div className="flex flex-col gap-3">
               <label htmlFor="buyers" className="flex items-center gap-1 cursor-pointer">
-                <input type="checkbox" name="buyers" id="buyers" className="hidden peer" />
+                <input type="checkbox" name="buyers" id="buyers" className="sr-only peer" />
                 <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                   <div className="w-3 h-3">
                     <SvgCheckMark />
@@ -182,7 +182,7 @@ const SalesRules: FC<any> = () => {
                 Buyers
               </label>
               <label htmlFor="planners" className="flex items-center gap-1 cursor-pointer">
-                <input type="checkbox" name="planners" id="planners" className="hidden peer" />
+                <input type="checkbox" name="planners" id="planners" className="sr-only peer" />
                 <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                   <div className="w-3 h-3">
                     <SvgCheckMark />
@@ -191,7 +191,7 @@ const SalesRules: FC<any> = () => {
                 Planners
               </label>
               <label htmlFor="managers" className="flex items-center gap-1 cursor-pointer">
-                <input type="checkbox" name="managers" id="managers" className="hidden peer" />
+                <input type="checkbox" name="managers" id="managers" className="sr-only peer" />
                 <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                   <div className="w-3 h-3">
                     <SvgCheckMark />
@@ -210,7 +210,7 @@ const SalesRules: FC<any> = () => {
             className="col-span-1 order-1 h-max rounded-card border border-line bg-surface shadow-card"
           >
             <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
-              <input type="checkbox" id="retail-chains-2" className="hidden peer" />
+              <input type="checkbox" id="retail-chains-2" className="sr-only peer" />
               <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgStorefront />
               </div>
@@ -229,7 +229,7 @@ const SalesRules: FC<any> = () => {
             className="col-span-1 order-2 h-max rounded-card border border-line bg-surface shadow-card"
           >
             <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
-              <input type="checkbox" className="hidden peer" id="workshops-2" />
+              <input type="checkbox" className="sr-only peer" id="workshops-2" />
               <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgWrench />
               </div>
@@ -248,7 +248,7 @@ const SalesRules: FC<any> = () => {
             className="col-span-1 order-3 h-max rounded-card border border-line bg-surface shadow-card"
           >
             <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
-              <input type="checkbox" className="hidden peer" id="tradespeople-2" />
+              <input type="checkbox" className="sr-only peer" id="tradespeople-2" />
               <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgHardHat />
               </div>
@@ -267,7 +267,7 @@ const SalesRules: FC<any> = () => {
             className="col-span-1 order-4 xl:order-6 rounded-card border border-line bg-surface shadow-card"
           >
             <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
-              <input type="checkbox" className="hidden peer" id="facility-service-providers-2" />
+              <input type="checkbox" className="sr-only peer" id="facility-service-providers-2" />
               <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgFacilityServiceProviders />
               </div>
@@ -286,7 +286,7 @@ const SalesRules: FC<any> = () => {
             className="order-7 rounded-card border border-line bg-surface shadow-card"
           >
             <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
-              <input type="checkbox" className="hidden peer" id="without-gln-uts-code-2" />
+              <input type="checkbox" className="sr-only peer" id="without-gln-uts-code-2" />
               <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgGLN_UTSCode />
               </div>
@@ -305,7 +305,7 @@ const SalesRules: FC<any> = () => {
             className="order-8 rounded-card border border-line bg-surface shadow-card"
           >
             <div className="flex flex-col items-center justify-center gap-3 px-6 py-4">
-              <input type="checkbox" className="hidden peer" id="warehouses-manufacturers-2" />
+              <input type="checkbox" className="sr-only peer" id="warehouses-manufacturers-2" />
               <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgWarehouse />
               </div>
@@ -326,7 +326,7 @@ const SalesRules: FC<any> = () => {
             className="order-5 xl:order-4 rounded-card border border-line bg-surface shadow-card h-max"
           >
             <div className="flex flex-col items-center justify-center gap-4 px-6 py-4 ">
-              <input type="checkbox" className="hidden peer" id="Contractors-2" />
+              <input type="checkbox" className="sr-only peer" id="Contractors-2" />
               <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgVest />
               </div>
@@ -345,7 +345,7 @@ const SalesRules: FC<any> = () => {
 
               <div className="flex flex-col gap-3">
                 <label htmlFor="individual-2" className="flex items-center gap-1 cursor-pointer">
-                  <input type="checkbox" name="individual" id="individual-2" className="hidden peer" />
+                  <input type="checkbox" name="individual" id="individual-2" className="sr-only peer" />
                   <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                     <div className="w-3 h-3">
                       <SvgCheckMark />
@@ -354,7 +354,7 @@ const SalesRules: FC<any> = () => {
                   Individual
                 </label>
                 <label htmlFor="corporate-2" className="flex items-center gap-1 cursor-pointer">
-                  <input type="checkbox" name="corporate" id="corporate-2" className="hidden peer" />
+                  <input type="checkbox" name="corporate" id="corporate-2" className="sr-only peer" />
                   <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                     <div className="w-3 h-3">
                       <SvgCheckMark />
@@ -370,7 +370,7 @@ const SalesRules: FC<any> = () => {
             className="order-6 xl:order-5 rounded-card border border-line bg-surface shadow-card h-max"
           >
             <div className="flex flex-col items-center justify-center gap-4 px-6 py-4">
-              <input type="checkbox" className="hidden peer" id="procurement-teams-2" />
+              <input type="checkbox" className="sr-only peer" id="procurement-teams-2" />
               <div className="w-16 h-20 peer-checked:text-brand-600">
                 <SvgBadge />
               </div>
@@ -385,7 +385,7 @@ const SalesRules: FC<any> = () => {
               <div className="w-full border-t border-line h-2"></div>
               <div className="flex flex-col gap-3">
                 <label htmlFor="buyers-2" className="flex items-center gap-1 cursor-pointer">
-                  <input type="checkbox" name="buyers" id="buyers-2" className="hidden peer" />
+                  <input type="checkbox" name="buyers" id="buyers-2" className="sr-only peer" />
                   <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                     <div className="w-3 h-3">
                       <SvgCheckMark />
@@ -394,7 +394,7 @@ const SalesRules: FC<any> = () => {
                   Buyers
                 </label>
                 <label htmlFor="planners-2" className="flex items-center gap-1 cursor-pointer">
-                  <input type="checkbox" name="planners" id="planners-2" className="hidden peer" />
+                  <input type="checkbox" name="planners" id="planners-2" className="sr-only peer" />
                   <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                     <div className="w-3 h-3">
                       <SvgCheckMark />
@@ -403,7 +403,7 @@ const SalesRules: FC<any> = () => {
                   Planners
                 </label>
                 <label htmlFor="managers-2" className="flex items-center gap-1 cursor-pointer">
-                  <input type="checkbox" name="managers" id="managers-2" className="hidden peer" />
+                  <input type="checkbox" name="managers" id="managers-2" className="sr-only peer" />
                   <div className="flex items-center text-transparent peer-checked:text-white justify-center w-5 h-5 border border-brand-300 rounded-md peer-checked:bg-brand-600 peer-checked:border-transparent">
                     <div className="w-3 h-3">
                       <SvgCheckMark />

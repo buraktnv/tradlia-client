@@ -42,8 +42,12 @@ const DiscoverCategory: FC<any> = () => {
       </div>
       <div className="container grid w-full grid-cols-4 gap-8 mx-auto">
         {discoverCards.map((card) => (
-          <Link key={card.href} href={card.href} className="focus-visible:outline-none rounded-card">
-            <div className="relative flex flex-col w-full h-72 cursor-pointer select-none group rounded-card transition-shadow duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none shadow-card hover:shadow-pop focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 bg-surface overflow-hidden">
+          <Link
+            key={card.href}
+            href={card.href}
+            className="block rounded-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+          >
+            <div className="relative flex flex-col w-full h-72 cursor-pointer select-none group rounded-card transition-shadow duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none shadow-card hover:shadow-pop bg-surface overflow-hidden">
               <div className="pt-5 pb-1 pl-8 font-display text-lg font-semibold text-ink">{card.title}</div>
               <div className="relative w-full flex-1 p-4 pr-20">
                 <div className="relative top-0 left-0 w-full h-full transition-transform duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:scale-105">

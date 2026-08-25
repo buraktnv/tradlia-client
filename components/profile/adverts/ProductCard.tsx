@@ -38,7 +38,7 @@ const ProductCard: FC<AdvertProductCardProps> = ({ content, setOpenModal, listTy
   const checkbox = (
     <label htmlFor={contentId} className="flex items-center cursor-pointer flex-shrink-0">
       <div className="flex h-5 w-5 items-center justify-center rounded-md border border-line bg-surface transition-colors duration-200">
-        <input type="checkbox" id={contentId} className="hidden peer" />
+        <input type="checkbox" id={contentId} className="sr-only peer" />
         <div className="h-3.5 w-3.5 rounded-sm peer-checked:bg-brand-400"></div>
       </div>
     </label>

@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import Link from "next/link";
 import { SvgMinus, SvgPlus, SvgShowMore } from "../../helpers/svgs/category";
 import BrandFilter from "../shared/category/BrandFilter";
 import PriceFilter from "../shared/category/PriceFilter";
@@ -26,7 +26,7 @@ const SidebarSwitchMenu: FC<any> = ({ activeCategory, activeSubCategory }) => {
   }));
   return (
     <div className="relative w-full py-4 px-4 bg-canvas border border-line rounded-card xl:pb-[1.75rem] hidden xl:block">
-      <h2 className="font-display text-xs uppercase tracking-wider text-ink-muted mb-1">Categories</h2>
+      <h2 className="font-display text-xs uppercase tracking-wider text-ink-soft mb-1">Categories</h2>
       <div>
         {(isExpanded ? menuItems : menuItems.slice(0, 3)).map((el: any) => (
           <SwitchMenu content={el} key={el.id} />
@@ -90,7 +90,6 @@ const Sidebar: FC<any> = ({ setSidebar, activeCategory, activeSubCategory, produ
 
 const SwitchMenu: FC<any> = ({ content }) => {
   const [state, setState] = useState<any>(content.isOpen);
-  const router = useRouter();
 
   useEffect(() => {
     setState(content.isOpen);
@@ -99,27 +98,28 @@ const SwitchMenu: FC<any> = ({ content }) => {
   return (
     <div className="py-2">
       <div className="flex items-center justify-between pr-2">
-        <button
-          type="button"
+        <Link
+          href={categoryUrl(content.id)}
           className={`text-left text-sm rounded-pill px-2 py-1 -ml-2 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 ${
             content.activeCategory
               ? "border border-brand-400 bg-brand-50 text-brand-700 font-medium"
               : "text-ink hover:text-brand-700 hover:bg-brand-50"
           }`}
-          onClick={() => router.push(categoryUrl(content.id))}
         >
           {content?.title}
-        </button>
+        </Link>
         <button
           type="button"
           aria-label={content.isOpen || state ? `Collapse ${content.title}` : `Expand ${content.title}`}
           aria-expanded={Boolean(content.isOpen || state)}
-          className={`w-4 h-4 text-ink-muted cursor-pointer transition-transform duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-pill ${
+          className={`flex items-center justify-center w-8 h-8 -mr-2 text-ink-muted cursor-pointer transition-transform duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-pill ${
             content.isOpen || state ? "rotate-180" : ""
           }`}
           onClick={() => setState((pre: boolean) => !pre)}
         >
-          {content.isOpen || state ? <SvgMinus /> : <SvgPlus />}
+          <span className="block w-4 h-4">
+            {content.isOpen || state ? <SvgMinus /> : <SvgPlus />}
+          </span>
         </button>
       </div>
 
@@ -127,18 +127,17 @@ const SwitchMenu: FC<any> = ({ content }) => {
         {(content.isOpen || state) &&
           content?.subCategories?.map((sub: any) => {
             return (
-              <button
-                type="button"
+              <Link
                 key={sub.id}
+                href={categoryUrl(content.id, sub.id)}
                 className={`text-left text-xs rounded-pill px-2 py-1 -ml-1 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 ${
                   content.activeSubCategory === sub.id
                     ? "border border-brand-400 bg-brand-50 text-brand-700 font-medium"
                     : "text-ink-soft hover:text-brand-700 hover:bg-brand-50"
                 }`}
-                onClick={() => router.push(categoryUrl(content.id, sub.id))}
               >
                 {sub.name}
-              </button>
+              </Link>
             );
           })}
       </div>

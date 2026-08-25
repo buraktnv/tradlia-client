@@ -18,7 +18,7 @@ export const ReceiptTypeCheckbox: FC<any> = ({ content }) => (
         name={content.name}
         id={content.label}
         value={content.label}
-        className="hidden peer"
+        className="sr-only peer"
       />
       <div className="w-5 h-4 xl:w-5 xl:h-5 border border-brand-300 text-transparent peer-checked:text-white peer-checked:bg-brand-400 flex xl:rounded-full items-center justify-center transition-colors duration-100 ease-in-out">
         <div className="w-3 h-2 xl:w-3 xl:h-3">

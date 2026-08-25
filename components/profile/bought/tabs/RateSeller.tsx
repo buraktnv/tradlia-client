@@ -76,7 +76,7 @@ const RateSeller: FC<any> = ({ setModal, content }) => {
               className="flex w-full px-4 py-2 border outline-none rounded-xl xl:rounded-2xl xl:text-sm text-[12px] leading-3"
             ></textarea>
             <label className="flex items-center py-3 rounded-full gap-2 text-ink-muted" htmlFor="61">
-              <input type="checkbox" id="61" name="" className="hidden peer" />
+              <input type="checkbox" id="61" name="" className="sr-only peer" />
               <div className="w-5 h-5 rounded-md peer-checked:bg-success text-transparent border border-line"></div>
               <p className="text-[12px] leading-3 xl:text-sm whitespace-nowrap">
                 I allow my name to be shown in reviews

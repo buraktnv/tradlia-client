@@ -76,7 +76,7 @@ const Basket: FC<any> = ({ setActivePage, activePage, basketData, setBasketData 
           </div>
         </div>
         <div className="container grid gap-4 px-3 py-8 mx-auto xl:py-12 xl:px-0">
-          <h2 className="font-display text-xs uppercase tracking-wider text-ink-muted font-semibold">
+          <h2 className="font-display text-xs uppercase tracking-wider text-ink-soft font-semibold">
             Recommendations from Sellers in Your Cart
           </h2>
           <div className="grid grid-cols-2 gap-3 text-base xl:grid-cols-5">
@@ -103,7 +103,7 @@ const Basket: FC<any> = ({ setActivePage, activePage, basketData, setBasketData 
         </div>
 
         <div className="container grid gap-4 px-3 py-8 mx-auto xl:py-12 xl:px-0">
-          <h2 className="font-display text-xs uppercase tracking-wider text-ink-muted font-semibold">
+          <h2 className="font-display text-xs uppercase tracking-wider text-ink-soft font-semibold">
             Recently Viewed
           </h2>
           <div className="grid grid-cols-2 gap-3 text-base xl:grid-cols-5">

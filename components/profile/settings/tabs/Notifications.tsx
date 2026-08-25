@@ -89,7 +89,7 @@ const Card: FC<any> = ({ content }) => {
       <label htmlFor={content.id} className="block h-full select-none">
         <div className="px-3 whitespace-pre-line xl:pl-8 xl:pr-16">{content.text}</div>
         <div className="flex items-end justify-end px-6">
-          <input type="checkbox" id={content.id} className="hidden peer" />
+          <input type="checkbox" id={content.id} className="sr-only peer" />
           <div className="absolute flex justify-center items-center right-2 bottom-9 sm:right-3 sm:bottom-6 w-5 h-5 rounded-md peer-checked:bg-danger text-transparent peer-checked:text-white mt-2 border border-danger">
             <div className="w-2.5 h-2.5 ">
               <SvgCheckMark />

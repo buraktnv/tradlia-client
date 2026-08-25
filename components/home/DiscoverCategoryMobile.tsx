@@ -1,6 +1,7 @@
-import { FC, useLayoutEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import useIsClient from "../../helpers/hooks/useIsClient";
 import useMediaQuery from "../../helpers/hooks/useMediaQuery";
+import usePrefersReducedMotion from "../../helpers/hooks/usePrefersReducedMotion";
 import styles from "./DiscoverCategoryMobile.module.scss";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,8 +36,10 @@ const discoverItems = [
 const DiscoverCategoryMobile = () => {
   const slideDiv = useRef<HTMLDivElement>(null);
   const [activeItem, setActiveItem] = useState<string>("item1");
+  const prefersReducedMotion = usePrefersReducedMotion();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    if (prefersReducedMotion) return;
     let timer: NodeJS.Timeout | null = null;
 
     timer = setTimeout(() => {
@@ -50,7 +53,7 @@ const DiscoverCategoryMobile = () => {
       timer && clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeItem]);
+  }, [activeItem, prefersReducedMotion]);
 
   const scrollEvent = (e: any) => {
     const offset1 = document.getElementById("item1")!.offsetLeft - 16;
@@ -68,7 +71,7 @@ const DiscoverCategoryMobile = () => {
   const scrollToElement = (item: string) => {
     slideDiv?.current?.scrollTo({
       left: document.getElementById(item)?.offsetLeft,
-      behavior: "smooth",
+      behavior: prefersReducedMotion ? "auto" : "smooth",
     });
     setActiveItem(item);
   };
@@ -98,7 +101,7 @@ const DiscoverCategoryMobile = () => {
                 aria-label={`Go to ${item.text}`}
                 aria-current={activeItem === item.id ? "true" : undefined}
                 onClick={() => scrollToElement(item.id)}
-                className={`h-2 cursor-pointer rounded-pill transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
+                className={`h-2 cursor-pointer rounded-pill transition-[width,background-color] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
                   activeItem === item.id ? "w-6 bg-brand-400" : "w-2 bg-line hover:bg-ink-muted"
                 }`}
               ></button>
@@ -112,7 +115,10 @@ const DiscoverCategoryMobile = () => {
 
 const SingleItem: FC<any> = ({ text, type, imgUrl }) => {
   return (
-    <Link href={`/category?cat=${type}`} className="focus-visible:outline-none">
+    <Link
+      href={`/category?cat=${type}`}
+      className="block rounded-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+    >
       <div className="relative flex flex-col w-full h-full px-3 cursor-pointer select-none group">
         <div className="px-6 pt-5 pb-2 font-display text-xl font-semibold text-ink">{text}</div>
         <div className="relative w-full h-full pb-6">

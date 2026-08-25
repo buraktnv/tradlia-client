@@ -114,7 +114,7 @@ const RateProduct: FC<any> = ({ setModal3 }) => {
             className="flex w-full px-4 py-2 border border-line outline-none rounded-3xl"
           ></textarea>
           <label className="flex justify-center py-3 rounded-full gap-2 text-ink-muted" htmlFor="62">
-            <input type="checkbox" id="62" name="" className="hidden peer" />
+            <input type="checkbox" id="62" name="" className="sr-only peer" />
             <div className="w-5 h-5 rounded-md peer-checked:bg-amber-500 text-transparent border border-line"></div>
             <p className=" whitespace-nowrap">I allow my name to appear in the review</p>
           </label>

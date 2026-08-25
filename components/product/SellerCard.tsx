@@ -67,7 +67,7 @@ const Stars = ({ star }: { star: number }) => (
 
 const SellerCard: FC<any> = ({ svg, title, star, starPoint, advertisementCount, date, stock, price, item }) => {
   return (
-    <div className="flex flex-col xl:grid grid-cols-5 w-full bg-surface rounded-card shadow-card border border-line hover:border-brand-300 hover:shadow-pop transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none px-4 xl:px-6 py-4 gap-3 xl:gap-0">
+    <div className="flex flex-col xl:grid grid-cols-5 w-full bg-surface rounded-card shadow-card border border-line hover:border-brand-300 hover:shadow-pop transition-[border-color,box-shadow] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none px-4 xl:px-6 py-4 gap-3 xl:gap-0">
       <div className="flex xl:col-span-2 pb-2 xl:pb-0 border-b xl:border-b-0 xl:border-r border-line items-center">
         <div
           className="w-max h-max rounded-full border border-line bg-canvas p-3 flex items-center justify-center mr-3 text-brand-600"
@@ -83,25 +83,25 @@ const SellerCard: FC<any> = ({ svg, title, star, starPoint, advertisementCount, 
           <div className="flex items-center gap-1.5 mt-1">
             <Stars star={star} />
             <span className="font-display text-sm font-bold text-ink">{starPoint}</span>
-            <span className="text-xs text-ink-muted">{advertisementCount} Listings</span>
+            <span className="text-xs text-ink-soft">{advertisementCount} Listings</span>
           </div>
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-3 col-span-3 pt-2 xl:pt-0 xl:flex-nowrap xl:justify-around">
         <div className="grid grid-cols-3 xl:grid-cols-3 items-center gap-x-4 xl:gap-x-8 xl:gap-y-2">
           <div className="flex flex-col xl:items-start gap-1.5">
-            <span className="text-[11px] uppercase tracking-wide text-ink-muted">Expires</span>
+            <span className="text-[11px] uppercase tracking-wide text-ink-soft">Expires</span>
             <span className="bg-canvas rounded-pill px-3 py-1 text-xs text-ink-soft font-medium w-max">{date}</span>
           </div>
           <div className="flex flex-col xl:items-start gap-1.5">
-            <span className="text-[11px] uppercase tracking-wide text-ink-muted">Stock</span>
+            <span className="text-[11px] uppercase tracking-wide text-ink-soft">Stock</span>
             <span className="bg-canvas rounded-pill px-3 py-1 text-xs text-ink-soft font-medium w-max">{stock}</span>
           </div>
           <div className="flex flex-col xl:items-start gap-1">
-            <span className="text-[11px] uppercase tracking-wide text-ink-muted">Price</span>
+            <span className="text-[11px] uppercase tracking-wide text-ink-soft">Price</span>
             <span className="font-display text-xl xl:text-3xl font-bold text-ink leading-none">{price} $</span>
             {item.shipping === 0 && (
-              <span className="text-xs text-ink-muted">Free shipping</span>
+              <span className="text-xs text-ink-soft">Free shipping</span>
             )}
           </div>
         </div>
@@ -212,7 +212,7 @@ const Info: FC<any> = ({ star, title, svg, starPoint, advertisementCount }) => (
           <Stars star={star} />
           <span className="font-display text-sm font-bold text-ink">{starPoint}</span>
         </div>
-        <div className="text-xs text-ink-muted mt-0.5">{advertisementCount} Listings</div>
+        <div className="text-xs text-ink-soft mt-0.5">{advertisementCount} Listings</div>
       </div>
       <p className="text-xs leading-4 text-ink-soft">
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.

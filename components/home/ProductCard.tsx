@@ -138,10 +138,10 @@ const DealOfTheDay: FC<{ content: DealOfTheDayContent }> = ({ content }) => {
           </div>
           <div className="relative">
             <div className="flex items-center gap-1.5 titles">
-              <h5 className="text-[10px] leading-[14px] xl:text-base font-semibold tracking-wide text-surface font-display line-clamp-1">
+              <h3 className="text-[10px] leading-[14px] xl:text-base font-semibold tracking-wide text-surface font-display line-clamp-1">
                 {content.name}
-              </h5>
-              <h3 className="hidden md:block text-brand-100/90 text-[10px] leading-[14px] xl:text-xs truncate">{content.brand}</h3>
+              </h3>
+              <p className="hidden md:block text-brand-100/90 text-[10px] leading-[14px] xl:text-xs truncate">{content.brand}</p>
             </div>
             <div className="flex items-baseline justify-between mt-0.5">
               <div className="font-display text-sm xl:text-xl font-semibold text-amber-400">
@@ -149,7 +149,7 @@ const DealOfTheDay: FC<{ content: DealOfTheDayContent }> = ({ content }) => {
               </div>
             </div>
           </div>
-          <div className="absolute left-0 grid items-center invisible w-full px-4 mt-1 transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none opacity-0 bottom-3 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+          <div className="absolute left-0 grid items-center invisible w-full px-4 mt-1 transition-[opacity,visibility] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none opacity-0 bottom-3 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
             <Link
               href="/product"
               className="select-none cursor-pointer inline-flex items-center gap-2 justify-center px-4 py-1.5 xl:py-2 border border-brand-300/50 rounded-pill text-[11px] leading-3 xl:text-sm text-brand-200 font-medium transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-600 hover:border-brand-600 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300"

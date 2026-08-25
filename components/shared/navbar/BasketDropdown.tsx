@@ -23,6 +23,9 @@ const BasketDropdown: FC = () => {
           >
             {basket.length}
           </span>
+          <span role="status" className="sr-only">
+            Cart, {basket.length} items
+          </span>
         </label>
         <div
           tabIndex={0}
@@ -42,7 +45,7 @@ const BasketDropdown: FC = () => {
             {basket.length > 0 ? (
               basket.map((el) => <ItemsList key={el.basket_id} content={el} />)
             ) : (
-              <div className="text-sm font-medium text-center text-ink-muted py-2">Your cart is currently empty</div>
+              <div className="text-sm font-medium text-center text-ink-soft py-2">Your cart is currently empty</div>
             )}
           </div>
           <span className="h-[1px] w-full my-2 bg-line" />
@@ -50,13 +53,11 @@ const BasketDropdown: FC = () => {
             <span className="flex gap-1 mx-1 text-base font-medium text-ink">
               Total : <p className="font-display font-semibold"> {basketTotal.prices} $</p>
             </span>
-            <Link href="/basket" className="w-full">
-              <button
-                type="button"
-                className="cursor-pointer select-none drop-shadow-input-shadow text-sm text-center bg-amber-400 w-full rounded-pill text-ink px-4 mt-3 py-2 font-semibold transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-amber-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
-              >
-                Go to Cart
-              </button>
+            <Link
+              href="/basket"
+              className="cursor-pointer select-none drop-shadow-input-shadow block text-sm text-center bg-amber-400 w-full rounded-pill text-ink px-4 mt-3 py-2 font-semibold transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-amber-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+            >
+              Go to Cart
             </Link>
           </div>
         </div>
@@ -81,7 +82,7 @@ const ItemsList: FC<{ content: IBasketProduct }> = ({ content }) => {
         <div className="flex flex-col flex-1 ml-4">
           <div className="flex flex-col flex-1">
             <p className="text-sm font-semibold text-ink">{content.name}</p>
-            <p className="text-sm text-ink-muted">{content.brand}</p>
+            <p className="text-sm text-ink-soft">{content.brand}</p>
           </div>
           <span className="font-display font-semibold text-ink">{String(content.price)} $</span>
         </div>

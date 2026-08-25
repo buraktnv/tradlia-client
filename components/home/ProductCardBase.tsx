@@ -56,7 +56,7 @@ export const ProductCardBase: FC<ProductCardBaseProps> = ({ content, deleteCard,
             {discountLabel}
           </span>
         )}
-        <div className="absolute top-2 right-2 flex items-center gap-1 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 focus-within:opacity-100 focus-within:translate-y-0 transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none">
+        <div className="absolute top-2 right-2 flex items-center gap-1 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 focus-within:opacity-100 focus-within:translate-y-0 transition-[opacity,transform] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none">
           <Link
             href="/category"
             aria-label={`Quick view ${content.name}`}
@@ -92,7 +92,7 @@ export const ProductCardBase: FC<ProductCardBaseProps> = ({ content, deleteCard,
             {content.name}
           </Link>
         </h3>
-        <p className="text-xs text-ink-muted truncate">{content.brand}</p>
+        <p className="text-xs text-ink-soft truncate">{content.brand}</p>
 
         <p className="flex items-center gap-1.5 mt-auto pt-1">
           {content.stockStatus !== "out" ? (
@@ -101,14 +101,14 @@ export const ProductCardBase: FC<ProductCardBaseProps> = ({ content, deleteCard,
               <span className="text-xs text-ink-soft">{lowStock ? "Low stock" : "In stock"}</span>
             </>
           ) : (
-            <span className="text-xs text-ink-muted">Out of stock</span>
+            <span className="text-xs text-ink-soft">Out of stock</span>
           )}
         </p>
 
         <div className="flex items-baseline gap-2">
           <span className="font-display text-lg font-semibold text-ink">{priceFormat(content.price)} $</span>
           {hasDiscount && (
-            <span className="text-sm text-ink-muted line-through">{priceFormat(content.oldPrice ?? content.price)} $</span>
+            <span className="text-sm text-ink-soft line-through">{priceFormat(content.oldPrice ?? content.price)} $</span>
           )}
         </div>
 
@@ -125,8 +125,8 @@ export const ProductCardBase: FC<ProductCardBaseProps> = ({ content, deleteCard,
             </span>
           )}
           {content.advertCount > 0 && (
-            <span className="ml-auto whitespace-nowrap text-[11px] text-ink-muted">
-              from <strong className="font-semibold text-ink-soft">{content.advertCount} listings</strong>
+            <span className="ml-auto whitespace-nowrap text-[11px] text-ink-soft">
+              from <strong className="font-semibold text-ink">{content.advertCount} listings</strong>
             </span>
           )}
         </div>
