@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { NextPage } from "next";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import SingleProductItem from "../../components/product/SingleProductItem";
 import BottomBar from "../../components/product/Bottombar";
 import SellerCard from "../../components/product/SellerCard";
@@ -9,6 +10,8 @@ import SidebarCard from "../../components/product/SidebarCard";
 import FilterTabMenu from "../../components/product/FilterTabMenu";
 import { SvgWarranty, SvgMaximum, SvgSearch, SvgVendoPay } from "../../helpers/svgs/product";
 import StateFilter from "../../components/shared/category/StateFilter";
+import { productCatalog, type CatalogProduct } from "../../helpers/productCatalog";
+import { getCategoryById } from "../../helpers/categories";
 
 const BottomBarData = {
   commentCount: 56,
@@ -152,12 +155,48 @@ const SidebarCardData: any = {
 };
 
 const Product: NextPage = () => {
+  const router = useRouter();
   const [filter, setFilter] = useState("");
   const [itemList, setItemList] = useState<any>(items);
+  const [catalogProduct, setCatalogProduct] = useState<CatalogProduct | null>(null);
   const slideDiv = useRef<HTMLDivElement>(null);
   const slideDiv2 = useRef<HTMLDivElement>(null);
   const [activeItem, setActiveItem] = useState<string>("itemb1");
   const [activeItem2, setActiveItem2] = useState<string>("itemc1");
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    const raw = router.query.id;
+    const parsed = typeof raw === "string" ? Number.parseInt(raw, 10) : Number.NaN;
+    setCatalogProduct(productCatalog.find((entry) => entry.id === parsed) ?? null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady]);
+
+  const category = catalogProduct ? getCategoryById(catalogProduct.categoryId) : null;
+  const categoryLabel = category ? `${category.name}${category.subtitle ? ` ${category.subtitle}` : ""}` : null;
+  const productName = catalogProduct?.name ?? SidebarCardData.name;
+  const productBrand = categoryLabel ?? SidebarCardData.brand;
+  const productImage = catalogProduct?.image ?? SidebarCardData.mainImage;
+
+  const sidebarCardData = {
+    ...SidebarCardData,
+    name: productName,
+    brand: productBrand,
+    mainImage: productImage,
+    slider1: catalogProduct?.image ?? SidebarCardData.slider1,
+    slider2: catalogProduct?.image ?? SidebarCardData.slider2,
+    slider3: catalogProduct?.image ?? SidebarCardData.slider3,
+    slider4: catalogProduct?.image ?? SidebarCardData.slider4,
+  };
+  const bottomBarData = {
+    ...BottomBarData,
+    name: productName,
+    brand: productBrand,
+    image: productImage,
+  };
+  const sellerItems = items.map((item: any) =>
+    catalogProduct ? { ...item, name: productName, brand: productBrand, image: productImage } : item
+  );
 
   const scrollEvent = (e: any) => {
     const offset1 = document.getElementById("itemb1")!.offsetLeft - 12;
@@ -231,25 +270,25 @@ const Product: NextPage = () => {
             <li aria-hidden="true" className="text-ink-muted">/</li>
             <li>
               <Link
-                href="/category?cat=tools"
+                href={`/category?cat=${category?.id ?? "tools"}`}
                 className="text-ink-muted hover:text-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
               >
-                Tools &amp; Fasteners
+                {categoryLabel ?? "Tools & Fasteners"}
               </Link>
             </li>
             <li aria-hidden="true" className="text-ink-muted">/</li>
             <li aria-current="page" className="font-medium text-ink-soft">
-              TorqueMax Wood Screws
+              {productName}
             </li>
           </ol>
         </nav>
       </div>
       <div className="flex flex-col col-span-1 gap-3 mt-3 xl:hidden">
-        <SidebarCard content={SidebarCardData} />
+        <SidebarCard content={sidebarCardData} />
       </div>
       <div className="container grid grid-cols-6 mx-auto my-3 xl:my-[1.5rem]">
         <div className="flex-col hidden col-span-1 gap-3 xl:gap-[1.5rem] xl:flex">
-          <SidebarCard content={SidebarCardData} />
+          <SidebarCard content={sidebarCardData} />
           <StateFilter />
         </div>
         <div className="w-full col-span-6 px-3 mb-3 xl:mb-[1.5rem] xl:px-6 xl:col-span-5">
@@ -291,16 +330,7 @@ const Product: NextPage = () => {
               date="Apr 2025"
               stock="15"
               price="63.23"
-              item={{
-                id: 1,
-                name: "Classic Lemon Cologne",
-                brand: "Nordwell",
-                image: "/images/photos/product-10.svg",
-                price: 23.5,
-                shipping: 1,
-                advertCount: 250,
-                isFavorite: false,
-              }}
+              item={sellerItems[0]}
             />
             <SellerCard
               svg={svg.tradedirect}
@@ -311,16 +341,7 @@ const Product: NextPage = () => {
               date="Apr 2025"
               stock="63"
               price="25.00"
-              item={{
-                id: 2,
-                name: "TRMS Multimeter",
-                brand: "MultiCheck Instruments",
-                image: "/images/photos/product-3.svg",
-                price: 53.5,
-                shipping: 0,
-                advertCount: 250,
-                isFavorite: false,
-              }}
+              item={sellerItems[1]}
             />
             <SellerCard
               svg={svg.SupplyHub}
@@ -331,16 +352,7 @@ const Product: NextPage = () => {
               date="Apr 2025"
               stock="63"
               price="18.23"
-              item={{
-                id: 3,
-                name: "SenseIt Temp Sensor",
-                brand: "Module ±0.5°C",
-                image: "/images/photos/product-11.svg",
-                price: 35.5,
-                shipping: 1,
-                advertCount: 250,
-                isFavorite: false,
-              }}
+              item={sellerItems[2]}
             />
             <SellerCard
               svg={svg.ToolWorks}
@@ -351,16 +363,7 @@ const Product: NextPage = () => {
               date="May 2023"
               stock="34"
               price="46.23"
-              item={{
-                id: 4,
-                name: "SafeGuard 3-Ply Black",
-                brand: "Dust Mask FFP2 Ear Loops 50 pcs",
-                image: "/images/photos/product-4.svg",
-                price: 45.5,
-                shipping: 1,
-                advertCount: 250,
-                isFavorite: true,
-              }}
+              item={sellerItems[3]}
             />
           </div>
           <div className="mt-12">
@@ -456,7 +459,7 @@ const Product: NextPage = () => {
             </div>
           </div>
           <div>
-            <BottomBar content={BottomBarData} />
+            <BottomBar content={bottomBarData} />
           </div>
         </div>
       </div>
