@@ -14,7 +14,7 @@ const SearchInput: FC = () => {
     }
   };
 
-  //TODO items center creates a bug in the parent div
+  // NOTE: items-center here breaks the parent flex layout; keep top alignment
   return (
     <form onSubmit={onSubmit} className="relative w-full" role="search">
       <span className="absolute top-1/2 -translate-y-1/2 left-4 pointer-events-none" aria-hidden="true">
