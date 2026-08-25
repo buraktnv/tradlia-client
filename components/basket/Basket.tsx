@@ -76,7 +76,9 @@ const Basket: FC<any> = ({ setActivePage, activePage, basketData, setBasketData 
           </div>
         </div>
         <div className="container grid gap-4 px-3 py-8 mx-auto xl:py-12 xl:px-0">
-          <p className="text-[#4CBEC5] font-bold text-base xl:text-xl">Recommendations from Sellers in Your Cart</p>
+          <h2 className="font-display text-xs uppercase tracking-wider text-ink-muted font-semibold">
+            Recommendations from Sellers in Your Cart
+          </h2>
           <div className="grid grid-cols-2 gap-3 text-base xl:grid-cols-5">
             {recommendedList &&
               recommendedList.map((content: any) => (
@@ -85,9 +87,11 @@ const Basket: FC<any> = ({ setActivePage, activePage, basketData, setBasketData 
           </div>
         </div>
 
-        <div className="bg-[#4CBEC5] py-8 xl:py-12 px-3 xl:px-0">
+        <div className="bg-brand-50 border-y border-line py-8 xl:py-12 px-3 xl:px-0">
           <div className="container grid gap-4 mx-auto">
-            <p className="text-base font-bold text-white xl:text-xl">Best-Selling Listings in the Last 7 Days</p>
+            <h2 className="font-display text-xs uppercase tracking-wider text-brand-700 font-semibold">
+              Best-Selling Listings in the Last 7 Days
+            </h2>
 
             <div className="grid grid-cols-2 gap-3 text-base xl:grid-cols-5">
               {recommendedList &&
@@ -99,7 +103,9 @@ const Basket: FC<any> = ({ setActivePage, activePage, basketData, setBasketData 
         </div>
 
         <div className="container grid gap-4 px-3 py-8 mx-auto xl:py-12 xl:px-0">
-          <p className="text-[#4CBEC5] font-bold text-base xl:text-xl">Recently Viewed</p>
+          <h2 className="font-display text-xs uppercase tracking-wider text-ink-muted font-semibold">
+            Recently Viewed
+          </h2>
           <div className="grid grid-cols-2 gap-3 text-base xl:grid-cols-5">
             {recommendedList &&
               recommendedList.map((content: any) => (

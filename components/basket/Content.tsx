@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { toast } from "react-toastify";
+import { HIRE_ME_COPY } from "../../helpers/config";
 import BasketCard from "./BasketCard";
 import Notification from "./Notification";
 
@@ -121,8 +122,9 @@ const content: FC<any> = ({ content: basketData, setContent }) => {
     return (
       <div className="grid gap-3 xl:gap-[1rem]">
         <Notification />
-        <div className="rounded-2xl border border-[#00B1B265] bg-white p-10 text-center text-sm text-[#A0A2AF]">
-          Your cart is empty.
+        <div className="rounded-card border border-dashed border-line bg-surface p-10 text-center">
+          <p className="font-display text-base font-semibold text-ink">Your cart is empty.</p>
+          <p className="mt-2 text-sm text-ink-muted">{HIRE_ME_COPY.searchEmpty}</p>
         </div>
       </div>
     );
@@ -172,7 +174,7 @@ const content: FC<any> = ({ content: basketData, setContent }) => {
         <button
           type="button"
           onClick={clearCart}
-          className="px-8 py-3 text-sm font-medium text-[#7E8096] bg-[#F4F5F9] border border-[#00B1B265] rounded-full"
+          className="px-8 py-3 text-sm font-medium text-ink-soft bg-surface border border-line rounded-pill transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-danger/40 hover:text-dangerDark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
         >
           Empty Cart
         </button>

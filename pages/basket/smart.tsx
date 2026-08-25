@@ -61,6 +61,12 @@ const DOMESTIC_SHIPPING = 35;
 
 const formatPrice = (value: number) => `${value.toFixed(2).replace(".", ",")} $`;
 
+const smartInputClass =
+  "rounded-card border border-line bg-surface text-ink-soft outline-none focus:border-brand-400 focus-visible:ring-2 focus-visible:ring-brand-400/30 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none";
+
+const primaryButtonClass =
+  "rounded-pill bg-brand-400 hover:bg-brand-500 active:bg-brand-600 text-white font-semibold transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1";
+
 const SmartBasket: NextPage = () => {
   const { addItem } = useBasketContext();
   const [rows, setRows] = useState<BasketRow[]>([
@@ -93,6 +99,9 @@ const SmartBasket: NextPage = () => {
   const shippingTotal = selected.length > 0 ? DOMESTIC_SHIPPING : 0;
   const grandTotal = productsTotal + shippingTotal;
 
+  const matchRatio =
+    rows.length === 0 ? 0 : Math.round((selected.length / Math.max(rows.length, 1)) * 100);
+
   const createBasket = () => {
     if (selected.length === 0) {
       toast.error("Please select at least one product first.");
@@ -116,24 +125,27 @@ const SmartBasket: NextPage = () => {
   };
 
   return (
-    <div className="container mx-auto mt-[2rem] mb-[3rem] flex flex-col gap-4 rounded-3xl bg-white px-5 pt-2 xl:w-3/5 xl:bg-[#F4F5F7] xl:px-24 xl:py-10 xl:mb-0">
+    <div className="container mx-auto mt-[2rem] mb-[3rem] flex flex-col gap-4 rounded-card bg-canvas px-5 pt-2 xl:w-3/5 xl:px-24 xl:py-10 xl:mb-8 border border-line shadow-card">
       <div className="flex items-center gap-4 px-1 xl:px-0">
-        <div className="h-12 w-12 text-[#4CBEC5] xl:h-16 xl:w-16">
+        <div className="h-12 w-12 shrink-0 rounded-pill bg-brand-50 p-2.5 text-brand-600 xl:h-16 xl:w-16">
           <SvgSmartBasket />
         </div>
         <div>
-          <h3 className="text-[13px] font-bold text-[#4CBEC5] xl:text-base">Tradlia Smart Basket</h3>
-          <p className="text-[11px] leading-3 text-[#7E8096] xl:text-[0.85rem] xl:leading-4">
+          <h3 className="font-display text-xs uppercase tracking-wider text-brand-600 font-semibold">
+            Tradlia Smart Basket
+          </h3>
+          <p className="mt-1 text-sm leading-snug text-ink-soft">
             Create your shopping list with up to 10 products.
             <br /> Generate the most profitable basket with a single click.
           </p>
         </div>
       </div>
+      <MatchMeter ratio={matchRatio} />
       {activePage === "create" ? (
         <>
-          <div className="grid grid-cols-5 py-1 pt-3 font-medium text-[#4CBEC5] xl:pt-8">
-            <div className="col-span-3 px-3 text-[13px] leading-[8px] xl:text-base">Product List</div>
-            <div className="col-span-1 text-left text-[13px] leading-[8px] xl:text-base">Qty</div>
+          <div className="grid grid-cols-5 py-1 pt-3 font-medium uppercase tracking-wide text-ink-muted">
+            <div className="col-span-3 px-3 text-xs">Product List</div>
+            <div className="col-span-1 text-left text-xs">Qty</div>
             <div className="col-span-1"></div>
           </div>
           <div className="grid gap-[1.5rem]">
@@ -147,42 +159,38 @@ const SmartBasket: NextPage = () => {
               />
             ))}
           </div>
-          <div
-            className="my-2 flex cursor-pointer select-none items-center gap-3 px-3 xl:px-4 xl:py-4"
+          <button
+            type="button"
             onClick={addRow}
+            disabled={rows.length >= 10}
+            className="my-2 flex select-none items-center gap-3 px-3 xl:px-4 xl:py-4 self-start rounded-pill focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:opacity-50 disabled:pointer-events-none group"
           >
-            <div className="h-5 w-4 text-[#4CBEC5] xl:w-5">
-              <SvgPlus />
-            </div>
-            <p className="text-[13px] font-bold leading-[10px] text-[#4CBEC5] xl:text-base xl:leading-normal">
-              Add Another Product
-            </p>
-          </div>
+            <span className="flex h-6 w-6 items-center justify-center rounded-pill border border-line bg-surface text-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:border-brand-300">
+              <span className="block h-3 w-3">
+                <SvgPlus />
+              </span>
+            </span>
+            <p className="text-sm font-semibold text-brand-600">Add Another Product</p>
+          </button>
           <div className="flex items-center justify-start px-4">
-            <label htmlFor="1" className="flex items-center justify-center gap-3 cursor-pointer select-none">
+            <label htmlFor="shelf-life-only" className="flex items-center justify-center gap-3 cursor-pointer select-none">
               <input
                 type="checkbox"
                 className="hidden peer"
-                id="1"
+                id="shelf-life-only"
                 checked={shelfLifeOnly}
                 onChange={(e) => setShelfLifeOnly(e.target.checked)}
               />
-              <div className="flex justify-center items-center w-[23px] h-[23px] rounded-md peer-checked:bg-[#4CBEC5] text-transparent peer-checked:text-white border-2 border-[#4CBEC5]">
-                <div className="w-3 h-3">
+              <span className="flex justify-center items-center w-[23px] h-[23px] rounded-md peer-checked:bg-brand-400 peer-checked:border-brand-400 text-transparent peer-checked:text-white border-2 border-line bg-surface transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none peer-focus-visible:ring-2 peer-focus-visible:ring-brand-400">
+                <span className="w-3 h-3">
                   <SvgCheckMark />
-                </div>
-              </div>
-              <p className="text-[13px] font-bold text-[#A0A2AF] leading-[10px] xl:text-base">
-                Only Shelf Life Over 12 Months
-              </p>
+                </span>
+              </span>
+              <p className="text-sm font-medium text-ink-soft">Only Shelf Life Over 12 Months</p>
             </label>
           </div>
           <div className="py-4">
-            <button
-              type="button"
-              onClick={createBasket}
-              className="w-full rounded-full bg-gradient-to-r from-[#66C1BF] to-[#00A29D] px-4 py-3.5 text-[13px] font-bold leading-3 text-white drop-shadow-md xl:w-max xl:py-2 xl:text-base"
-            >
+            <button type="button" onClick={createBasket} className={`${primaryButtonClass} w-full px-4 py-3 text-sm xl:w-max xl:px-10`}>
               Create Smart Basket
             </button>
           </div>
@@ -201,6 +209,28 @@ const SmartBasket: NextPage = () => {
   );
 };
 
+const MatchMeter: FC<{ ratio: number }> = ({ ratio }) => (
+  <div className="grid gap-2 px-1 xl:px-0" data-testid="match-meter">
+    <div className="flex items-center justify-between">
+      <p className="font-display text-xs uppercase tracking-wider text-ink-muted font-semibold">Basket Match</p>
+      <p className="font-display text-sm font-semibold text-ink tabular-nums">{ratio}%</p>
+    </div>
+    <div
+      role="progressbar"
+      aria-label="Basket match ratio"
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={ratio}
+      className="h-2 w-full overflow-hidden rounded-pill bg-line"
+    >
+      <div
+        className="h-full rounded-pill bg-gradient-to-r from-brand-400 to-brand-600 transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
+        style={{ width: `${ratio}%` }}
+      ></div>
+    </div>
+  </div>
+);
+
 const BasketRow: FC<{
   row: BasketRow;
   products: SmartProduct[];
@@ -212,8 +242,9 @@ const BasketRow: FC<{
       <div className="relative col-span-3">
         <select
           value={row.productId ?? ""}
+          aria-label="Select product"
           onChange={(e) => onChange({ productId: e.target.value ? Number(e.target.value) : null })}
-          className="w-full appearance-none rounded-full border border-[#00B1B266] bg-white px-4 py-2.5 text-[12px] text-[#7E8096] shadow-sm outline-none focus:ring-1 ring-[#4CBEC5] xl:px-6 xl:text-sm"
+          className={`${smartInputClass} w-full appearance-none px-4 py-2.5 text-[12px] xl:px-6 xl:text-sm`}
         >
           <option value="" disabled>
             Select a product…
@@ -224,7 +255,7 @@ const BasketRow: FC<{
             </option>
           ))}
         </select>
-        <div className="pointer-events-none absolute right-4 top-3 h-3 w-3 rotate-180 text-[#4CBEC5]">
+        <div className="pointer-events-none absolute right-4 top-3 h-3 w-3 rotate-180 text-brand-600">
           <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 20.115 11.541">
             <path
               d="M1353.53,411.979a1.484,1.484,0,0,0,2.1,0l7.525-7.525,7.526,7.525a1.483,1.483,0,0,0,2.1-2.1l-8.575-8.575a1.483,1.483,0,0,0-2.1,0l-8.575,8.575A1.483,1.483,0,0,0,1353.53,411.979Z"
@@ -238,9 +269,10 @@ const BasketRow: FC<{
         <input
           type="number"
           min={1}
+          aria-label="Quantity"
           value={row.qty}
           onChange={(e) => onChange({ qty: Math.max(1, Number(e.target.value) || 1) })}
-          className="w-full rounded-full border border-[#00B1B266] bg-white px-2 py-2.5 text-center text-[12px] text-[#7E8096] shadow-sm outline-none focus:ring-1 ring-[#4CBEC5] xl:text-sm"
+          className={`${smartInputClass} w-full px-2 py-2.5 text-center text-[12px] tabular-nums xl:text-sm`}
         />
       </div>
       <div className="col-span-1 flex items-center justify-center">
@@ -248,7 +280,7 @@ const BasketRow: FC<{
           type="button"
           onClick={onRemove}
           aria-label="Remove product row"
-          className="h-8 w-8 rounded-full border border-[#FB295A40] text-[#FB295A] transition-colors hover:bg-[#FB295A10]"
+          className="h-8 w-8 rounded-pill border border-danger/30 bg-surface text-danger transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-dangerTint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
         >
           <div className="mx-auto h-3 w-3">
             <SvgClose />
@@ -269,33 +301,30 @@ const ConfirmBasketView: FC<{
 }> = ({ selected, productsTotal, shippingTotal, grandTotal, onAddAll, onBack }) => {
   return (
     <div className="mt-4 flex flex-col gap-4">
-      <div className="rounded-2xl border border-[#00b2b280] bg-white p-4 shadow-sm xl:p-6">
-        <div className="mb-3 flex items-center justify-between border-b border-[#00B1B240] pb-3">
-          <p className="text-base font-bold text-[#4CBEC5]">Your Smart Basket</p>
+      <div className="rounded-card border border-line bg-surface p-4 shadow-card xl:p-6">
+        <div className="mb-3 flex items-center justify-between border-b border-line pb-3">
+          <p className="font-display text-base font-semibold text-ink">Your Smart Basket</p>
           <button
             type="button"
             onClick={onBack}
-            className="rounded-full border border-[#00B1B266] px-4 py-1.5 text-xs font-medium text-[#4CBEC5]"
+            className="rounded-pill border border-line bg-surface px-4 py-1.5 text-xs font-medium text-ink-soft hover:border-brand-300 hover:text-brand-700 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
           >
             Edit List
           </button>
         </div>
         <div className="flex flex-col gap-3">
           {selected.map(({ row, product }) => (
-            <div
-              key={product.id}
-              className="flex items-center gap-4 rounded-xl border border-[#DADADA80] p-3 xl:p-4"
-            >
+            <div key={product.id} className="flex items-center gap-4 rounded-card border border-line bg-canvas p-3 xl:p-4">
               <div className="relative h-14 w-14 shrink-0">
                 <Image className="object-contain" src={product.image} fill sizes="56px" alt={product.name} />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-bold text-[#7E8096]">{product.name}</p>
-                <p className="truncate text-xs text-[#7E8096]">{product.brand}</p>
+                <p className="truncate text-sm font-semibold text-ink">{product.name}</p>
+                <p className="truncate text-xs text-ink-muted">{product.brand}</p>
               </div>
               <div className="text-right">
-                <p className="text-xs text-[#7E8096]">Qty: {row.qty}</p>
-                <p className="whitespace-nowrap text-sm font-bold text-[#4CBEC5]">
+                <p className="text-xs text-ink-muted tabular-nums">Qty: {row.qty}</p>
+                <p className="whitespace-nowrap text-sm font-display font-bold text-ink tabular-nums">
                   {formatPrice(product.price * row.qty)}
                 </p>
               </div>
@@ -303,25 +332,27 @@ const ConfirmBasketView: FC<{
           ))}
         </div>
       </div>
-      <div className="rounded-2xl border border-[#00b2b280] bg-white p-4 text-sm shadow-sm xl:p-6">
-        <div className="flex items-center gap-2 border-b border-[#00B1B240] pb-3">
-          <div className="h-6 w-6 text-[#4CBEC5]">
-            <SvgDomesticCargo />
-          </div>
-          <p className="font-bold text-[#4CBEC5]">Order Summary</p>
+      <div className="rounded-card border border-line bg-surface p-4 shadow-card xl:p-6">
+        <div className="flex items-center gap-2 border-b border-line pb-3">
+          <span className="flex h-8 w-8 items-center justify-center rounded-pill bg-brand-50 text-brand-600">
+            <span className="block h-4 w-4">
+              <SvgDomesticCargo />
+            </span>
+          </span>
+          <p className="font-display text-base font-semibold text-ink">Order Summary</p>
         </div>
-        <div className="grid grid-cols-3 gap-3 py-4 text-[#7E8096]">
+        <div className="grid grid-cols-3 gap-3 py-4">
           <div className="flex flex-col gap-1 text-center">
-            <span className="text-xs">Products</span>
-            <span className="font-bold">{formatPrice(productsTotal)}</span>
+            <span className="text-xs text-ink-muted">Products</span>
+            <span className="font-display font-semibold text-ink tabular-nums">{formatPrice(productsTotal)}</span>
           </div>
           <div className="flex flex-col gap-1 text-center">
-            <span className="text-xs">Domestic Shipping</span>
-            <span className="font-bold">{formatPrice(shippingTotal)}</span>
+            <span className="text-xs text-ink-muted">Domestic Shipping</span>
+            <span className="font-display font-semibold text-ink tabular-nums">{formatPrice(shippingTotal)}</span>
           </div>
           <div className="flex flex-col gap-1 text-center">
-            <span className="text-xs">Total</span>
-            <span className="font-bold text-[#4CBEC5]">{formatPrice(grandTotal)}</span>
+            <span className="text-xs text-ink-muted">Total</span>
+            <span className="font-display text-lg font-bold text-ink tabular-nums">{formatPrice(grandTotal)}</span>
           </div>
         </div>
       </div>
@@ -329,12 +360,12 @@ const ConfirmBasketView: FC<{
         <button
           type="button"
           onClick={onAddAll}
-          className="flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#66C1BF] to-[#00A29D] px-8 py-3 text-sm font-bold text-white shadow-md"
+          className={`${primaryButtonClass} flex items-center justify-center gap-2 px-8 py-3 text-sm`}
         >
           <span>Add All to Cart</span>
-          <div className="h-5 w-5">
+          <span className="block h-5 w-5">
             <SvgShopCar />
-          </div>
+          </span>
         </button>
       </div>
     </div>

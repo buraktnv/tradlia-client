@@ -17,64 +17,62 @@ const BasketInfo: FC<any> = ({ setActivePage, basketData }) => {
     0
   );
   const total = shipping + productsPrice;
-  const totalParts = total.toFixed(2).split(".");
-  const fmt = (value: number) => value.toFixed(2).replace(".", ",");
+  const fmt = (value: number) => `${value.toFixed(2)} $`;
   const hasItems = pieces > 0;
+
+  const checkoutButtonClass =
+    "w-full rounded-pill py-3 bg-brand-400 hover:bg-brand-500 active:bg-brand-600 text-white font-semibold disabled:opacity-50 disabled:pointer-events-none transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1";
 
   return (
     <>
-      {/* Cart info */}
-      <div className="hidden xl:grid gap-5 px-8 py-6 bg-white border border-[#00B1B265] rounded-3xl">
+      {/* Cart summary */}
+      <div className="hidden xl:grid gap-5 bg-surface rounded-card shadow-card p-6 sticky top-6 border border-line">
         <div>
-          <p className="font-bold text-[#4CBEC5] text-center xl:text-left">
-            Selected Products in Cart({pieces})
+          <p className="font-display text-xs uppercase tracking-wider text-ink-muted">Cart Summary</p>
+          <p className="mt-1 text-sm font-semibold text-ink">
+            Selected Products in Cart ({pieces})
           </p>
-          <p className="text-xs text-[#7E8096] text-center xl:text-left">
+          <p className="text-xs text-ink-muted">
             Selected {pieces} products from {firms} sellers
           </p>
         </div>
-        <div className="font-bold text-[#7E8096] flex items-end py-2 xl:justify-start justify-center">
-          <p className="text-5xl">{totalParts[0]},</p>
-          <p className="text-3xl">{totalParts[1]} $</p>
-        </div>
-        <div className="flex w-full">
-          <button
-            type="button"
-            disabled={!hasItems}
-            className={`w-full text-lg py-2 rounded-full font-medium transition-colors ${
-              hasItems
-                ? "bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] text-white cursor-pointer"
-                : "bg-[#CCCFDD] text-white cursor-not-allowed"
-            }`}
-            onClick={() => setActivePage(() => "payment")}
-          >
-            Complete Purchase
-          </button>
-        </div>
-        <div className="font-bold text-[#7E8096] text-base px-12 xl:px-0">
-          <div className="flex justify-between w-full">
-            <p>Shipping</p> <p>{fmt(shipping)} $</p>
+        <div className="grid gap-2 border-t border-line pt-4">
+          <div className="flex justify-between text-sm text-ink-soft tabular-nums">
+            <p>Products</p>
+            <p>{fmt(productsPrice)}</p>
           </div>
-          <div className="flex justify-between w-full">
-            <p>Products</p> <p>{fmt(productsPrice)} $</p>
+          <div className="flex justify-between text-sm text-ink-soft tabular-nums">
+            <p>Shipping</p>
+            <p>{fmt(shipping)}</p>
           </div>
         </div>
+        <div className="flex items-baseline justify-between border-t border-line pt-4">
+          <p className="font-display text-sm font-semibold text-ink">Total</p>
+          <p className="font-display text-xl font-bold text-ink tabular-nums">{fmt(total)}</p>
+        </div>
+        <button
+          type="button"
+          aria-label="Complete purchase"
+          disabled={!hasItems}
+          className={checkoutButtonClass}
+          onClick={() => setActivePage(() => "payment")}
+        >
+          Complete Purchase
+        </button>
       </div>
-      <div className="fixed xl:hidden bottom-0 pb-[100px] left-0 right-0 bg-[#E5F3F3] rounded-3xl rounde px-3 pt-4 z-40 border border-[#00B1B265]">
-        <div className="grid justify-between grid-cols-2">
-          <div className="col-span-1 font-bold text-[#7E8096] flex items-center xl:justify-start justify-start">
-            <p className="text-2xl">{totalParts[0]},</p>
-            <p className="text-xl">{totalParts[1]} $</p>
+
+      <div className="fixed xl:hidden bottom-0 pb-[100px] left-0 right-0 bg-surface rounded-t-card px-4 pt-3 z-40 border-t border-x border-line shadow-pop">
+        <div className="grid justify-between grid-cols-2 items-center gap-3">
+          <div className="col-span-1 flex flex-col">
+            <span className="text-xs text-ink-muted">Total</span>
+            <span className="font-display text-lg font-bold text-ink tabular-nums">{fmt(total)}</span>
           </div>
           <div className="flex justify-end col-span-1">
             <button
               type="button"
+              aria-label="Complete purchase"
               disabled={!hasItems}
-              className={`text-sm px-4 py-2 rounded-full font-medium whitespace-nowrap transition-colors ${
-                hasItems
-                  ? "bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] text-white cursor-pointer"
-                  : "bg-[#CCCFDD] text-white cursor-not-allowed"
-              }`}
+              className="rounded-pill px-5 py-2.5 text-sm font-semibold whitespace-nowrap bg-brand-400 hover:bg-brand-500 active:bg-brand-600 text-white disabled:opacity-50 disabled:pointer-events-none transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
               onClick={() => setActivePage(() => "payment")}
             >
               Complete Purchase
