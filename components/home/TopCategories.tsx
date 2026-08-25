@@ -53,10 +53,10 @@ const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCat
           className="flex items-center gap-3 text-left rounded-card px-2 py-1.5 cursor-pointer transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
         >
           <span
-            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-card p-2.5 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none ${
+            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-card p-2.5 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none [&>div]:w-full [&>div]:h-full ${
               isActive
-                ? "bg-brand-100 text-brand-700"
-                : "bg-canvas text-ink-soft group-hover:bg-brand-100 group-hover:text-brand-700"
+                ? "bg-brand-600 text-white"
+                : "bg-canvas text-ink-soft group-hover:bg-brand-600 group-hover:text-white"
             }`}
           >
             <content.icon isActive={isActive} />
@@ -77,11 +77,11 @@ const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCat
           <div className="flex overflow-hidden rounded-card shadow-pop bg-surface border border-line">
             <div className="hidden lg:flex w-24 shrink-0 bg-brand-600 px-2 items-center justify-center text-white relative">
               <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center opacity-20">
-                <span className="w-16 h-20 block">
+                <span className="w-16 h-20 block fill-current">
                   <SvgM />
                 </span>
               </span>
-              <span className="relative w-14 h-16 opacity-90">
+              <span className="relative w-14 h-16 opacity-90 grid [&>div]:w-full [&>div]:h-full [&>div]:relative">
                 <content.icon isActive={true} />
               </span>
             </div>
@@ -92,7 +92,7 @@ const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCat
                   key={sub.id}
                   href={catId ? categoryUrl(catId, sub.id) : "/category"}
                 >
-                  <div className={`w-6 h-3 svgIcon text-brand-500`}>
+                  <div className={`w-6 h-3 svgIcon fill-current text-brand-500`}>
                     <SvgM />
                   </div>
                   {sub.name}
