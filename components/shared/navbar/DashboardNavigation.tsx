@@ -19,11 +19,9 @@ const DashboardNavigation: FC<any> = ({ setIsDashboardShown }) => {
           <div className="flex justify-between flex-1 w-full h-full overflow-y-auto grow items-between">
             {!selectedCategory ? (
               <div className="flex flex-col w-full px-12 mt-2">
-                <button type="button" className="flex items-center justify-start invisible w-full py-2 my-1" tabIndex={-1} aria-hidden="true">
-                  <span className="font-semibold text-brand-600 transform rotate-180">
-                    <SvgArrow />
-                  </span>
-                </button>
+                <div aria-hidden="true" className="flex items-center w-full py-2 my-1">
+                  <p className="font-display text-xs uppercase tracking-wider text-ink-muted">All Categories</p>
+                </div>
                 {jsonCategoryList.map((el) => (
                   <button type="button"
                     className="group flex items-center w-full py-2 my-2 rounded-card text-left transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
@@ -53,7 +51,7 @@ const DashboardNavigation: FC<any> = ({ setIsDashboardShown }) => {
                     <SvgArrow />
                   </span>
                 </button>
-                <button type="button" className="flex items-center w-full py-2 my-2 rounded-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1">
+                <div className="flex items-center w-full py-2 my-2 rounded-card">
                   {jsonCategoryList
                     .filter((el) => el.id === selectedCategory)
                     .map((el) => (
@@ -66,7 +64,7 @@ const DashboardNavigation: FC<any> = ({ setIsDashboardShown }) => {
                     {jsonCategoryList.filter((el) => el.id === selectedCategory)[0]?.text1}{" "}
                     {jsonCategoryList.filter((el) => el.id === selectedCategory)[0]?.text2}
                   </span>
-                </button>
+                </div>
                 {selectedCategoryItem?.subCategories.map((sub) => (
                   <button
                     type="button"
