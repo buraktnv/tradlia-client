@@ -6,15 +6,15 @@ import { useRouter } from "next/router";
 import { SvgPlus } from "../../helpers/svgs/adverts";
 
 const SvgGrid = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="#currentColor">
+  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor">
     <path d="M3.5 3.5h7v7h-7zM13.5 3.5h7v7h-7zM3.5 13.5h7v7h-7zM13.5 13.5h7v7h-7z" />
   </svg>
 );
 
 const itemBase =
-  "group flex select-none items-center gap-3 rounded-r-card border-l-2 border-transparent px-3 py-2 text-sm transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1";
+  "group flex select-none items-center gap-3 rounded-r-card border-l-2 px-3 py-2 text-sm transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1";
 const activeItem = "bg-brand-50 text-brand-700 border-brand-400 font-medium";
-const inactiveItem = "text-ink-soft hover:text-ink hover:bg-canvas";
+const inactiveItem = "border-transparent text-ink-soft hover:text-ink hover:bg-canvas";
 
 const SectionLabel: FC<{ children: React.ReactNode }> = ({ children }) => (
   <h2 className="px-3 pb-1 pt-4 font-display text-xs uppercase tracking-wider text-ink-muted first-of-type:pt-1">
