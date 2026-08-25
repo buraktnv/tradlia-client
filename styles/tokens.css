@@ -1,0 +1,10 @@
+/* Design tokens: motion + z-index (single source of truth for the redesign) */
+:root {
+  --dur-fast: 150ms;
+  --dur-med: 250ms;
+  --dur-slow: 450ms;
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --z-nav: 100;
+  --z-modal: 200;
+  --z-toast: 300;
+}
