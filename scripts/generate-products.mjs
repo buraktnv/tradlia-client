@@ -118,18 +118,18 @@ function pills() {
 `;
 }
 
-/** Syringe. */
-function syringe() {
+/** Adjustable wrench. */
+function wrench() {
   return `
   ${shadow(200, 345, 130, 18)}
-  <path d="M176 70 L224 70 L224 92 L176 92 Z" fill="#e8eaef"/>
-  <path d="M176 92 L224 92 L224 180 L176 180 Z" fill="url(#g-syr)" opacity="0.95"/>
-  <path d="M196 70 L204 70 L204 92 L196 92 Z" fill="#5b5f6a"/>
-  <rect x="184" y="180" width="32" height="96" rx="8" fill="#ffffff" opacity="0.9"/>
-  <rect x="188" y="190" width="24" height="70" rx="6" fill="url(#g-syr)"/>
-  <path d="M196 276 L204 276 L204 330 L196 330 Z" fill="#e8eaef"/>
-  <path d="M196 330 L212 342 L188 342 Z" fill="#d9dce3"/>
-  <ellipse cx="192" cy="120" rx="5" ry="24" fill="#fff" opacity="0.4"/>
+  <mask id="jaw-cut">
+    <rect x="0" y="0" width="400" height="400" fill="#ffffff"/>
+    <rect x="262" y="98" width="170" height="60" transform="rotate(-45 262 128)" fill="#000000"/>
+  </mask>
+  <circle cx="262" cy="128" r="58" fill="url(#g-wrench)" mask="url(#jaw-cut)"/>
+  <path d="M150 292 L238 204" stroke="url(#g-wrench)" stroke-width="48" stroke-linecap="round"/>
+  <rect x="150" y="234" width="20" height="52" rx="10" transform="rotate(-45 160 260)" fill="#ffffff" opacity="0.35"/>
+  <circle cx="238" cy="128" r="10" fill="#ffffff" opacity="0.35"/>
 `;
 }
 
@@ -171,7 +171,7 @@ function dental() {
 `;
 }
 
-/** Stethoscope. */
+/** Borescope (inspection camera). */
 function stetho() {
   return `
   ${shadow(200, 345, 130, 18)}
@@ -205,7 +205,7 @@ const PRODUCTS = [
   { name: "prod-05", draw: () => spray() },
   { name: "prod-06", draw: () => drops() },
   { name: "prod-07", draw: () => pills() },
-  { name: "prod-08", draw: () => syringe() },
+  { name: "prod-08", draw: () => wrench() },
   { name: "prod-09", draw: () => mask() },
   { name: "prod-10", draw: () => thermometer() },
   { name: "prod-11", draw: () => dental() },
@@ -218,7 +218,7 @@ const PRODUCTS = [
 
 let count = 0;
 for (const { name, draw } of PRODUCTS) {
-  const gradientIds = ["g-bottle", "g-jar", "g-box", "g-tube", "g-spray", "g-drops", "g-pills", "g-syr", "g-mask", "g-therm", "g-dental", "g-stetho", "g-gloves"];
+  const gradientIds = ["g-bottle", "g-jar", "g-box", "g-tube", "g-spray", "g-drops", "g-pills", "g-wrench", "g-mask", "g-therm", "g-dental", "g-stetho", "g-gloves"];
   const used = gradientIds.filter((id) => draw().includes(`url(#${id})`));
   const defs = used
     .map((id, i) => {

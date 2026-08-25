@@ -55,7 +55,7 @@ const Payment: FC<any> = ({ setActivePage, activePage, basketData, setBasketData
                 address: "123 Commerce St, Suite 100 \nPortland, OR 97201",
                 telNo: "+1 (555) 012-3456",
                 receiptType: "Corporate",
-                firmName: "John Miller \nPharmacy \nGroup",
+                firmName: "John Miller \nTrading \nGroup",
                 taxOffice: "Portland Tax Office",
                 taxNumber: "TX-12345678",
               }}

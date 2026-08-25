@@ -20,9 +20,9 @@ export const BasketCardData: any[] = [
     productCards: [
       {
         id: 1,
-        name: "StrepNaz\n Orange & Orange",
-        brand: "Echinacea 24 Lozenges",
-        image: "/images/photos/StrepNaz Herbal.svg",
+        name: "TorqueMax\n Wood Screws",
+        brand: "4×40 (500 Count)",
+        image: "/images/photos/product-3.svg",
         price: 47.98,
         miad: "March 2023",
         isFavorite: false,
@@ -32,9 +32,9 @@ export const BasketCardData: any[] = [
       },
       {
         id: 2,
-        name: "Oxygenated Water",
-        brand: "100 ml",
-        image: "/images/photos/Oxygenated Water.svg",
+        name: "GripTight Pallet Wrap",
+        brand: "20 µm Roll",
+        image: "/images/photos/product-2.svg",
         price: 25.98,
         miad: "March 2023",
         count: 2,
@@ -49,7 +49,7 @@ export const BasketCardData: any[] = [
   {
     id: 3,
     logo: "pharma",
-    firm: "PharmaMax",
+    firm: "PartsHub",
     shippingCampaign: null,
     shippingCampaign2: "Same-Day Shipping if Ordered by 3:55 PM",
     minTotalPrice: 250,
@@ -57,9 +57,9 @@ export const BasketCardData: any[] = [
     productCards: [
       {
         id: 4,
-        name: "StrepNaz Orange & ",
-        brand: "Echinacea 24 Lozenges",
-        image: "/images/photos/StrepNaz Herbal.svg",
+        name: "TorqueMax Wood Screws ",
+        brand: "4×40 (500 Count)",
+        image: "/images/photos/product-3.svg",
         price: 47.98,
         miad: "March 2023",
         isFavorite: false,
@@ -82,9 +82,9 @@ export const BasketCardData: any[] = [
     productCards: [
       {
         id: 6,
-        name: "StrepNaz\n Orange & Orange",
-        brand: "Echinacea 24 Lozenges",
-        image: "/images/photos/StrepNaz Herbal.svg",
+        name: "TorqueMax\n Wood Screws",
+        brand: "4×40 (500 Count)",
+        image: "/images/photos/product-3.svg",
         price: 47.98,
         miad: "March 2023",
         isFavorite: false,
@@ -94,9 +94,9 @@ export const BasketCardData: any[] = [
       },
       {
         id: 7,
-        name: "Oxygenated Water",
-        brand: "100 ml",
-        image: "/images/photos/Oxygenated Water.svg",
+        name: "GripTight Pallet Wrap",
+        brand: "20 µm Roll",
+        image: "/images/photos/product-2.svg",
         price: 25.98,
         miad: "March 2023",
         count: 2,

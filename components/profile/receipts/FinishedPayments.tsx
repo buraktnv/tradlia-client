@@ -17,9 +17,9 @@ const cardList = [
     productList: [
       {
         id: 1,
-        image: "/images/photos/StrepNaz Herbal.svg",
-        name: "StrepNaz Orange &",
-        brand: "Echinacea 24 Lozenges",
+        image: "/images/photos/product-3.svg",
+        name: "TorqueMax Wood Screws",
+        brand: "4×40 (500 Count)",
         miad: "March 2023",
         quantity: "15",
         price: "47.98",
@@ -27,9 +27,9 @@ const cardList = [
       },
       {
         id: 2,
-        image: "/images/photos/Oxygenated Water.svg",
-        name: "HealthPro Oxygenated Water",
-        brand: "100 ml",
+        image: "/images/photos/product-2.svg",
+        name: "HealthPro GripTight Pallet Wrap",
+        brand: "20 µm Roll",
         miad: "March 2024",
         quantity: "25",
         price: "53.98",
@@ -64,9 +64,9 @@ const cardList = [
     productList: [
       {
         id: 1,
-        image: "/images/photos/StrepNaz Herbal.svg",
-        name: "StrepNaz Orange &",
-        brand: "Echinacea 24 Lozenges",
+        image: "/images/photos/product-3.svg",
+        name: "TorqueMax Wood Screws",
+        brand: "4×40 (500 Count)",
         miad: "March 2023",
         quantity: "15",
         price: "47.98",
@@ -74,9 +74,9 @@ const cardList = [
       },
       {
         id: 2,
-        image: "/images/photos/Oxygenated Water.svg",
-        name: "HealthPro Oxygenated Water",
-        brand: "100 ml",
+        image: "/images/photos/product-2.svg",
+        name: "HealthPro GripTight Pallet Wrap",
+        brand: "20 µm Roll",
         miad: "March 2024",
         quantity: "25",
         price: "53.98",
@@ -111,9 +111,9 @@ const cardList = [
     productList: [
       {
         id: 1,
-        image: "/images/photos/StrepNaz Herbal.svg",
-        name: "StrepNaz Orange &",
-        brand: "Echinacea 24 Lozenges",
+        image: "/images/photos/product-3.svg",
+        name: "TorqueMax Wood Screws",
+        brand: "4×40 (500 Count)",
         miad: "March 2023",
         quantity: "15",
         price: "47.98",
@@ -121,9 +121,9 @@ const cardList = [
       },
       {
         id: 2,
-        image: "/images/photos/Oxygenated Water.svg",
-        name: "HealthPro Oxygenated Water",
-        brand: "100 ml",
+        image: "/images/photos/product-2.svg",
+        name: "HealthPro GripTight Pallet Wrap",
+        brand: "20 µm Roll",
         miad: "March 2024",
         quantity: "25",
         price: "53.98",
@@ -158,9 +158,9 @@ const cardList = [
     productList: [
       {
         id: 1,
-        image: "/images/photos/StrepNaz Herbal.svg",
-        name: "StrepNaz Orange &",
-        brand: "Echinacea 24 Lozenges",
+        image: "/images/photos/product-3.svg",
+        name: "TorqueMax Wood Screws",
+        brand: "4×40 (500 Count)",
         miad: "March 2023",
         quantity: "15",
         price: "47.98",
@@ -168,9 +168,9 @@ const cardList = [
       },
       {
         id: 2,
-        image: "/images/photos/Oxygenated Water.svg",
-        name: "HealthPro Oxygenated Water",
-        brand: "100 ml",
+        image: "/images/photos/product-2.svg",
+        name: "HealthPro GripTight Pallet Wrap",
+        brand: "20 µm Roll",
         miad: "March 2024",
         quantity: "25",
         price: "53.98",

@@ -7,9 +7,9 @@ import EraseModal from "./EraseAdvertModal";
 const ProductList = [
   {
     id: 1,
-    image: "/images/photos/StrepNaz Herbal.svg",
-    name: "StrepNaz Orange &",
-    brand: "Echinacea 24 Lozenges",
+    image: "/images/photos/product-3.svg",
+    name: "TorqueMax Wood Screws",
+    brand: "4×40 (500 Count)",
     miad: "March 2023",
     quantity: "15",
     price: "47.98",
@@ -20,9 +20,9 @@ const ProductList = [
   },
   {
     id: 2,
-    image: "/images/photos/Oxygenated Water.svg",
-    name: "VitaHealth Oxygenated Water",
-    brand: "100 ml",
+    image: "/images/photos/product-2.svg",
+    name: "GripTight Pallet Wrap",
+    brand: "20 µm Roll",
     miad: "March 2024",
     quantity: "16",
     price: "53.25",
@@ -47,8 +47,8 @@ const ProductList = [
   {
     id: 4,
     image: "/images/photos/product-4.svg",
-    name: "ThroatEase Lozenges",
-    brand: "Honey-Lemon Flavored 24 Lozenges",
+    name: "WriteWell Gel Pens",
+    brand: "Blue 0.7 mm 10 pcs",
     miad: "March 2023",
     quantity: "15",
     price: "47.98",

@@ -12,8 +12,8 @@ import StateFilter from "../../components/shared/category/StateFilter";
 const BottomBarData = {
   commentCount: 56,
   image: "/images/photos/product-6.svg",
-  name: "Herbiva Orange &",
-  brand: "Echinacea 24 Lozenges",
+  name: "TorqueMax Wood Screws",
+  brand: "4×40 (500 Count)",
   votes: {
     5: 450,
     4: 65,
@@ -110,7 +110,7 @@ const items: any = [
   },
   {
     id: 2,
-    name: "Contactless Thermometer",
+    name: "TRMS Multimeter",
     brand: "MediCore Digital",
     image: "/images/photos/product-3.svg",
     price: 53.5,
@@ -120,8 +120,8 @@ const items: any = [
   },
   {
     id: 3,
-    name: "Probiotix",
-    brand: "20 Vials - Probiotic",
+    name: "SenseIt Temp Sensor",
+    brand: "Module ±0.5°C",
     image: "/images/photos/product-11.svg",
     price: 35.5,
     shipping: 1,
@@ -146,8 +146,8 @@ const SidebarCardData: any = {
   slider2: "/images/photos/product-6.svg",
   slider3: "/images/photos/product-6.svg",
   slider4: "/images/photos/product-6.svg",
-  name: "Herbiva Orange &",
-  brand: "Echinacea 24 Lozenges",
+  name: "TorqueMax Wood Screws",
+  brand: "4×40 (500 Count)",
 };
 
 const Product: NextPage = () => {
@@ -271,8 +271,8 @@ const Product: NextPage = () => {
               }}
             />
             <SellerCard
-              svg={svg.pharmaWholesale}
-              title="PharmaWholesale"
+              svg={svg.tradedirect}
+              title="TradeDirect"
               star={4}
               starPoint={"4.1"}
               advertisementCount={63}
@@ -281,7 +281,7 @@ const Product: NextPage = () => {
               price="25.00"
               item={{
                 id: 2,
-                name: "Contactless Thermometer",
+                name: "TRMS Multimeter",
                 brand: "MediCore Digital",
                 image: "/images/photos/product-3.svg",
                 price: 53.5,
@@ -291,8 +291,8 @@ const Product: NextPage = () => {
               }}
             />
             <SellerCard
-              svg={svg.MediVault}
-              title="MediVault"
+              svg={svg.SupplyHub}
+              title="SupplyHub"
               star={4}
               starPoint={"4,0"}
               advertisementCount={63}
@@ -301,8 +301,8 @@ const Product: NextPage = () => {
               price="18.23"
               item={{
                 id: 3,
-                name: "Probiotix",
-                brand: "20 Vials - Probiotic",
+                name: "SenseIt Temp Sensor",
+                brand: "Module ±0.5°C",
                 image: "/images/photos/product-11.svg",
                 price: 35.5,
                 shipping: 1,
@@ -311,8 +311,8 @@ const Product: NextPage = () => {
               }}
             />
             <SellerCard
-              svg={svg.MediPlus}
-              title="MediPlus"
+              svg={svg.ToolWorks}
+              title="ToolWorks"
               star={3}
               starPoint={"3,9"}
               advertisementCount={42}
@@ -475,7 +475,7 @@ const svg = {
       />
     </svg>
   ),
-  pharmaWholesale: (
+  tradedirect: (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -499,7 +499,7 @@ const svg = {
       </g>
     </svg>
   ),
-  MediVault: (
+  SupplyHub: (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -523,7 +523,7 @@ const svg = {
       />
     </svg>
   ),
-  MediPlus: (
+  ToolWorks: (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"

@@ -9,8 +9,8 @@ import type { HomeProductItem } from "../../types/product";
 const items: HomeProductItem[] = [
   {
     id: 1,
-    name: "Nitrile Exam Gloves",
-    brand: "MedSupply - 100 Count",
+    name: "Hex Bolt Assortment M6",
+    brand: "Partshub - 200 Count",
     image: "/images/photos/transparent/prod-13.svg",
     price: 18.50,
     shipping: 0,
@@ -42,8 +42,8 @@ const items: HomeProductItem[] = [
   },
   {
     id: 4,
-    name: "Blood Pressure Monitor",
-    brand: "Omron Platinum Series",
+    name: "Digital Clamp Meter",
+    brand: "TradeDirect - 600A AC/DC",
     image: "/images/photos/transparent/prod-03.svg",
     price: 89.99,
     shipping: 0,
@@ -53,8 +53,8 @@ const items: HomeProductItem[] = [
   },
   {
     id: 5,
-    name: "Pulse Oximeter",
-    brand: "ChoiceMMed - Fingertip",
+    name: "Cordless Impact Driver",
+    brand: "ToolWorks - 18V Brushless",
     image: "/images/photos/transparent/prod-12.svg",
     price: 24.99,
     shipping: 0,
@@ -64,8 +64,8 @@ const items: HomeProductItem[] = [
   },
   {
     id: 6,
-    name: "First Aid Kit",
-    brand: "LifeLine - 100 Pieces",
+    name: "Industrial First-Aid Kit",
+    brand: "SafeMart - 50 Pieces",
     image: "/images/photos/transparent/prod-16.svg",
     price: 34.99,
     shipping: 1,
@@ -75,8 +75,8 @@ const items: HomeProductItem[] = [
   },
   {
     id: 7,
-    name: "Hand Sanitizer Gel",
-    brand: "Purell - 500ml Pump",
+    name: "Heavy-Duty Degreaser",
+    brand: "GreenLine - 5L Concentrate",
     image: "/images/photos/transparent/prod-05.svg",
     price: 12.49,
     shipping: 0,
@@ -86,8 +86,8 @@ const items: HomeProductItem[] = [
   },
   {
     id: 8,
-    name: "Vitamin D3 5000 IU",
-    brand: "NatureWise - 360 Softgels",
+    name: "A4 Copy Paper 80 gsm",
+    brand: "ClearOffice - 2500 Sheets",
     image: "/images/photos/transparent/prod-07.svg",
     price: 19.99,
     shipping: 0,
@@ -97,8 +97,8 @@ const items: HomeProductItem[] = [
   },
   {
     id: 9,
-    name: "Compression Socks",
-    brand: "Dr. Scholl's - 15-20 mmHg",
+    name: "Cut-Resistant Gloves",
+    brand: "SafeMart - Level D Pair",
     image: "/images/photos/transparent/prod-02.svg",
     price: 22.99,
     shipping: 0,
@@ -119,8 +119,8 @@ const items: HomeProductItem[] = [
   },
   {
     id: 11,
-    name: "Nebulizer Machine",
-    brand: "Philips Respironics",
+    name: "LED High Bay 150W",
+    brand: "BrightWork - IP65 Industrial",
     image: "/images/photos/transparent/prod-15.svg",
     price: 149.99,
     shipping: 0,
@@ -130,8 +130,8 @@ const items: HomeProductItem[] = [
   },
   {
     id: 12,
-    name: "Insulin Syringes 31G",
-    brand: "BD Ultra-Fine - 100 Count",
+    name: "Circular Saw Blade Set",
+    brand: "DrillMaster - 10 Pieces",
     image: "/images/photos/transparent/prod-08.svg",
     price: 32.99,
     shipping: 0,

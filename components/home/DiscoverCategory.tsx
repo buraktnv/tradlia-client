@@ -27,7 +27,7 @@ const DiscoverCategory: FC<any> = () => {
               <div className="relative top-0 left-0 w-full h-full transition-all duration-200 ease-in-out transform group-hover:scale-105">
                 <Image
                   className="object-contain"
-                  src="/images/main/homepage/medical-category.svg"
+                  src="/images/main/homepage/packaging-category.svg"
                   alt="Packaging & Shipping"
                   fill sizes="100vw"
                 />

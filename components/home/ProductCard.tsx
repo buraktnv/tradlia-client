@@ -8,8 +8,8 @@ import type { HomeProductItem, DealOfTheDayContent } from "../../types/product";
 const items: HomeProductItem[] = [
   {
     id: 1,
-    name: "Nitrile Exam Gloves",
-    brand: "MedSupply - 100 Count",
+    name: "Hex Bolt Assortment M6",
+    brand: "Partshub - 200 Count",
     image: "/images/photos/transparent/prod-13.svg",
     price: 18.50,
     shipping: 0,
@@ -88,8 +88,8 @@ const ProductCard = () => {
         content={{
           image: "/images/photos/transparent/prod-03.svg",
           price: 32.50,
-          name: "Blood Pressure Monitor",
-          brand: "Omron Platinum Series",
+          name: "Cordless Combi Drill",
+          brand: "DrillMaster - 18V 2 Batteries",
         }}
       />
     </div>

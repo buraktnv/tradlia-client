@@ -33,11 +33,11 @@ const UpdateProduct: FC<any> = ({ setOpenModal }) => {
 
           <div className="flex w-[90%] xl:w-full">
             <div className="xl:w-full xl:flex xl:justify-center xl:items-center">
-              <Image src="/images/photos/StrepNaz Herbal.svg" width={120} height={100} alt="image" />
+              <Image src="/images/photos/product-3.svg" width={120} height={100} alt="image" />
             </div>
             <div className="flex flex-col w-full space-y-5">
               <div className="text-[#7E8096] xl:flex xl:w-96 px-3 xl:px-7  mb-6 whitespace-nowrap xl:mb-6">
-                <strong>StrepNaz Orange & </strong> Echinacea 24 Lozenges
+                <strong>TorqueMax Wood Screws </strong> 4×40 (500 Count)
               </div>
               <div className="justify-end hidden space-x-4 xl:flex">
                 <select className="peer relative appearance-none xl:bg-[#FCFCFC] w-[96%] py-2 text-[#7E8096] text-lg font-semibold px-4 xl:px-[13px] outline-none rounded-full border border-[#00B1B265] drop-shadow-input-shadow">

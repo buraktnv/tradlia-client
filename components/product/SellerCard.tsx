@@ -16,7 +16,7 @@ const items: any = [
   },
   {
     id: 2,
-    name: "Contactless Thermometer",
+    name: "TRMS Multimeter",
     brand: "MediCore Digital",
     image: "/images/photos/product-3.svg",
     price: 53.5,
@@ -26,8 +26,8 @@ const items: any = [
   },
   {
     id: 3,
-    name: "Probiotix",
-    brand: "20 Vials - Probiotic",
+    name: "SenseIt Temp Sensor",
+    brand: "Module ±0.5°C",
     image: "/images/photos/product-11.svg",
     price: 35.5,
     shipping: 1,
