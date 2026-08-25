@@ -357,8 +357,8 @@ const ProductCard: FC<any> = ({ content, onChange, onRemove }) => {
             </div>
           </button>
         </div>
-        <div className="flex items-center gap-3">
-          <div>
+        <div className="flex min-w-0 items-center gap-3">
+          <div className="min-w-0">
             <div className="bg-canvas rounded-pill flex border border-line hover:border-brand-300 p-0.5 xl:p-1 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none">
               <button
                 type="button"
@@ -388,7 +388,7 @@ const ProductCard: FC<any> = ({ content, onChange, onRemove }) => {
               </button>
             </div>
           </div>
-          <div className="flex items-center justify-center text-ink-soft text-sm font-display font-bold text-center w-20 xl:w-24 whitespace-nowrap tabular-nums">
+          <div className="flex min-w-0 shrink items-center justify-center text-ink-soft text-sm font-display font-bold text-center w-20 xl:w-24 whitespace-nowrap tabular-nums">
             <p>{(content.price * content.count).toFixed(2).replace(".", ",")} $</p>
           </div>
         </div>

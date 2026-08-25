@@ -107,7 +107,7 @@ const Slider: FC = () => {
 
   return (
     <>
-      <div className="relative flex flex-col px-5 bg-surface xl:px-3">
+      <div className="relative flex flex-col overflow-hidden px-5 bg-surface xl:px-3">
         <div className="bg-canvas absolute w-[100%] h-[60%] left-0 bottom-0" aria-hidden="true"></div>
         <div className="container relative mx-auto mb-6 xl:mb-0">
           <div className="absolute flex w-full h-full rounded-full">

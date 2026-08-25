@@ -92,7 +92,7 @@ const SoldCard: FC<any> = ({ content, status }: { content: any; status?: OrderSt
           ))}
         </div>
         <div className="col-span-6 flex w-full items-end xl:col-span-1 xl:h-[96px] xl:flex-col xl:items-start xl:justify-center">
-          <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[13px] leading-4 text-ink-muted xl:flex-col xl:items-start xl:text-sm">
+          <div className="flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-1 text-[13px] leading-4 text-ink-muted xl:flex-col xl:items-start xl:text-sm">
             <span>Order No:</span>
             <span className="font-display font-bold text-brand-600">{content.orderID}</span>
             <OrderStatusChip status={status} />
