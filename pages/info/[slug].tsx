@@ -24,29 +24,29 @@ const pages: Record<string, { title: string; intro: string }> = {
     title: "Privacy & Security",
     intro: "The technical and organisational measures Tradlia uses to keep your account safe.",
   },
-  medicals: {
-    title: "Medical Supplies",
-    intro: "A category overview for clinics and medical professionals sourcing supplies on Tradlia.",
+  "industrial-supplies": {
+    title: "Industrial Supplies",
+    intro: "A category overview for workshops and manufacturers sourcing supplies on Tradlia.",
   },
-  "family-medicine": {
-    title: "Family Medicine",
-    intro: "Products and equipment tailored to family medicine practices.",
+  "facility-management": {
+    title: "Facility Management",
+    intro: "Products and equipment tailored to facility teams.",
   },
-  dentists: {
-    title: "Dentists",
-    intro: "Dental instruments, consumables and equipment for modern practices.",
+  "workshop-tools": {
+    title: "Workshop Tools",
+    intro: "Tools, consumables and equipment for modern workshops.",
   },
-  veterinarians: {
-    title: "Veterinarians",
-    intro: "Veterinary supplies and equipment for animal care professionals.",
+  "warehouse-logistics": {
+    title: "Warehouse & Logistics",
+    intro: "Storage, handling and shipping equipment for warehouses.",
   },
-  "healthcare-providers": {
-    title: "Healthcare Providers",
-    intro: "How hospitals, clinics and care homes procure through Tradlia.",
+  "procurement-teams": {
+    title: "Procurement Teams",
+    intro: "How purchasing teams procure through Tradlia.",
   },
   "who-can-join": {
     title: "Who Can Join?",
-    intro: "Tradlia is open to verified healthcare professionals, businesses and individual buyers.",
+    intro: "Tradlia is open to verified businesses, tradespeople and individual buyers.",
   },
   "how-to-buy-or-sell": {
     title: "How to Buy or Sell",

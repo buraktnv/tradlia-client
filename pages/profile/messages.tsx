@@ -72,7 +72,7 @@ const messageContentList = [
   },
   {
     id: 2,
-    customer: "MediSupply",
+    customer: "SupplyHub",
     subject: "Return and Cancellation",
     message: "Hello. 4 items, lot no: HVCG0653 Silver...",
     date: "28.02.2022 - 14:20",
@@ -148,7 +148,7 @@ const messageContentList = [
   },
   {
     id: 5,
-    customer: "MediSupply",
+    customer: "SupplyHub",
     subject: "Delivery and Shipping",
     message: "Hello. 4 items, lot no: HVCG0653 Silver...",
     date: "28.02.2022 - 14:20",

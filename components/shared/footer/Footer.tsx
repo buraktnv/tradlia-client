@@ -66,61 +66,61 @@ const Footer: FC = () => {
             <div className="flex flex-col">
               <p className="text-sm font-ubuntu font-bold text-[#4CBEC5] cursor-default">Categories</p>
               <Link
-                href="/info/medicals"
+                href="/info/industrial-supplies"
                 className="select-none cursor-pointer text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1"
                 target={"_blank"}>
 
-                <p>Medical</p>
+                <p>Industrial Supplies</p>
 
               </Link>
               <Link
-                href="/info/family-medicine"
+                href="/info/facility-management"
                 className="select-none cursor-pointer text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1"
                 target={"_blank"}>
 
-                <p>Family Medicine</p>
+                <p>Facility Management</p>
 
               </Link>
               <Link
-                href="/info/dentists"
+                href="/info/workshop-tools"
                 className="select-none cursor-pointer text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1">
 
-                <p>Dentistry</p>
+                <p>Workshop Tools</p>
 
               </Link>
               <Link
-                href="/info/veterinarians"
+                href="/info/warehouse-logistics"
                 className="select-none cursor-pointer text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1">
 
-                <p>Veterinary</p>
+                <p>Warehouse & Logistics</p>
 
               </Link>
               <Link
-                href="/info/healthcare-providers"
+                href="/info/procurement-teams"
                 className="select-none cursor-pointer text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1">
 
-                <p>Health</p>
+                <p>Procurement Teams</p>
 
               </Link>
               <Link
-                href="/category"
+                href="/category?cat=safety"
                 className="select-none cursor-pointer text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1">
 
-                <p>Personal Care & Cosmetics</p>
+                <p>Safety Gear & Workwear</p>
 
               </Link>
               <Link
-                href="/category"
+                href="/category?cat=tools"
                 className="select-none cursor-pointer text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1">
 
-                <p>Dietary Supplements</p>
+                <p>Power Tools & Accessories</p>
 
               </Link>
               <Link
-                href="/category"
+                href="/category?cat=office"
                 className="select-none cursor-pointer text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1">
 
-                <p>Office/Stationery/Hygiene</p>
+                <p>Office & Facility</p>
 
               </Link>
             </div>

@@ -17,7 +17,7 @@ const productList: SmartProduct[] = [
   {
     id: 1,
     name: "PureSafe 3-Ply Black",
-    brand: "Surgical Mask with Wire 50-pack",
+    brand: "Dust Mask FFP2 with Valve 5-pack",
     image: "/images/photos/product-2.svg",
     price: 47.98,
   },

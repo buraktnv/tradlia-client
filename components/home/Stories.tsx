@@ -14,52 +14,52 @@ interface StoryProduct {
 
 // Small static catalog used to populate the story overlay per category.
 const storyProducts: Record<string, StoryProduct[]> = {
-  medical: [
-    { name: "Nitrile Exam Gloves", brand: "MedSupply - 100 Count", price: 18.5, image: "/images/photos/transparent/prod-13.svg" },
-    { name: "Digital Thermometer", brand: "MediCore - Clinical Grade", price: 23.5, image: "/images/photos/transparent/prod-10.svg" },
-    { name: "Surgical Masks 3-Ply", brand: "SafeGuard - 50 Pack", price: 15.99, image: "/images/photos/transparent/prod-09.svg" },
+  packaging: [
+    { name: "Double-Wall Boxes 50 pcs", brand: "StackSafe - 400×300×300 mm", price: 18.5, image: "/images/photos/transparent/prod-01.svg" },
+    { name: "Pallet Wrap 20 µm", brand: "GripTight - 500 m Roll", price: 45.5, image: "/images/photos/transparent/prod-02.svg" },
+    { name: "Shipping Labels A4", brand: "StackSafe - 100 Sheets", price: 9.99, image: "/images/photos/transparent/prod-15.svg" },
   ],
-  family: [
-    { name: "Vitamin D3 5000 IU", brand: "NatureWise - 360 Softgels", price: 19.99, image: "/images/photos/transparent/prod-07.svg" },
-    { name: "Cough Relief Drops", brand: "Herbiva - 24 Lozenges", price: 8.44, image: "/images/photos/transparent/prod-06.svg" },
-    { name: "Baby Care Cream", brand: "PureLife - 200 ml", price: 12.9, image: "/images/photos/transparent/prod-02.svg" },
+  fasteners: [
+    { name: "Wood Screws 4×40", brand: "TorqueMax - 500 Count", price: 36.5, image: "/images/photos/transparent/prod-03.svg" },
+    { name: "Hex Bolts M8", brand: "BoltCore - 200 Count", price: 9.9, image: "/images/photos/transparent/prod-04.svg" },
+    { name: "Universal Anchors", brand: "BoltCore - 100 Count", price: 12.49, image: "/images/photos/transparent/prod-05.svg" },
   ],
-  dental: [
-    { name: "Sonic Toothbrush", brand: "DentalPro - Soft Bristles", price: 29.99, image: "/images/photos/transparent/prod-11.svg" },
-    { name: "Whitening Toothpaste", brand: "DentalPro - 100 ml", price: 6.49, image: "/images/photos/transparent/prod-04.svg" },
-    { name: "Dental Floss Picks", brand: "DentalPro - 50 Count", price: 4.99, image: "/images/photos/transparent/prod-15.svg" },
+  electronics: [
+    { name: "CAT6 Cable 305 m", brand: "LinkPro - Solid Copper", price: 12.75, image: "/images/photos/transparent/prod-06.svg" },
+    { name: "Temp Sensor Module", brand: "SenseIt - ±0.5°C", price: 6.4, image: "/images/photos/transparent/prod-10.svg" },
+    { name: "Power Supply 24V 5A", brand: "LinkPro - Industrial", price: 21.99, image: "/images/photos/transparent/prod-11.svg" },
   ],
-  veterinary: [
-    { name: "Pet Multivitamins", brand: "VetPlus - 120 Tablets", price: 21.99, image: "/images/photos/transparent/prod-03.svg" },
-    { name: "Flea & Tick Spray", brand: "VetGuard - 250 ml", price: 16.75, image: "/images/photos/transparent/prod-05.svg" },
-    { name: "Pet Wound Ointment", brand: "VetCare - 50 ml", price: 12.99, image: "/images/photos/transparent/prod-01.svg" },
+  safety: [
+    { name: "EN397 Safety Helmet", brand: "HardHat Pro - White", price: 27.9, image: "/images/photos/transparent/prod-07.svg" },
+    { name: "Cut-Resistant Gloves", brand: "SafeGrip - Level D Pair", price: 19.49, image: "/images/photos/transparent/prod-08.svg" },
+    { name: "Hi-Vis Vest Class 2", brand: "SafeGrip - Yellow XL", price: 8.99, image: "/images/photos/transparent/prod-09.svg" },
   ],
-  health: [
-    { name: "Pulse Oximeter", brand: "ChoiceMMed - Fingertip", price: 24.99, image: "/images/photos/transparent/prod-12.svg" },
-    { name: "Blood Pressure Monitor", brand: "Omron Platinum Series", price: 89.99, image: "/images/photos/transparent/prod-10.svg" },
-    { name: "Heat Therapy Gel", brand: "MediHeat - 100 ml", price: 14.5, image: "/images/photos/transparent/prod-14.svg" },
+  tools: [
+    { name: "18V Combi Drill", brand: "DrillMaster - 2 Batteries", price: 23.5, image: "/images/photos/transparent/prod-09.svg" },
+    { name: "115 mm Angle Grinder", brand: "AnglePro - 900 W", price: 54.0, image: "/images/photos/transparent/prod-10.svg" },
+    { name: "Circular Saw Blade Set", brand: "DrillMaster - 10 Pieces", price: 16.75, image: "/images/photos/transparent/prod-12.svg" },
   ],
-  "personal-care": [
-    { name: "Moisturizing Cream", brand: "PureLife - 200 ml", price: 12.9, image: "/images/photos/transparent/prod-02.svg" },
-    { name: "Vitamin C Serum", brand: "GlowLab - 30 ml", price: 18.75, image: "/images/photos/transparent/prod-06.svg" },
-    { name: "Hand Sanitizer Gel", brand: "Purell - 500 ml Pump", price: 12.49, image: "/images/photos/transparent/prod-05.svg" },
+  electrical: [
+    { name: "Circuit Breaker 16A", brand: "VoltLine - Type B DIN", price: 21.9, image: "/images/photos/transparent/prod-11.svg" },
+    { name: "LED High Bay 150W", brand: "BrightWork - IP65", price: 14.25, image: "/images/photos/transparent/prod-14.svg" },
+    { name: "H07RN-F Cable 3×2.5", brand: "VoltLine - 50 m Drum", price: 39.99, image: "/images/photos/transparent/prod-05.svg" },
   ],
-  supplements: [
-    { name: "Omega-3 Softgels", brand: "NatureWise - 120 Count", price: 24.99, image: "/images/photos/transparent/prod-07.svg" },
-    { name: "Multivitamin Complex", brand: "VitaPlus - 60 Tablets", price: 17.49, image: "/images/photos/transparent/prod-01.svg" },
-    { name: "Herbal Sleep Aid", brand: "NightCalm - 30 Capsules", price: 13.99, image: "/images/photos/transparent/prod-15.svg" },
+  lab: [
+    { name: "Digital Caliper 150 mm", brand: "PreciScale - IP54", price: 8.44, image: "/images/photos/transparent/prod-13.svg" },
+    { name: "TRMS Multimeter", brand: "MultiCheck - CAT III", price: 32.6, image: "/images/photos/transparent/prod-14.svg" },
+    { name: "USB Microscope 1000×", brand: "PreciScale - LED Ring", price: 24.99, image: "/images/photos/transparent/prod-15.svg" },
   ],
   office: [
-    { name: "Desk Organizer Set", brand: "OfficePro - 5 Pieces", price: 27.99, image: "/images/photos/transparent/prod-16.svg" },
-    { name: "Office Hygiene Kit", brand: "OfficePro - 10 Pieces", price: 19.99, image: "/images/photos/transparent/prod-09.svg" },
-    { name: "First Aid Refills", brand: "SafeGuard - 25 Pieces", price: 11.5, image: "/images/photos/transparent/prod-08.svg" },
+    { name: "A4 Paper 500 sheets", brand: "ClearOffice - 80 gsm", price: 11.2, image: "/images/photos/transparent/prod-15.svg" },
+    { name: "Gel Pens Blue 10 pcs", brand: "WriteWell - 0.7 mm", price: 7.85, image: "/images/photos/transparent/prod-16.svg" },
+    { name: "Facial Tissue Box", brand: "ClearOffice - 100 Sheets", price: 4.25, image: "/images/photos/transparent/prod-08.svg" },
   ],
 };
 
 // Safety net for categories without a dedicated entry.
 const fallbackProducts: StoryProduct[] = [
-  { name: "Medical Essentials Kit", brand: "MedStore - Assorted", price: 24.99, image: "/images/photos/transparent/prod-01.svg" },
-  { name: "Health & Wellness Pack", brand: "MedStore - Assorted", price: 29.99, image: "/images/photos/transparent/prod-07.svg" },
+  { name: "Tradlia Bestseller Bundle", brand: "Assorted - Top Rated", price: 24.99, image: "/images/photos/transparent/prod-01.svg" },
+  { name: "Workshop Essentials Pack", brand: "Assorted - Top Rated", price: 29.99, image: "/images/photos/transparent/prod-07.svg" },
 ];
 
 const getFullName = (cat: ICategory) => (cat.subtitle ? `${cat.name} ${cat.subtitle}` : cat.name);

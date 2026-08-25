@@ -12,9 +12,9 @@ const DiscoverCategory: FC<any> = () => {
         <div className="absolute top-1/3 left-1/3 w-40 h-40 rounded-full bg-white/40 blur-2xl"></div>
       </div>
       <div className="container grid w-full grid-cols-2 gap-8 mx-auto xl:grid-cols-4">
-        <Link href={"/category?cat=medical"}>
+        <Link href={"/category?cat=packaging"}>
           <div className="relative flex flex-col w-full h-56 cursor-pointer select-none xl:h-full group">
-            <div className="pt-4 pb-2 pl-10 text-xl text-[#5327A8]">Medical</div>
+            <div className="pt-4 pb-2 pl-10 text-xl text-[#5327A8]">Packaging</div>
             <div className="relative w-full h-full p-6 pr-28">
               <div className="absolute top-0 bottom-0 left-0 right-0">
                 <div className="relative w-full h-full rounded-[3.2rem] shadow-xl">
@@ -28,7 +28,7 @@ const DiscoverCategory: FC<any> = () => {
                 <Image
                   className="object-contain"
                   src="/images/main/homepage/medical-category.svg"
-                  alt="Medical Supplies"
+                  alt="Packaging & Shipping"
                   fill sizes="100vw"
                 />
               </div>
@@ -39,9 +39,9 @@ const DiscoverCategory: FC<any> = () => {
             </div>
           </div>
         </Link>
-        <Link href={"/category?cat=health"}>
+        <Link href={"/category?cat=tools"}>
           <div className="relative flex flex-col w-full h-full cursor-pointer select-none group">
-            <div className="pt-4 pb-2 pl-10 text-xl text-[#5327A8]">Health</div>
+            <div className="pt-4 pb-2 pl-10 text-xl text-[#5327A8]">Power Tools</div>
             <div className="relative w-full h-full p-6 pr-28">
               <div className="absolute top-0 bottom-0 left-0 right-0">
                 <div className="relative w-full h-full rounded-[3.2rem] shadow-xl bg-gradient-to-r to-[#FF7B03] from-[#FFBE00]"></div>
@@ -50,7 +50,7 @@ const DiscoverCategory: FC<any> = () => {
                 <SvgM />
               </div>
               <div className="relative top-0 left-0 w-full h-56 transition-all duration-200 ease-in-out transform group-hover:scale-105">
-                <Image className="object-contain" src="/images/main/homepage/health-category.svg" alt="Health & Wellness" fill sizes="100vw" />
+                <Image className="object-contain" src="/images/main/homepage/health-category.svg" alt="Power Tools & Accessories" fill sizes="100vw" />
               </div>
             </div>
             <div className="absolute text-xl font-bold -bottom-4 right-10">
@@ -59,9 +59,9 @@ const DiscoverCategory: FC<any> = () => {
             </div>
           </div>
         </Link>
-        <Link href={"/category?cat=supplements"}>
+        <Link href={"/category?cat=safety"}>
           <div className="relative flex flex-col w-full h-full cursor-pointer select-none group">
-            <div className="pt-4 pb-2 pl-10 text-xl text-[#5327A8]">Supplements</div>
+            <div className="pt-4 pb-2 pl-10 text-xl text-[#5327A8]">Safety Gear</div>
             <div className="relative w-full h-full p-6 pr-28">
               <div className="absolute top-0 bottom-0 left-0 right-0">
                 <div className="relative w-full h-full rounded-[3.2rem] shadow-xl bg-gradient-to-r to-[#FF0045] from-[#FF516B]"></div>
@@ -73,7 +73,7 @@ const DiscoverCategory: FC<any> = () => {
                 <Image
                   className="object-contain"
                   src="/images/main/homepage/supplements-category.svg"
-                  alt="Supplements"
+                  alt="Safety Gear & Workwear"
                   fill sizes="100vw"
                 />
               </div>
@@ -84,9 +84,9 @@ const DiscoverCategory: FC<any> = () => {
             </div>
           </div>
         </Link>
-        <Link href={"/category?cat=personal-care"}>
+        <Link href={"/category?cat=electronics"}>
           <div className="relative flex flex-col w-full h-full cursor-pointer select-none group">
-            <div className="pt-4 pb-2 pl-10 text-xl text-[#5327A8]">Personal Care</div>
+            <div className="pt-4 pb-2 pl-10 text-xl text-[#5327A8]">Electronics</div>
             <div className="relative w-full h-full p-6 pr-28">
               <div className="absolute top-0 bottom-0 left-0 right-0">
                 <div className="relative w-full h-full rounded-[3.2rem] shadow-xl bg-gradient-to-r from-[#00A29D] to-[#66C1BF]"></div>
@@ -95,7 +95,7 @@ const DiscoverCategory: FC<any> = () => {
                 <SvgM />
               </div>
               <div className="relative top-0 left-0 w-full h-56 transition-all duration-200 ease-in-out transform group-hover:scale-105">
-                <Image className="object-contain" src="/images/main/homepage/personal-care-category.svg" alt="Personal Care" fill sizes="100vw" />
+                <Image className="object-contain" src="/images/main/homepage/personal-care-category.svg" alt="Electronics Components" fill sizes="100vw" />
               </div>
             </div>
             <div className="absolute text-xl font-bold -bottom-4 right-10 ">

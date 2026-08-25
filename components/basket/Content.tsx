@@ -12,7 +12,7 @@ export const BasketCardData: any[] = [
   {
     id: 0,
     logo: "medi",
-    firm: "MediSupply",
+    firm: "SupplyHub",
     shippingCampaign: 500,
     shippingCampaign2: "Same-Day Shipping if Ordered by 3:55 PM",
     minTotalPrice: 100,
@@ -74,7 +74,7 @@ export const BasketCardData: any[] = [
   {
     id: 5,
     logo: "medi",
-    firm: "MediSupply",
+    firm: "SupplyHub",
     shippingCampaign: 500,
     shippingCampaign2: "Same-Day Shipping if Ordered by 3:55 PM",
     minTotalPrice: 100,

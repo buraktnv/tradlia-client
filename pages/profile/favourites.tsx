@@ -43,7 +43,7 @@ const items: any = [
   {
     id: 4,
     name: "PureSafe 3-Layer Black",
-    brand: "Surgical Mask with Nose Wire 50 pcs",
+    brand: "Dust Mask FFP2 Nose Wire 50 pcs",
     image: "/images/photos/product-2.svg",
     price: 45.5,
     shipping: 1,

@@ -59,32 +59,32 @@ const DiscoverCategoryMobile = () => {
           <div className={`carousel w-full ${styles.carousel}`} ref={slideDiv} onScroll={scrollEvent}>
             <div id="item1" className="relative w-full py-4 carousel-item">
               <SingleItem
-                text={"Medical"}
-                type={"medical"}
+                text={"Packaging"}
+                type={"packaging"}
                 colorClass={"to-[#3fdcc4] via-[#0275b5] from-[#00bfae]"}
                 imgUrl={"/images/main/homepage/product-17.svg"}
               />
             </div>
             <div id="item2" className="relative w-full py-4 carousel-item">
               <SingleItem
-                text={"Health"}
-                type={"health"}
+                text={"Power Tools"}
+                type={"tools"}
                 colorClass={"to-[#FF7B03] from-[#FFBE00]"}
                 imgUrl={"/images/main/homepage/product-18.svg"}
               />
             </div>
             <div id="item3" className="relative w-full py-4 carousel-item">
               <SingleItem
-                text={"Supplements"}
-                type={"supplements"}
+                text={"Safety Gear"}
+                type={"safety"}
                 colorClass={"to-[#FF0045] from-[#FF516B]"}
                 imgUrl={"/images/main/homepage/product-19.svg"}
               />
             </div>
             <div id="item4" className="relative w-full py-4 carousel-item">
               <SingleItem
-                text={"Personal Care"}
-                type={"personal-care"}
+                text={"Electronics"}
+                type={"electronics"}
                 colorClass={"from-[#00A29D] to-[#66C1BF]"}
                 imgUrl={"/images/main/homepage/product-20.svg"}
               />

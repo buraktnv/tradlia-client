@@ -37,7 +37,7 @@ const items: any = [
   {
     id: 4,
     name: "SafeGuard 3-Ply Black",
-    brand: "Surgical Mask with Ear Loops 50 pcs",
+    brand: "Dust Mask FFP2 Ear Loops 50 pcs",
     image: "/images/photos/product-4.svg",
     price: 45.5,
     shipping: 1,

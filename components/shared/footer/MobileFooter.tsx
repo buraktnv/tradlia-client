@@ -92,7 +92,7 @@ const Footer: FC = () => {
                   className="text-xs font-ubuntu hover:text-[#4CBEC5] w-max mt-1 select-none cursor-pointer"
                   target={"_blank"}>
 
-                  <p>Medical</p>
+                  <p>Industrial Supplies</p>
 
                 </Link>
                 <Link
@@ -100,49 +100,49 @@ const Footer: FC = () => {
                   className="text-xs font-ubuntu hover:text-[#4CBEC5] w-max mt-1 select-none cursor-pointer"
                   target={"_blank"}>
 
-                  <p>Family Medicine</p>
+                  <p>Facility Management</p>
 
                 </Link>
                 <Link
                   href="/"
                   className="text-xs font-ubuntu hover:text-[#4CBEC5] w-max mt-1 select-none cursor-pointer">
 
-                  <p>Dentistry</p>
+                  <p>Workshop Tools</p>
 
                 </Link>
                 <Link
                   href="/"
                   className="text-xs font-ubuntu hover:text-[#4CBEC5] w-max mt-1 select-none cursor-pointer">
 
-                  <p>Veterinary</p>
+                  <p>Warehouse &amp; Logistics</p>
 
                 </Link>
                 <Link
                   href="/"
                   className="text-xs font-ubuntu hover:text-[#4CBEC5] w-max mt-1 select-none cursor-pointer">
 
-                  <p>Health</p>
+                  <p>Procurement Teams</p>
 
                 </Link>
                 <Link
                   href="/"
                   className="text-xs font-ubuntu hover:text-[#4CBEC5] w-max mt-1 select-none cursor-pointer">
 
-                  <p>Personal Care & Cosmetics</p>
+                  <p>Safety Gear &amp; Workwear</p>
 
                 </Link>
                 <Link
                   href="/"
                   className="text-xs font-ubuntu hover:text-[#4CBEC5] w-max mt-1 select-none cursor-pointer">
 
-                  <p>Dietary Supplements</p>
+                  <p>Power Tools &amp; Accessories</p>
 
                 </Link>
                 <Link
                   href="/"
                   className="text-xs font-ubuntu hover:text-[#4CBEC5] w-max mt-1 select-none cursor-pointer">
 
-                  <p>Office/Stationery/Hygiene</p>
+                  <p>Office &amp; Facility</p>
 
                 </Link>
               </div>
@@ -275,7 +275,7 @@ const Footer: FC = () => {
                 className="cursor-pointer select-none text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1"
                 target={"_blank"}>
 
-                <p>Medical</p>
+                <p>Industrial Supplies</p>
 
               </Link>
               <Link
@@ -283,49 +283,49 @@ const Footer: FC = () => {
                 className="cursor-pointer select-none text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1"
                 target={"_blank"}>
 
-                <p>Family Medicine</p>
+                <p>Facility Management</p>
 
               </Link>
               <Link
                 href="/"
                 className="cursor-pointer select-none text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1">
 
-                <p>Dentistry</p>
+                <p>Workshop Tools</p>
 
               </Link>
               <Link
                 href="/"
                 className="cursor-pointer select-none text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1">
 
-                <p>Veterinary</p>
+                <p>Warehouse &amp; Logistics</p>
 
               </Link>
               <Link
                 href="/"
                 className="cursor-pointer select-none text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1">
 
-                <p>Health</p>
+                <p>Procurement Teams</p>
 
               </Link>
               <Link
                 href="/"
                 className="cursor-pointer select-none text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1">
 
-                <p>Personal Care & Cosmetics</p>0
+                <p>Safety Gear &amp; Workwear</p>0
                                 
               </Link>
               <Link
                 href="/"
                 className="cursor-pointer select-none text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1">
 
-                <p>Dietary Supplements</p>
+                <p>Power Tools &amp; Accessories</p>
 
               </Link>
               <Link
                 href="/"
                 className="cursor-pointer select-none text-xs font-ubuntu text-[#A3A9C1] hover:text-[#4CBEC5] w-max mt-1">
 
-                <p>Office/Stationery/Hygiene</p>
+                <p>Office &amp; Facility</p>
 
               </Link>
             </div>

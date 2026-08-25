@@ -52,7 +52,7 @@ const cardList = [
   {
     id: 4,
     orderID: "AvTEyBXUq ",
-    customer: "MediSupply",
+    customer: "SupplyHub",
     orderDate: "28.02.2022 - 14:20",
     total: "515.73",
     active: false,

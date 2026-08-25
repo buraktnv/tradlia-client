@@ -17,7 +17,7 @@ const discountList = [
   {
     id: 2,
     amounts: "500",
-    seller: "MediSupply",
+    seller: "SupplyHub",
     discount: "50,00",
   },
   {
@@ -35,7 +35,7 @@ const discountList = [
   {
     id: 5,
     amounts: "500",
-    seller: "MediSupply",
+    seller: "SupplyHub",
     discount: "50,00",
   },
   {
@@ -53,7 +53,7 @@ const discountList = [
   {
     id: 8,
     amounts: "500",
-    seller: "MediSupply",
+    seller: "SupplyHub",
     discount: "50,00",
   },
 ];

@@ -14,13 +14,14 @@ enum WALLET_TABS {
 }
 
 const filterList = [
-  { id: 0, title: "Medical", active: true },
-  { id: 1, title: "Family Medicine", active: false },
-  { id: 2, title: "Dentistry", active: false },
-  { id: 3, title: "Veterinary", active: false },
-  { id: 4, title: "Personal Care & Cosmetics", active: false },
-  { id: 5, title: "Dietary Supplements", active: false },
-  { id: 6, title: "Office & Stationery & Hygiene", active: false },
+  { id: 0, title: "Packaging & Shipping", active: true },
+  { id: 1, title: "Fasteners & Fixings", active: false },
+  { id: 2, title: "Electronics Components", active: false },
+  { id: 3, title: "Safety Gear & Workwear", active: false },
+  { id: 4, title: "Power Tools & Accessories", active: false },
+  { id: 5, title: "Electrical Supplies", active: false },
+  { id: 6, title: "Lab & Measurement", active: false },
+  { id: 7, title: "Office & Facility", active: false },
 ];
 
 const Wallet: NextPage = () => {
