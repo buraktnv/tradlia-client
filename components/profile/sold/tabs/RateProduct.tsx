@@ -48,17 +48,17 @@ const RateProduct: FC<any> = ({ setModal3 }) => {
           <div className="flex gap-1 justify-between items-center">
             <div className="flex items-center text-xm text-ink-muted">The product matched its description </div>
             <div className="flex gap-1 ">
-              <button type="button">
+              <button type="button" aria-label="Positive rating">
                 <span className="">
                   <SvgSmile />
                 </span>
               </button>
-              <button type="button">
+              <button type="button" aria-label="Neutral rating">
                 <span className="">
                   <SvgStraight />
                 </span>
               </button>
-              <button type="button">
+              <button type="button" aria-label="Negative rating">
                 <span className="">
                   <SvgSad />
                 </span>
@@ -68,17 +68,17 @@ const RateProduct: FC<any> = ({ setModal3 }) => {
           <div className="flex gap-1 justify-between items-center">
             <div className="flex items-center text-sm text-ink-muted">The store packaged the product with care</div>
             <div className="flex gap-1 items-center">
-              <button type="button">
+              <button type="button" aria-label="Positive rating">
                 <span className="">
                   <SvgSmile />
                 </span>
               </button>
-              <button type="button">
+              <button type="button" aria-label="Neutral rating">
                 <span className="">
                   <SvgStraight />
                 </span>
               </button>
-              <button type="button">
+              <button type="button" aria-label="Negative rating">
                 <span className="">
                   <SvgSad />
                 </span>
@@ -88,17 +88,17 @@ const RateProduct: FC<any> = ({ setModal3 }) => {
           <div className="flex gap-1 justify-between items-center">
             <div className="flex items-center text-sm text-ink-muted">I am satisfied with the store's communication</div>
             <div className="flex gap-1 items-center">
-              <button type="button">
+              <button type="button" aria-label="Positive rating">
                 <span className="">
                   <SvgSmile />
                 </span>
               </button>
-              <button type="button">
+              <button type="button" aria-label="Neutral rating">
                 <span className="">
                   <SvgStraight />
                 </span>
               </button>
-              <button type="button">
+              <button type="button" aria-label="Negative rating">
                 <span className="">
                   <SvgSad />
                 </span>

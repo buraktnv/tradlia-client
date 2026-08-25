@@ -100,30 +100,30 @@ const AddNewGroup: FC = () => {
         </div>
 
         <div className="hidden gap-2 text-sm font-medium xl:flex">
-          <button type="button" className="bg-gradient-to-r from-brand-400 to-brand-500 text-white px-4 py-2 rounded-full">
+          <button type="button" className="bg-gradient-to-r from-brand-400 to-brand-500 text-white px-4 py-2 rounded-pill focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1">
             Excel Standards
           </button>
-          <button type="button" className="bg-gradient-to-r from-amber-400 to-amber-500 text-white px-4 py-2 rounded-full">
+          <button type="button" className="bg-gradient-to-r from-amber-400 to-amber-500 text-white px-4 py-2 rounded-pill focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1">
             Sample Excel File
           </button>
           <button type="button"
             onClick={() => setOpenModal(true)}
-            className="bg-gradient-to-r from-danger to-dangerDark text-white px-4 py-2 rounded-full"
+            className="bg-gradient-to-r from-danger to-dangerDark text-white px-4 py-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
           >
             Upload File
           </button>
         </div>
       </div>
       <div className="flex justify-center gap-2 mx-2 text-sm font-medium xl:hidden">
-        <button type="button" className="bg-gradient-to-r from-brand-400 to-brand-500 text-white px-2 py-2 rounded-2xl">
+        <button type="button" className="bg-gradient-to-r from-brand-400 to-brand-500 text-white px-2 py-2 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400">
           Excel Standards
         </button>
-        <button type="button" className="bg-gradient-to-r from-amber-400 to-amber-500 text-white px-2  py-2 rounded-2xl">
+        <button type="button" className="bg-gradient-to-r from-amber-400 to-amber-500 text-white px-2  py-2 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400">
           Sample Excel File
         </button>
         <button type="button"
           onClick={() => setOpenModal(true)}
-          className="bg-gradient-to-r from-danger to-dangerDark text-white px-6 py-2 rounded-2xl"
+          className="bg-gradient-to-r from-danger to-dangerDark text-white px-6 py-2 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
         >
           Upload File
         </button>

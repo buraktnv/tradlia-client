@@ -50,7 +50,7 @@ const Search: NextPage = () => {
   const noop = () => {};
 
   return (
-    <div className="container px-3 py-6 xl:pt-32 mx-auto">
+    <div className="container px-3 py-6 mx-auto">
       <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
         <h1 className="font-display text-lg xl:text-xl font-semibold text-ink">
           {query ? (
@@ -67,14 +67,19 @@ const Search: NextPage = () => {
       </div>
 
       {results.length > 0 ? (
-        <div className="grid w-full h-full grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-3 xl:grid-cols-4" role="list">
+        <div
+          className="grid w-full h-full grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-3 xl:grid-cols-4"
+          role="list"
+          aria-label="Search results"
+        >
           {results.map((product) => (
-            <ProductCardBase
-              key={product.id}
-              content={toCardContent(product)}
-              deleteCard={noop}
-              favoriteCard={noop}
-            />
+            <div role="listitem" key={product.id}>
+              <ProductCardBase
+                content={toCardContent(product)}
+                deleteCard={noop}
+                favoriteCard={noop}
+              />
+            </div>
           ))}
         </div>
       ) : (

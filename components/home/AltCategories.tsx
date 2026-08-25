@@ -145,7 +145,7 @@ const AltCategories = () => {
   const activePage = Math.floor(activeIndex / 3);
 
   return (
-    <div className="relative flex flex-col w-full bg-surface">
+    <div className="relative flex flex-col w-full bg-surface overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-96 overflow-hidden bg-gradient-to-b from-brand-100/50 via-brand-50/40 to-transparent" aria-hidden="true"></div>
       <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-brand-200/30 blur-3xl" aria-hidden="true"></div>
       <div className="absolute top-10 -right-24 w-80 h-80 rounded-full bg-brand-100/40 blur-3xl" aria-hidden="true"></div>

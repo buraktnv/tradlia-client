@@ -25,7 +25,7 @@ const FilterSelection: FC<any> = () => {
   return (
     <div className="bg-surface border-b border-line">
       <div className="container mx-auto">
-        <nav aria-label="Quick catalog filters" className="flex w-full gap-1 py-3 overflow-x-auto xl:justify-center xl:gap-5 xl:pt-28 xl:pb-5">
+        <nav aria-label="Quick catalog filters" className="flex w-full gap-1 py-3 overflow-x-auto xl:justify-center xl:gap-5 xl:py-5">
           {jsonFilterList.map((el) => (
             <SingleFilterItem key={el.id} content={el} />
           ))}

@@ -169,7 +169,7 @@ const DealOfTheDay: FC<{ content: DealOfTheDayContent }> = ({ content }) => {
 const CountdownCell: FC<{ label: string; value: string }> = ({ label, value }) => (
   <div className="flex flex-col items-center xl:items-stretch">
     <div className="text-brand-100/80 text-[9px] leading-3 xl:text-xs text-center py-0.5 w-full uppercase tracking-wider">{label}</div>
-    <div className="flex items-center justify-center bg-white/10 border border-white/20 rounded-md py-1">
+    <div className="flex items-center justify-center bg-white/10 border border-white/20 rounded-card py-1">
       <span className="font-display text-surface text-[18px] leading-[18px] xl:text-xl font-semibold tracking-widest">{value}</span>
     </div>
   </div>

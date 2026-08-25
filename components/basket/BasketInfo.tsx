@@ -17,7 +17,7 @@ const BasketInfo: FC<any> = ({ setActivePage, basketData }) => {
     0
   );
   const total = shipping + productsPrice;
-  const fmt = (value: number) => `${value.toFixed(2)} $`;
+  const fmt = (value: number) => `${value.toFixed(2)}`.replace(".", ",") + " $";
   const hasItems = pieces > 0;
 
   const checkoutButtonClass =

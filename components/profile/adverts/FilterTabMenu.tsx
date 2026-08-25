@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { SvgImg1, SvgImg2 } from "../../../helpers/svgs/adverts";
 import DateDropdown from "../feedback/DateDropdown";
 import FilterDropdown from "../feedback/FilterDropdown";
@@ -14,16 +14,33 @@ const filterList = [
 ];
 
 const FilterTabMenu: FC<any> = ({ setOpenModal2, setListType }) => {
+  const [view, setView] = useState<number>(0);
+  const selectView = (v: number) => {
+    setView(v);
+    setListType(v);
+  };
   return (
     <div className="flex h-12 w-full items-center justify-between gap-2 rounded-card border border-line bg-surface px-3 shadow-card xl:h-[3.5rem] xl:gap-6">
       <TopluIslemDropdown setOpenModal2={setOpenModal2} />
       <FilterDropdown filterList={filterList} />
       <DateDropdown />
       <div className="items-center justify-center hidden gap-4 xl:flex">
-        <button type="button" className="btn list1" onClick={() => setListType(0)}>
+        <button
+          type="button"
+          aria-label="Grid view"
+          aria-pressed={view === 0}
+          onClick={() => selectView(0)}
+          className="btn list1 w-8 h-8 flex items-center justify-center rounded-pill text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+        >
           <SvgImg2 />
         </button>
-        <button type="button" className="btn list2" onClick={() => setListType(1)}>
+        <button
+          type="button"
+          aria-label="List view"
+          aria-pressed={view === 1}
+          onClick={() => selectView(1)}
+          className="btn list2 w-8 h-8 flex items-center justify-center rounded-pill text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+        >
           <SvgImg1 />
         </button>
       </div>

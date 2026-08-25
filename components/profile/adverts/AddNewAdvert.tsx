@@ -157,7 +157,7 @@ const AddNewAdvert: FC = () => {
             </div>
           </div>
           <div className=" flex rounded-full w-max px-6 xl:px-8 bg-ink justify-center items-center self-center xl:self-start xl:justify-start hover:bg-gradient-to-r from-amber-400 to-amber-500">
-            <button type="button" className="flex items-center space-x-2 drop-shadow-brand">
+            <button type="button" className="flex items-center space-x-2 drop-shadow-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-pill">
               <span className="py-3 xl:py-3">
                 <SvgNewAdd />
               </span>
@@ -245,7 +245,7 @@ const Card: FC<any> = () => {
         <FileDropzone />
       </div>
       <div className="absolute xl:flex-row flex-col top-[85%] left-[12%] sm:left-[28%]  xl:top-[76.5%] xl:left-6 flex items-center col-span-4 mt-2 gap-3 h-max ">
-        <button type="button" className="bg-gradient-to-r from-brand-400 to-brand-500 rounded-full text-white font-bold  drop-shadow-brand px-12 lg  py-2 xl:py-3">
+        <button type="button" className="bg-gradient-to-r from-brand-400 to-brand-500 rounded-full text-white font-bold  drop-shadow-brand px-12 lg  py-2 xl:py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400">
           <div className="w-max">Send for Approval</div>
         </button>
         <div className="flex flex-col text-sm text-center xl:text-start w-max xl:w-full">

@@ -63,7 +63,7 @@ export const jsonCategoryList = [
     text1: "Electrical",
     text2: "Supplies",
     icon: SvgElectrical,
-    align: "-left-4",
+    align: "right-12 flex-row-reverse",
     rounded: ["rounded-br-[2rem]", "rounded-bl-[2rem]"],
   },
   {

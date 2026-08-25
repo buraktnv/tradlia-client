@@ -8,32 +8,27 @@ import { categoryUrl } from "../../helpers/urls";
 const TopCategories: FC<{ isOpen: boolean }> = ({ isOpen }) => {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
+  // Static in-flow strip (not an overlay): it occupies layout space below the
+  // navbar, so pages never need top clearance and content is never covered.
+  if (!isOpen) return null;
+
   return (
-    <div className="relative">
-      <div
-        aria-hidden={!isOpen}
-        className={`hidden xl:block absolute top-0 left-0 w-full z-40 transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none ${
-          isOpen ? "opacity-100 translate-y-0 visible" : "opacity-0 -translate-y-2 invisible pointer-events-none"
-        }`}
-      >
-        <nav className="bg-surface border-b border-line shadow-pop">
-          <div
-            aria-label="Product categories"
-            className={`flex container justify-between py-4 mx-auto space-x-8 ${
-              isOpen ? "opacity-100" : "max-h-0 opacity-0 overflow-hidden"
-            }`}
-          >
-            {jsonCategoryList.map((el: any) => (
-              <SingleCategoryItem
-                key={el.id}
-                content={el}
-                selectedCategory={selectedCategory}
-                setSelectedCategory={setSelectedCategory}
-              />
-            ))}
-          </div>
-        </nav>
-      </div>
+    <div className="hidden xl:block overflow-x-clip">
+      <nav className="bg-surface border-b border-line shadow-pop">
+        <div
+          aria-label="Product categories"
+          className="flex container justify-between py-4 mx-auto gap-3 overflow-x-auto hiddenScroll"
+        >
+          {jsonCategoryList.map((el: any) => (
+            <SingleCategoryItem
+              key={el.id}
+              content={el}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+            />
+          ))}
+        </div>
+      </nav>
     </div>
   );
 };
@@ -45,7 +40,7 @@ const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCat
   const catId = category?.id;
 
   return (
-    <div className="group">
+    <div className="group shrink-0">
       <div className="relative">
         <button
           type="button"

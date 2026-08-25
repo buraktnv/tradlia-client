@@ -20,20 +20,18 @@ const NavbarMobile: FC = () => {
             <div className="col-span-3 p-1">
               <Link
                 href="/profile/adverts"
-                className="relative flex flex-col items-center justify-center h-full cursor-pointer select-none focus-visible:outline-none group"
+                aria-label="Add free listing"
+                className="relative flex flex-col items-center justify-center h-full cursor-pointer select-none focus-visible:outline-none group rounded-card focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
               >
                 <span className="absolute -top-7 left-1/2 -translate-x-1/2">
-                  <button
-                    type="button"
-                    aria-label="Add free listing"
-                    tabIndex={-1}
-                    className="flex items-center justify-center w-12 h-12 bg-amber-400 text-ink border-4 border-surface rounded-full text-3xl font-light shadow-pop transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:bg-amber-500"
+                  <span
+                    className="flex items-center justify-center w-12 h-12 bg-amber-400 text-ink border-4 border-surface rounded-full text-3xl font-light shadow-pop transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:bg-amber-500 group-focus-visible:bg-amber-500"
                   >
                     +
-                  </button>
+                  </span>
                 </span>
                 <div className="w-6 h-6 my-0.5"></div>
-                <span className="text-[10px] leading-[10px] font-medium text-ink-soft whitespace-nowrap transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:text-brand-600">
+                <span className="text-[10px] leading-[10px] font-medium text-ink-soft whitespace-nowrap transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:text-brand-600 group-focus-visible:text-brand-600">
                   Add Free Listing
                 </span>
 

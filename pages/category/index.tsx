@@ -218,7 +218,7 @@ const Category: NextPage = () => {
 
   return (
     <>
-      <div className="container relative px-3 py-6 xl:pt-32 mx-auto text-sm">
+      <div className="container relative px-3 py-6 mx-auto text-sm">
         <div className="grid grid-cols-5 gap-6">
           <div
             className={`${

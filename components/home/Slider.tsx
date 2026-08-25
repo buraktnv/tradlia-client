@@ -98,8 +98,6 @@ const photos: SliderImage[] = [
 const Slider: FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const swiperRef = useRef<SwiperType | null>(null);
-  // Guard against missing lookups so the slider never crashes on bad indexes.
-  const activeImage = photos[activeIndex] ?? photos[0];
 
   const goToSlide = (index: number) => {
     swiperRef.current?.slideToLoop(index);
@@ -203,24 +201,24 @@ const Slider: FC = () => {
                 type="button"
                 key={el.id}
                 aria-label={`Show slide ${index + 1}: ${el.category}`}
-                aria-current={activeImage.url === el.url ? "true" : undefined}
+                aria-current={activeIndex === index ? "true" : undefined}
                 onClick={() => goToSlide(index)}
                 className={`shrink-0 cursor-pointer rounded-card border px-4 py-2.5 text-left transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
-                  activeImage.url === el.url
+                  activeIndex === index
                     ? "border-brand-400 bg-brand-50 shadow-card"
                     : "border-line bg-surface hover:border-brand-300"
                 }`}
               >
                 <span
                   className={`block text-[10px] font-semibold uppercase tracking-wider ${
-                    activeImage.url === el.url ? "text-brand-600" : "text-ink-muted"
+                    activeIndex === index ? "text-brand-600" : "text-ink-muted"
                   }`}
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <span
                   className={`block text-xs font-semibold leading-tight mt-0.5 ${
-                    activeImage.url === el.url ? "text-ink" : "text-ink-soft"
+                    activeIndex === index ? "text-ink" : "text-ink-soft"
                   }`}
                 >
                   {el.category}

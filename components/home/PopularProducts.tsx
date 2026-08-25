@@ -192,7 +192,7 @@ const PopularProducts: FC<any> = () => {
             1024: { slidesPerView: 4 },
             1280: { slidesPerView: 5 },
           }}
-          className="!py-8"
+          className="!py-8 w-full"
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}

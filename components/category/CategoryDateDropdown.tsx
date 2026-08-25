@@ -53,7 +53,7 @@ const ItemsList: FC<any> = ({ title, active }) => {
       <div className="flex items-center w-full px-2 py-0.5">
         <button
           type="button"
-          className={`text-sm transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded ${
+          className={`text-sm transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-pill ${
             active ? "text-brand-600 font-medium" : "text-ink-soft hover:text-brand-600"
           }`}
         >

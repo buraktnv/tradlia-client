@@ -47,17 +47,17 @@ const RateProduct: FC<any> = ({ setModal3 }) => {
               Product was as described in the listing
             </div>
             <div className="flex gap-1 ">
-              <button type="button">
+              <button type="button" aria-label="Positive rating">
                 <span className="">
                   <SvgSmile />
                 </span>
               </button>
-              <button type="button">
+              <button type="button" aria-label="Neutral rating">
                 <span className="">
                   <SvgStraight />
                 </span>
               </button>
-              <button type="button">
+              <button type="button" aria-label="Negative rating">
                 <span className="">
                   <SvgSad />
                 </span>
@@ -69,17 +69,17 @@ const RateProduct: FC<any> = ({ setModal3 }) => {
               Store took care with product packaging
             </div>
             <div className="flex items-center gap-1">
-              <button type="button">
+              <button type="button" aria-label="Positive rating">
                 <span className="">
                   <SvgSmile />
                 </span>
               </button>
-              <button type="button">
+              <button type="button" aria-label="Neutral rating">
                 <span className="">
                   <SvgStraight />
                 </span>
               </button>
-              <button type="button">
+              <button type="button" aria-label="Negative rating">
                 <span className="">
                   <SvgSad />
                 </span>
@@ -91,17 +91,17 @@ const RateProduct: FC<any> = ({ setModal3 }) => {
               I'm satisfied with the store's communication
             </div>
             <div className="flex items-center gap-1">
-              <button type="button">
+              <button type="button" aria-label="Positive rating">
                 <span className="">
                   <SvgSmile />
                 </span>
               </button>
-              <button type="button">
+              <button type="button" aria-label="Neutral rating">
                 <span className="">
                   <SvgStraight />
                 </span>
               </button>
-              <button type="button">
+              <button type="button" aria-label="Negative rating">
                 <span className="">
                   <SvgSad />
                 </span>

@@ -158,17 +158,18 @@ const content: FC<any> = ({ content: basketData, setContent }) => {
   const enriched = basketData.map((seller: any) => ({ ...seller, ...getSellerTotal(seller) }));
 
   return (
-    <div className="grid gap-3 xl:gap-[1rem]">
+    <div className="grid gap-3 xl:gap-[1rem]" role="list" aria-label="Basket sellers">
       <Notification />
       {enriched.map((el: any) => (
-        <BasketCard
-          key={el.id}
-          content={el}
-          onChange={updateSeller}
-          onRemoveSeller={removeSeller}
-          onCompleteSeller={completeSeller}
-          onRemoveCampaign={removeCampaign}
-        />
+        <div role="listitem" key={el.id}>
+          <BasketCard
+            content={el}
+            onChange={updateSeller}
+            onRemoveSeller={removeSeller}
+            onCompleteSeller={completeSeller}
+            onRemoveCampaign={removeCampaign}
+          />
+        </div>
       ))}
       <div className="flex justify-end w-full px-3 xl:px-0">
         <button

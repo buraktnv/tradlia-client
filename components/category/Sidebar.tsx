@@ -41,7 +41,7 @@ const SidebarSwitchMenu: FC<any> = ({ activeCategory, activeSubCategory }) => {
             onClick={() => setIsExpanded((pre: boolean) => !pre)}
           >
             {isExpanded ? "Show Less" : "Show More"}
-            <div className={`w-3 h-3 ml-2 transform duration-200 ${isExpanded && "rotate-180"}`}>
+            <div className={`w-3 h-3 ml-2 transition-transform duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none ${isExpanded && "rotate-180"}`}>
               <SvgShowMore />
             </div>
           </button>
@@ -55,7 +55,7 @@ const Sidebar: FC<any> = ({ setSidebar, activeCategory, activeSubCategory, produ
   const activeTitle =
     categories.find((cat) => cat.id === activeCategory)?.name ?? "All Products";
   return (
-    <div className="flex flex-col w-full text-ink-soft bg-surface min-h-fit h-full p-3 gap-[1rem] xl:p-0 xl:bg-transparent xl:gap-[1.4rem]">
+    <div className="flex flex-col w-full text-ink-soft bg-surface min-h-fit h-full p-3 gap-4 xl:p-0 xl:bg-transparent xl:gap-6">
       <div className="justify-between w-full bg-brand-50 border border-brand-400 text-brand-700 rounded-card px-4 py-2 hidden xl:flex xl:min-h-[2.75rem] items-center">
         <h3 className="font-display font-semibold">{activeTitle}</h3>
         <h5 className="text-sm font-medium text-brand-600">{productCount ?? 0} Products</h5>
@@ -114,7 +114,7 @@ const SwitchMenu: FC<any> = ({ content }) => {
           type="button"
           aria-label={content.isOpen || state ? `Collapse ${content.title}` : `Expand ${content.title}`}
           aria-expanded={Boolean(content.isOpen || state)}
-          className={`w-4 h-4 text-ink-muted cursor-pointer transform transition-transform duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded ${
+          className={`w-4 h-4 text-ink-muted cursor-pointer transition-transform duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-pill ${
             content.isOpen || state ? "rotate-180" : ""
           }`}
           onClick={() => setState((pre: boolean) => !pre)}

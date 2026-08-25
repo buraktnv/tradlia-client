@@ -64,15 +64,20 @@ const Content: FC<any> = ({ items, setSidebar }) => {
           </div>
         </div>
 
-        <div className="grid w-full h-full grid-cols-2 mt-3 xl:grid-cols-4 gap-x-4 gap-y-6 content" role="list">
+        <div
+          className="grid w-full h-full grid-cols-2 mt-3 xl:grid-cols-4 gap-x-4 gap-y-6 content"
+          role="list"
+          aria-label="Category products"
+        >
           {itemList &&
             itemList.map((content: any) => (
-              <ProductCardBase
-                key={content.id}
-                content={content}
-                deleteCard={deleteCard}
-                favoriteCard={favoriteCard}
-              />
+              <div role="listitem" key={content.id}>
+                <ProductCardBase
+                  content={content}
+                  deleteCard={deleteCard}
+                  favoriteCard={favoriteCard}
+                />
+              </div>
             ))}
         </div>
       </div>

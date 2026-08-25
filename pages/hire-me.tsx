@@ -14,7 +14,7 @@ const STACK = [
 
 const HireMe: NextPage = () => {
   return (
-    <div className="flex justify-center px-4 py-10 xl:py-16 xl:pt-32">
+    <div className="flex justify-center px-4 py-10 xl:py-16">
       <main className="w-full max-w-2xl rounded-card border border-line bg-surface p-6 shadow-pop sm:p-10">
         <div className="flex flex-col items-center text-center">
           <p className="flex items-center gap-2 font-display text-xs uppercase tracking-wider text-ink-muted">

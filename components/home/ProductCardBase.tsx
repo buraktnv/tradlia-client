@@ -32,11 +32,20 @@ export const ProductCardBase: FC<ProductCardBaseProps> = ({ content, deleteCard,
     }
   };
 
+  const productHref = `/product?id=${content.id}`;
+
   return (
     <article className="group relative flex flex-col h-full bg-surface rounded-card shadow-card border border-line hover:border-brand-300 hover:shadow-pop transition-shadow duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none">
       <div className="relative aspect-square w-full bg-canvas rounded-t-card overflow-hidden">
+        <Link
+          href={productHref}
+          aria-label={`View ${content.name}`}
+          className="absolute inset-0 rounded-t-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-inset"
+        >
+          <span className="sr-only">{content.name}</span>
+        </Link>
         <Image
-          className="object-contain p-6 transition-transform duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:scale-[1.04] group-focus-within:scale-[1.04]"
+          className="object-contain p-6 pointer-events-none transition-transform duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:scale-[1.04] group-focus-within:scale-[1.04]"
           src={content.image}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 1280px) 33vw, 20vw"
@@ -75,7 +84,14 @@ export const ProductCardBase: FC<ProductCardBaseProps> = ({ content, deleteCard,
       </div>
 
       <div className="flex flex-col flex-1 gap-1.5 p-4">
-        <h3 className="text-sm font-medium leading-snug text-ink line-clamp-2">{content.name}</h3>
+        <h3 className="text-sm font-medium leading-snug text-ink line-clamp-2">
+          <Link
+            href={productHref}
+            className="rounded-card transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+          >
+            {content.name}
+          </Link>
+        </h3>
         <p className="text-xs text-ink-muted truncate">{content.brand}</p>
 
         <p className="flex items-center gap-1.5 mt-auto pt-1">
