@@ -1,39 +1,20 @@
 @reference "./globals.css";
 
 .form-group {
-  @apply grid items-center grid-cols-7 my-2;
+  @apply flex items-center gap-2.5 my-1.5;
 }
 
 .form-group input {
-  @apply row-span-6;
-  padding: 0;
-  height: initial;
-  width: initial;
-  margin-bottom: 0;
-  display: none;
-  cursor: pointer;
+  @apply w-[18px] h-[18px] shrink-0 m-0 p-0 cursor-pointer appearance-none rounded-md border border-line bg-surface transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none checked:border-brand-400 checked:bg-brand-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px 12px;
+}
+
+.form-group input:checked {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23ffffff'%3E%3Cpath fill-rule='evenodd' d='M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0L3.3 9.7a1 1 0 1 1 1.4-1.4l3.8 3.8 6.8-6.8a1 1 0 0 1 1.4 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
 }
 
 .form-group label {
-  @apply col-span-6 relative cursor-pointer text-[#7E8096] select-none font-medium text-xs;
-}
-
-.form-group label:before {
-  content: "";
-  -webkit-appearance: none;
-  background-color: transparent;
-  display: inline-block;
-  position: relative;
-  vertical-align: middle;
-  cursor: pointer;
-  margin-right: 5px;
-  @apply border border-[#4CBEC5] w-5 h-5 rounded-md;
-}
-.form-group input + label:after {
-  content: "";
-  @apply hidden;
-}
-
-.form-group input:checked + label:after {
-  @apply bg-[#4CBEC5] block absolute left-[3px] top-[3px] w-3.5 h-3.5 rounded;
+  @apply text-xs font-medium text-ink-soft select-none cursor-pointer transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none peer-checked:text-brand-700;
 }

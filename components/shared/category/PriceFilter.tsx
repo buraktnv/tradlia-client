@@ -47,7 +47,7 @@ const PriceFilter: FC<any> = ({ content }) => {
       }`}
     >
       <div className="flex items-center justify-between">
-        <div className="font-display font-semibold tracking-wide text-brand-700 xl:text-base text-sm">PRICE RANGE</div>
+        <div className="font-display text-xs uppercase tracking-wider text-ink-muted xl:text-sm">PRICE RANGE</div>
         <div className="flex items-center gap-2">
           {isActive && (
             <button
@@ -84,7 +84,7 @@ const PriceFilter: FC<any> = ({ content }) => {
                 id=""
                 value={0}
                 aria-label="Minimum price"
-                className="col-span-2 py-1 text-center font-medium text-ink-soft text-sm rounded-pill outline-none border border-line mx-1 focus:border-brand-400 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
+                className="col-span-2 py-1 text-sm text-center font-medium text-ink-soft rounded-pill outline-none border border-line mx-1 drop-shadow-input-shadow focus:border-brand-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
               />
               <input
                 type="text"
@@ -92,7 +92,7 @@ const PriceFilter: FC<any> = ({ content }) => {
                 id=""
                 value={"50,000"}
                 aria-label="Maximum price"
-                className="col-span-2 py-1 text-sm text-center font-medium text-ink-soft rounded-pill outline-none border border-line mx-1 focus:border-brand-400 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
+                className="col-span-2 py-1 text-sm text-center font-medium text-ink-soft rounded-pill outline-none border border-line mx-1 drop-shadow-input-shadow focus:border-brand-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
               />
               <button
                 type="button"

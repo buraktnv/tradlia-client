@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import SingleCard from "../../components/profile/favourites/SingleCard";
+import ProductCardBase from "../../components/home/ProductCardBase";
 import { productCatalog, CatalogProduct } from "../../helpers/productCatalog";
 import { getCategoryById } from "../../helpers/categories";
 import useLocalStorage from "../../helpers/hooks/useLocalStorage";
@@ -50,20 +50,26 @@ const Search: NextPage = () => {
   const noop = () => {};
 
   return (
-    <div className="container px-3 py-6 mx-auto text-sm">
-      <div className="mb-4">
-        <h1 className="text-lg font-bold text-[#7E8096]">
-          {query ? `Search results for "${query}"` : "All products"}
+    <div className="container px-3 py-6 xl:pt-32 mx-auto">
+      <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
+        <h1 className="font-display text-lg xl:text-xl font-semibold text-ink">
+          {query ? (
+            <>
+              Search results for <span className="text-brand-600">&ldquo;{query}&rdquo;</span>
+            </>
+          ) : (
+            "All products"
+          )}
         </h1>
-        <p className="text-xs font-light text-[#7E8096]">
+        <p className="text-xs text-ink-muted">
           {results.length} product{results.length === 1 ? "" : "s"} found
         </p>
       </div>
 
       {results.length > 0 ? (
-        <div className="grid w-full h-full grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3 xl:grid-cols-4">
+        <div className="grid w-full h-full grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-3 xl:grid-cols-4" role="list">
           {results.map((product) => (
-            <SingleCard
+            <ProductCardBase
               key={product.id}
               content={toCardContent(product)}
               deleteCard={noop}
@@ -72,19 +78,29 @@ const Search: NextPage = () => {
           ))}
         </div>
       ) : (
-        <div className="py-16 text-center text-sm text-[#7E8096]">{HIRE_ME_COPY.searchEmpty}</div>
+        <div className="py-16 px-6 text-center rounded-card border border-dashed border-line bg-surface">
+          <p className="font-display text-base font-semibold text-ink">No matching products</p>
+          <p className="mt-1 text-sm text-ink-muted">{HIRE_ME_COPY.searchEmpty}</p>
+          <button
+            type="button"
+            onClick={() => router.push("/category")}
+            className="mt-4 inline-flex items-center bg-brand-600 text-white rounded-pill px-4 py-1.5 text-sm font-medium transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+          >
+            Browse all products
+          </button>
+        </div>
       )}
 
       {recentSearches.length > 0 && (
-        <div className="mt-8">
-          <h3 className="mb-2 text-sm font-semibold text-[#7E8096]">Recent searches</h3>
+        <div className="mt-10">
+          <h3 className="mb-3 font-display text-xs uppercase tracking-wider text-ink-muted">Recent searches</h3>
           <div className="flex flex-wrap gap-2">
             {recentSearches.map((term) => (
               <button
                 type="button"
                 key={term}
                 onClick={() => router.push(`/search?q=${encodeURIComponent(term)}`)}
-                className="px-3 py-1 text-xs rounded-full border border-[#4CBEC565] text-[#4CBEC5] hover:bg-[#4CBEC5] hover:text-white transition duration-150 ease-in-out"
+                className="bg-canvas border border-line rounded-pill px-3 py-1.5 text-sm text-ink-soft hover:border-brand-300 hover:text-brand-700 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
               >
                 {term}
               </button>

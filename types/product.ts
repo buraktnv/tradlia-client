@@ -10,6 +10,12 @@ export interface HomeProductItem {
   isFavorite: boolean;
   advertCount: number;
   backgroundColor: string;
+  /** Optional strike-through reference price shown next to the current price. */
+  oldPrice?: number;
+  /** Optional campaign/discount ribbon label (e.g. "-20%"). */
+  discountLabel?: string;
+  /** Stock availability for the signature pulse-dot badge; defaults to "in". */
+  stockStatus?: "in" | "low" | "out";
 }
 
 export interface DealOfTheDayContent {
@@ -36,6 +42,12 @@ export interface SingleCardContent {
   isFavorite: boolean;
   advertCount: number;
   backgroundColor: string;
+  /** Optional strike-through reference price shown next to the current price. */
+  oldPrice?: number;
+  /** Optional campaign/discount ribbon label (e.g. "-20%"). */
+  discountLabel?: string;
+  /** Stock availability for the signature pulse-dot badge; defaults to "in". */
+  stockStatus?: "in" | "low" | "out";
 }
 
 export interface SingleCardProps {

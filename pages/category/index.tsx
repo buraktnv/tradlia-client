@@ -16,6 +16,9 @@ interface CategoryItem {
   advertCount: number;
   isFavorite: boolean;
   categoryId: string;
+  oldPrice?: number;
+  discountLabel?: string;
+  stockStatus?: "in" | "low" | "out";
 }
 
 const items: CategoryItem[] = [
@@ -108,6 +111,29 @@ const items: CategoryItem[] = [
     categoryId: "safety",
   },
   {
+    id: 13,
+    name: "ClearView Safety Goggles",
+    brand: "Anti-Fog ANSI Z87.1",
+    image: "/images/photos/product-6.svg",
+    price: 11.25,
+    oldPrice: 14.5,
+    shipping: 0,
+    advertCount: 140,
+    isFavorite: false,
+    categoryId: "safety",
+  },
+  {
+    id: 14,
+    name: "EarDefend Pro Muffs",
+    brand: "SNR 30 dB Adjustable",
+    image: "/images/photos/product-10.svg",
+    price: 24.9,
+    shipping: 0,
+    advertCount: 90,
+    isFavorite: false,
+    categoryId: "safety",
+  },
+  {
     id: 9,
     name: "DrillMaster 18V",
     brand: "Combi Drill 2 Batteries",
@@ -192,7 +218,7 @@ const Category: NextPage = () => {
 
   return (
     <>
-      <div className="container relative px-3 py-6 mx-auto text-sm">
+      <div className="container relative px-3 py-6 xl:pt-32 mx-auto text-sm">
         <div className="grid grid-cols-5 gap-6">
           <div
             className={`${
@@ -209,8 +235,8 @@ const Category: NextPage = () => {
           {!sidebar && (
             <div className="col-span-5 xl:col-span-4">
               <div className="xl:pl-8 mb-4">
-                <h1 className="text-lg font-bold text-[#7E8096]">{breadcrumb}</h1>
-                <p className="text-xs font-light text-[#7E8096]">
+                <h1 className="font-display text-lg xl:text-xl font-semibold text-ink">{breadcrumb}</h1>
+                <p className="text-xs text-ink-muted">
                   {visibleItems.length} product{visibleItems.length === 1 ? "" : "s"}
                 </p>
               </div>
@@ -222,17 +248,20 @@ const Category: NextPage = () => {
               {pageCount > 1 && (
                 <div className="flex items-center justify-center w-full">
                   <div className="flex items-center gap-3 mt-12">
-                    <h3>
-                      <div
-                        className={`w-4 h-7 text-[#4CBEC5] ${
-                          activePage <= 1 ? "opacity-30 cursor-not-allowed" : "cursor-pointer"
-                        }`}
-                        onClick={() => activePage > 1 && setActiveCardPage(activePage - 1)}
-                      >
+                    <button
+                      type="button"
+                      aria-label="Previous page"
+                      className={`w-8 h-8 flex items-center justify-center rounded-full text-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 ${
+                        activePage <= 1 ? "opacity-30 cursor-not-allowed" : "cursor-pointer hover:bg-brand-50"
+                      }`}
+                      disabled={activePage <= 1}
+                      onClick={() => activePage > 1 && setActiveCardPage(activePage - 1)}
+                    >
+                      <span className="w-4 h-7">
                         <SvgLessThan />
-                      </div>
-                    </h3>
-                    <div className="flex items-center gap-2 xl:gap-8">
+                      </span>
+                    </button>
+                    <div className="flex items-center gap-2 xl:gap-6" role="group" aria-label="Product pages">
                       {Array.from({ length: pageCount }, (_, index) => index + 1).map((page) => (
                         <CardNavItem
                           key={page}
@@ -242,16 +271,19 @@ const Category: NextPage = () => {
                         />
                       ))}
                     </div>
-                    <h3>
-                      <div
-                        className={`w-4 h-7 text-[#4CBEC5] ${
-                          activePage >= pageCount ? "opacity-30 cursor-not-allowed" : "cursor-pointer"
-                        }`}
-                        onClick={() => activePage < pageCount && setActiveCardPage(activePage + 1)}
-                      >
+                    <button
+                      type="button"
+                      aria-label="Next page"
+                      className={`w-8 h-8 flex items-center justify-center rounded-full text-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 ${
+                        activePage >= pageCount ? "opacity-30 cursor-not-allowed" : "cursor-pointer hover:bg-brand-50"
+                      }`}
+                      disabled={activePage >= pageCount}
+                      onClick={() => activePage < pageCount && setActiveCardPage(activePage + 1)}
+                    >
+                      <span className="w-4 h-7">
                         <SvgMoreThan />
-                      </div>
-                    </h3>
+                      </span>
+                    </button>
                   </div>
                 </div>
               )}
@@ -270,14 +302,19 @@ interface CardNavItemProps {
 }
 
 const CardNavItem: FC<CardNavItemProps> = ({ pageNumber, activePage, setActivePage }) => (
-  <h3
-    className={`cursor-pointer select-none w-8 h-8 rounded-full flex items-center justify-center text-lg text-[#7E8096] font-medium transition duration-150 ease-in-out ${
-      activePage === pageNumber ? "bg-[#4CBEC5] text-white" : "hover:bg-[#4CBEC5] hover:text-white"
+  <button
+    type="button"
+    aria-label={`Go to page ${pageNumber}`}
+    aria-current={activePage === pageNumber ? "page" : undefined}
+    className={`cursor-pointer select-none w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium font-display transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
+      activePage === pageNumber
+        ? "bg-brand-600 text-white"
+        : "text-ink-soft hover:bg-brand-50 hover:text-brand-700"
     }`}
     onClick={() => setActivePage(pageNumber)}
   >
     {pageNumber}
-  </h3>
+  </button>
 );
 
 export default Category;

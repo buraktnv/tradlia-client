@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import SingleCard from "../profile/favourites/SingleCard";
+import ProductCardBase from "./ProductCardBase";
 import type { HomeProductItem } from "../../types/product";
 
 const items: HomeProductItem[] = [
@@ -16,7 +16,8 @@ const items: HomeProductItem[] = [
     shipping: 0,
     advertCount: 250,
     isFavorite: false,
-    backgroundColor: "bg-[#F4F5F9]",
+    backgroundColor: "",
+    stockStatus: "in",
   },
   {
     id: 2,
@@ -24,10 +25,12 @@ const items: HomeProductItem[] = [
     brand: "MultiCheck - CAT III 600V",
     image: "/images/photos/transparent/prod-10.svg",
     price: 32.60,
+    oldPrice: 41.0,
     shipping: 0,
     advertCount: 180,
     isFavorite: true,
-    backgroundColor: "bg-[#F4F5F9]",
+    backgroundColor: "",
+    stockStatus: "low",
   },
   {
     id: 3,
@@ -38,7 +41,8 @@ const items: HomeProductItem[] = [
     shipping: 1,
     advertCount: 320,
     isFavorite: false,
-    backgroundColor: "bg-[#F4F5F9]",
+    backgroundColor: "",
+    stockStatus: "in",
   },
   {
     id: 4,
@@ -49,7 +53,8 @@ const items: HomeProductItem[] = [
     shipping: 0,
     advertCount: 95,
     isFavorite: true,
-    backgroundColor: "bg-[#F4F5F9]",
+    backgroundColor: "",
+    stockStatus: "in",
   },
   {
     id: 5,
@@ -60,7 +65,8 @@ const items: HomeProductItem[] = [
     shipping: 0,
     advertCount: 150,
     isFavorite: true,
-    backgroundColor: "bg-[#F4F5F9]",
+    backgroundColor: "",
+    stockStatus: "in",
   },
   {
     id: 6,
@@ -71,7 +77,8 @@ const items: HomeProductItem[] = [
     shipping: 1,
     advertCount: 200,
     isFavorite: false,
-    backgroundColor: "bg-[#F4F5F9]",
+    backgroundColor: "",
+    stockStatus: "low",
   },
   {
     id: 7,
@@ -82,7 +89,8 @@ const items: HomeProductItem[] = [
     shipping: 0,
     advertCount: 400,
     isFavorite: false,
-    backgroundColor: "bg-[#F4F5F9]",
+    backgroundColor: "",
+    stockStatus: "in",
   },
   {
     id: 8,
@@ -93,7 +101,8 @@ const items: HomeProductItem[] = [
     shipping: 0,
     advertCount: 280,
     isFavorite: false,
-    backgroundColor: "bg-[#F4F5F9]",
+    backgroundColor: "",
+    stockStatus: "in",
   },
   {
     id: 9,
@@ -104,7 +113,8 @@ const items: HomeProductItem[] = [
     shipping: 0,
     advertCount: 120,
     isFavorite: false,
-    backgroundColor: "bg-[#F4F5F9]",
+    backgroundColor: "",
+    stockStatus: "in",
   },
   {
     id: 10,
@@ -115,7 +125,8 @@ const items: HomeProductItem[] = [
     shipping: 1,
     advertCount: 85,
     isFavorite: false,
-    backgroundColor: "bg-[#F4F5F9]",
+    backgroundColor: "",
+    stockStatus: "out",
   },
   {
     id: 11,
@@ -123,10 +134,12 @@ const items: HomeProductItem[] = [
     brand: "BrightWork - IP65 Industrial",
     image: "/images/photos/transparent/prod-15.svg",
     price: 149.99,
+    oldPrice: 179.0,
     shipping: 0,
     advertCount: 45,
     isFavorite: true,
-    backgroundColor: "bg-[#F4F5F9]",
+    backgroundColor: "",
+    stockStatus: "in",
   },
   {
     id: 12,
@@ -137,11 +150,12 @@ const items: HomeProductItem[] = [
     shipping: 0,
     advertCount: 160,
     isFavorite: false,
-    backgroundColor: "bg-[#F4F5F9]",
+    backgroundColor: "",
+    stockStatus: "in",
   },
 ];
 
-const AltCategories: FC<any> = () => {
+const PopularProducts: FC<any> = () => {
   const [itemList, setItemList] = useState<HomeProductItem[]>(items);
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const swiperRef = useRef<SwiperType | null>(null);
@@ -162,9 +176,11 @@ const AltCategories: FC<any> = () => {
   const activePage = Math.floor(activeIndex / 2);
 
   return (
-    <div className="bg-[#F4F5F9]">
+    <section className="bg-canvas border-y border-line">
       <div className={`flex flex-col w-full pt-8 pb-4 xl:py-12 px-4 xl:px-0 mx-auto container`}>
-        <div className="text-lg xl:text-2xl font-bold text-[#4CBEC5]">Best Selling Listings in the Last 7 Days</div>
+        <h2 className="font-display text-lg xl:text-2xl font-semibold text-ink">
+          Best Selling Listings <span className="text-brand-600">in the Last 7 Days</span>
+        </h2>
         <Swiper
           modules={[Autoplay]}
           slidesPerView={2}
@@ -185,25 +201,27 @@ const AltCategories: FC<any> = () => {
           {itemList &&
             itemList.slice(0, 8).map((content: HomeProductItem) => (
               <SwiperSlide key={content.id} className="!h-auto">
-                <SingleCard content={content} deleteCard={deleteCard} favoriteCard={favoriteCard} />
+                <ProductCardBase content={content} deleteCard={deleteCard} favoriteCard={favoriteCard} />
               </SwiperSlide>
             ))}
         </Swiper>
-        <div className="relative flex justify-center w-full gap-2 py-2 pb-8 xl:hidden">
+        <div className="relative flex justify-center w-full gap-2 py-2 pb-8 xl:hidden" role="group" aria-label="Best sellers pagination">
           {[0, 1, 2, 3].map((page) => (
             <button
               type="button"
               key={page}
+              aria-label={`Go to slide group ${page + 1}`}
+              aria-current={activePage === page}
               onClick={() => swiperRef.current?.slideToLoop(page * 2)}
-              className={`rounded-full px-4 py-1 border cursor-pointer border-[#4CBEC5] ${
-                activePage === page && "bg-[#4CBEC5]"
+              className={`rounded-pill w-10 py-1 border cursor-pointer transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 ${
+                activePage === page ? "bg-brand-400 border-brand-400" : "bg-surface border-line hover:border-brand-300"
               }`}
             ></button>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default AltCategories;
+export default PopularProducts;

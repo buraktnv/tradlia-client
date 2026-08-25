@@ -33,7 +33,7 @@ const BrandFilter: FC<any> = () => {
       }`}
     >
       <div className="flex items-center justify-between">
-        <div className="font-display font-semibold tracking-wide text-brand-700 xl:text-base text-sm">BRANDS</div>
+        <div className="font-display text-xs uppercase tracking-wider text-ink-muted xl:text-sm">BRANDS</div>
         <div className="flex items-center gap-2">
           {isActive && (
             <button
