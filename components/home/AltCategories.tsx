@@ -145,10 +145,10 @@ const AltCategories = () => {
   const activePage = Math.floor(activeIndex / 3);
 
   return (
-    <div className="relative flex flex-col w-full bg-white">
-      <div className="absolute top-0 left-0 w-full h-96 overflow-hidden bg-gradient-to-b from-[#66C1BF]/[0.14] via-[#00A29D]/[0.08] to-transparent"></div>
-      <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-[#66C1BF]/20 blur-3xl"></div>
-      <div className="absolute top-10 -right-24 w-80 h-80 rounded-full bg-[#5327A8]/10 blur-3xl"></div>
+    <div className="relative flex flex-col w-full bg-surface">
+      <div className="absolute top-0 left-0 w-full h-96 overflow-hidden bg-gradient-to-b from-brand-100/50 via-brand-50/40 to-transparent" aria-hidden="true"></div>
+      <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-brand-200/30 blur-3xl" aria-hidden="true"></div>
+      <div className="absolute top-10 -right-24 w-80 h-80 rounded-full bg-brand-100/40 blur-3xl" aria-hidden="true"></div>
       <div className="container mx-auto">
         <Swiper
           modules={[Autoplay]}
@@ -183,9 +183,11 @@ const AltCategories = () => {
             <button
               type="button"
               key={page}
+              aria-label={`Go to category page ${page + 1}`}
+              aria-current={activePage === page ? "true" : undefined}
               onClick={() => swiperRef.current?.slideToLoop(page * 3)}
-              className={`rounded-full px-4 py-1 border border-[#4CBEC5] ${
-                activePage === page && "bg-[#4CBEC5]"
+              className={`h-2 cursor-pointer rounded-pill transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
+                activePage === page ? "w-6 bg-brand-400" : "w-2 bg-line hover:bg-ink-muted"
               }`}
             ></button>
           ))}
@@ -205,7 +207,7 @@ const AltCategories = () => {
         <button
           type="button"
           onClick={() => setShowAll((pre) => !pre)}
-          className="bg-gradient-to-r from-[#66C1BF] to-[#00A29D] text-white px-8 py-2 font-thin rounded-full xl:font-bold text-[12px] leading-[14px] xl:text-base h-10"
+          className="bg-brand-600 text-white px-8 py-2 rounded-pill xl:font-bold text-[12px] leading-[14px] xl:text-base h-10 inline-flex items-center justify-center transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
         >
           {showAll ? "Show Less" : "Show More"}
         </button>
@@ -217,24 +219,20 @@ const AltCategories = () => {
 const SingleCategoryItem: FC<any> = ({ content, href, selectedCategory, setSelectedCategory }) => {
   const isActive = content.id === selectedCategory;
   return (
-    <Link href={href}>
+    <Link href={href} className="focus-visible:outline-none">
       <div
-        className="relative flex flex-col items-center w-full h-full group hover:cursor-pointer"
+        className={`relative flex flex-col items-center w-full h-full group cursor-pointer rounded-card py-5 px-3 xl:px-8 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
+          isActive ? "bg-brand-100" : "hover:bg-brand-50"
+        }`}
         onClick={() => setSelectedCategory(content.id)}
       >
-        <div
-          className={`absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 rounded-2xl z-0 transition-all duration-200 group-hover:visible group-hover:bg-gradient-to-r group-hover:from-[#66c1bf] group-hover:to-[#00a29d] ${
-            isActive && "bg-gradient-to-r from-[#66C1BF] to-[#00A29D] visible opacity-100"
-          } `}
-        ></div>
-
-        <span className={`relative py-5 px-3 xl:px-8 flex flex-col items-center justify-center rounded-2xl w-full`}>
-          <div className="w-12 h-12">
+        <span className="relative flex flex-col items-center justify-center w-full">
+          <div className={`w-12 h-12 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none ${isActive ? "text-brand-700" : "text-ink-soft group-hover:text-brand-600"}`}>
             <content.icon isActive={isActive} />
           </div>
           <div
-            className={`text-[13px] leading-4 pt-2 text-center xl:text-sm mt-1 flex flex-col items-center justify-center transition-all duration-200 ease-in-out font-bold group-hover:text-white ${
-              isActive ? "text-white" : "text-[#7E8096]"
+            className={`text-[13px] leading-4 pt-2 text-center xl:text-sm mt-1 flex flex-col items-center justify-center font-semibold transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none ${
+              isActive ? "text-brand-700" : "text-ink-soft group-hover:text-brand-700"
             }`}
           >
             <p>{content.text1}</p>

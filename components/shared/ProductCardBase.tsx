@@ -10,12 +10,12 @@ interface ProductCardBaseProps {
 export const ProductCardBase: FC<ProductCardBaseProps> = ({ item, onFavoriteToggle }) => {
   return (
     <div
-      className={`flex relative group flex-col group justify-between h-[240px] xl:h-[360px] border drop-shadow-lg xl:drop-shadow-none border-[#dadada65] hover:border-[#4CBEC5]/60 hover:shadow-lg py-4 px-4 rounded-3xl w-full transition-all ease-in-out duration-300 hover:pb-12 xl:hover:pb-16 ${
-        item.backgroundColor ? `${item.backgroundColor}` : "bg-white"
+      className={`flex relative group flex-col group justify-between h-[240px] xl:h-[360px] border drop-shadow-lg xl:drop-shadow-none border-line hover:border-brand-400/60 hover:shadow-card py-4 px-4 rounded-card w-full transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:pb-12 xl:hover:pb-16 ${
+        item.backgroundColor ? `${item.backgroundColor}` : "bg-surface"
       }`}
     >
       <div className="flex flex-col text-[11px] xl:text-base">
-        <div className="flex flex-col text-[#7E8096]">
+        <div className="flex flex-col text-ink-soft">
           <h5 className="font-bold">{item.name}</h5>
           <h3>{item.brand}</h3>
         </div>
@@ -26,10 +26,10 @@ export const ProductCardBase: FC<ProductCardBaseProps> = ({ item, onFavoriteTogg
         </div>
       </div>
       <div className="z-0 flex items-end justify-between">
-        <div className="text-sm leading-4 xl:leading-normal xl:text-xl font-bold text-[#6F7081]">
+        <div className="text-sm leading-4 xl:leading-normal xl:text-xl font-bold text-ink-soft">
           {`${item.price.toFixed(2)}`.replace(".", ",")} $ <br />
           {item.advertCount > 0 && (
-            <p className="text-[9px] leading-[7px] xl:text-xs font-normal text-[#7E8096] whitespace-nowrap">
+            <p className="text-[9px] leading-[7px] xl:text-xs font-normal text-ink-muted whitespace-nowrap">
               starting from <strong> {item.advertCount} listings</strong>
             </p>
           )}

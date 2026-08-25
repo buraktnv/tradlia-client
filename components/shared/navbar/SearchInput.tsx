@@ -16,19 +16,20 @@ const SearchInput: FC = () => {
 
   //TODO items center creates a bug in the parent div
   return (
-    <form onSubmit={onSubmit} className="relative w-full">
-      <span className="absolute top-2.5 left-3">
-        <Image src={"/images/navbar/searchIcon.svg"} width={16} height={16} alt="search" />
+    <form onSubmit={onSubmit} className="relative w-full" role="search">
+      <span className="absolute top-1/2 -translate-y-1/2 left-4 pointer-events-none" aria-hidden="true">
+        <Image src={"/images/navbar/searchIcon.svg"} width={16} height={16} alt="" />
       </span>
       <input
-        className="h-10 w-full text-sm border px-9 py-2 rounded-full border-[#66bebc] focus:outline-none font-light"
+        className="drop-shadow-input-shadow h-10 w-full text-sm border px-11 pr-24 rounded-pill border-line bg-surface text-ink placeholder:text-ink-muted focus:outline-none focus:border-brand-400 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
         placeholder="search product name, barcode, brand or member"
+        aria-label="Search products"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
       <button
         type="submit"
-        className="absolute right-0 top-0 text-gray-100 text-sm h-10 px-5 bg-gradient-to-r from-[#66C1BF] to-[#009f9a] rounded-full"
+        className="absolute right-0 top-0 h-10 px-5 rounded-pill bg-brand-600 text-sm font-semibold text-white transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
       >
         Search
       </button>

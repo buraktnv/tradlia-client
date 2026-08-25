@@ -29,7 +29,7 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
       </div>
       <main
         className={`flex flex-col py-28 ${!isHome && "pt-16"} ${
-          !MobileBgWhitePages.includes(router.asPath) && "bg-[#F2F2F2]"
+          !MobileBgWhitePages.includes(router.asPath) && "bg-canvas"
         } xl:py-0 xl:bg-white xl:my-0 xl:pb-12`}
       >
         {children}

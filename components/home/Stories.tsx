@@ -109,18 +109,18 @@ const Stories: FC = () => {
               setSlideIndex(0);
               setOpenCategory(cat);
             }}
-            className="flex flex-col items-center shrink-0 cursor-pointer group"
+            className="flex flex-col items-center shrink-0 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 rounded-full"
           >
-            <span className="p-[2.5px] rounded-full bg-gradient-to-tr from-[#FFBE00] via-[#FF516B] to-[#5327A8] transition-transform duration-200 group-hover:scale-105">
-              <span className="flex items-center justify-center w-14 h-14 xl:w-[72px] xl:h-[72px] bg-white rounded-full">
-                <span className="flex items-center justify-center w-full h-full bg-[#F4F5F9] rounded-full">
-                  <span className="w-8 h-8 xl:w-9 xl:h-9">
+            <span className="p-[2.5px] rounded-full bg-gradient-to-tr from-brand-300 via-brand-400 to-brand-600 transition-transform duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:scale-105">
+              <span className="flex items-center justify-center w-14 h-14 xl:w-[72px] xl:h-[72px] bg-surface rounded-full">
+                <span className="flex items-center justify-center w-full h-full bg-canvas rounded-full">
+                  <span className="w-8 h-8 xl:w-9 xl:h-9 text-ink-soft">
                     <cat.icon isActive={false} />
                   </span>
                 </span>
               </span>
             </span>
-            <span className="mt-1.5 text-[10px] leading-3 xl:text-xs text-center text-[#7E8096] font-medium group-hover:text-[#4CBEC5]">
+            <span className="mt-1.5 text-[10px] leading-3 xl:text-xs text-center max-w-[72px] text-ink-soft font-medium transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:text-brand-600">
               {getFullName(cat)}
             </span>
           </button>
@@ -136,9 +136,9 @@ const Stories: FC = () => {
             {/* progress bars */}
             <div className="flex gap-1 px-4 pt-4">
               {products.map((_p, i) => (
-                <div key={i} className="h-[3px] flex-1 bg-white/30 rounded-full overflow-hidden">
+                <div key={i} className="h-[3px] flex-1 bg-surface/30 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-white rounded-full transition-[width] duration-[4000ms] ease-linear"
+                    className="h-full bg-surface rounded-full transition-[width] duration-[4000ms] ease-linear"
                     style={{ width: i < slideIndex ? "100%" : i === slideIndex ? `${progress}%` : "0%" }}
                   />
                 </div>
@@ -147,12 +147,12 @@ const Stories: FC = () => {
             {/* header */}
             <div className="flex items-center justify-between px-4 py-3">
               <div className="flex items-center gap-3">
-                <span className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white text-sm font-bold">
+                <span className="flex items-center justify-center w-9 h-9 rounded-full bg-surface/10 text-surface text-sm font-display font-semibold">
                   {openCategory.name.slice(0, 1)}
                 </span>
                 <div>
-                  <p className="text-white text-sm font-semibold">{getFullName(openCategory)}</p>
-                  <p className="text-white/50 text-[10px]">
+                  <p className="text-surface text-sm font-semibold">{getFullName(openCategory)}</p>
+                  <p className="text-surface/50 text-[10px]">
                     {slideIndex + 1} / {products.length}
                   </p>
                 </div>
@@ -161,9 +161,9 @@ const Stories: FC = () => {
                 type="button"
                 aria-label="Close story"
                 onClick={() => setOpenCategory(null)}
-                className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white hover:bg-white/20 cursor-pointer"
+                className="flex items-center justify-center w-9 h-9 rounded-full bg-surface/10 text-surface hover:bg-surface/20 cursor-pointer transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
               >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5" aria-hidden="true">
                   <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
                 </svg>
               </button>
@@ -175,21 +175,21 @@ const Stories: FC = () => {
                   <div className="relative w-56 h-56 xl:w-80 xl:h-80">
                     <Image src={current.image} alt={current.name} fill sizes="100vw" className="object-contain drop-shadow-2xl" />
                   </div>
-                  <p className="mt-8 text-white text-lg xl:text-2xl font-bold text-center">{current.name}</p>
-                  <p className="mt-1 text-white/60 text-sm xl:text-base text-center">{current.brand}</p>
-                  <p className="mt-3 text-[#4CBEC5] text-xl xl:text-2xl font-bold">
+                  <p className="mt-8 text-surface text-lg xl:text-2xl font-display font-semibold text-center">{current.name}</p>
+                  <p className="mt-1 text-surface/60 text-sm xl:text-base text-center">{current.brand}</p>
+                  <p className="mt-3 font-display text-brand-300 text-xl xl:text-2xl font-semibold">
                     {`${current.price.toFixed(2)}`.replace(".", ",")} $
                   </p>
                   <Link
                     href={`/category?cat=${openCategory.id}`}
                     onClick={() => setOpenCategory(null)}
-                    className="mt-6 px-8 py-2 rounded-full bg-gradient-to-r from-[#66C1BF] to-[#00A29D] text-white text-sm font-medium cursor-pointer"
+                    className="mt-6 px-8 py-2 rounded-pill bg-brand-400 text-ink text-sm font-semibold cursor-pointer transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-1 focus-visible:ring-offset-black"
                   >
                     Shop {getFullName(openCategory)}
                   </Link>
                 </>
               ) : (
-                <p className="text-white/60">No products in this category yet.</p>
+                <p className="text-surface/60">No products in this category yet.</p>
               )}
             </div>
           </div>

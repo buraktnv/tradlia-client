@@ -28,29 +28,36 @@ const BrandFilter: FC<any> = () => {
   const [isActive, setIsActive] = useState<boolean>(true);
   return (
     <div
-      className={`bg-white xl:bg-[#F7F7FA] w-full py-4 px-4 relative xl:border-none border border-[#4CBEC580] ${
-        isActive ? "rounded-3xl" : "rounded-full"
+      className={`bg-surface xl:bg-canvas w-full py-4 px-4 relative xl:border-none border border-line ${
+        isActive ? "rounded-card" : "rounded-pill"
       }`}
     >
       <div className="flex items-center justify-between">
-        <div className="font-bold text-[#4CBEC5] xl:text-base text-sm">BRANDS</div>
+        <div className="font-display font-semibold tracking-wide text-brand-700 xl:text-base text-sm">BRANDS</div>
         <div className="flex items-center gap-2">
           {isActive && (
-            <button type="button" className="flex items-center border xl:border-none border-[#4CBEC5]  gap-2 text-[#7E8096] bg-white rounded-full px-2 py-1 text-xs">
+            <button
+              type="button"
+              aria-label="Clear brand filters"
+              className="flex items-center border xl:border-none border-line gap-2 text-ink-soft bg-surface rounded-pill px-2 py-1 text-xs transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-400 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+            >
               Clear
               <div className="w-2 h-2">
                 <SvgClose />
               </div>
             </button>
           )}
-          <div
-            className={`w-4 h-4 text-[#4CBEC5] cursor-pointer transform transition ease-in-out duration-300 ${
+          <button
+            type="button"
+            aria-label={isActive ? "Collapse brand filters" : "Expand brand filters"}
+            aria-expanded={isActive}
+            className={`w-4 h-4 text-brand-600 cursor-pointer transform transition-transform duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
               isActive ? "rotate-0" : "rotate-180"
             }`}
             onClick={() => setIsActive((pre: any) => !pre)}
           >
             <SvgShowMore />
-          </div>
+          </button>
         </div>
       </div>
       {isActive && (
@@ -58,10 +65,10 @@ const BrandFilter: FC<any> = () => {
           <div className="relative mt-4 pb-[1.5rem]">
             <input
               type="text"
-              className="w-full pl-2 mb-2 px-8 py-1.5 rounded-full placeholder:text-[#4CBEC5] border border-[#4CBEC5] text-center text-sm focus:outline-none"
+              className="w-full pl-2 mb-2 px-8 py-1.5 rounded-pill placeholder:text-ink-muted border border-line text-ink text-center text-sm focus:outline-none focus:border-brand-400 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
               placeholder="Search Brand"
             />
-            <button type="button" className="absolute w-4 h-4 top-2 right-4">
+            <button type="button" aria-label="Search brands" className="absolute w-4 h-4 top-2 right-4 text-ink-muted">
               <SvgSearch />
             </button>
             <div className={`px-1.5 max-h-80 overflow-y-scroll ${scrollBar.ScrollBar}`}>
@@ -70,9 +77,10 @@ const BrandFilter: FC<any> = () => {
               ))}
             </div>
           </div>
-          <div className="absolute left-0 flex justify-center w-full text-white rounded-full -bottom-3">
-            <button type="button"
-              className="flex items-center justify-between px-3 py-1 w-max bg-[#C2C7D3]  rounded-full"
+          <div className="absolute left-0 flex justify-center w-full rounded-pill -bottom-3">
+            <button
+              type="button"
+              className="flex items-center justify-between px-3 py-1 w-max bg-ink text-white rounded-pill transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
               onClick={() => setIsActive(false)}
             >
               Show Less

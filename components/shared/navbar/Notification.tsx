@@ -30,15 +30,17 @@ const Notification: FC<any> = () => {
   return (
     <div className="group">
       <div className="relative">
-        <div className="w-[26px] h-[26px] relative cursor-pointer">
+        <button
+          type="button"
+          aria-label={`Notifications, ${notificationCount} unread`}
+          className="relative flex w-[26px] h-[26px] items-center justify-center text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 rounded-full cursor-pointer"
+        >
           <SvgNotifications />
-          <div className="absolute -right-1 justify-center px-1 text-xs text-center text-white bg-gradient-to-r from-[#FF516B] to-[#FF0045] rounded-full -bottom-2">
-            {notificationCount}
-          </div>
-        </div>
+          <span className="pulse-dot absolute top-0 -right-1 bg-danger" aria-hidden="true" />
+        </button>
 
         <div
-          className={`relative invisible top-4  opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out group-hover:visible z-[99]`}
+          className={`relative invisible top-4 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none z-[99]`}
         >
           <div className="absolute w-56 h-8 right-1 -top-4"></div>
           <div className="absolute right-1 -top-3">
@@ -46,19 +48,22 @@ const Notification: FC<any> = () => {
               <SvgModalPiece />
             </div>
           </div>
-          <div className="absolute top-0 right-0 border border-[#00b2b27e] py-2 px-3 bg-white z-[51] rounded-l-xl rounded-b-2xl w-56">
+          <div className="absolute top-0 right-0 border border-line py-2 px-3 bg-surface z-[51] rounded-card shadow-pop w-64">
             <div className="flex items-center justify-center gap-2 px-4 pt-2 pb-3">
-              <div className="w-[26px] h-[26px]">
+              <div className="w-[26px] h-[26px] text-brand-600">
                 <SvgNotifications />
               </div>
-              <p className="font-medium text-[#4CBEC5]">Notifications</p>
+              <p className="font-display font-semibold text-ink">Notifications</p>
             </div>
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full divide-y divide-line">
               {notificationList && notificationList.map((el) => <NotificationItem key={el.id} content={el} />)}
             </div>
-            <div className="flex justify-center w-full py-1">
-              <Link href={"/notifications"}>
-                <button type="button" className="cursor-pointer select-none text-sm bg-gradient-to-r from-[#FF516B] to-[#FF0045] rounded-full text-white px-2 py-2 w-full font-bold">
+            <div className="flex justify-center w-full py-1 pt-2">
+              <Link href={"/notifications"} className="w-full">
+                <button
+                  type="button"
+                  className="cursor-pointer select-none text-sm bg-brand-600 rounded-pill text-white px-2 py-2 w-full font-semibold transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+                >
                   Show All Notifications
                 </button>
               </Link>
@@ -72,16 +77,11 @@ const Notification: FC<any> = () => {
 
 const NotificationItem: FC<any> = ({ content }) => {
   return (
-    <div>
-      <div className="w-full h-[1px] bg-[#4CBEC5]/75"></div>
-      <div className="pt-1.5 pb-3">
-        <div className="font-medium text-[#4CBEC5] text-base leading-relaxed tracking-tight">{content.title}</div>
-        <div className="text-[#7E8096] leading-snug text-[0.8rem]">{content.message}</div>
-      </div>
+    <div className="pt-2 pb-3 px-1">
+      <div className="font-display text-sm font-semibold leading-relaxed tracking-tight text-ink">{content.title}</div>
+      <div className="text-ink-soft leading-snug text-xs mt-0.5">{content.message}</div>
     </div>
   );
 };
-
-
 
 export default Notification;

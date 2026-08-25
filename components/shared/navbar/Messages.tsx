@@ -34,14 +34,16 @@ const Notification: FC<any> = () => {
   return (
     <div className="group">
       <div className="relative">
-        <div className="w-[32px] h-[24px] relative cursor-pointer">
+        <button
+          type="button"
+          aria-label={`Messages, ${messageCount} unread`}
+          className="relative flex w-[32px] h-[24px] items-center justify-center text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 rounded-full cursor-pointer"
+        >
           <SvgMessages />
-          <div className="absolute -right-1 justify-center px-1 text-xs text-center text-white bg-gradient-to-r from-[#66C1BF] to-[#00A29D] rounded-full -bottom-2">
-            {messageCount}
-          </div>
-        </div>
+          <span className="pulse-dot absolute -top-1 -right-1 bg-danger" aria-hidden="true" />
+        </button>
         <div
-          className={`relative invisible top-4  opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out group-hover:visible z-[99]`}
+          className={`relative invisible top-4 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none z-[99]`}
         >
           <div className="absolute w-56 h-8 right-1 -top-4"></div>
           <div className="absolute right-1 -top-3">
@@ -49,19 +51,22 @@ const Notification: FC<any> = () => {
               <SvgModalPiece />
             </div>
           </div>
-          <div className="absolute top-0 right-0 border border-[#00b2b27e] py-2 px-3 bg-white z-[51] rounded-l-xl rounded-b-2xl w-64">
+          <div className="absolute top-0 right-0 border border-line py-2 px-3 bg-surface z-[51] rounded-card shadow-pop w-64">
             <div className="flex items-center justify-center gap-2 px-4 pt-2 pb-3">
-              <div className="w-[26px] h-[26px]">
+              <div className="w-[26px] h-[26px] text-brand-600">
                 <SvgMessages />
               </div>
-              <p className="font-medium text-[#4CBEC5]">My Messages</p>
+              <p className="font-display font-semibold text-ink">My Messages</p>
             </div>
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full divide-y divide-line">
               {messageList && messageList.map((el) => <MessageItem key={el.id} content={el} />)}
             </div>
-            <div className="flex justify-center w-full py-1">
-              <Link href={"/profile/messages"}>
-                <button type="button" className="cursor-pointer select-none text-sm bg-gradient-to-r from-[#66C1BF] to-[#00A29D] w-full rounded-full text-white px-2 py-2 font-bold">
+            <div className="flex justify-center w-full py-1 pt-2">
+              <Link href={"/profile/messages"} className="w-full">
+                <button
+                  type="button"
+                  className="cursor-pointer select-none text-sm bg-brand-600 w-full rounded-pill text-white px-2 py-2 font-semibold transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+                >
                   View All Messages
                 </button>
               </Link>
@@ -75,23 +80,20 @@ const Notification: FC<any> = () => {
 
 const MessageItem: FC<any> = ({ content }) => {
   return (
-    <div className="py-1 cursor-pointer">
-      <div className="w-full h-[1px] bg-[#4CBEC5]/75"></div>
-      <div className="pt-1.5 pb-3">
-        <div className="flex items-center gap-1 py-1">
-          <div className="flex justify-center items-center h-8 w-8 border rounded-full bg-[#F2F2F2] border-[#4CBEC5]">
-            <div className="w-5 h-5">
-              <SvgMarket />
-            </div>
+    <div className="py-2 cursor-pointer">
+      <div className="flex items-center gap-1.5 py-1">
+        <div className="flex justify-center items-center h-8 w-8 border rounded-full bg-canvas border-line text-ink-soft">
+          <div className="w-5 h-5">
+            <SvgMarket />
           </div>
-          <div className="text-[#7E8096] font-medium">{content.seller}</div>
         </div>
-        <div className="font-medium text-[#4CBEC5] text-base leading-relaxed tracking-tight">{content.title}</div>
-        <div className="text-[#7E8096] text-sm">{content.message}</div>
-        <div className="flex text-xs text-[#7E8096] leading-relaxed">
-          <p className="font-bold">{content.date}</p>
-          <p>- {content.hour}</p>
-        </div>
+        <div className="text-ink-muted text-xs font-medium">{content.seller}</div>
+      </div>
+      <div className="font-display text-sm font-semibold leading-relaxed tracking-tight text-ink">{content.title}</div>
+      <div className="text-ink-soft text-xs">{content.message}</div>
+      <div className="flex text-[11px] text-ink-muted leading-relaxed mt-0.5">
+        <p className="font-semibold">{content.date}</p>
+        <p>- {content.hour}</p>
       </div>
     </div>
   );

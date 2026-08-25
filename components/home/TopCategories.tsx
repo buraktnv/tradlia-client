@@ -11,29 +11,28 @@ const TopCategories: FC<{ isOpen: boolean }> = ({ isOpen }) => {
   return (
     <div className="relative">
       <div
-        className={`absolute top-0 left-0 w-full transform h-3  bg-[#5327A8]  transition-all ease-in-out duration-300 ${
-          isOpen ? "opacity-0" : "opacity-100"
+        aria-hidden={!isOpen}
+        className={`hidden xl:block absolute top-0 left-0 w-full z-40 transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none ${
+          isOpen ? "opacity-100 translate-y-0 visible" : "opacity-0 -translate-y-2 invisible pointer-events-none"
         }`}
-      ></div>
-      <div
-        className={`hidden xl:flex flex-col w-full max-h-full bg-[#5327A8] ${
-          isOpen ? "opacity-100" : "opacity-0"
-        } transition-all ease-in-out duration-300`}
       >
-        <div
-          className={`flex container justify-between py-4 mx-auto space-x-8 ${
-            isOpen ? "opacity-100" : "max-h-0 opacity-0"
-          }`}
-        >
-          {jsonCategoryList.map((el: any) => (
-            <SingleCategoryItem
-              key={el.id}
-              content={el}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-            />
-          ))}
-        </div>
+        <nav className="bg-surface border-b border-line shadow-pop">
+          <div
+            aria-label="Product categories"
+            className={`flex container justify-between py-4 mx-auto space-x-8 ${
+              isOpen ? "opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+            }`}
+          >
+            {jsonCategoryList.map((el: any) => (
+              <SingleCategoryItem
+                key={el.id}
+                content={el}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+              />
+            ))}
+          </div>
+        </nav>
       </div>
     </div>
   );
@@ -48,63 +47,62 @@ const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCat
   return (
     <div className="group">
       <div className="relative">
-        <div
-          className="flex items-center group hover:cursor-pointer"
+        <button
+          type="button"
           onMouseEnter={() => {
             setSelectedCategory((pre: any) => (pre !== content.id ? content.id : null));
           }}
           onClick={() => catId && router.push(categoryUrl(catId))}
+          className="flex items-center gap-3 text-left rounded-card px-2 py-1.5 cursor-pointer transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
         >
           <span
-            className={`relative h-14 w-14 p-2 rounded-2xl transition duration-200 ease-in-out ${
+            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-card p-2.5 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none ${
               isActive
-                ? "bg-gradient-to-r from-[#66c1bf] to-[#00a29d]"
-                : "group-hover:bg-gradient-to-r group-hover:from-[#66c1bf] group-hover:to-[#00a29d]"
+                ? "bg-brand-100 text-brand-700"
+                : "bg-canvas text-ink-soft group-hover:bg-brand-100 group-hover:text-brand-700"
             }`}
           >
             <content.icon isActive={isActive} />
-            <span
-              className={`absolute transition-shadow duration-300 ease-in-out group-hover:visible translate-y-4 bottom-0 left-2 rounded right-2 h-1 bg-gradient-to-r from-[#66c1bf] to-[#00a29d] ${
-                isActive ? "visible" : "invisible group-hover:visible"
-              }`}
-            ></span>
           </span>
 
-          <div
-            className={`text-sm ml-1 transition duration-200 ease-in-out font-semibold group-hover:text-[#66c1bf] ${
-              isActive ? "text-[#66c1bf]" : "text-[#F4F5F9]"
+          <span
+            className={`text-sm ml-1 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none font-semibold leading-tight ${
+              isActive ? "text-brand-700" : "text-ink group-hover:text-brand-700"
             }`}
           >
             <p>{content.text1}</p>
             <p>{content.text2}</p>
-          </div>
-        </div>
+          </span>
+        </button>
         <div
-          className={`absolute z-30 top-[72px] group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 opacity-0 translate-y-10 invisible transition-all duration-300 ease-in-out flex ${content.align}`}
+          className={`absolute z-30 top-full pt-3 ${content.align ?? ""} invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none flex`}
         >
-          <div
-            className={`bg-gradient-to-b from-[#66C1BF] to-[#00A29D] h-80  px-2 flex items-center justify-center ${content.rounded[0]} shadow-md`}
-          >
-            <div className="w-20 h-24 opacity-70">
-              <content.icon isActive={true} />
-            </div>
-          </div>
-          <div
-            className={`grid grid-cols-2 text-xs bg-white w-[450px] px-6 shadow-md font-medium text-[#6F7081] py-8 ${content.rounded[1]}`}
-          >
-            {category?.subCategories.map((sub) => (
-              <button
-                type="button"
-                className="flex items-center gap-1 cursor-pointer whitespace-nowrap btnGroupHover hover:text-[#00A29D]"
-                key={sub.id}
-                onClick={() => catId && router.push(categoryUrl(catId, sub.id))}
-              >
-                <div className={`w-6 h-3 svgIcon`}>
+          <div className="flex overflow-hidden rounded-card shadow-pop bg-surface border border-line">
+            <div className="hidden lg:flex w-24 shrink-0 bg-brand-600 px-2 items-center justify-center text-white relative">
+              <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center opacity-20">
+                <span className="w-16 h-20 block">
                   <SvgM />
-                </div>
-                {sub.name}
-              </button>
-            ))}
+                </span>
+              </span>
+              <span className="relative w-14 h-16 opacity-90">
+                <content.icon isActive={true} />
+              </span>
+            </div>
+            <div className="grid grid-cols-2 text-xs bg-surface w-[450px] max-w-[80vw] px-6 py-6 font-medium gap-x-4">
+              {category?.subCategories.map((sub) => (
+                <button
+                  type="button"
+                  className="flex items-center gap-1.5 cursor-pointer whitespace-nowrap btnGroupHover rounded-pill px-2 py-1.5 my-0.5 text-left text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+                  key={sub.id}
+                  onClick={() => catId && router.push(categoryUrl(catId, sub.id))}
+                >
+                  <div className={`w-6 h-3 svgIcon text-brand-500`}>
+                    <SvgM />
+                  </div>
+                  {sub.name}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>

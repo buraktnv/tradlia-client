@@ -8,8 +8,8 @@ const isActiveRoute = (asPath: string, route: string) => asPath.split("?")[0] ==
 const NavbarMobile: FC = () => {
   return (
     <div className="relative">
-      <div className="navbarMobile fixed bottom-0 left-0 right-0 flex h-20 w-full z-50 drop-shadow-[0_0_5px_rgba(0,0,0,0.25)]">
-        <div className="flex h-full w-full bg-white rounded-t-[25px] p-2 border border-[#4CBEC5]/50">
+      <nav aria-label="Mobile primary" className="navbarMobile fixed bottom-0 left-0 right-0 flex h-20 w-full z-50">
+        <div className="flex h-full w-full bg-surface/95 backdrop-blur rounded-t-3xl p-2 border-t border-x border-line shadow-pop">
           <div className="grid w-full grid-cols-11 gap-2">
             <div className="flex flex-col items-center justify-center col-span-2 p-1">
               <NavItemMessages />
@@ -20,15 +20,20 @@ const NavbarMobile: FC = () => {
             <div className="col-span-3 p-1">
               <Link
                 href="/profile/adverts"
-                className="relative flex flex-col items-center justify-center h-full cursor-pointer select-none">
-
-                <span className="absolute border border-[#4CBEC5] rounded-full borderWrapper -top-8">
-                  <button type="button" className="border-4 bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] text-white rounded-full text-3xl px-3.5 py-1 whitespace-nowrap drop-shadow-md">
+                className="relative flex flex-col items-center justify-center h-full cursor-pointer select-none focus-visible:outline-none group"
+              >
+                <span className="absolute -top-7 left-1/2 -translate-x-1/2">
+                  <button
+                    type="button"
+                    aria-label="Add free listing"
+                    tabIndex={-1}
+                    className="flex items-center justify-center w-12 h-12 bg-amber-400 text-ink border-4 border-surface rounded-full text-3xl font-light shadow-pop transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:bg-amber-500"
+                  >
                     +
                   </button>
                 </span>
                 <div className="w-6 h-6 my-0.5"></div>
-                <span className="text-[11px] leading-[8px] font-medium text-[#FF7B03] whitespace-nowrap">
+                <span className="text-[10px] leading-[10px] font-medium text-ink-soft whitespace-nowrap transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:text-brand-600">
                   Add Free Listing
                 </span>
 
@@ -42,7 +47,7 @@ const NavbarMobile: FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </nav>
     </div>
   );
 };
@@ -53,23 +58,27 @@ const NavItemOrdersBasket = () => {
   return (
     <Link
       href={route}
-      className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group">
-
+      aria-label={`My Cart, 3 items`}
+      className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 rounded-card"
+    >
       <span
-        className={`w-11 h-11 relative fill-gray-600 group-hover:fill-[#4CBEC5] flex items-center justify-center ${
-          isActiveRoute(router.asPath, route) && "fill-[#4CBEC5]"
+        className={`w-11 h-11 relative fill-ink-soft group-hover:fill-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none flex items-center justify-center ${
+          isActiveRoute(router.asPath, route) && "fill-brand-600"
         }`}
       >
         <div className="w-6 h-6">
           <SvgBasket />
         </div>
-        <div className="absolute -right-2 w-[22px] h-[22px] flex items-center justify-center text-xs text-center text-white bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] rounded-full -top-2">
+        <span
+          className="absolute -right-1.5 min-w-[18px] h-[18px] px-1 flex items-center justify-center text-[10px] font-bold text-center text-surface bg-danger rounded-pill -top-1"
+          aria-hidden="true"
+        >
           3
-        </div>
+        </span>
       </span>
       <span
-        className={`text-[10px] text-gray-600 whitespace-nowrap group-hover:text-[#4CBEC5] ${
-          isActiveRoute(router.asPath, route) && "text-[#4CBEC5]"
+        className={`text-[10px] text-ink-soft whitespace-nowrap transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:text-brand-600 ${
+          isActiveRoute(router.asPath, route) && "text-brand-600 font-semibold"
         }`}
       >
         My Cart
@@ -85,11 +94,12 @@ const NavItemOrdersSmartBasket = () => {
   return (
     <Link
       href={route}
-      className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group">
+      className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 rounded-card"
+    >
 
       <span
-        className={`w-11 h-11 relative fill-gray-600 group-hover:fill-[#4CBEC5] flex items-center justify-center ${
-          isActiveRoute(router.asPath, route) && "fill-[#4CBEC5]"
+        className={`w-11 h-11 relative fill-ink-soft group-hover:fill-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none flex items-center justify-center ${
+          isActiveRoute(router.asPath, route) && "fill-brand-600"
         }`}
       >
         <div className="w-6 h-6">
@@ -97,8 +107,8 @@ const NavItemOrdersSmartBasket = () => {
         </div>
       </span>
       <span
-        className={`text-[10px] text-gray-600 whitespace-nowrap group-hover:text-[#4CBEC5] ${
-          isActiveRoute(router.asPath, route) && "text-[#4CBEC5]"
+        className={`text-[10px] text-ink-soft whitespace-nowrap transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:text-brand-600 ${
+          isActiveRoute(router.asPath, route) && "text-brand-600 font-semibold"
         }`}
       >
         Smart Basket
@@ -114,11 +124,12 @@ const NavItemOrdersBought = () => {
   return (
     <Link
       href={route}
-      className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group">
+      className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 rounded-card"
+    >
 
       <span
-        className={`w-11 h-11 relative fill-gray-600 group-hover:fill-[#4CBEC5] flex items-center justify-center ${
-          isActiveRoute(router.asPath, route) && "fill-[#4CBEC5]"
+        className={`w-11 h-11 relative fill-ink-soft group-hover:fill-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none flex items-center justify-center ${
+          isActiveRoute(router.asPath, route) && "fill-brand-600"
         }`}
       >
         <div className="w-6 h-6">
@@ -126,8 +137,8 @@ const NavItemOrdersBought = () => {
         </div>
       </span>
       <span
-        className={`text-[10px] text-gray-600 whitespace-nowrap group-hover:text-[#4CBEC5] ${
-          isActiveRoute(router.asPath, route) && "text-[#4CBEC5]"
+        className={`text-[10px] text-ink-soft whitespace-nowrap transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:text-brand-600 ${
+          isActiveRoute(router.asPath, route) && "text-brand-600 font-semibold"
         }`}
       >
         My Orders
@@ -143,23 +154,28 @@ const NavItemMessages = () => {
   return (
     <Link
       href={route}
-      className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group">
+      aria-label="Messages, 3 unread"
+      className="flex flex-col items-center justify-center w-full gap-1 cursor-pointer select-none group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 rounded-card"
+    >
 
       <span
-        className={`w-11 h-11 relative fill-gray-600 group-hover:fill-[#4CBEC5] flex items-center justify-center ${
-          isActiveRoute(router.asPath, route) && "fill-[#4CBEC5]"
+        className={`w-11 h-11 relative fill-ink-soft group-hover:fill-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none flex items-center justify-center ${
+          isActiveRoute(router.asPath, route) && "fill-brand-600"
         }`}
       >
         <div className="w-6 h-6">
           <SvgMessages1 />
         </div>
-        <div className="absolute -right-2 w-[22px] h-[22px] flex items-center justify-center text-xs text-center text-white bg-gradient-to-r from-[#66C1BF] to-[#00A29D] rounded-full -top-2">
+        <span
+          className="absolute -right-1 min-w-[18px] h-[18px] px-1 flex items-center justify-center text-[10px] font-bold text-center text-surface bg-danger rounded-pill -top-1"
+          aria-hidden="true"
+        >
           3
-        </div>
+        </span>
       </span>
       <span
-        className={`text-[10px] text-gray-600 whitespace-nowrap group-hover:text-[#4CBEC5] ${
-          isActiveRoute(router.asPath, route) && "text-[#4CBEC5]"
+        className={`text-[10px] text-ink-soft whitespace-nowrap transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:text-brand-600 ${
+          isActiveRoute(router.asPath, route) && "text-brand-600 font-semibold"
         }`}
       >
         Messages

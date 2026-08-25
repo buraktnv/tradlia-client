@@ -107,21 +107,21 @@ const Slider: FC = () => {
 
   return (
     <>
-      <div className="relative flex flex-col px-5 bg-white xl:px-3">
-        <div className="bg-[#F4F5F9] absolute w-[100%] h-[60%] left-0 bottom-0"></div>
+      <div className="relative flex flex-col px-5 bg-surface xl:px-3">
+        <div className="bg-canvas absolute w-[100%] h-[60%] left-0 bottom-0" aria-hidden="true"></div>
         <div className="container relative mx-auto mb-6 xl:mb-0">
           <div className="absolute flex w-full h-full rounded-full">
             <div className="relative w-full h-full xl:h-[400px] drop-shadow-md">
-              <Image src="/images/main/homepage/photoBg.svg" alt="bg" fill sizes="100vw" className="rounded-3xl" />
+              <Image src="/images/main/homepage/photoBg.svg" alt="" aria-hidden="true" fill sizes="100vw" className="rounded-card" />
             </div>
           </div>
           <button
             type="button"
             aria-label="Previous slide"
             onClick={() => swiperRef.current?.slidePrev()}
-            className="absolute left-3 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 shadow-md backdrop-blur transition hover:bg-white xl:flex"
+            className="absolute left-3 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/80 shadow-card backdrop-blur transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-surface text-ink-soft hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 xl:flex"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-5 w-5 text-[#4CBEC5]">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-5 w-5" aria-hidden="true">
               <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
@@ -129,9 +129,9 @@ const Slider: FC = () => {
             type="button"
             aria-label="Next slide"
             onClick={() => swiperRef.current?.slideNext()}
-            className="absolute right-3 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 shadow-md backdrop-blur transition hover:bg-white xl:flex"
+            className="absolute right-3 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/80 shadow-card backdrop-blur transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-surface text-ink-soft hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 xl:flex"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-5 w-5 text-[#4CBEC5]">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-5 w-5" aria-hidden="true">
               <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
@@ -150,21 +150,21 @@ const Slider: FC = () => {
               <SwiperSlide key={el.id}>
                 <div className="relative flex h-[200px] w-[341px] xl:h-[400px] xl:w-full">
                   <div className="z-10 xl:p-2 xl:m-1 m-1 w-1/2 xl:w-[35%]">
-                    <div className="h-full xl:w-full flex flex-col justify-between xl:justify-center xl:rounded-[2.5rem] rounded-[1.3rem] pl-1 pr-3 py-4 xl:p-0 bg-white/95 xl:bg-transparent">
-                      <div className="xl:text-4xl leading-5 text-[19px] font-light xl:tracking-normal tracking-tighter text-[#7E8096] mx-3 xl:ml-14">
+                    <div className="h-full xl:w-full flex flex-col justify-between xl:justify-center rounded-card pl-1 pr-3 py-4 xl:p-0 bg-surface/95 xl:bg-transparent">
+                      <div className="xl:text-3xl text-[19px] leading-tight font-light xl:tracking-normal tracking-tighter text-ink-soft mx-3 xl:ml-14">
                         <p className="whitespace-pre">{el.text1}</p>
 
-                        <div className="xl:text-5xl text-[22px] font-bold text-[#4CBEC5]">
+                        <div className="font-display xl:text-5xl text-[22px] font-semibold leading-[1.05] tracking-tight text-ink mt-2 xl:mt-3">
                           <span className="whitespace-pre">{el.text2}</span>
                         </div>
-                        <div className="hidden px-10 xl:flex">
-                          <Image src="/images/main/secondSection/heartBeat.svg" alt="Heart Beat" height={36} width={36} />
+                        <div className="hidden px-10 xl:flex" aria-hidden="true">
+                          <Image src="/images/main/secondSection/heartBeat.svg" alt="" height={36} width={36} />
                         </div>
                       </div>
                       <div className="m-1 mx-3 xl:ml-14">
                         <Link
                           href={`/category?cat=${el.type}`}
-                          className="xl:px-8 px-2 py-1 xl:py-2 text-[10px] xl:text-xl cursor-pointer mt-2 font-light drop-shadow-lg text-white bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] rounded-3xl col-span-3"
+                          className="inline-flex items-center justify-center xl:px-8 px-3 py-1.5 xl:py-2 text-[11px] xl:text-base cursor-pointer mt-2 font-semibold text-white bg-ink rounded-pill col-span-3 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
                         >
                           Shop {el.category}
                         </Link>
@@ -175,7 +175,7 @@ const Slider: FC = () => {
                     {/* slider-bar asset used as a soft background disc */}
                     <div className="absolute right-[2%] xl:right-[6%] top-1/2 -translate-y-1/2 pointer-events-none opacity-25 blur-2xl">
                       <div className="relative w-[200px] h-[200px] xl:w-[400px] xl:h-[400px]">
-                        <Image src={el.url} alt="" fill sizes="100vw" className="rounded-full" />
+                        <Image src={el.url} alt="" aria-hidden="true" fill sizes="100vw" className="rounded-full" />
                       </div>
                     </div>
                     {/* transparent product hero */}
@@ -196,36 +196,50 @@ const Slider: FC = () => {
             ))}
           </Swiper>
         </div>
-        <div className="container hidden mx-auto xl:block">
-          <div className="flex justify-around px-[2.5rem] py-6 mx-auto space-x-6 overflow-x-auto">
+        <div className="container relative hidden mx-auto xl:block">
+          <div className="flex justify-start gap-3 px-[2.5rem] py-5 mx-auto overflow-x-auto hiddenScroll">
             {photos.map((el, index) => (
-              <button type="button" key={el.id} className={`p-2 relative group cursor-pointer`} onClick={() => goToSlide(index)}>
-                <div
-                  className={`absolute top-0 left-0 w-full h-full transform transition-all duration-300 ease-in-out group ${
-                    activeImage.url === el.url ? "block" : "opacity-0 group-hover:opacity-100"
+              <button
+                type="button"
+                key={el.id}
+                aria-label={`Show slide ${index + 1}: ${el.category}`}
+                aria-current={activeImage.url === el.url ? "true" : undefined}
+                onClick={() => goToSlide(index)}
+                className={`shrink-0 cursor-pointer rounded-card border px-4 py-2.5 text-left transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
+                  activeImage.url === el.url
+                    ? "border-brand-400 bg-brand-50 shadow-card"
+                    : "border-line bg-surface hover:border-brand-300"
+                }`}
+              >
+                <span
+                  className={`block text-[10px] font-semibold uppercase tracking-wider ${
+                    activeImage.url === el.url ? "text-brand-600" : "text-ink-muted"
                   }`}
                 >
-                  <Image src="/images/main/homepage/png-1-2.svg" alt="" fill sizes="100vw" />
-                </div>
-                <div className="absolute top-0 left-0 w-full h-full opacity-40">
-                  <Image src="/images/main/homepage/png-1.svg" alt="" fill sizes="100vw" className="rounded-[1.7rem]" />
-                </div>
-                <div className="relative flex w-20 p-2 h-14">
-                  <Image className="object-contain" src={el.url} fill sizes="100vw" alt="" />
-                </div>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span
+                  className={`block text-xs font-semibold leading-tight mt-0.5 ${
+                    activeImage.url === el.url ? "text-ink" : "text-ink-soft"
+                  }`}
+                >
+                  {el.category}
+                </span>
               </button>
             ))}
           </div>
         </div>
-        <div className="container block mx-auto xl:hidden">
+        <div className="container relative block mx-auto xl:hidden">
           <div className="relative flex justify-center w-full gap-2 py-2 pb-8">
             {photos.map((el, index) => (
               <button
                 type="button"
                 key={el.id}
+                aria-label={`Go to slide ${index + 1}`}
+                aria-current={activeIndex === index ? "true" : undefined}
                 onClick={() => goToSlide(index)}
-                className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                  activeIndex === index && "bg-[#4CBEC5]"
+                className={`h-2 cursor-pointer rounded-pill transition-all duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
+                  activeIndex === index ? "w-6 bg-brand-400" : "w-2 bg-line hover:bg-ink-muted"
                 }`}
               ></button>
             ))}
