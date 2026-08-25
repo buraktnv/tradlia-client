@@ -145,42 +145,60 @@ function mask() {
 `;
 }
 
-/** Thermometer. */
-function thermometer() {
-  return `
-  ${shadow(200, 345, 120, 18)}
-  <rect x="186" y="60" width="28" height="200" rx="14" fill="#ffffff"/>
-  <rect x="190" y="120" width="20" height="110" rx="10" fill="url(#g-therm)"/>
-  <circle cx="200" cy="292" r="30" fill="url(#g-therm)"/>
-  <circle cx="200" cy="292" r="14" fill="#ffffff" opacity="0.5"/>
-  <rect x="170" y="64" width="60" height="8" rx="4" fill="#c9ccd4"/>
-  <rect x="170" y="80" width="60" height="8" rx="4" fill="#e4e6ea"/>
-`;
-}
-
-/** Dental kit (toothbrush + paste tube in a tray). */
-function dental() {
-  return `
-  ${shadow(200, 345, 140, 20)}
-  <rect x="120" y="270" width="160" height="60" rx="16" fill="#eef0f4"/>
-  <rect x="136" y="284" width="128" height="32" rx="10" fill="#ffffff"/>
-  <path d="M170 160 L196 160 L192 280 L174 280 Z" fill="url(#g-dental)"/>
-  <rect x="220" y="190" width="46" height="90" rx="10" fill="#ffffff"/>
-  <rect x="228" y="200" width="30" height="60" rx="6" fill="url(#g-dental)"/>
-  <path d="M222 186 L264 186 L264 194 L222 194 Z" fill="#5b5f6a"/>
-`;
-}
-
-/** Borescope (inspection camera). */
-function stetho() {
+/** Angle grinder (motor body, gearhead, guard and cutting disc). */
+function grinder() {
   return `
   ${shadow(200, 345, 130, 18)}
-  <path d="M150 120 Q150 80 200 80 Q250 80 250 120 L250 170" fill="none" stroke="#5b5f6a" stroke-width="14" stroke-linecap="round"/>
-  <circle cx="150" cy="170" r="12" fill="#5b5f6a"/>
-  <path d="M250 170 L250 230" stroke="#5b5f6a" stroke-width="14" stroke-linecap="round"/>
-  <circle cx="250" cy="250" r="34" fill="url(#g-stetho)"/>
-  <circle cx="250" cy="250" r="22" fill="#ffffff" opacity="0.5"/>
-  <path d="M190 100 Q200 90 210 100" stroke="#ffffff" stroke-width="5" fill="none" opacity="0.6"/>
+  <rect x="104" y="178" width="36" height="56" rx="14" fill="#5b5f6a"/>
+  <rect x="128" y="156" width="132" height="100" rx="26" fill="url(#g-grinder)"/>
+  <rect x="148" y="188" width="92" height="38" rx="8" fill="#ffffff" opacity="0.92"/>
+  <rect x="160" y="198" width="64" height="7" rx="3.5" fill="#c9ccd4"/>
+  <rect x="160" y="210" width="40" height="7" rx="3.5" fill="#e4e6ea"/>
+  <rect x="176" y="130" width="18" height="30" rx="8" fill="#5b5f6a"/>
+  <rect x="162" y="112" width="76" height="20" rx="10" fill="#5b5f6a"/>
+  <circle cx="274" cy="206" r="42" fill="#e8eaef"/>
+  <path d="M234 192 A44 44 0 0 1 314 192" stroke="#5b5f6a" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <circle cx="274" cy="206" r="15" fill="#5b5f6a"/>
+  <circle cx="274" cy="206" r="6" fill="#ffffff" opacity="0.85"/>
+  <rect x="267" y="224" width="14" height="82" rx="7" fill="#8fa0aa"/>
+  <line x1="274" y1="232" x2="274" y2="298" stroke="#ffffff" stroke-width="3" opacity="0.5"/>
+`;
+}
+
+/** DIN-rail circuit breaker (module body, lever and screw terminals). */
+function breaker() {
+  return `
+  ${shadow(200, 345, 90, 16)}
+  <rect x="154" y="54" width="26" height="24" rx="6" fill="#5b5f6a"/>
+  <rect x="220" y="54" width="26" height="24" rx="6" fill="#5b5f6a"/>
+  <rect x="140" y="66" width="120" height="256" rx="14" fill="url(#g-breaker)"/>
+  <rect x="152" y="80" width="96" height="54" rx="6" fill="#ffffff" opacity="0.92"/>
+  <rect x="164" y="94" width="64" height="8" rx="4" fill="#c9ccd4"/>
+  <rect x="164" y="108" width="42" height="8" rx="4" fill="#e4e6ea"/>
+  <rect x="182" y="148" width="36" height="66" rx="9" fill="#5b5f6a"/>
+  <rect x="189" y="158" width="22" height="26" rx="5" fill="#ffffff"/>
+  <circle cx="236" cy="216" r="7" fill="#ffffff" opacity="0.85"/>
+  <rect x="160" y="240" width="80" height="10" rx="5" fill="#ffffff" opacity="0.6"/>
+  <rect x="160" y="258" width="56" height="10" rx="5" fill="#ffffff" opacity="0.35"/>
+  <rect x="154" y="310" width="26" height="24" rx="6" fill="#5b5f6a"/>
+  <rect x="220" y="310" width="26" height="24" rx="6" fill="#5b5f6a"/>
+`;
+}
+
+/** LED high bay fixture (hook, finned housing and light cone). */
+function highbay() {
+  return `
+  ${shadow(200, 352, 96, 13)}
+  <path d="M136 218 L264 218 L316 342 L84 342 Z" fill="#ffbe00" opacity="0.12"/>
+  <path d="M200 46 L200 74" stroke="#5b5f6a" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="200" cy="42" r="11" fill="none" stroke="#5b5f6a" stroke-width="7"/>
+  <rect x="172" y="72" width="56" height="34" rx="10" fill="#5b5f6a"/>
+  <ellipse cx="200" cy="146" rx="98" ry="26" fill="url(#g-bay)"/>
+  <ellipse cx="200" cy="170" rx="110" ry="28" fill="url(#g-bay)"/>
+  <ellipse cx="200" cy="196" rx="98" ry="26" fill="url(#g-bay)"/>
+  <ellipse cx="182" cy="140" rx="16" ry="52" fill="#fff" opacity="0.25"/>
+  <ellipse cx="200" cy="212" rx="76" ry="18" fill="#ffffff" opacity="0.95"/>
+  <ellipse cx="200" cy="212" rx="58" ry="12" fill="#ffbe00" opacity="0.35"/>
 `;
 }
 
@@ -207,9 +225,9 @@ const PRODUCTS = [
   { name: "prod-07", draw: () => pills() },
   { name: "prod-08", draw: () => wrench() },
   { name: "prod-09", draw: () => mask() },
-  { name: "prod-10", draw: () => thermometer() },
-  { name: "prod-11", draw: () => dental() },
-  { name: "prod-12", draw: () => stetho() },
+  { name: "prod-10", draw: () => grinder() },
+  { name: "prod-11", draw: () => breaker() },
+  { name: "prod-12", draw: () => highbay() },
   { name: "prod-13", draw: () => gloves() },
   { name: "prod-14", draw: () => bottle() },
   { name: "prod-15", draw: () => jar() },
@@ -218,7 +236,7 @@ const PRODUCTS = [
 
 let count = 0;
 for (const { name, draw } of PRODUCTS) {
-  const gradientIds = ["g-bottle", "g-jar", "g-box", "g-tube", "g-spray", "g-drops", "g-pills", "g-wrench", "g-mask", "g-therm", "g-dental", "g-stetho", "g-gloves"];
+  const gradientIds = ["g-bottle", "g-jar", "g-box", "g-tube", "g-spray", "g-drops", "g-pills", "g-wrench", "g-mask", "g-grinder", "g-breaker", "g-bay", "g-gloves"];
   const used = gradientIds.filter((id) => draw().includes(`url(#${id})`));
   const defs = used
     .map((id, i) => {

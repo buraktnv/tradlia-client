@@ -161,8 +161,19 @@ const Slider: FC = () => {
                         <div className="font-display xl:text-5xl text-[22px] font-semibold leading-[1.05] tracking-tight text-ink mt-2 xl:mt-3">
                           <span className="whitespace-pre">{el.text2}</span>
                         </div>
-                        <div className="hidden px-10 xl:flex" aria-hidden="true">
-                          <Image src="/images/main/secondSection/heartBeat.svg" alt="" height={36} width={36} />
+                        <div className="hidden px-10 xl:flex text-brand-500" aria-hidden="true">
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-9 w-9"
+                          >
+                            <path d="M3 17l6-6 4 4 8-9" />
+                            <path d="M15 6h6v6" />
+                          </svg>
                         </div>
                       </div>
                       <div className="m-1 mx-3 xl:ml-14">

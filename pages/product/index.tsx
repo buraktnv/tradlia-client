@@ -134,8 +134,8 @@ const items: any = [
   },
   {
     id: 4,
-    name: "SafeGuard 3-Ply Black",
-    brand: "Dust Mask FFP2 Ear Loops 50 pcs",
+    name: "Vented Safety Goggles",
+    brand: "ANSI Z87 Clear Lens 1 pc",
     image: "/images/photos/product-4.svg",
     price: 45.5,
     shipping: 1,

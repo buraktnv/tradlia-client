@@ -16,7 +16,7 @@ const notificationsData = [
   },
   {
     id: 3,
-    text: "CardiaPharma has shipped your order",
+    text: "SafeMart has shipped your order",
     time: "Today - 11:00",
     type: "routine",
   },
@@ -28,7 +28,7 @@ const notificationsData = [
   },
   {
     id: 5,
-    text: "Durumedi has shipped your order",
+    text: "GreenLine has shipped your order",
     time: "01 May 2022 - 17:12",
     type: "routine",
   },
@@ -52,7 +52,7 @@ const notificationsData = [
   },
   {
     id: 9,
-    text: "CardiaPharma has shipped your order",
+    text: "SupplyHub has shipped your order",
     time: "Today - 11:00",
     type: "routine",
   },
@@ -64,7 +64,7 @@ const notificationsData = [
   },
   {
     id: 11,
-    text: "Durumedi has shipped your order",
+    text: "Partshub has shipped your order",
     time: "01 May 2022 - 17:12",
     type: "routine",
   },

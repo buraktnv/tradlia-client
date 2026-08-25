@@ -1,7 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
-  <!-- PharmaDirect - Pharmacy cross -->
-  <circle cx="50" cy="50" r="45" fill="#fff0f0" stroke="#FF516B" stroke-width="3"/>
-  <rect x="42" y="25" width="16" height="50" rx="4" fill="#FF516B"/>
-  <rect x="25" y="42" width="50" height="16" rx="4" fill="#FF516B"/>
-  <circle cx="50" cy="50" r="8" fill="white"/>
+  <!-- TradeDirect - Storefront with awning -->
+  <circle cx="50" cy="50" r="45" fill="#EAF9F8" stroke="#4CBEC5" stroke-width="3"/>
+  <path d="M22 42 L28 26 L72 26 L78 42 Z" fill="#4CBEC5"/>
+  <path d="M34 26 L30 42 M50 26 L50 42 M66 26 L70 42" stroke="#0F3D41" stroke-width="3"/>
+  <path d="M27 42 L73 42 L73 74 L27 74 Z" fill="none" stroke="#4CBEC5" stroke-width="3"/>
+  <rect x="43" y="56" width="14" height="18" fill="#4CBEC5"/>
+  <rect x="31" y="48" width="12" height="10" rx="2" fill="#FFC53D"/>
 </svg>

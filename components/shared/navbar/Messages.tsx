@@ -6,7 +6,7 @@ const messageList: any[] = [
   {
     id: 0,
     title: "Delivery & Shipping",
-    seller: "PharmaTrend",
+    seller: "TradeDirect",
     message: "Hello, could you please expedite the shipping?",
     date: "20.04.2022",
     hour: "11:34",
@@ -14,7 +14,7 @@ const messageList: any[] = [
   {
     id: 1,
     title: "Delivery & Shipping",
-    seller: "PharmaTrend",
+    seller: "PackPro",
     message: "Hello, could you please expedite the shipping?",
     date: "20.04.2022",
     hour: "10:34",
@@ -22,7 +22,7 @@ const messageList: any[] = [
   {
     id: 2,
     title: "Delivery & Shipping",
-    seller: "PharmaTrend",
+    seller: "ToolWorks",
     message: "Hello, could you please expedite the shipping?",
     date: "20.04.2022",
     hour: "09:34",

@@ -45,7 +45,7 @@ export const SvgDownload = () => (
     viewBox="0 0 163.974 206.53"
   >
     <defs>
-      <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <linearGradient id="grad-download" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
         <stop offset="0" stopColor="#ff516b" />
         <stop offset="1" stopColor="#ff0045" />
       </linearGradient>
@@ -140,7 +140,7 @@ export const SvgExclamation = () => (
     viewBox="0 0 151.486 151.126"
   >
     <defs>
-      <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <linearGradient id="grad-exclamation" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
         <stop offset="0" stopColor="#ff516b" />
         <stop offset="1" stopColor="#ff0045" />
       </linearGradient>
@@ -314,7 +314,7 @@ export const SvgBanner1 = () => (
     className="w-12 h-10 transition scale-[120%]"
   >
     <defs>
-      <linearGradient id="linear-gradient" x1="0.5" y1="0.041" x2="0.488" y2="1.826" gradientUnits="objectBoundingBox">
+      <linearGradient id="grad-banner-red" x1="0.5" y1="0.041" x2="0.488" y2="1.826" gradientUnits="objectBoundingBox">
         <stop offset="0" stopColor="#ff516b" />
         <stop offset="1" stopColor="#ff0045" />
       </linearGradient>
@@ -341,7 +341,7 @@ export const SvgBanner = () => (
     className="w-12 h-10 transition scale-[120%]"
   >
     <defs>
-      <linearGradient id="linear-gradient" x1="0.5" y1="0.041" x2="0.488" y2="1.826" gradientUnits="objectBoundingBox">
+      <linearGradient id="grad-banner-teal" x1="0.5" y1="0.041" x2="0.488" y2="1.826" gradientUnits="objectBoundingBox">
         <stop offset="0" stopColor="#ff516b" />
         <stop offset="1" stopColor="#ff0045" />
       </linearGradient>
