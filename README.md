@@ -39,7 +39,9 @@ A complete account area under `/profile`:
 | Theming | Token-driven Tailwind theme: color ramps, ink/canvas/surface neutrals, radii, shadows |
 | Signature element | "Order pulse" dot (`.pulse-dot`) used for stock badges and order lifecycle chips |
 | Motion | Shared duration/easing tokens (`styles/tokens.css`) with `prefers-reduced-motion` fallbacks |
+| Interactions | Full hover/focus states on every control, pointer cursors on all clickable elements, 200 ms shared transitions |
 | Accessibility | Keyboard focus rings (`focus-visible`), ARIA labels on interactive controls, semantic landmarks |
+| Responsiveness | Fluid layouts down to 390 px with no horizontal overflow (audited viewport-by-viewport) |
 
 ## Tech Stack
 
@@ -87,6 +89,19 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | ![Reports](docs/screenshots/reports.png) | |
 | *Performance reports* | |
 
+## Footage
+
+Short demo clips of live interactions. GIFs embedded below; higher-quality MP4 versions (better for LinkedIn / Upwork) live in `docs/footage/`.
+
+| | |
+|---|---|
+| ![Home & category browsing](docs/footage/clip1-home.gif) | ![Browse & filters](docs/footage/clip2-browse.gif) |
+| *Home hero + category hover states* | *Category filters → product page* |
+| ![Add to basket](docs/footage/clip3-basket.gif) | ![Seller dashboard](docs/footage/clip4-dashboard.gif) |
+| *Product page → basket → checkout* | *Order lifecycle → reports* |
+| ![Smart basket](docs/footage/clip5-smart.gif) | ![Mobile](docs/footage/clip6-mobile.gif) |
+| *Smart basket match meter* | *Mobile experience* |
+
 ## Project Structure
 
 ```
@@ -107,6 +122,7 @@ tradlia-client/
 │   └── svgs/              # SVG icon components
 ├── styles/                # Global styles, design tokens, Tailwind entry
 ├── public/images/         # Product images, icons
+├── docs/                  # Portfolio assets: screenshots + demo footage (GIF/MP4)
 └── types/                 # Shared TypeScript types
 ```
 
