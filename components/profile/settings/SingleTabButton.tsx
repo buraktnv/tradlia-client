@@ -1,30 +1,19 @@
 import { FC } from "react";
 import { SingleTabButtonProps } from "./properties";
 
-const SingleTabButton: FC<SingleTabButtonProps> = ({ text, icon, activeTab, setActiveTab, tab, color }) => {
+const SingleTabButton: FC<SingleTabButtonProps> = ({ text, icon, activeTab, setActiveTab, tab }) => {
   const isActiveTab = activeTab === tab;
   return (
-    <div className="col-span-1 flex items-center w-full p-1">
-      <div
-        className={`flex items-center justify-center cursor-pointer group rounded-2xl py-2 w-full text-white ${
-          isActiveTab ? "bg-[" + color + "]" : "hover:bg-[" + color + "]"
-        }`}
-        onClick={() => setActiveTab(tab)}
-      >
-        <div
-          className={`w-6 h-6 ${activeTab === tab ? "text-white" : "group-hover:text-white text-[" + color + "]"}`}
-        >
-          {icon}
-        </div>
-        <h3
-          className={`ml-1  font-medium text-xs ${
-            isActiveTab ? "text-white" : "text-[#7E8096] group-hover:text-white"
-          }`}
-        >
-          {text}
-        </h3>
-      </div>
-    </div>
+    <button type="button"
+      aria-pressed={isActiveTab}
+      onClick={() => setActiveTab(tab)}
+      className={`flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-pill px-3 py-2 text-left text-sm transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 ${
+        isActiveTab ? "bg-brand-50 font-medium text-brand-700" : "text-ink-soft hover:bg-canvas hover:text-ink"
+      }`}
+    >
+      <span className={`h-5 w-5 shrink-0 fill-current ${isActiveTab ? "" : "text-ink-muted"}`}>{icon}</span>
+      <span className="truncate">{text}</span>
+    </button>
   );
 };
 

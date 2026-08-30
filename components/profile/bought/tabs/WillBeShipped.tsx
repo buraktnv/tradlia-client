@@ -18,9 +18,9 @@ const cardList = [
     productList: [
       {
         id: 2,
-        image: "/images/photos/StrepNaz Herbal.svg",
-        name: "StrepNaz Orange &",
-        brand: "Echinacea 24 Lozenges",
+        image: "/images/photos/product-3.svg",
+        name: "TorqueMax Wood Screws",
+        brand: "4×40 (500 Count)",
         miad: "March 2023",
         quantity: "15",
         price: "47.98",
@@ -28,9 +28,9 @@ const cardList = [
       },
       {
         id: 3,
-        image: "/images/photos/Oxygenated Water.svg",
-        name: "HealthAid Oxygen Water",
-        brand: "100 ml",
+        image: "/images/photos/product-2.svg",
+        name: "GripTight Pallet Wrap",
+        brand: "20 µm Roll",
         miad: "March 2024",
         quantity: "25",
         price: "53.98",
@@ -38,9 +38,9 @@ const cardList = [
       },
       {
         id: 4,
-        image: "/images/photos/Oxygenated Water.svg",
-        name: "HealthAid Oxygen Water",
-        brand: "100 ml",
+        image: "/images/photos/product-2.svg",
+        name: "GripTight Pallet Wrap",
+        brand: "20 µm Roll",
         miad: "March 2024",
         quantity: "25",
         price: "53.98",
@@ -48,9 +48,9 @@ const cardList = [
       },
       {
         id: 5,
-        image: "/images/photos/StrepNaz Herbal.svg",
-        name: "StrepNaz Orange &",
-        brand: "Echinacea 24 Lozenges",
+        image: "/images/photos/product-3.svg",
+        name: "TorqueMax Wood Screws",
+        brand: "4×40 (500 Count)",
         miad: "March 2023",
         quantity: "15",
         price: "47.98",
@@ -85,9 +85,9 @@ const cardList = [
     productList: [
       {
         id: 7,
-        image: "/images/photos/StrepNaz Herbal.svg",
-        name: "StrepNaz Orange &",
-        brand: "Echinacea 24 Lozenges",
+        image: "/images/photos/product-3.svg",
+        name: "TorqueMax Wood Screws",
+        brand: "4×40 (500 Count)",
         miad: "March 2023",
         quantity: "15",
         price: "47.98",
@@ -95,9 +95,9 @@ const cardList = [
       },
       {
         id: 8,
-        image: "/images/photos/Oxygenated Water.svg",
-        name: "HealthAid Oxygen Water",
-        brand: "100 ml",
+        image: "/images/photos/product-2.svg",
+        name: "GripTight Pallet Wrap",
+        brand: "20 µm Roll",
         miad: "March 2024",
         quantity: "25",
         price: "53.98",
@@ -122,7 +122,7 @@ const cardList = [
   {
     id: 9,
     orderID: "OhCaDwnom",
-    customer: "MediSupply",
+    customer: "SupplyHub",
     orderDate: "28.02.2022 - 14:20",
     total: "184.91",
     active: true,
@@ -132,9 +132,9 @@ const cardList = [
     productList: [
       {
         id: 10,
-        image: "/images/photos/StrepNaz Herbal.svg",
-        name: "StrepNaz Orange &",
-        brand: "Echinacea 24 Lozenges",
+        image: "/images/photos/product-3.svg",
+        name: "TorqueMax Wood Screws",
+        brand: "4×40 (500 Count)",
         miad: "March 2023",
         quantity: "15",
         price: "47.98",
@@ -142,9 +142,9 @@ const cardList = [
       },
       {
         id: 11,
-        image: "/images/photos/Oxygenated Water.svg",
-        name: "HealthAid Oxygen Water",
-        brand: "100 ml",
+        image: "/images/photos/product-2.svg",
+        name: "GripTight Pallet Wrap",
+        brand: "20 µm Roll",
         miad: "March 2024",
         quantity: "25",
         price: "53.98",
@@ -179,9 +179,9 @@ const cardList = [
     productList: [
       {
         id: 14,
-        image: "/images/photos/StrepNaz Herbal.svg",
-        name: "StrepNaz Orange &",
-        brand: "Echinacea 24 Lozenges",
+        image: "/images/photos/product-3.svg",
+        name: "TorqueMax Wood Screws",
+        brand: "4×40 (500 Count)",
         miad: "March 2023",
         quantity: "15",
         price: "47.98",
@@ -189,9 +189,9 @@ const cardList = [
       },
       {
         id: 15,
-        image: "/images/photos/Oxygenated Water.svg",
-        name: "HealthAid Oxygen Water",
-        brand: "100 ml",
+        image: "/images/photos/product-2.svg",
+        name: "GripTight Pallet Wrap",
+        brand: "20 µm Roll",
         miad: "March 2024",
         quantity: "25",
         price: "53.98",
@@ -218,7 +218,7 @@ const cardList = [
 const WillBeShipped: FC = () => {
   return (
     <div className="grid gap-3 xl:gap-[0.75rem]">
-      {cardList && cardList.map((content) => <BoughtCard key={content.id} content={content} />)}
+      {cardList && cardList.map((content) => <BoughtCard key={content.id} content={content} status="pending" />)}
     </div>
   );
 };

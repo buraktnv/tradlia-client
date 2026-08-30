@@ -4,51 +4,87 @@ import { SvgCheck, SvgPrintInvoice, SvgPrintShipping, SvgShowMore } from "../../
 import FirmReceiptInfo from "../../receipts/FirmReceiptInfo";
 import ShippingInfo from "../../receipts/ShippingInfo";
 import MessageSellerModal from "./MessageSellerModal";
+import PrintInvoice from "../../_shared/PrintInvoice";
+import PrintShippingLabel from "../../_shared/PrintShippingLabel";
+import OrderStatusChip, { OrderStatusKey } from "../../_shared/OrderStatusChip";
+import { exportCsv } from "../../../../helpers/exportCsv";
+import { printSection } from "../../../../helpers/printSection";
 
-const SoldCard: FC<any> = ({ content }) => {
+const outlineBtn =
+  "inline-flex items-center justify-center gap-2 rounded-pill border border-line bg-surface px-4 py-2 text-sm font-medium text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-300 hover:bg-brand-50/40 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1";
+
+const SoldCard: FC<any> = ({ content, status }: { content: any; status?: OrderStatusKey }) => {
   const [active, setActive] = useState<boolean>(content.active || false);
   const [modal1, setModal1] = useState<boolean>(false);
+  const [showDetails, setShowDetails] = useState<boolean>(false);
+  const [printTarget, setPrintTarget] = useState<"invoice" | "shipping-label" | null>(null);
+
+  const exportProductList = () => {
+    exportCsv(
+      `Order-${content.orderID}-ProductList`,
+      ["Order No", "Product", "Brand", "Expiry", "Qty", "Price", "Amount"],
+      content.productList.map((el: any) => [
+        content.orderID,
+        el.name,
+        el.brand,
+        el.miad,
+        el.quantity,
+        el.price,
+        el.total,
+      ])
+    );
+  };
+
+  const handlePrint = (target: "invoice" | "shipping-label") => {
+    setPrintTarget(target);
+    setTimeout(() => {
+      printSection(target);
+      setPrintTarget(null);
+    }, 100);
+  };
+
   return (
     <div
-      className={`flex flex-col bg-white w-full border transition ${
-        active ? "border-[#00b2b2ce] shadow-md" : "border-transparent xl:border-[#ccccccce]"
-      } rounded-xl xl:rounded-3xl p-3 xl:px-4 xl:py-3 text-sm`}
+      className={`flex flex-col w-full rounded-card border bg-surface p-3 text-sm transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none xl:p-4 ${
+        active ? "border-brand-300 shadow-card" : "border-line shadow-card"
+      }`}
     >
       {modal1 && <MessageSellerModal setModal1={setModal1} />}
       <div className="flex items-center justify-between pb-2 xl:hidden">
-        <div className={`font-bold text-[14px] leading-5 text-[#7E8096]`}>{content.customer}</div>
-        <div className="flex gap-2">
-          <div className="text-[12px] leading-5 text-[#7E8096]">{content.orderDate}</div>
+        <div className="flex items-center gap-2">
+          <span className="font-medium leading-5 text-ink">{content.customer}</span>
+          <OrderStatusChip status={status} />
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-xs leading-5 text-ink-soft">{content.orderDate}</span>
           <button type="button"
+            aria-expanded={active}
+            aria-label={active ? "Collapse order" : "Expand order"}
             onClick={() => setActive((pre) => !pre)}
-            className={`w-5 h-5 flex items-center justify-center border rounded-full transition ${
-              active
-                ? "rotate-0 bg-gradient-to-tr from-[#66c1c0] to-[#00a29d]"
-                : "border-[#00b2b2c4] bg-[#F4F5F7] rotate-180"
+            className={`flex h-6 w-6 items-center justify-center rounded-full border transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 ${
+              active ? "rotate-180 border-brand-400 bg-brand-400 text-white" : "border-line bg-canvas text-brand-500"
             }`}
           >
-            <div
-              className={`w-[10px] h-[6px] transform ${active ? "text-white -translate-y-[1px]" : "text-[#00B1B2]"}`}
-            >
+            <span className={`h-3 w-3 fill-current ${active ? "-translate-y-[1px]" : ""}`}>
               <SvgShowMore />
-            </div>
+            </span>
           </button>
         </div>
       </div>
-      <div className={`grid w-full grid-cols-12 xl:grid-cols-6 xl:px-6 gap-1 xl:h-auto ${active && "items-center"}`}>
-        <div className="relative flex row-span-2 col-span-6 mr-5  gap-0.5 px-3 border-r border-[#CCCCCC80] xl:hidden">
+      <div className={`grid w-full grid-cols-12 gap-1 xl:grid-cols-6 xl:px-4 xl:h-auto ${active && "items-center"}`}>
+        <div className="relative col-span-6 mr-5 row-span-2 flex gap-0.5 px-3 border-r border-line xl:hidden">
           {content.productList.length > 3 && (
-            <div className="absolute top-0 flex items-center justify-center h-full -right-3.5">
-              <div className="flex items-center justify-center w-7 h-7 border border-[#C6C6C680] bg-white rounded-full text-[13px] text-[#7E8096] leading-[15px]">
+            <div className="absolute -right-3.5 top-0 flex h-full items-center justify-center">
+              <div className="flex h-7 w-7 items-center justify-center rounded-full border border-line bg-surface text-[13px] leading-[15px] text-ink-soft tabular-nums">
                 +{content.productList.length - 3}
               </div>
             </div>
           )}
           {content.productList.slice(0, 3).map((el: any) => (
-            <div key={el.id} className="relative w-full h-20 xl:hidden">
+            <div key={el.id} className="relative h-20 w-full xl:hidden">
               <Image src={el.image} alt={el.brand} fill sizes="100vw" className="object-contain" />
-              <div className="absolute bottom-0 left-0 flex justify-center w-full select-none xl:hidden">
-                <div className="w-5 h-5 bg-[#4CBEC5] rounded-full text-white text-[11px] leading-4 flex items-center justify-center">
+              <div className="absolute bottom-0 left-0 flex w-full select-none justify-center xl:hidden">
+                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-400 text-[11px] leading-4 text-white tabular-nums">
                   {el.quantity}
                 </div>
               </div>
@@ -56,128 +92,149 @@ const SoldCard: FC<any> = ({ content }) => {
           ))}
         </div>
 
-        <div className={`flex col-span-6 xl:col-span-2 ${!active && "items-end"}`}>
-          <div
-            className={`text-[#7E8096] flex xl:flex-row xl:items-center gap-1 text-[13px] leading-4 xl:text-[0.90rem]`}
-          >
-            <h3> Order</h3>
-            <p className="hidden xl:block">No:</p>
-            <h3 className={`text-[#4CBEC5] flex gap-1 font-bold ${!active ? "before:content-[':']" : ""}`}>
-              {content.orderID}
-            </h3>
+        <div className={`col-span-6 flex xl:col-span-2 ${!active && "items-end"}`}>
+          <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-[13px] leading-4 text-ink-soft xl:text-sm">
+            <span>Order No:</span>
+            <span className="font-display font-bold text-brand-600">{content.orderID}</span>
             {active && (
-              <h3 className="xl:before:content-['('] xl:after:content-[')']"> {content.orderPiece} Items</h3>
+              <span className="tabular-nums text-ink"> ({content.orderPiece} Items)</span>
             )}
+            <OrderStatusChip status={status} />
           </div>
         </div>
-        <div className="hidden col-span-1 xl:block">
-          <div className="text-[#7E8096] flex items-center text-sm xl:text-[0.90rem]">
-            Buyer:<h3 className="text-[#4CBEC5] font-bold px-1"> {content.customer} </h3>
+        <div className="col-span-1 hidden xl:block">
+          <div className="flex items-center text-sm text-ink-soft">
+            Buyer:<span className="px-1 font-medium text-brand-600"> {content.customer} </span>
           </div>
         </div>
-        <div className="hidden col-span-2 xl:block">
-          <div className="text-[#7E8096] flex items-center text-sm justify-center xl:text-[0.90rem]">
-            Order Date:<h3 className="px-1 font-medium"> {content.orderDate} </h3>
+        <div className="col-span-2 hidden xl:block">
+          <div className="flex items-center justify-center text-sm text-ink-soft">
+            Ordered:<span className="px-1 font-medium tabular-nums text-ink"> {content.orderDate} </span>
           </div>
         </div>
-        <div
-          className={`flex justify-between col-span-2 xl:items-center xl:col-span-1 xl:gap-4 ${
-            active ? "col-span-2" : "col-span-4"
-          }`}
-        >
-          <div
-            className={`text-[#7E8096] flex xl:flex-row xl:items-center text-[13px] leading-4 whitespace-nowrap xl:text-[0.90rem] xl:text-center gap-1`}
-          >
-            <h3 className={`after:content-[':']`}>Amount</h3>
-            <h3 className="font-bold text-[#E8336E]"> {content.total} $ </h3>
+        <div className={`col-span-2 flex justify-between xl:col-span-1 xl:items-center xl:gap-4 ${active ? "col-span-2" : "col-span-4"}`}>
+          <div className="flex items-center whitespace-nowrap gap-1 text-[13px] leading-4 text-ink-soft xl:text-sm">
+            <span>Total</span>
+            <span className="font-bold tabular-nums text-ink">{content.total} $</span>
           </div>
           <button type="button"
+            aria-expanded={active}
+            aria-label={active ? "Collapse order" : "Expand order"}
             onClick={() => setActive((pre) => !pre)}
-            className={`p-1 border hidden xl:block rounded-full transition ${
-              active
-                ? "rotate-0 bg-gradient-to-tr from-[#66c1c0] to-[#00a29d]"
-                : "border-[#00b2b2c4] bg-[#F4F5F7] rotate-180"
+            className={`hidden h-7 w-7 items-center justify-center rounded-full border p-1 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 xl:flex ${
+              active ? "rotate-180 border-brand-400 bg-brand-400 text-white" : "border-line bg-canvas text-brand-500"
             }`}
           >
-            <div className={`w-3 h-3 transform ${active ? "text-white -translate-y-[1px]" : "text-[#00B1B2]"}`}>
+            <span className={`h-3 w-3 fill-current ${active ? "-translate-y-[1px]" : ""}`}>
               <SvgShowMore />
-            </div>
+            </span>
           </button>
         </div>
-        <div className="grid col-span-12 text-xs xl:grid-cols-3 xl:text-sm">
-          <div className="grid items-center grid-cols-3 font-bold">
-            <div className="text-[#E94190]"> {content.deliveryDate}</div>
-            <div className="flex items-center w-full gap-1 text-[#86BC25]">
-              <div className="w-3 h-3">
+        <div className="col-span-12 grid text-xs xl:grid-cols-3 xl:text-sm">
+          <div className="grid grid-cols-3 items-center gap-2 font-medium">
+            <div className="text-dangerDark tabular-nums"> {content.deliveryDate}</div>
+            <div className="flex w-full items-center gap-1 text-successDark">
+              <span className="h-3 w-3 fill-current">
                 <SvgCheck />
-              </div>
+              </span>
               E-Invoice
             </div>
-            <div className="flex items-center w-full gap-1 text-[#86BC25] whitespace-nowrap">
-              <div className="w-3 h-3">
+            <div className="flex w-full items-center gap-1 whitespace-nowrap text-successDark">
+              <span className="h-3 w-3 fill-current">
                 <SvgCheck />
-              </div>
+              </span>
               Shipping Label
             </div>
           </div>
         </div>
       </div>
       {active && (
-        <div className="flex flex-col w-full gap-2 mt-3 xl:px-3">
+        <div className="mt-3 flex w-full flex-col gap-3 border-t border-line pt-3 xl:px-4">
           {content.productList &&
             content.productList.map((el: { id: any }) => <ProductCard content={el} key={el.id} />)}
           <div className="grid grid-cols-12 gap-3 xl:gap-4">
-            <div className="order-3 col-span-12 col-start-1 xl:order-none xl:col-start-auto xl:col-span-4">
-              <button type="button" className="text-[13px] leading-3 xl:text-sm border-[#00B1B2] border bg-[#F4F5F7] text-[#7E8096] font-medium rounded-full xl:px-16 py-3 w-full">
+            <div className="order-3 col-span-12 col-start-1 xl:order-none xl:col-span-4 xl:col-start-auto">
+              <button type="button" aria-label="Export product list to Excel" onClick={exportProductList} className={`${outlineBtn} w-full`}>
                 Export Product List to Excel
               </button>
             </div>
 
-            <div className="text-[13px] leading-4 xl:text-sm text-[#7E8096] col-start-3 col-span-6 xl:col-start-10 xl:col-span-3 flex flex-col gap-2 pl-12 xl:order-none order-0">
-              <div className="flex flex-col">
-                <div className="grid grid-cols-2 gap-1">
-                  <h3 className="text-right">Discount:</h3> <h3 className="px-1 font-bold">{content.discount}$</h3>
-                </div>
-                <div className="grid grid-cols-2 gap-1">
-                  <h3 className="text-right"> Tax:</h3> <h3 className="px-1 font-bold">{content.KDV}$</h3>
-                </div>
+            <div className="order-0 col-span-6 col-start-3 flex flex-col gap-2 pl-12 text-[13px] leading-4 text-ink-soft xl:order-none xl:col-span-3 xl:col-start-10 xl:text-sm">
+              <div className="grid grid-cols-2 gap-1">
+                <h3 className="text-right">Discount:</h3>
+                <h3 className="px-1 font-medium tabular-nums text-ink">{content.discount}$</h3>
+              </div>
+              <div className="grid grid-cols-2 gap-1">
+                <h3 className="text-right">Tax:</h3>
+                <h3 className="px-1 font-medium tabular-nums text-ink">{content.KDV}$</h3>
               </div>
             </div>
 
-            <button type="button" className="xl:col-span-2 col-span-6 xl:order-none order-4 bg-gradient-to-r from-[#AFCA19] to-[#52AE33] whitespace-nowrap text-white flex px-4 py-2 xl:py-3 rounded-full items-center justify-center gap-2 text-[13px] leading-3 xl:text-sm">
-              <div className="h-5 xl:w-5 xl:h-5">
+            <button type="button" onClick={() => handlePrint("invoice")} className="order-4 col-span-6 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-pill bg-success px-4 py-2 text-[13px] font-medium leading-3 text-white transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-successDark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 xl:order-none xl:col-span-2 xl:py-3 xl:text-sm">
+              <span className="h-5 fill-current xl:h-5 xl:w-5">
                 <SvgPrintInvoice />
-              </div>
-              <h3>Print Invoice</h3>
+              </span>
+              <span>Print Invoice</span>
             </button>
-            <button type="button" className="xl:col-span-2 col-span-6 xl:order-none order-5 bg-gradient-to-r whitespace-nowrap from-[#FFBE00] to-[#FF7B03] text-white flex px-4 py-2 xl:py-3 rounded-full items-center justify-center gap-2 text-[13px] leading-3 xl:text-sm">
-              <div className="h-5 xl:w-5 xl:h-5">
+            <button type="button" onClick={() => handlePrint("shipping-label")} className="order-5 col-span-6 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-pill bg-amber-500 px-4 py-2 text-[13px] font-medium leading-3 text-white transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-amberDark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 xl:order-none xl:col-span-2 xl:py-3 xl:text-sm">
+              <span className="h-5 fill-current xl:h-5 xl:w-5">
                 <SvgPrintShipping />
-              </div>
-              <h3>Print Shipping Label</h3>
+              </span>
+              <span>Print Shipping Label</span>
             </button>
 
             <button type="button"
               onClick={() => setModal1(true)}
-              className="col-start-3 xl:col-start-auto col-span-8 xl:col-span-3 text-[13px] leading-3 xl:text-sm xl:order-none order-7 flex justify-center w-full text-[#4CBEC5] border border-[#4CBEC5] px-8 py-3 rounded-full whitespace-nowrap"
+              className={`${outlineBtn} order-7 col-span-8 col-start-3 w-full xl:order-none xl:col-span-3 xl:col-start-auto`}
             >
-              Send Message to Seller
+              Send Message to Buyer
             </button>
 
-            <button type="button" className="xl:order-none order-2 text-[13px] leading-3 xl:text-sm col-start-1 xl:col-start-auto col-span-12 xl:col-span-2 flex justify-center w-full text-[#5327A8] border border-[#5327A8] px-4 py-3 rounded-full whitespace-nowrap">
+            <button type="button" aria-expanded={showDetails} onClick={() => setShowDetails((pre) => !pre)} className={`${outlineBtn} order-2 col-span-12 w-full xl:order-none xl:col-span-2 xl:col-start-auto`}>
               Order Details
             </button>
 
-            <button type="button" className="xl:order-none order-1 col-span-10 col-start-2 xl:col-start-auto xl:col-span-3 flex bg-gradient-to-r from-[#FF516B] to-[#FF0045] text-white py-2.5 rounded-full items-center justify-center gap-1 whitespace-nowrap px-4">
-              <h3 className="text-[12px] leading-3 xl:text-sm font-medium">Order Total:</h3>
-              <h3 className="font-bold text-[16px] leading-3 xl:text-base whitespace-nowrap">{content.total} $</h3>
-            </button>
-            <div className="xl:order-none leading-3 text-[11px] xl:text-sm order-6 text-[#FB295A] p-0 xl:pb-3 xl:pt-6 col-span-12 xl:col-span-12 ">
+            {showDetails && (
+              <div className="order-8 col-span-12 rounded-card border border-line bg-canvas p-3 text-xs leading-5 text-ink-soft xl:text-sm">
+                <div className="grid gap-1 xl:grid-cols-2">
+                  <div>
+                    <b className="text-brand-600">Order No:</b> {content.orderID}
+                  </div>
+                  <div>
+                    <b className="text-brand-600">Order Date:</b> {content.orderDate}
+                  </div>
+                  <div>
+                    <b className="text-brand-600">Buyer:</b> {content.customer}
+                  </div>
+                  <div>
+                    <b className="text-brand-600">Delivery:</b> {content.deliveryDate}
+                  </div>
+                  <div className="xl:col-span-2">
+                    <b className="text-brand-600">Items:</b>{" "}
+                    {content.productList
+                      .map((el: any) => `${el.name} (${el.brand}) x${el.quantity}`)
+                      .join(", ")}
+                  </div>
+                  <div className="xl:col-span-2">
+                    <b className="text-brand-600">Billing Address:</b> {content.receiptInfo?.address}
+                  </div>
+                  <div className="xl:col-span-2">
+                    <b className="text-brand-600">Tracking No:</b> {content.shippingInfo?.trackingNumber}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="order-1 col-span-10 col-start-2 flex items-center justify-center gap-1 whitespace-nowrap rounded-pill bg-ink px-4 py-2.5 text-white xl:order-none xl:col-span-3 xl:col-start-auto">
+              <span className="text-xs font-medium leading-3 xl:text-sm">Order Total:</span>
+              <span className="whitespace-nowrap font-display text-base font-bold tabular-nums xl:text-lg">{content.total} $</span>
+            </div>
+            <div className="order-6 col-span-12 p-0 text-[11px] leading-3 text-dangerDark xl:order-none xl:col-span-12 xl:pb-3 xl:pt-2 xl:text-sm">
               Please remember to place your e-invoice printout inside the shipping package.
             </div>
           </div>
           <div className="grid w-full gap-3 xl:grid-cols-9">
-            <div className="xl:col-span-6 w-full">
+            <div className="w-full xl:col-span-6">
               <FirmReceiptInfo content={content.receiptInfo} />
             </div>
             <div className="xl:col-span-3">
@@ -186,56 +243,60 @@ const SoldCard: FC<any> = ({ content }) => {
           </div>
         </div>
       )}
+      {printTarget === "invoice" && <PrintInvoice order={content} />}
+      {printTarget === "shipping-label" && <PrintShippingLabel order={content} />}
     </div>
   );
 };
 
 const ProductCard: FC<any> = ({ content }) => {
   return (
-    <div className="grid grid-cols-12 gap-3 p-3 xl:py-2 text-sm border border-[#DADADA80] xl:grid-cols-7 xl:px-6 rounded-xl xl:rounded-[1.5rem]">
-      <div className="flex w-full h-full col-span-4 p-2 xl:col-span-1 ">
-        <div className="relative w-full h-20">
+    <div className="grid grid-cols-12 gap-3 rounded-card border border-line bg-canvas/60 p-3 text-sm xl:grid-cols-7 xl:py-2 xl:px-5">
+      <div className="col-span-4 flex h-full w-full p-2 xl:col-span-1">
+        <div className="relative h-20 w-full">
           <Image className="object-contain" src={content?.image} fill sizes="100vw" alt={content.brand} />
         </div>
       </div>
-      <div className="grid grid-cols-1 col-span-8 gap-1 xl:grid-cols-6 xl:col-span-6">
-        <div className="grid justify-start grid-cols-5 gap-2 xl:py-2 xl:flex xl:flex-col xl:col-span-2">
-          <h3 className="text-[#4CBEC5] font-medium  xl:text-left text-[12px] leading-5 xl:text-sm">Product</h3>
-          <div className="text-[#7E8096] xl:py-1.5 text-[12px] leading-[18px] xl:text-sm col-span-4">
-            <h4 className="font-bold"> {content?.name}</h4> {content?.brand}
+      <div className="col-span-8 grid grid-cols-1 gap-1 xl:col-span-6 xl:grid-cols-6">
+        <div className="grid grid-cols-5 justify-start gap-2 xl:col-span-2 xl:flex xl:flex-col xl:py-2">
+          <h3 className="font-display text-xs uppercase tracking-wider text-ink-soft xl:text-left xl:text-sm xl:normal-case xl:tracking-normal">Product</h3>
+          <div className="col-span-4 text-[12px] leading-[18px] text-ink-soft xl:text-sm">
+            <h4 className="font-medium text-ink"> {content?.name}</h4> {content?.brand}
           </div>
         </div>
-        <div className="grid justify-start grid-cols-5 gap-2 xl:py-2 xl:flex xl:flex-col">
-          <h3 className="text-[#4CBEC5] font-medium  xl:text-left text-[12px] leading-5 xl:text-sm">Expiry</h3>
-          <p className="text-[#7E8096] font-medium xl:py-1.5 text-[12px] leading-[18px] xl:text-sm col-span-4">
+        <div className="grid grid-cols-5 justify-start gap-2 xl:flex xl:flex-col xl:py-2">
+          <h3 className="font-display text-xs uppercase tracking-wider text-ink-soft xl:text-left xl:text-sm xl:normal-case xl:tracking-normal">Expiry</h3>
+          <p className="col-span-4 font-medium text-[12px] leading-[18px] text-ink-soft tabular-nums xl:text-sm">
             {content?.miad}
           </p>
         </div>
-        <div className="grid items-center justify-start grid-cols-5 gap-2 xl:py-2 xl:px-4 xl:flex xl:flex-col">
-          <h3 className="text-[#4CBEC5] font-medium text-left xl:px-2 text-[12px] leading-5 xl:text-sm">Qty</h3>
-          <div className="flex col-span-2 xl:justify-center">
+        <div className="grid grid-cols-5 items-center justify-start gap-2 xl:flex xl:flex-col xl:px-4 xl:py-2">
+          <h3 className="font-display text-xs uppercase tracking-wider text-ink-soft xl:px-2 xl:text-sm xl:normal-case xl:tracking-normal">Qty</h3>
+          <div className="col-span-2 flex xl:justify-center">
             <input
-              className="text-[#7E8096] outline-none text-[12px] leading-[18px] xl:text-sm font-medium border rounded-full text-center w-3/4 xl:w-2/3 px-1 xl:px-2 py-0.5 xl:py-1.5 inline-block border-[#00B1B2] bg-[#F4F5F7]"
+              aria-label="Quantity"
+              className="inline-block w-3/4 rounded-pill border border-line bg-surface px-1 py-0.5 text-center text-[12px] font-medium leading-[18px] text-ink tabular-nums outline-none transition-colors duration-200 focus:border-brand-400 focus-visible:ring-2 focus-visible:ring-brand-400/30 xl:w-2/3 xl:px-2 xl:py-1.5 xl:text-sm"
               type="number"
               defaultValue={content?.quantity}
               placeholder="0"
             />
           </div>
         </div>
-        <div className="grid justify-start grid-cols-5 gap-2 xl:px-2 xl:py-2 xl:flex xl:flex-col">
-          <h3 className="text-[#4CBEC5] font-medium  xl:text-left text-[12px] leading-5 xl:text-sm">Price</h3>
-          <div className="flex w-full col-span-4">
+        <div className="grid grid-cols-5 justify-start gap-2 xl:flex xl:flex-col xl:px-2 xl:py-2">
+          <h3 className="font-display text-xs uppercase tracking-wider text-ink-soft xl:text-left xl:text-sm xl:normal-case xl:tracking-normal">Price</h3>
+          <div className="col-span-4 flex w-full">
             <input
-              className="text-[#7E8096] font-medium xl:py-1.5 w-2/3 outline-none text-[12px] leading-[18px] xl:text-sm"
+              aria-label="Price"
+              className="w-2/3 bg-transparent text-[12px] font-medium leading-[18px] text-ink tabular-nums outline-none xl:text-sm"
               defaultValue={content?.price}
               placeholder="0"
               type="number"
             />
           </div>
         </div>
-        <div className="grid justify-start grid-cols-5 gap-2 xl:py-2 xl:flex xl:flex-col">
-          <h3 className="text-[#4CBEC5] font-medium  xl:text-left text-[12px] leading-5 xl:text-sm">Amount</h3>
-          <p className="text-[#7E8096] font-medium xl:py-1.5 text-[12px] leading-[18px] xl:text-sm col-span-4">
+        <div className="grid grid-cols-5 justify-start gap-2 xl:flex xl:flex-col xl:py-2">
+          <h3 className="font-display text-xs uppercase tracking-wider text-ink-soft xl:text-left xl:text-sm xl:normal-case xl:tracking-normal">Amount</h3>
+          <p className="col-span-4 font-medium text-[12px] leading-[18px] text-ink-soft tabular-nums xl:text-sm">
             {content?.total}
           </p>
         </div>

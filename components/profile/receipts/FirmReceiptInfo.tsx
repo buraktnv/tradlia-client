@@ -1,53 +1,52 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { SvgShowMore } from "../../../helpers/svgs/receiptSvg";
 
 const FirmReceiptInfo: FC<any> = ({ content }) => {
   const [active, setActive] = useState<boolean>(content.active || false);
   return (
-    <div className="flex flex-col w-full text-[12px] leading-3 xl:text-sm">
-      <div
+    <div className="flex w-full flex-col text-[12px] leading-3 xl:text-sm">
+      <button type="button"
+        aria-expanded={active}
         onClick={() => setActive((pre) => !pre)}
-        className={`flex justify-between items-center px-4 xl:px-6 py-3 rounded-full font-medium border border-[#00B1B2] text-[#4CBEC5] ${
-          !active && "xl:mb-[2rem]"
+        className={`flex items-center justify-between rounded-pill border px-4 font-medium transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 xl:px-5 ${
+          active ? "border-line bg-canvas text-ink" : "border-line bg-surface text-ink-muted hover:bg-canvas"
         }`}
       >
         Member Invoice Information
-        <div
-          className={`w-4 h-4 xl:mx-4 transform duration-300 ease-out cursor-pointer ${
-            active ? "rotate-0" : "rotate-180"
-          } `}
+        <span
+          className={`h-3 w-3 transform cursor-pointer fill-current duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none ${active ? "rotate-0 text-brand-500" : "rotate-180 text-brand-500"}`}
         >
           <SvgShowMore />
-        </div>
-      </div>
+        </span>
+      </button>
       {active && (
-        <div className="flex flex-col gap-3 px-3 xl:px-6 xl:flex-row xl:justify-between">
-          <div className="grid gap-2 mt-2 xl:my-4 xl:pr-16 xl:border-r border-[#00b2b2]">
-            <div className="grid grid-cols-3 xl:block">
-              <h3 className="font-bold text-[#4CBEC5]">Company Name</h3>
-              <p className="text-[#7E8096] whitespace-nowrap col-span-2">{content.name}</p>
+        <div className="mt-3 flex flex-col gap-4 xl:flex-row xl:justify-between xl:gap-0">
+          <div className="grid gap-2 xl:border-r xl:border-line xl:pr-12">
+            <div className="grid grid-cols-3 gap-2 xl:block">
+              <h3 className="font-display text-xs uppercase tracking-wider text-ink-muted xl:text-sm xl:normal-case xl:tracking-normal">Company Name</h3>
+              <p className="col-span-2 whitespace-nowrap text-ink-soft">{content.name}</p>
             </div>
-            <div className="grid grid-cols-3 xl:block">
-              <h3 className="font-bold text-[#4CBEC5]">Tax No</h3>
-              <p className="text-[#7E8096] whitespace-nowrap col-span-2">{content.taxID}</p>
+            <div className="grid grid-cols-3 gap-2 xl:block">
+              <h3 className="font-display text-xs uppercase tracking-wider text-ink-muted xl:text-sm xl:normal-case xl:tracking-normal">Tax No</h3>
+              <p className="col-span-2 whitespace-nowrap text-ink-soft tabular-nums">{content.taxID}</p>
             </div>
-            <div className="grid grid-cols-3 xl:block">
-              <h3 className="font-bold text-[#4CBEC5]">Tax Office</h3>
-              <p className="text-[#7E8096] whitespace-nowrap col-span-2">{content.taxOffice}</p>
+            <div className="grid grid-cols-3 gap-2 xl:block">
+              <h3 className="font-display text-xs uppercase tracking-wider text-ink-muted xl:text-sm xl:normal-case xl:tracking-normal">Tax Office</h3>
+              <p className="col-span-2 whitespace-nowrap text-ink-soft">{content.taxOffice}</p>
             </div>
           </div>
-          <div className="grid gap-2 xl:py-3 xl:pl-16">
-            <div className="grid grid-cols-3 xl:block">
-              <h3 className="font-bold text-[#4CBEC5]">ID No</h3>
-              <p className="text-[#7E8096] whitespace-nowrap col-span-2">{content.TCNo}</p>
+          <div className="grid gap-2 xl:pl-12">
+            <div className="grid grid-cols-3 gap-2 xl:block">
+              <h3 className="font-display text-xs uppercase tracking-wider text-ink-muted xl:text-sm xl:normal-case xl:tracking-normal">ID No</h3>
+              <p className="col-span-2 whitespace-nowrap text-ink-soft tabular-nums">{content.TCNo}</p>
             </div>
-            <div className="grid grid-cols-3 xl:block">
-              <h3 className="font-bold text-[#4CBEC5]">Address</h3>
-              <p className="text-[#7E8096] leading-tight">{content.address}</p>
+            <div className="grid grid-cols-3 gap-2 xl:block">
+              <h3 className="font-display text-xs uppercase tracking-wider text-ink-muted xl:text-sm xl:normal-case xl:tracking-normal">Address</h3>
+              <p className="leading-tight text-ink-soft">{content.address}</p>
             </div>
-            <div className="grid grid-cols-3 xl:block">
-              <h3 className="font-bold text-[#4CBEC5]">Email</h3>
-              <p className="text-[#7E8096] whitespace-nowrap col-span-2">{content.email}</p>
+            <div className="grid grid-cols-3 gap-2 xl:block">
+              <h3 className="font-display text-xs uppercase tracking-wider text-ink-muted xl:text-sm xl:normal-case xl:tracking-normal">Email</h3>
+              <p className="col-span-2 whitespace-nowrap text-ink-soft">{content.email}</p>
             </div>
           </div>
         </div>

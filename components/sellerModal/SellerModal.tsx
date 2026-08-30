@@ -1,57 +1,45 @@
-import { FC, useEffect, useState } from "react";
-import { SvgTooth } from "../../helpers/svgs/sellerSvg";
+import { FC } from "react";
+import { SvgStorefront } from "../../helpers/svgs/sellerSvg";
+import PortalModal from "../shared/PortalModal";
 import OrderDropdown from "../profile/bought/tabs/OrderDropdown";
 
 const SellerModal: FC<any> = ({ setModal }) => {
-  const [fade, setFade] = useState<boolean>(false);
-  useEffect(() => {
-    setFade(true);
-  }, []);
   return (
-    <div className="absolute top-0 left-0 z-10 flex items-center w-full h-full md:fixed">
-      <div
-        className={`bg-[#000000be] fixed top-0 bottom-0 left-0 right-0 transition-opacity duration-300 ease-in-out z-20 ${
-          fade ? "opacity-100" : "opacity-0"
-        }`}
-        onClick={() => {
-          setFade(false);
-          setTimeout(() => setModal(() => false), 300);
-        }}
-      ></div>
-      <div className="flex mx-auto w-max h-max">
-        <div
-          className={`bg-white flex flex-col w-full gap-5 rounded-3xl px-5 xl:px-10 py-5 z-20 transition-all duration-300 ease-in-out ${
-            fade ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
-          }`}
-        >
-          <div className="flex px-16 py-1 text-[#4CBEC5] border border-[#00b2b280] rounded-full text-center text-md">
-            Send <p className="pl-2 font-bold">Message to Seller</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-16 h-16 p-3 text-[#00a29d9a] bg-[#F4F5F9] rounded-full border border-[#00b2b280]">
-              <SvgTooth />
-            </div>
-            <p className="text-lg text-[#7E8096] font-medium">Tradlia</p>
-          </div>
-          <OrderDropdown />
-
-          <textarea
-            name="message"
-            id="message"
-            cols={20}
-            rows={5}
-            placeholder={"Your Message"}
-            className="border rounded-[1.3rem] p-4  outline-none text-[#7E8096]"
-          ></textarea>
-          <button type="button"
-            onClick={() => setModal(false)}
-            className="w-full bg-gradient-to-r from-[#66C1BF] to-[#00A29D] text-white rounded-full py-2 font-bold text-lg"
-          >
-            Send
-          </button>
+    <PortalModal open onClose={() => setModal(false)} panelClassName="px-5 xl:px-8 py-6">
+      <div className="flex flex-col w-full gap-5">
+        <div className="flex flex-col gap-1">
+          <h2 className="font-display text-lg font-semibold text-ink">Send Message to Seller</h2>
+          <p className="text-sm text-ink-muted">Your message goes directly to the seller&rsquo;s inbox.</p>
         </div>
+        <div className="flex items-center gap-3">
+          <div
+            className="w-14 h-14 p-3.5 text-brand-600 bg-canvas rounded-full border border-line flex items-center justify-center"
+            aria-hidden="true"
+          >
+            <SvgStorefront />
+          </div>
+          <p className="font-display text-base font-semibold text-ink">Tradlia</p>
+        </div>
+        <OrderDropdown />
+
+        <textarea
+          name="message"
+          id="message"
+          cols={20}
+          rows={5}
+          placeholder={"Your Message"}
+          aria-label="Your message"
+          className="w-full border border-line bg-surface rounded-card p-4 outline-none text-sm text-ink placeholder:text-ink-muted transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-300 focus-visible:border-brand-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+        ></textarea>
+        <button
+          type="button"
+          onClick={() => setModal(false)}
+          className="w-full rounded-pill py-3 bg-brand-400 hover:bg-brand-500 active:bg-brand-600 text-white font-semibold transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2"
+        >
+          Send
+        </button>
       </div>
-    </div>
+    </PortalModal>
   );
 };
 

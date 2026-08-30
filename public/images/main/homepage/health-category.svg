@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <!-- Power Tools category - Drill silhouette -->
+  <rect x="20" y="20" width="260" height="260" rx="30" fill="#EAF9F8" stroke="#4CBEC5" stroke-width="4"/>
+  <path d="M60 100 Q60 88 72 88 L170 88 Q196 88 208 112 L216 130 Q220 140 210 146 L96 160 Q78 162 66 150 Q60 142 60 132 Z" fill="#4CBEC5"/>
+  <rect x="206" y="106" width="22" height="34" rx="6" fill="#16232B"/>
+  <rect x="228" y="116" width="26" height="14" rx="3" fill="#51646E"/>
+  <path d="M254 118 L282 123 L282 127 L254 122 Z" fill="#16232B"/>
+  <path d="M84 160 L124 160 L112 236 Q110 248 98 248 L82 248 Q70 248 71 236 Z" fill="#51646E"/>
+  <rect x="76" y="188" width="52" height="18" rx="6" fill="#FFC53D"/>
+  <circle cx="94" cy="118" r="9" fill="#EAF9F8"/>
+  <circle cx="126" cy="118" r="9" fill="#EAF9F8"/>
+</svg>

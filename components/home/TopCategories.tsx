@@ -1,52 +1,23 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { FC, useState } from "react";
+import Link from "next/link";
 import { SvgM } from "../../helpers/svgs/homeSvg";
-import { ICategoryItem, jsonCategoryList } from "./jsonCategoryList";
+import { jsonCategoryList } from "./jsonCategoryList";
+import { categories } from "../../helpers/categories";
+import { categoryUrl } from "../../helpers/urls";
 
-interface SingleCategoryItemProps {
-  content: ICategoryItem;
-  selectedCategory: number | null;
-  setSelectedCategory: Dispatch<SetStateAction<number | null>>;
-}
-
-// TODO There are items with the same id here ???
-const SubCategoryList: any = [
-  { id: 1, isActive: false, name: "Glass Ionomers" },
-  { id: 2, isActive: false, name: "Scaling & Prophylaxis" },
-  { id: 3, isActive: true, name: "Accessories" },
-  { id: 4, isActive: false, name: "Disinfection & Sterilization" },
-  { id: 5, isActive: false, name: "Glasses and Face Masks" },
-  { id: 6, isActive: false, name: "Dental Unit & Accessories" },
-  { id: 7, isActive: false, name: "Anesthesia" },
-  { id: 8, isActive: false, name: "Air Water Syringes" },
-  { id: 9, isActive: false, name: "Caps" },
-  { id: 10, isActive: false, name: "Teeth" },
-  { id: 11, isActive: false, name: "Whitening" },
-  { id: 12, isActive: false, name: "Fillings" },
-  { id: 13, isActive: false, name: "Surgical" },
-  { id: 14, isActive: false, name: "Hand Instruments" },
-  { id: 15, isActive: false, name: "Pediatric & Prophylaxis" },
-  { id: 16, isActive: false, name: "Gloves" },
-];
-
-const TopCategories: FC<any> = ({ isOpen }) => {
+const TopCategories: FC<{ isOpen: boolean }> = ({ isOpen }) => {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
+  // Static in-flow strip (not an overlay): it occupies layout space below the
+  // navbar, so pages never need top clearance and content is never covered.
+  if (!isOpen) return null;
+
   return (
-    <div className="relative">
-      <div
-        className={`absolute top-0 left-0 w-full transform h-3  bg-[#5327A8]  transition-all ease-in-out duration-300 ${
-          isOpen ? "opacity-0" : "opacity-100"
-        }`}
-      ></div>
-      <div
-        className={`hidden xl:flex flex-col w-full max-h-full bg-[#5327A8] ${
-          isOpen ? "opacity-100" : "opacity-0"
-        } transition-all ease-in-out duration-300`}
-      >
+    <div className="hidden xl:block overflow-x-clip">
+      <nav className="bg-surface border-b border-line shadow-pop">
         <div
-          className={`flex container justify-between py-4 mx-auto space-x-8 ${
-            isOpen ? "opacity-100" : "max-h-0 opacity-0"
-          }`}
+          aria-label="Product categories"
+          className="flex container justify-between py-4 mx-auto gap-3 overflow-x-auto hiddenScroll"
         >
           {jsonCategoryList.map((el: any) => (
             <SingleCategoryItem
@@ -54,73 +25,80 @@ const TopCategories: FC<any> = ({ isOpen }) => {
               content={el}
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
-              SubCategoryList={SubCategoryList}
             />
           ))}
         </div>
-      </div>
+      </nav>
     </div>
   );
 };
 
-const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCategory, SubCategoryList }) => {
+const SingleCategoryItem: FC<any> = ({ content, selectedCategory, setSelectedCategory }) => {
   const isActive = content.id === selectedCategory;
+  const category = categories.find((c) => c.icon === content.icon);
+  const catId = category?.id;
 
   return (
-    <div className="group">
+    <div className="group shrink-0">
       <div className="relative">
-        <div
-          className="flex items-center group hover:cursor-pointer"
+        <Link
+          href={catId ? categoryUrl(catId) : "/category"}
           onMouseEnter={() => {
             setSelectedCategory((pre: any) => (pre !== content.id ? content.id : null));
           }}
+          onFocus={() => {
+            setSelectedCategory((pre: any) => (pre !== content.id ? content.id : null));
+          }}
+          onClick={() => setSelectedCategory(content.id)}
+          className="flex items-center gap-3 text-left rounded-card px-2 py-1.5 cursor-pointer transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
         >
           <span
-            className={`relative h-14 w-14 p-2 rounded-2xl group-hover:bg-gradient-to-r transition duration-200 ease-in-out ${
-              isActive && "bg-gradient-to-r from-[#66c1bf] to-[#00a29d]"
+            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-card p-2.5 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none [&>div]:w-full [&>div]:h-full ${
+              isActive
+                ? "bg-brand-600 text-white"
+                : "bg-canvas text-ink-soft group-hover:bg-brand-600 group-hover:text-white"
             }`}
           >
-            <div className="absolute w-full h-full opacity-0 group-hover:opacity-100 transform duration-200 ease-in-out bg-gradient-to-r rounded-2xl group-hover:from-[#66c1bf] group-hover:to-[#00a29d] top-0 left-0"></div>
-            {/* Bg Color Transition */}
             <content.icon isActive={isActive} />
-            <span className="absolute invisible transition-shadow duration-300 ease-in-out group-hover:visible translate-y-4 bottom-0 left-2 rounded right-2 h-1 bg-gradient-to-r from-[#66c1bf] to-[#00a29d]"></span>
           </span>
 
-          <div
-            className={`text-sm ml-1 transition duration-200 ease-in-out font-semibold group-hover:text-[#66c1bf] ${
-              isActive ? "text-[#66c1bf]" : "text-[#F4F5F9]"
+          <span
+            className={`text-sm ml-1 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none font-semibold leading-tight ${
+              isActive ? "text-brand-700" : "text-ink group-hover:text-brand-700"
             }`}
           >
             <p>{content.text1}</p>
             <p>{content.text2}</p>
-          </div>
-        </div>
-        <div className="absolute top-0 z-30 w-full h-16 bg-transparent"></div>
+          </span>
+        </Link>
         <div
-          className={`absolute z-30 top-[72px] group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 opacity-0 translate-y-10 invisible transition-all duration-300 ease-in-out flex ${content.align}`}
+          className={`absolute z-30 top-full pt-3 ${content.align ?? ""} invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0 transition-[opacity,transform,visibility] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none flex`}
         >
-          <div
-            className={`bg-gradient-to-b from-[#66C1BF] to-[#00A29D] h-80  px-2 flex items-center justify-center ${content.rounded[0]} shadow-md`}
-          >
-            <div className="w-20 h-24 opacity-70">
-              <content.icon isActive={true} />
-            </div>
-          </div>
-          <div
-            className={`grid grid-cols-2 text-xs bg-white w-[450px] px-6 shadow-md font-medium text-[#6F7081] py-8 ${content.rounded[1]}`}
-          >
-            {SubCategoryList.map((el: any) => (
-              <button type="button"
-                className="flex items-center gap-1 cursor-pointer whitespace-nowrap btnGroupHover hover:text-[#00A29D]"
-                key={el.id}
-              >
-                {/*  <div className={`w-6 h-3 ${el.isActive ? "visible" : "invisible"} group-hover:`}> */}
-                <div className={`w-6 h-3 svgIcon`}>
+          <div className="flex overflow-hidden rounded-card shadow-pop bg-surface border border-line">
+            <div className="hidden lg:flex w-24 shrink-0 bg-brand-600 px-2 items-center justify-center text-white relative">
+              <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center opacity-20">
+                <span className="w-16 h-20 block fill-current">
                   <SvgM />
-                </div>
-                {el.name}
-              </button>
-            ))}
+                </span>
+              </span>
+              <span className="relative w-14 h-16 opacity-90 grid [&>div]:w-full [&>div]:h-full [&>div]:relative">
+                <content.icon isActive={true} />
+              </span>
+            </div>
+            <div className="grid grid-cols-2 text-xs bg-surface w-[450px] max-w-[80vw] px-6 py-6 font-medium gap-x-4">
+              {category?.subCategories.map((sub) => (
+                <Link
+                  className="flex items-center gap-1.5 cursor-pointer whitespace-nowrap btnGroupHover rounded-pill px-2 py-1.5 my-0.5 text-left text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+                  key={sub.id}
+                  href={catId ? categoryUrl(catId, sub.id) : "/category"}
+                >
+                  <div className={`w-6 h-3 svgIcon fill-current text-brand-500`}>
+                    <SvgM />
+                  </div>
+                  {sub.name}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>

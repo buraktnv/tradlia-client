@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { SvgImg1, SvgImg2 } from "../../../helpers/svgs/adverts";
 import DateDropdown from "../feedback/DateDropdown";
 import FilterDropdown from "../feedback/FilterDropdown";
@@ -14,25 +14,42 @@ const filterList = [
 ];
 
 const FilterTabMenu: FC<any> = ({ setOpenModal2, setListType }) => {
+  const [view, setView] = useState<number>(0);
+  const selectView = (v: number) => {
+    setView(v);
+    setListType(v);
+  };
   return (
-    <div className="xl:h-[3rem] h-12 gap-2 flex xl:gap-10 xl:justify-between rounded-full border border-[#00B1B265] bg-[#F4F5F7] items-center w-full xl:w-full">
+    <div className="flex h-12 w-full items-center justify-between gap-2 rounded-card border border-line bg-surface px-3 shadow-card xl:h-[3.5rem] xl:gap-6">
       <TopluIslemDropdown setOpenModal2={setOpenModal2} />
       <FilterDropdown filterList={filterList} />
       <DateDropdown />
       <div className="items-center justify-center hidden gap-4 xl:flex">
-        <button type="button" className="btn list1" onClick={() => setListType(0)}>
+        <button
+          type="button"
+          aria-label="Grid view"
+          aria-pressed={view === 0}
+          onClick={() => selectView(0)}
+          className="btn list1 w-8 h-8 flex items-center justify-center rounded-pill text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+        >
           <SvgImg2 />
         </button>
-        <button type="button" className="btn list2" onClick={() => setListType(1)}>
+        <button
+          type="button"
+          aria-label="List view"
+          aria-pressed={view === 1}
+          onClick={() => selectView(1)}
+          className="btn list2 w-8 h-8 flex items-center justify-center rounded-pill text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+        >
           <SvgImg1 />
         </button>
       </div>
-      <div className="xl:flex relative ring-1 ring-[#00B1B265] rounded-full  ring-offset-0 hidden">
+      <div className="xl:flex relative ring-1 ring-brand-200 rounded-full  ring-offset-0 hidden">
         <input
           type="search"
           id="search"
           placeholder="Search product"
-          className="h-10 outline-0 bg-white  placeholder-[#4CBEC5]  placeholder:font-light text-center  px-14 py-3 xl:py-3.5 rounded-full"
+          className="h-10 outline-0 bg-white  placeholder:text-brand-500  placeholder:font-light text-center  px-14 py-3 xl:py-3.5 rounded-full"
           required
         />
         <svg
@@ -47,7 +64,7 @@ const FilterTabMenu: FC<any> = ({ setOpenModal2, setListType }) => {
             data-name="Path 1095"
             d="M2736.929,620.224l-6.214-6.215a13.386,13.386,0,1,0-2.682,2.715l6.2,6.2a1.907,1.907,0,0,0,2.7,0h0A1.908,1.908,0,0,0,2736.929,620.224Zm-16.979-4.236a9.93,9.93,0,1,1,9.93-9.93A9.93,9.93,0,0,1,2719.95,615.988Z"
             transform="translate(-2706.567 -592.675)"
-            fill="#4cbec5"
+            fill="currentColor"
           />
         </svg>
       </div>

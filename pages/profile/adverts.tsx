@@ -15,7 +15,7 @@ enum ADVERTS_TABS {
   OFFLINE,
   WAITING_APPROVAL,
 }
-//TODO modals inside page tabs
+// NOTE: tab modals are intentionally page-level, not nested in tabs
 const Adverts: NextPage = () => {
   const [activeTab, setActiveTab] = useState<ADVERTS_TABS>(ADVERTS_TABS.ADD_NEW);
   return (

@@ -18,9 +18,9 @@ const cardList = [
     productList: [
       {
         id: 1,
-        image: "/images/photos/StrepNaz Herbal.svg",
+        image: "/images/photos/product-3.svg",
         name: "VitaC Orange &",
-        brand: "Echinacea 24 Pastilles",
+        brand: "4×40 (500 Count)",
         miad: "March 2023",
         quantity: "15",
         price: "47.98",
@@ -28,9 +28,9 @@ const cardList = [
       },
       {
         id: 2,
-        image: "/images/photos/Oxygenated Water.svg",
-        name: "HealthAid Oxygen Water",
-        brand: "100 ml",
+        image: "/images/photos/product-2.svg",
+        name: "GripTight Pallet Wrap",
+        brand: "20 µm Roll",
         miad: "March 2024",
         quantity: "25",
         price: "53.98",
@@ -38,9 +38,9 @@ const cardList = [
       },
       {
         id: 3,
-        image: "/images/photos/Oxygenated Water.svg",
-        name: "HealthAid Oxygen Water",
-        brand: "100 ml",
+        image: "/images/photos/product-2.svg",
+        name: "GripTight Pallet Wrap",
+        brand: "20 µm Roll",
         miad: "March 2024",
         quantity: "25",
         price: "53.98",
@@ -48,9 +48,9 @@ const cardList = [
       },
       {
         id: 4,
-        image: "/images/photos/StrepNaz Herbal.svg",
+        image: "/images/photos/product-3.svg",
         name: "VitaC Orange &",
-        brand: "Echinacea 24 Pastilles",
+        brand: "4×40 (500 Count)",
         miad: "March 2023",
         quantity: "15",
         price: "47.98",
@@ -75,7 +75,7 @@ const cardList = [
   {
     id: 4,
     orderID: "AvTEyBXUq ",
-    customer: "MediSupply",
+    customer: "SupplyHub",
     orderDate: "28.02.2022 - 14:20",
     total: "515.73",
     active: false,
@@ -85,9 +85,9 @@ const cardList = [
     productList: [
       {
         id: 1,
-        image: "/images/photos/StrepNaz Herbal.svg",
+        image: "/images/photos/product-3.svg",
         name: "VitaC Orange &",
-        brand: "Echinacea 24 Pastilles",
+        brand: "4×40 (500 Count)",
         miad: "March 2023",
         quantity: "15",
         price: "47.98",
@@ -95,9 +95,9 @@ const cardList = [
       },
       {
         id: 2,
-        image: "/images/photos/Oxygenated Water.svg",
-        name: "HealthAid Oxygen Water",
-        brand: "100 ml",
+        image: "/images/photos/product-2.svg",
+        name: "GripTight Pallet Wrap",
+        brand: "20 µm Roll",
         miad: "March 2024",
         quantity: "25",
         price: "53.98",
@@ -132,9 +132,9 @@ const cardList = [
     productList: [
       {
         id: 1,
-        image: "/images/photos/StrepNaz Herbal.svg",
+        image: "/images/photos/product-3.svg",
         name: "VitaC Orange &",
-        brand: "Echinacea 24 Pastilles",
+        brand: "4×40 (500 Count)",
         miad: "March 2023",
         quantity: "15",
         price: "47.98",
@@ -142,9 +142,9 @@ const cardList = [
       },
       {
         id: 2,
-        image: "/images/photos/Oxygenated Water.svg",
-        name: "HealthAid Oxygen Water",
-        brand: "100 ml",
+        image: "/images/photos/product-2.svg",
+        name: "GripTight Pallet Wrap",
+        brand: "20 µm Roll",
         miad: "March 2024",
         quantity: "25",
         price: "53.98",
@@ -179,9 +179,9 @@ const cardList = [
     productList: [
       {
         id: 1,
-        image: "/images/photos/StrepNaz Herbal.svg",
+        image: "/images/photos/product-3.svg",
         name: "VitaC Orange &",
-        brand: "Echinacea 24 Pastilles",
+        brand: "4×40 (500 Count)",
         miad: "March 2023",
         quantity: "15",
         price: "47.98",
@@ -189,9 +189,9 @@ const cardList = [
       },
       {
         id: 2,
-        image: "/images/photos/Oxygenated Water.svg",
-        name: "HealthAid Oxygen Water",
-        brand: "100 ml",
+        image: "/images/photos/product-2.svg",
+        name: "GripTight Pallet Wrap",
+        brand: "20 µm Roll",
         miad: "March 2024",
         quantity: "25",
         price: "53.98",
@@ -218,7 +218,7 @@ const cardList = [
 const WillBeShipped: FC = () => {
   return (
     <div className="grid gap-3 xl:gap-[0.75rem]">
-      {cardList && cardList.map((content) => <SoldCardWithPhotos key={content.id} content={content} />)}
+      {cardList && cardList.map((content) => <SoldCardWithPhotos key={content.id} content={content} status="pending" />)}
     </div>
   );
 };

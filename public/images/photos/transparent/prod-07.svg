@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+  <linearGradient id="g-hat-prod-07" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66c1bf"/><stop offset="1" stop-color="#00a29d"/></linearGradient>
+  </defs>
+  
+  <ellipse cx="200" cy="348" rx="122" ry="18" fill="#000" opacity="0.14"/>
+  <ellipse cx="200" cy="254" rx="116" ry="26" fill="url(#g-hat-prod-07)"/>
+  <path d="M104 250 C104 148 146 88 200 88 C254 88 296 148 296 250 Z" fill="url(#g-hat-prod-07)"/>
+  <path d="M156 102 C138 152 132 202 134 248" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" opacity="0.3"/>
+  <path d="M244 102 C262 152 268 202 266 248" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" opacity="0.3"/>
+  <path d="M200 90 L200 250" stroke="#ffffff" stroke-width="9" opacity="0.22"/>
+  <rect x="182" y="198" width="36" height="26" rx="6" fill="#ffffff" opacity="0.9"/>
+  <rect x="190" y="207" width="20" height="8" rx="4" fill="#c9ccd4"/>
+
+</svg>

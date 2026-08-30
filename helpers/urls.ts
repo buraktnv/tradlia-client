@@ -1,5 +1,10 @@
 export const URL_HOME = "/";
 
+/** Builds a category listing URL, optionally scoped to a subcategory. */
+export function categoryUrl(catId: string, subId?: string) {
+  return `/category?cat=${encodeURIComponent(catId)}${subId ? `&sub=${encodeURIComponent(subId)}` : ""}`;
+}
+
 export const URL_PROFILE = "/profile";
 export const URL_PROFILE_ADVERTS = "/profile/adverts";
 export const URL_PROFILE_FAVOURITES = "/profile/favourites";

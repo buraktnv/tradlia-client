@@ -1,5 +1,6 @@
-import { FC, useEffect, useState } from "react";
-import { SvgFilledStar, SvgStar, SvgStore } from "../../helpers/svgs/sellerSvg";
+import { FC } from "react";
+import { SvgFilledStar, SvgStar, SvgStorefront } from "../../helpers/svgs/sellerSvg";
+import PortalModal from "../shared/PortalModal";
 import styles from "../shared/ScrollBar.module.scss";
 
 const comments: any = [
@@ -75,102 +76,87 @@ const comments: any = [
   },
 ];
 
+const initialsOf = (name: string) => name.replace(/[^a-zA-Z]/g, "").slice(0, 2).toUpperCase();
+
 const AllComments: FC<any> = ({ setModal1 }) => {
-  const [fade, setFade] = useState<boolean>(false);
-  useEffect(() => {
-    setFade(true);
-  }, []);
   return (
-    <div className="absolute top-0 left-0 z-10 w-screen h-screen text-sm">
-      <div
-        className={`bg-[#000000be] fixed top-0 bottom-0 left-0 right-0 transition-opacity duration-300 ease-in-out z-20 ${
-          fade ? "opacity-100" : "opacity-0"
-        }`}
-        onClick={() => {
-          setFade(false);
-          setTimeout(() => setModal1(() => false), 300);
-        }}
-      ></div>
-      <div className="flex items-center justify-center w-full h-full px-2 my-16 xl:px-0 xl:my-0">
-        <div
-          className={`bg-white p-10 flex flex-col items-center justify-center gap-5 h-4/5 rounded-3xl z-20 transition-all duration-300 ease-in-out ${
-            fade ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
-          }`}
-        >
-          <button type="button"
+    <PortalModal open onClose={() => setModal1(false)} panelClassName="px-6 xl:px-8 py-6">
+      <div className="flex flex-col items-center gap-5 text-sm">
+        <div className="flex items-center justify-between w-full">
+          <h2 className="font-display text-lg font-semibold text-ink">Store Reviews</h2>
+          <button
+            type="button"
             onClick={() => setModal1(false)}
-            className="flex items-center justify-center text-[#F9B000] text-lg font-medium border border-[#f59b0065] rounded-full w-full py-2"
+            aria-label="Close store reviews"
+            className="rounded-pill border border-line px-4 py-1.5 text-xs font-medium text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-300 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
           >
-            Store Reviews
+            Close
           </button>
+        </div>
 
-          <div className="flex flex-col justify-center w-full space-y-3">
-            <div className="flex gap-5">
-              <div className="flex items-center gap-3">
-                <div className="w-16 h-16 p-3 text-[#66c1c0ad] bg-[#F4F5F9] xl:bg-white rounded-full border border-[#66c1c0ad]">
-                  <SvgStore />
-                </div>
-                <div className="flex flex-col">
-                  <p className="text-lg text-[#7E8096] font-semibold">Tradlia</p>
+        <div className="flex flex-col justify-center w-full space-y-3">
+          <div className="flex gap-5">
+            <div className="flex items-center gap-3">
+              <div
+                className="w-14 h-14 p-3.5 text-brand-600 bg-canvas rounded-full border border-line flex items-center justify-center"
+                aria-hidden="true"
+              >
+                <SvgStorefront />
+              </div>
+              <div className="flex flex-col">
+                <p className="font-display text-base font-semibold text-ink">Tradlia</p>
 
-                  <div className="flex items-center justify-center w-full gap-2">
-                    <div className="w-4 h-4 text-[#F9B000]">
+                <div className="flex items-center w-full gap-1.5" aria-label="Rated 4.1 out of 5">
+                  {[0, 1, 2, 3].map((i) => (
+                    <div key={`filled-${i}`} className="w-4 h-4 text-amber-400">
                       <SvgFilledStar />
                     </div>
-                    <div className="w-4 h-4 text-[#F9B000]">
-                      <SvgFilledStar />
-                    </div>
-                    <div className="w-4 h-4 text-[#F9B000]">
-                      <SvgFilledStar />
-                    </div>
-                    <div className="w-4 h-4 text-[#F9B000]">
-                      <SvgFilledStar />
-                    </div>
-                    <div className="w-4 h-4 text-[#F9B000]">
-                      <SvgStar />
-                    </div>
-                    <div className="flex text-md font-bold text-[#F9B000]">4,1</div>
+                  ))}
+                  <div className="w-4 h-4 text-line">
+                    <SvgStar />
                   </div>
+                  <span className="pl-1 font-display text-sm font-bold text-ink">4,1</span>
                 </div>
               </div>
             </div>
           </div>
-          <div className={`h-full flex flex-col pr-6 overflow-y-scroll ${styles.ScrollBar}`}>
-            {comments.map((comment: any) => (
-              <ProductCard comment={comment} key={comment.id} />
-            ))}
-          </div>
         </div>
+        <ul className={`flex flex-col w-full h-[45vh] pr-6 overflow-y-scroll ${styles.ScrollBar}`}>
+          {comments.map((comment: any) => <ProductCard comment={comment} key={comment.id} />)}
+        </ul>
       </div>
-    </div>
+    </PortalModal>
   );
 };
 const ProductCard: FC<any> = ({ comment }) => {
   return (
-    <div className="flex flex-col border-t py-[1rem] border-[#f59b0065]">
-      <div className="flex py-3">
-        <div className="w-4 h-4 text-[#F9B000]">
-          <SvgFilledStar />
+    <li className="flex gap-3 border-t border-line py-[1rem]">
+      <div
+        className="flex items-center justify-center shrink-0 w-9 h-9 rounded-full bg-brand-100 text-brand-700 font-display font-semibold text-xs"
+        aria-hidden="true"
+      >
+        {initialsOf(comment.name)}
+      </div>
+      <div className="flex flex-col gap-1 min-w-0">
+        <div className="flex items-center gap-0.5" aria-label="Rated 4 out of 5">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={`filled-${i}`} className="w-3.5 h-3.5 text-amber-400">
+              <SvgFilledStar />
+            </div>
+          ))}
+          <div className="w-3.5 h-3.5 text-line">
+            <SvgStar />
+          </div>
         </div>
-        <div className="w-4 h-4 text-[#F9B000]">
-          <SvgFilledStar />
-        </div>
-        <div className="w-4 h-4 text-[#F9B000]">
-          <SvgFilledStar />
-        </div>
-        <div className="w-4 h-4 text-[#F9B000]">
-          <SvgFilledStar />
-        </div>
-        <div className="w-4 h-4 text-[#F9B000]">
-          <SvgStar />
+        <p className="text-sm text-ink-soft leading-relaxed">{comment.title}</p>
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 pt-0.5">
+          <span className="text-sm font-semibold text-ink">{comment.name}</span>
+          <span className="pulse-dot bg-success inline-block" aria-hidden="true" />
+          <span className="text-xs text-success font-medium">Verified buyer</span>
+          <span className="text-xs text-ink-muted border-l border-line pl-2">{comment.date}</span>
         </div>
       </div>
-      <div className="text-[#7E8096]">{comment.title}</div>
-      <div className="flex gap-2 py-1">
-        <div className="text-[#7E8096] font-bold">{comment.name}</div>
-        <div className="text-[#7E8096] border-l border-[#F59C00] px-2">{comment.date}</div>
-      </div>
-    </div>
+    </li>
   );
 };
 

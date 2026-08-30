@@ -1,107 +1,35 @@
 import { FC } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface IFilterItem {
   id: number;
   text1: string;
   icon: string;
-  iconClass: string;
-  textClass: string;
-  bgItem: string;
 }
 
-const FilterSelection: FC<any> = () => {
-  const jsonFilterList = [
-    {
-      id: 1,
-      text1: "Best Sellers",
-      icon: "/images/giftIcon.svg",
-      iconClass: "bg-gradient-to-r from-[#FF516B] to-[#FF0045]",
-      textClass: "text-[#E8336E]",
-      bgItem: "hidden",
-    },
-    {
-      id: 2,
-      text1: "BEST CATEGORY",
-      icon: "/images/Group399.svg",
-      iconClass: "bg-gradient-to-r from-[#FFBE00] to-[#FF7B03]",
-      textClass: "text-[#F59C00]",
-      bgItem: "hidden",
-    },
-    {
-      id: 3,
-      text1: "WOUND CARE PRODUCTS",
-      icon: "/images/photos/product-10.svg",
-      iconClass: "bg-gradient-to-r from-[#66C1BF] to-[#00A29D]",
-      textClass: "text-[#4CBEC5]",
-      bgItem: "hidden",
-    },
-    {
-      id: 4,
-      text1: "MEDISUPPLY",
-      icon: "/images/Group415.svg",
-      iconClass: "",
-      textClass: "text-[#7E8096]",
-      bgItem: "",
-    },
-    {
-      id: 5,
-      text1: "PHARMADIRECT",
-      icon: "/images/Group447.svg",
-      iconClass: "",
-      textClass: "text-[#7E8096]",
-      bgItem: "",
-    },
-    {
-      id: 6,
-      text1: "WHOLESALEX",
-      icon: "/images/Group415.svg",
-      iconClass: "",
-      textClass: "text-[#7E8096]",
-      bgItem: "",
-    },
-    {
-      id: 7,
-      text1: "NATUREMED",
-      icon: "/images/Group447.svg",
-      iconClass: "",
-      textClass: "text-[#7E8096]",
-      bgItem: "",
-    },
-    {
-      id: 8,
-      text1: "MEDINEED",
-      icon: "/images/Group415.svg",
-      iconClass: "",
-      textClass: "text-[#7E8096]",
-      bgItem: "",
-    },
-    {
-      id: 9,
-      text1: "HEALTHHUB",
-      icon: "/images/Group454.svg",
-      iconClass: "",
-      textClass: "text-[#7E8096]",
-      bgItem: "",
-    },
-    {
-      id: 10,
-      text1: "PHARMADEPOT",
-      icon: "/images/Group430.svg",
-      iconClass: "",
-      textClass: "text-[#7E8096]",
-      bgItem: "",
-    },
-  ];
+const jsonFilterList: IFilterItem[] = [
+  { id: 1, text1: "Best Sellers", icon: "/images/filter-best-sellers.svg" },
+  { id: 2, text1: "Best Category", icon: "/images/filter-best-category.svg" },
+  { id: 3, text1: "SafetyMart", icon: "/images/filter-safetymart.svg" },
+  { id: 4, text1: "SupplyHub", icon: "/images/filter-supplyhub.svg" },
+  { id: 5, text1: "TradeDirect", icon: "/images/filter-tradedirect.svg" },
+  { id: 6, text1: "WholesaleX", icon: "/images/filter-wholesalex.svg" },
+  { id: 7, text1: "GreenLine", icon: "/images/filter-greenline.svg" },
+  { id: 8, text1: "PackPro", icon: "/images/filter-packpro.svg" },
+  { id: 9, text1: "ToolWorks", icon: "/images/filter-toolworks.svg" },
+  { id: 10, text1: "PartsHub", icon: "/images/filter-partshub.svg" },
+];
 
+const FilterSelection: FC<any> = () => {
   return (
-    <div className="flex flex-col w-full px-3 py-4 bg-white xl:my-0 xl:px-0">
+    <div className="bg-surface border-b border-line">
       <div className="container mx-auto">
-        <div className="flex w-full py-3 overflow-x-auto xl:justify-center xl:py-6 xl:gap-0">
+        <nav aria-label="Quick catalog filters" className="flex w-full gap-1 py-3 overflow-x-auto xl:justify-center xl:gap-5 xl:py-5">
           {jsonFilterList.map((el) => (
             <SingleFilterItem key={el.id} content={el} />
           ))}
-        </div>
+        </nav>
       </div>
     </div>
   );
@@ -109,23 +37,21 @@ const FilterSelection: FC<any> = () => {
 
 const SingleFilterItem: FC<{ content: IFilterItem }> = ({ content }) => {
   return (
-    <span className="flex flex-col items-center justify-start w-full h-full cursor-pointer basis-1/5 min-w-[20%] xl:min-w-fit group">
+    <Link
+      href="/category"
+      className="group flex flex-col items-center justify-start shrink-0 basis-1/5 min-w-[20%] xl:basis-auto xl:min-w-fit cursor-pointer rounded-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+    >
       <span
-        className={`${content.iconClass} relative rounded-full flex items-center justify-center xl:p-4 p-2.5 xl:h-24 xl:w-24 h-16 w-16 border-[4px] border-[#F4F5F7]`}
+        className={`relative flex items-center justify-center h-16 w-16 xl:h-20 xl:w-20 p-3 bg-surface border border-line shadow-card group-hover:border-brand-300 group-hover:shadow-pop transition-[border-color,box-shadow] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-focus-visible:border-brand-300 rounded-pill`}
       >
-        <div className={`absolute w-full h-full top-0 ${content.bgItem}`}>
-          <Image src="/images/main/homepage/bg.svg" width={92} height={92} alt="bg" className="object-contain" />
-        </div>
-        <div className="relative w-full h-full duration-300 ease-in-out transform group-hover:scale-110 translate">
-          <Image src={content.icon} fill sizes="100vw" alt="" />
-        </div>
+        <span className="relative w-full h-full transition-transform duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:scale-110">
+          <Image src={content.icon} fill sizes="80px" alt="" aria-hidden="true" />
+        </span>
       </span>
-      <span
-        className={`font-bold text-center leading-3 mt-1 xl:mt-2 text-[10px] xl:text-sm uppercase ${content.textClass}`}
-      >
+      <span className="mt-2 mb-1 font-display text-[10px] xl:text-xs font-semibold uppercase tracking-wider text-ink-soft text-center leading-3 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:text-brand-700 group-focus-visible:text-brand-700">
         {content.text1}
       </span>
-    </span>
+    </Link>
   );
 };
 

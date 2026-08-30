@@ -21,6 +21,12 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
 
   return (
     <div className="flex flex-col w-full h-full">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[10000] focus:rounded-pill focus:bg-brand-600 focus:px-5 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+      >
+        Skip to content
+      </a>
       <div className="hidden xl:block">
         <Navbar />
       </div>
@@ -28,8 +34,9 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
         <HeaderMobile />
       </div>
       <main
+        id="main-content"
         className={`flex flex-col py-28 ${!isHome && "pt-16"} ${
-          !MobileBgWhitePages.includes(router.asPath) && "bg-[#F2F2F2]"
+          !MobileBgWhitePages.includes(router.asPath) && "bg-canvas"
         } xl:py-0 xl:bg-white xl:my-0 xl:pb-12`}
       >
         {children}

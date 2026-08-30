@@ -1,7 +1,7 @@
-import { cloneElement, FC, useState } from "react";
+import { FC, useState } from "react";
 import { useBasketContext } from "../../helpers/contexts/BasketContext";
-import { SvgFastCargo } from "../../helpers/svgs/product";
-import { starFrame, starSvg, SvgTrashCan } from "../../helpers/svgs/product";
+import { SvgFastCargo, SvgTrashCan } from "../../helpers/svgs/product";
+import { SvgFilledStar, SvgStar } from "../../helpers/svgs/sellerSvg";
 
 const items: any = [
   {
@@ -16,8 +16,8 @@ const items: any = [
   },
   {
     id: 2,
-    name: "Contactless Thermometer",
-    brand: "MediCore Digital",
+    name: "TRMS Multimeter",
+    brand: "MultiCheck Instruments",
     image: "/images/photos/product-3.svg",
     price: 53.5,
     shipping: 0,
@@ -26,8 +26,8 @@ const items: any = [
   },
   {
     id: 3,
-    name: "Probiotix",
-    brand: "20 Vials - Probiotic",
+    name: "SenseIt Temp Sensor",
+    brand: "Module ±0.5°C",
     image: "/images/photos/product-11.svg",
     price: 35.5,
     shipping: 1,
@@ -37,7 +37,7 @@ const items: any = [
   {
     id: 4,
     name: "SafeGuard 3-Ply Black",
-    brand: "Surgical Mask with Ear Loops 50 pcs",
+    brand: "Dust Mask FFP2 Ear Loops 50 pcs",
     image: "/images/photos/product-4.svg",
     price: 45.5,
     shipping: 1,
@@ -46,50 +46,63 @@ const items: any = [
   },
 ];
 
+const Stars = ({ star }: { star: number }) => (
+  <span className="flex items-center gap-0.5" aria-label={`Rated ${star} out of 5`}>
+    {Array(star)
+      .fill(0)
+      .map((_: any, i: number) => (
+        <span key={`filled-${i}`} className="w-3.5 h-3.5 text-amber-400">
+          <SvgFilledStar />
+        </span>
+      ))}
+    {Array(5 - star)
+      .fill(0)
+      .map((_: any, i: number) => (
+        <span key={`empty-${i}`} className="w-3.5 h-3.5 text-line">
+          <SvgStar />
+        </span>
+      ))}
+  </span>
+);
+
 const SellerCard: FC<any> = ({ svg, title, star, starPoint, advertisementCount, date, stock, price, item }) => {
   return (
-    <div className="flex flex-col xl:grid grid-cols-5 border px-3 w-full xl:px-6 py-4 rounded-[1.5rem] bg-white">
-      <div className="flex xl:col-span-2 pb-2 xl:pb-0 border-b w-full xl:border-b-0 xl:border-r border-[#CCCCCC] items-center">
-        <div className="w-max h-max rounded-full border border-[#00B1B2] p-3 flex items-center justify-center mr-3 ">
+    <div className="flex flex-col xl:grid grid-cols-5 w-full bg-surface rounded-card shadow-card border border-line hover:border-brand-300 hover:shadow-pop transition-[border-color,box-shadow] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none px-4 xl:px-6 py-4 gap-3 xl:gap-0">
+      <div className="flex xl:col-span-2 pb-2 xl:pb-0 border-b xl:border-b-0 xl:border-r border-line items-center">
+        <div
+          className="w-max h-max rounded-full border border-line bg-canvas p-3 flex items-center justify-center mr-3 text-brand-600"
+          aria-hidden="true"
+        >
           {svg}
         </div>
         <div className="relative flex flex-col justify-center">
-          <div className="text-[#7E8096] font-bold text-base card__hover relative">
+          <div className="font-display font-semibold text-base text-ink relative">
             {title}
             <Info star={star} title={title} svg={svg} starPoint={starPoint} advertisementCount={advertisementCount} />
           </div>
-          <div className="flex items-center">
-            <div className="flex">
-              {Array(star)
-                .fill(0)
-                .map((_: any, i: number) => cloneElement(starSvg, { key: i }))}
-            </div>
-            <div className="flex">
-              {Array(5 - star)
-                .fill(0)
-                .map((_: any, i: number) => cloneElement(starFrame, { key: i }))}
-            </div>
-            <div className="pr-1 text-[#F9B000] text-sm font-bold">{starPoint}</div>
-            <div className="text-[#7E8096] tracking-tight text-sm font-medium">{advertisementCount} Listings</div>
+          <div className="flex items-center gap-1.5 mt-1">
+            <Stars star={star} />
+            <span className="font-display text-sm font-bold text-ink">{starPoint}</span>
+            <span className="text-xs text-ink-soft">{advertisementCount} Listings</span>
           </div>
         </div>
       </div>
-      <div className="flex justify-between col-span-3 pt-2 xl:flex-none xl:justify-around w-max xl:w-full xl:pt-0">
-        <div className="grid items-center px-4 xl:grid-cols-3 xl:col-span-2 xl:gap-14">
-          <div className="flex items-start gap-2 xl:flex-col xl:gap-4">
-            <div className="text-[#4CBEC5] font-medium text-sm">Expires</div>
-            <p className="text-[#4CBEC5] font-medium text-sm mb-2 block xl:hidden ">:</p>
-            <div className="text-[#7E8096] font-medium text-sm">{date}</div>
+      <div className="flex flex-wrap items-center justify-between gap-3 col-span-3 pt-2 xl:pt-0 xl:flex-nowrap xl:justify-around">
+        <div className="grid grid-cols-3 xl:grid-cols-3 items-center gap-x-4 xl:gap-x-8 xl:gap-y-2">
+          <div className="flex flex-col xl:items-start gap-1.5">
+            <span className="text-[11px] uppercase tracking-wide text-ink-soft">Expires</span>
+            <span className="bg-canvas rounded-pill px-3 py-1 text-xs text-ink-soft font-medium w-max">{date}</span>
           </div>
-          <div className="flex items-start gap-2 xl:flex-col xl:gap-4 ">
-            <div className="text-[#4CBEC5] font-medium text-sm">Stock</div>
-            <p className="text-[#4CBEC5] font-medium text-sm mb-2 ml-1 block xl:hidden ">:</p>
-            <div className="text-[#7E8096] font-medium text-sm">{stock}</div>
+          <div className="flex flex-col xl:items-start gap-1.5">
+            <span className="text-[11px] uppercase tracking-wide text-ink-soft">Stock</span>
+            <span className="bg-canvas rounded-pill px-3 py-1 text-xs text-ink-soft font-medium w-max">{stock}</span>
           </div>
-          <div className="flex items-start gap-2 xl:flex-col xl:gap-4 ">
-            <div className="text-[#4CBEC5] font-medium xl:font-bold text-sm">Price</div>
-            <p className="text-[#4CBEC5] font-medium text-sm mb-2 block xl:hidden ">:</p>
-            <div className="text-[#7E8096] font-medium xl:font-bold text-sm">{price} $</div>
+          <div className="flex flex-col xl:items-start gap-1">
+            <span className="text-[11px] uppercase tracking-wide text-ink-soft">Price</span>
+            <span className="font-display text-xl xl:text-3xl font-bold text-ink leading-none">{price} $</span>
+            {item.shipping === 0 && (
+              <span className="text-xs text-ink-soft">Free shipping</span>
+            )}
           </div>
         </div>
         <BasketConnector item={item} />
@@ -97,6 +110,9 @@ const SellerCard: FC<any> = ({ svg, title, star, starPoint, advertisementCount, 
     </div>
   );
 };
+
+const stepperButtonClass =
+  "flex items-center justify-center w-9 h-9 rounded-pill border border-line text-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:opacity-40";
 
 const BasketConnector: FC<any> = ({ item }) => {
   const [isBasketActive, setIsBasketActive] = useState<boolean>(false);
@@ -106,330 +122,132 @@ const BasketConnector: FC<any> = ({ item }) => {
 
   if (!isBasketActive) {
     return (
-      <div className="flex items-center justify-center h-full cursor-pointer xl:w-40">
-        <div
+      <div className="flex items-center justify-center h-full xl:w-40 shrink-0">
+        <button
+          type="button"
           onClick={() => setIsBasketActive(true)}
-          className="flex gap-2 px-4 xl:px-6 py-2 text-white rounded-full bg-gradient-to-r  from-[#FFBE00] to-[#FF7B03] items-center justify-center my-auto  xl:w-full  xl:ml-0"
+          aria-label={`Add ${item.name} to cart`}
+          className="flex gap-2 items-center justify-center w-full max-w-40 rounded-pill py-2.5 px-4 bg-brand-400 hover:bg-brand-500 active:bg-brand-600 text-white text-sm font-semibold transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="39.363"
-            height="34.815"
-            viewBox="0 0 39.363 34.815"
-            className="w-4 h-4 mr-1"
-          >
-            <g transform="translate(-6285.254 -793.329)">
-              <path
-                d="M6292.58,797.48c1.219-.1,2.4-.2,3.569-.3q4.616-.405,9.231-.815l11.54-1.016c2.01-.176,4.019-.356,6.029-.524a1.542,1.542,0,0,1,1.65,1.891q-.764,6.048-1.507,12.1c-.1.844-.186,1.691-.294,2.534a3.156,3.156,0,0,1-3.008,2.767q-7.137.613-14.273,1.242c-3.187.279-6.381.5-9.557.871-1.49.175-3.855-1.566-4.188-2.981-.236-1.008-.4-2.034-.548-3.06-.51-3.666-1-7.335-1.491-11-.112-.827-.221-1.655-.309-2.485-.028-.261-.125-.347-.384-.342-.725.013-1.451.009-2.176,0a1.516,1.516,0,1,1,.02-3.025c.8,0,1.608,0,2.413,0a3.1,3.1,0,0,1,3.138,2.912C6292.47,796.648,6292.529,797.05,6292.58,797.48Zm.409,3.007c.074.574.14,1.1.211,1.628.436,3.214.867,6.428,1.315,9.64a1.389,1.389,0,0,0,1.616,1.342c1.7-.109,3.392-.266,5.087-.413q5.134-.447,10.264-.9,3.907-.344,7.817-.674c.33-.027.475-.137.519-.505.415-3.487.856-6.971,1.288-10.456.086-.694.162-1.39.248-2.141Z"
-                fill="#fff"
-              />
-              <path
-                d="M6294.511,822.844a5.3,5.3,0,1,1,5.3,5.3A5.356,5.356,0,0,1,6294.511,822.844Zm3.027-.009a2.319,2.319,0,0,0,2.249,2.281,2.269,2.269,0,1,0,.023-4.538A2.314,2.314,0,0,0,6297.538,822.835Z"
-                fill="#fff"
-              />
-              <path
-                d="M6314.186,817.55a5.3,5.3,0,1,1-5.294,5.3A5.39,5.39,0,0,1,6314.186,817.55Zm-2.266,5.25a2.32,2.32,0,0,0,2.214,2.316,2.269,2.269,0,1,0,.093-4.538A2.316,2.316,0,0,0,6311.92,822.8Z"
-                fill="#fff"
-              />
-            </g>
-          </svg>
-          <div className="text-sm font-medium">Add to Cart</div>
-        </div>
+          <span className="w-4 h-4" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+              <circle cx="9" cy="21" r="1.6" />
+              <circle cx="19" cy="21" r="1.6" />
+              <path d="M2.5 3h2l2.4 12.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L22 7H6" />
+            </svg>
+          </span>
+          Add to Cart
+        </button>
       </div>
     );
   }
 
   return (
-    <div className="flex items-center justify-center h-full xl:w-40">
-      <div className="border-[#F39200] border rounded-full xl:w-full xl:ml-0">
-        <div className="flex items-center justify-center gap-2.5 px-3 xl:px-6 rounded-full border-4 border-[#F4F5F9] ">
-          {itemQuantity < 1 ? (
-            <button type="button"
-              className="border-[#F4F5F9] bg-white h-full w-full flex items-center justify-center"
-              onClick={() => setIsBasketActive(false)}
-            >
+    <div className="flex items-center justify-center h-full xl:w-40 shrink-0">
+      <div className="flex items-center justify-center gap-1.5 border border-line rounded-pill p-1 bg-surface">
+        {itemQuantity < 1 ? (
+          <button
+            type="button"
+            aria-label="Close quantity selector"
+            className={stepperButtonClass}
+            onClick={() => setIsBasketActive(false)}
+          >
+            <span className="w-3.5 h-3.5">
               <SvgTrashCan />
-            </button>
-          ) : (
-            <button type="button" className="flex items-center justify-center w-full" onClick={() => removeItemById(item)}>
-              <SvgDelete />
-            </button>
-          )}
-          <div className="text-[#7E8096] font-medium text-sm bg-[#F4F5F7] h-full py-1 px-6 w-full">{itemQuantity}</div>
-          <button type="button"
-            className="flex items-center justify-center w-full"
-            onClick={() =>
-              addItem({
-                id: item.id,
-                name: item.name,
-                brand: item.brand,
-                image: item.image,
-                price: item.price,
-                shipping: item.shipping,
-              })
-            }
+            </span>
+          </button>
+        ) : (
+          <button
+            type="button"
+            aria-label="Decrease quantity"
+            className={stepperButtonClass}
+            onClick={() => removeItemById(item)}
           >
-            <SvgPlus />
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="w-3.5 h-3.5" aria-hidden="true">
+              <path d="M5 12h14" />
+            </svg>
           </button>
-        </div>
-      </div>
-    </div>
-  );
-
-  return (
-    <div className="flex items-center justify-center w-full h-full">
-      <div className="border-[#F39200] border rounded-full w-full xl:w-full xl:ml-0">
-        <div className="flex items-center justify-center gap-2.5 px-3 xl:px-4 rounded-full border-4 border-[#F4F5F9] ">
-          <button type="button" className="flex items-center justify-center w-full">
-            <SvgDelete />
-          </button>
-          <div className="text-[#7E8096] font-medium text-sm bg-[#F4F5F7] h-full py-1 px-6 w-full">{itemQuantity}</div>
-          <button type="button"
-            className="flex items-center justify-center w-full"
-            onClick={() =>
-              addItem({
-                id: items[1].id,
-                name: items[1].name,
-                brand: items[1].brand,
-                image: items[1].image,
-                price: items[1].price,
-                shipping: items[1].shipping,
-              })
-            }
-          >
-            <SvgPlus />
-          </button>
-        </div>
+        )}
+        <output
+          aria-live="polite"
+          className="min-w-8 text-center bg-canvas rounded-pill py-1 text-sm font-semibold font-display text-ink-soft"
+        >
+          {itemQuantity}
+        </output>
+        <button
+          type="button"
+          aria-label="Increase quantity"
+          className={stepperButtonClass}
+          onClick={() =>
+            addItem({
+              id: item.id,
+              name: item.name,
+              brand: item.brand,
+              image: item.image,
+              price: item.price,
+              shipping: item.shipping,
+            })
+          }
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="w-3.5 h-3.5" aria-hidden="true">
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+        </button>
       </div>
     </div>
   );
 };
 
-const SvgDelete = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="16.212" height="2.852" viewBox="0 0 16.212 2.852" className="w-3 h-3">
-    <rect width="16.213" height="2.852" rx="1.288" fill="#f39200" />
-  </svg>
-);
-
-const SvgPlus = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16.212"
-    height="16.212"
-    viewBox="0 0 16.212 16.212"
-    className="w-3 h-3"
-  >
-    <path
-      d="M6477.445,1029.311h-5.393v-5.393a1.286,1.286,0,0,0-1.287-1.287h-.278a1.286,1.286,0,0,0-1.287,1.287v5.393h-5.393a1.287,1.287,0,0,0-1.287,1.287v.277a1.287,1.287,0,0,0,1.287,1.288h5.393v5.393a1.286,1.286,0,0,0,1.287,1.287h.278a1.286,1.286,0,0,0,1.287-1.287v-5.393h5.393a1.287,1.287,0,0,0,1.287-1.288v-.277A1.287,1.287,0,0,0,6477.445,1029.311Z"
-      transform="translate(-6462.52 -1022.631)"
-      fill="#f39200"
-    />
-  </svg>
-);
+const perkRowClass = "flex items-center gap-2 text-sm font-medium";
 
 const Info: FC<any> = ({ star, title, svg, starPoint, advertisementCount }) => (
-  <div className="xl:grid absolute left-[60%] -top-10 z-10 py-3 px-4 rounded-xl info hidden">
-    <div className="absolute -bottom-[100px] -z-10 -left-4">
-      <svg xmlns="http://www.w3.org/2000/svg" width="350.62" height="408.723" viewBox="0 0 759.62 408.723">
-        <path
-          id="Path_250"
-          data-name="Path 250"
-          d="M2072.574,1114.354h-636.88a48.481,48.481,0,0,0-48.481,48.481v43.343l-22.589,22.589a9.185,9.185,0,0,0,0,12.99l22.589,22.589V1474.1a48.481,48.481,0,0,0,48.481,48.481h636.88a48.48,48.48,0,0,0,48.48-48.481V1162.835A48.48,48.48,0,0,0,2072.574,1114.354Z"
-          transform="translate(-1361.684 -1114.104)"
-          fill="#e5f3f3"
-          stroke="#00b1b2"
-          strokeMiterlimit="10"
-          strokeWidth="0.5"
-        />
-      </svg>
-    </div>
-    <div className="flex items-center justify-center">
-      <div className="w-max bg-white h-max rounded-full border border-[#00B1B2] p-3 flex items-center justify-center mr-3 ">
+  <div className="xl:grid hidden absolute left-[55%] -top-8 z-20 w-[30rem] bg-surface rounded-card shadow-pop border border-line p-4 info">
+    <div className="flex items-start gap-3">
+      <div className="shrink-0 w-max h-max bg-canvas rounded-full border border-line p-3 flex items-center justify-center text-brand-600">
         {svg}
       </div>
-      <div className="flex flex-col justify-center border-r-2 border-[#AFD3D2] py-2 pr-4">
-        <div className="text-[#7E8096] font-bold text-base cursor-pointer">{title}</div>
-        <div className="flex items-center">
-          <div className="flex">
-            {Array(star)
-              .fill(0)
-              .map((_: any, i: number) => cloneElement(starSvg, { key: i }))}
-          </div>
-          <div className="flex">
-            {Array(5 - star)
-              .fill(0)
-              .map((_: any, i: number) => cloneElement(starFrame, { key: i }))}
-          </div>
-          <div className="pr-1 text-[#F9B000] text-sm font-bold">{starPoint}</div>
+      <div className="flex flex-col justify-center border-r border-line pr-4">
+        <div className="font-display font-semibold text-base text-ink">{title}</div>
+        <div className="flex items-center gap-1.5 mt-1">
+          <Stars star={star} />
+          <span className="font-display text-sm font-bold text-ink">{starPoint}</span>
         </div>
-        <div className="text-[#7E8096] tracking-tight font-medium text-sm">{advertisementCount} Listings</div>
+        <div className="text-xs text-ink-soft mt-0.5">{advertisementCount} Listings</div>
       </div>
-      <div className="h-full pl-3 text-xs font-normal leading-3 text-left">
+      <p className="text-xs leading-4 text-ink-soft">
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.
-      </div>
+      </p>
     </div>
-    <div className="flex">
-      <div>
-        <div>
-          <div className="flex items-center py-2">
-            <div className="w-5 h-5 mr-1 text-[#ff792e]">
-              <SvgFastCargo />
-            </div>
-            <div className="font-medium text-sm text-[#FF792E] tracking-tighter whitespace-nowrap">
-              Same-Day Shipping Until 15:55
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center pb-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="100%"
-            height="100%"
-            viewBox="0 0 42.168 31.322"
-            className="w-5 h-5 mr-1"
-          >
-            <path
-              d="M5155.706,1399.381c-1.123,0-2.246,0-3.369,0s-2.247,0-3.37,0c-.606,0-.978.309-.988.806s.372.839.994.84q3.371,0,6.74,0c.6,0,.978-.31.989-.805S5156.326,1399.382,5155.706,1399.381Zm-12.66,16.472a1.646,1.646,0,1,0,1.634,1.658A1.65,1.65,0,0,0,5143.046,1415.853Zm-.817-19.764a.821.821,0,1,0,.8.819A.829.829,0,0,0,5142.229,1396.089Zm32.723,13.057q-2.061-4.117-4.121-8.234a2.563,2.563,0,0,0-2.5-1.535c-2.072.012-4.144,0-6.217,0h-.464v-.5q0-2.511,0-5.023a2.489,2.489,0,0,0-2.711-2.714h-23.055a2.493,2.493,0,0,0-2.729,2.736q0,9.656,0,19.309c0,.577,0,1.153,0,1.729a2.476,2.476,0,0,0,2.6,2.581c.659,0,1.317,0,1.976,0,.112,0,.224.012.342.019a4.967,4.967,0,0,0,9.934,0h15.762a4.965,4.965,0,0,0,8.706,3.248h.008l.018-.03a4.943,4.943,0,0,0,1.2-3.236.276.276,0,0,1,.1-.18,2.737,2.737,0,0,0,1.518-1.88v-5.518C5175.2,1409.663,5175.08,1409.4,5174.952,1409.146Zm-31.536,11.62h.027a3.005,3.005,0,0,1-.818,0h.008a3.292,3.292,0,0,1,.447-6.56,3.262,3.262,0,0,1,.329.02l.026,0c.1.012.2.028.3.049l.01,0a3.292,3.292,0,0,1-.328,6.484Zm16.584-4.934c-.152.007-.284.019-.415.019-3.828,0-7.657,0-11.485.008a.508.508,0,0,1-.439-.167,4.967,4.967,0,0,0-9.264.025.437.437,0,0,1-.386.142c-.727-.021-1.454-.005-2.182-.008s-1.026-.288-1.03-1.016c0-.191,0-.382,0-.63.8,0,1.554,0,2.307,0,.678,0,.983-.3.986-.978q.007-1.5,0-3.005a.846.846,0,0,0-.965-.957c-.754,0-1.509,0-2.328,0v-.444q0-7.471,0-14.943c0-.813.272-1.084,1.086-1.084H5158.9c.844,0,1.1.261,1.1,1.108v21.932Zm-25.178-3.3v-1.6h1.594v1.6Zm35.541-8.2a.533.533,0,0,1,.4.166c.8,1.558,1.576,3.127,2.387,4.752h-8.186v-4.925h1.816C5167.976,1404.322,5169.17,1404.316,5170.363,1404.329Zm-1.248,16.437h.024a3.016,3.016,0,0,1-.819,0h.011a3.3,3.3,0,1,1,.784,0Zm4.546-5.843a3.094,3.094,0,0,1-.208.727l-.121-.021a4.968,4.968,0,0,0-9.244.1.422.422,0,0,1-.367.129c-.671-.019-1.342-.006-2.044-.006v-14.823c2.308,0,4.585-.01,6.862.015a.93.93,0,0,1,.65.348,10.608,10.608,0,0,1,.679,1.282h-.465q-2.552,0-5.107,0c-.7,0-1,.3-1,1q0,3.109,0,6.218c0,.727.293,1.014,1.032,1.014h9.344v1.749C5173.671,1413.414,5173.689,1414.169,5173.661,1414.923Zm-17.834-18.836c-.054,0-.109,0-.164,0h-9.951a2.006,2.006,0,0,0-.328.013.82.82,0,0,0,.01,1.623,2.847,2.847,0,0,0,.37.011h8.429c.548,0,1.1.008,1.645,0a.826.826,0,0,0,.864-.8A.835.835,0,0,0,5155.827,1396.087Zm12.91,19.766a1.646,1.646,0,1,0,1.638,1.654A1.648,1.648,0,0,0,5168.737,1415.853Z"
-              transform="translate(-5133.15 -1391.144)"
-              fill="#86bc25"
-            />
-          </svg>
-          <div className="text-sm font-medium">Free Shipping Over $500</div>
-        </div>
-        <div className="flex items-center pb-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="100%"
-            height="100%"
-            viewBox="0 0 35.036 37.289"
-            className="w-5 h-5 mr-1"
-          >
-            <path
-              d="M5154.239,1478.092a1.267,1.267,0,0,1-.561-.141c-6.042-2.925-11.355-5.489-16.244-7.838a1.119,1.119,0,0,1-.717-1.129c.011-6.257.011-12.66,0-19.033a1.121,1.121,0,0,1,.711-1.133c4.964-2.383,10-4.818,14.881-7.172l1.269-.613a1.554,1.554,0,0,0,.187-.115c.036-.025.073-.049.109-.073l.067-.042h.574l.058.029.726.367c.512.26,1.041.528,1.565.782,4.5,2.175,9.336,4.511,14.211,6.854a1.079,1.079,0,0,1,.678,1.08c-.01,6.426-.01,12.854,0,19.1a1.079,1.079,0,0,1-.684,1.077c-5.233,2.518-10.557,5.088-16.274,7.856A1.254,1.254,0,0,1,5154.239,1478.092Zm4.048-23.1a.769.769,0,0,1,.621.323.75.75,0,0,1,.15.638.934.934,0,0,1-.534.615l-.358.176c-.95.464-1.933.945-2.91,1.4-.183.085-.217.139-.217.343.009,4.849.008,9.778.008,14.546v3l3.04-1.467q5.949-2.87,11.9-5.735c.127-.062.145-.091.145-.241q-.009-7.446-.006-14.894v-2.714l-1.075.519c-1.075.52-2.187,1.058-3.285,1.578-.061.029-.061.029-.061.184q0,.984,0,1.968c0,1.309,0,2.662.007,3.992a1.057,1.057,0,0,1-.668,1.057c-.849.4-1.708.815-2.539,1.217l-1.079.52a1.449,1.449,0,0,1-.625.171c-.278,0-.746-.133-.746-1.027v-1.132c0-1.548,0-3.149.008-4.724,0-.182-.031-.232-.206-.317-5.392-2.6-10.256-4.938-15.176-7.334a1.266,1.266,0,0,0-.559-.156,1.107,1.107,0,0,0-.513.144c-1.1.566-2.2,1.089-3.359,1.643l-.839.4,10.544,5.091.156.074a5.609,5.609,0,0,1,.506.26.769.769,0,0,1,.317,1.028.742.742,0,0,1-.7.462,1.033,1.033,0,0,1-.237-.028,1.291,1.291,0,0,1-.293-.118l-.06-.029-10.191-4.919-1.1-.53v3.131c0,4.772,0,9.707-.008,14.56,0,.081,0,.081.151.154l14.28,6.894c.212.1.426.2.654.31V1462.9c0-1.463,0-2.976.006-4.464,0-.2-.031-.219-.145-.264-.314-.124-.616-.277-.907-.426l-.151-.076a.824.824,0,0,1-.439-1.13.76.76,0,0,1,.7-.435,1.039,1.039,0,0,1,.43.1l.108.049c.333.153.678.31,1.008.493a.382.382,0,0,0,.194.061.494.494,0,0,0,.218-.064c.687-.341,1.389-.678,2.067-1q.646-.311,1.292-.623A1.09,1.09,0,0,1,5158.287,1454.987Zm5.427-.92c-.654.317-1.272.617-1.9.906-.129.059-.146.088-.145.238.007,1.14.007,2.3.006,3.419q0,.726,0,1.454l.254-.123c.733-.352,1.426-.685,2.119-1.034a.4.4,0,0,0,.027-.135c.008-.993.007-2,.007-2.98v-1.924Zm-17-7.224c4.59,2.216,9.336,4.508,14.008,6.752a.251.251,0,0,0,.1.016.333.333,0,0,0,.127-.022c.7-.323,1.4-.667,2.08-1l.331-.161-2.256-1.087q-1.626-.785-3.253-1.569l-2.326-1.123q-3.388-1.638-6.78-3.269a.566.566,0,0,0-.225-.056.123.123,0,0,0-.037,0c-.737.338-1.459.69-2.223,1.062l-.239.117Zm4.568-2.047c4.528,2.187,9.211,4.449,13.821,6.664a.309.309,0,0,0,.12.02.334.334,0,0,0,.132-.023c.938-.439,1.887-.9,2.805-1.343l.9-.437-2.774-1.34q-5.955-2.875-11.911-5.743a.47.47,0,0,0-.178-.045l-.019,0c-1.115.525-2.217,1.058-3.383,1.623l-.4.194Zm-8.974,23.325a.723.723,0,0,1-.294-.064c-.834-.374-1.681-.781-2.59-1.245a.736.736,0,0,1-.378-.434.8.8,0,0,1,.075-.619.775.775,0,0,1,.678-.448.8.8,0,0,1,.339.079c.974.451,1.775.839,2.52,1.22a.881.881,0,0,1,.341.368c.012.019.021.037.03.049l.052.072,0,.095a.844.844,0,0,1-.778.927Zm2.159-1.521a.764.764,0,0,1-.288-.052c-.46-.186-.908-.408-1.343-.623-.151-.075-.3-.15-.455-.223l-.676-.327c-.71-.342-1.443-.695-2.162-1.051a.893.893,0,0,1-.52-.695.767.767,0,0,1,.32-.688.965.965,0,0,1,.292-.14c.03-.01.06-.02.089-.032l.094-.039.1.033.114.036a1.762,1.762,0,0,1,.268.1l.426.2c1.332.64,2.71,1.3,4.058,1.966a1,1,0,0,1,.512.567.814.814,0,0,1-.246.8,1.109,1.109,0,0,1-.579.165Z"
-              transform="translate(-5136.717 -1440.803)"
-              fill="#4cbec5"
-            />
-          </svg>
-          <div className="text-sm font-medium">Min. $100</div>
-        </div>
+    <div className="mt-3 pt-3 border-t border-line grid grid-cols-2 gap-y-2">
+      <div className={perkRowClass}>
+        <span className="w-5 h-5 mr-1 text-amber-500" aria-hidden="true">
+          <SvgFastCargo />
+        </span>
+        <span className="text-amber-500 tracking-tight whitespace-nowrap">Same-Day Shipping Until 15:55</span>
       </div>
-      <div className="flex flex-col items-center justify-end pl-6">
-        <div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="208.201"
-            height="51.144"
-            viewBox="0 0 208.201 51.144"
-            className="w-20"
-          >
-            <g transform="translate(-5578.964 -1353.189)">
-              <g>
-                <path
-                  d="M5627.222,1356.528c.746-1.275-.512-2.683-2.769-3.17-2.24-.48-4.7.114-5.531,1.348l-28.766,42.776c-1.621,2.416-.6,5.42,2.5,6.472,3.135,1.068,6.993-.244,8.519-2.86Z"
-                  fill="#0069b3"
-                />
-                <path
-                  d="M5580.32,1404.166a1.845,1.845,0,0,1-.911-2.994l16.334-22.482a2.877,2.877,0,0,0,0-3.488l-14.864-18.231c-.953-1.169.124-2.688,2.358-3.4,2.205-.708,4.778-.392,5.793.716L5604.1,1370.8a2.59,2.59,0,0,1,0,3.257l-19.781,28.8A3.673,3.673,0,0,1,5580.32,1404.166Z"
-                  fill="#0069b3"
-                />
-                <path
-                  d="M5646.964,1353.273a2.54,2.54,0,0,0-2.394.575l-25.607,19.435s-1.812,1.415.364,3.6l24.82,25.073c2.349,2.372,6.479,3.1,9.071,1.538,2.538-1.532,2.545-4.6.122-6.831l-25.555-23.508c-.943-.868-1.055-1.133-.085-1.905l20.695-16.509C5648.881,1354.263,5648.023,1353.491,5646.964,1353.273Z"
-                  fill="#ee7d00"
-                />
-              </g>
-              <g id="Group_92" data-name="Group 92">
-                <path
-                  d="M5733.009,1379.735a1.562,1.562,0,1,1-2.208,2.211l-5.733-5.733a1.562,1.562,0,0,1,0-2.212l5.733-5.733a1.561,1.561,0,0,1,2.208,2.208l-4.625,4.632Z"
-                  fill="#ee7d00"
-                />
-              </g>
-              <g id="Group_93" data-name="Group 93">
-                <path
-                  d="M5758.209,1369.363a1.564,1.564,0,0,1-1.565,1.561,4.185,4.185,0,0,0-4.18,4.184v5.742a1.563,1.563,0,0,1-3.125,0v-5.742a7.315,7.315,0,0,1,7.305-7.307A1.567,1.567,0,0,1,5758.209,1369.363Z"
-                  fill="#ee7d00"
-                />
-              </g>
-              <path
-                d="M5740.807,1367.8a7.305,7.305,0,1,0,4.2,13.277,1.56,1.56,0,0,0,3.1-.228v-5.742A7.313,7.313,0,0,0,5740.807,1367.8Zm0,11.485a4.181,4.181,0,1,1,4.176-4.178A4.181,4.181,0,0,1,5740.807,1379.286Z"
-                fill="#ee7d00"
-              />
-              <g id="Group_94" data-name="Group 94">
-                <path
-                  d="M5692.136,1369.363a1.563,1.563,0,0,1-1.563,1.561,4.188,4.188,0,0,0-4.182,4.184v5.742a1.561,1.561,0,1,1-3.121,0v-5.742a7.312,7.312,0,0,1,7.3-7.307A1.566,1.566,0,0,1,5692.136,1369.363Z"
-                  fill="#0069b3"
-                />
-              </g>
-              <path
-                d="M5680.413,1367.8a1.565,1.565,0,0,0-1.565,1.562v5.9a4.027,4.027,0,0,1-8.054,0v-5.9a1.563,1.563,0,0,0-3.126,0v5.9a7.156,7.156,0,0,0,14.311,0v-5.9A1.567,1.567,0,0,0,5680.413,1367.8Z"
-                fill="#0069b3"
-              />
-              <path
-                d="M5698.606,1367.8h-2.343v-2.59a1.56,1.56,0,0,0-3.12,0v15.639a1.56,1.56,0,1,0,3.12,0v-9.923h2.343a1.563,1.563,0,1,0,0-3.126Z"
-                fill="#0069b3"
-              />
-              <g>
-                <path
-                  d="M5703,1367.8a1.563,1.563,0,0,0-1.561,1.562v11.487a1.562,1.562,0,1,0,3.124,0v-11.487A1.564,1.564,0,0,0,5703,1367.8Z"
-                  fill="#0069b3"
-                />
-                <path d="M5703,1363.652a1.591,1.591,0,1,0,1.593,1.6A1.6,1.6,0,0,0,5703,1363.652Z" fill="#0069b3" />
-              </g>
-              <path
-                d="M5722.038,1367.8a1.561,1.561,0,0,0-1.56,1.562v11.487a1.562,1.562,0,1,0,3.123,0v-11.487A1.564,1.564,0,0,0,5722.038,1367.8Z"
-                fill="#0069b3"
-              />
-              <path d="M5720.44,1365.248a1.6,1.6,0,1,1,1.6,1.587A1.6,1.6,0,0,1,5720.44,1365.248Z" fill="#0069b3" />
-              <g>
-                <path
-                  d="M5716.329,1378.064a4.183,4.183,0,1,1,0-5.914,1.563,1.563,0,0,0,2.212-2.208,7.305,7.305,0,1,0-6.721,12.3c0,.057-.01.11-.01.169v1.56c0,.866,3.124.866,3.124,0v-1.56c0-.059,0-.112-.007-.169a7.288,7.288,0,0,0,3.614-1.975,1.561,1.561,0,0,0-2.212-2.2Z"
-                  fill="#0069b3"
-                />
-              </g>
-              <path
-                d="M5779.862,1367.8a7.305,7.305,0,1,0,7.3,7.307A7.312,7.312,0,0,0,5779.862,1367.8Zm0,11.485a4.181,4.181,0,1,1,4.181-4.178A4.184,4.184,0,0,1,5779.862,1379.286Z"
-                fill="#ee7d00"
-              />
-              <path
-                id="Path_163"
-                data-name="Path 163"
-                d="M5771.788,1383.467a7.228,7.228,0,0,1-7.153,7.307c-3.173,0-2.618-2.01-2.618-2.01a1.535,1.535,0,0,1,1.486-1.2c.3,0,.6.088,1.132.088a4.113,4.113,0,0,0,4.029-4.187v-2.376a7.228,7.228,0,0,1-4.184,1.321,7.305,7.305,0,1,1,7.307-7.3Zm-3.124-8.359a4.18,4.18,0,1,0-4.183,4.178A4.186,4.186,0,0,0,5768.664,1375.108Z"
-                fill="#ee7d00"
-              />
-              <path
-                d="M5659.166,1387.65a4.106,4.106,0,0,0,4.022-4.183l0-2.376a6.794,6.794,0,0,1-4.026,1.321,7.074,7.074,0,0,1-7.149-7.18v-5.869a1.56,1.56,0,1,1,3.12,0v5.869a4.025,4.025,0,1,0,8.051.028v-5.9a1.563,1.563,0,0,1,3.125,0v14.1a7.231,7.231,0,0,1-7.147,7.307c-3.177,0-2.621-2.01-2.621-2.01a1.536,1.536,0,0,1,1.482-1.2C5658.326,1387.562,5658.625,1387.65,5659.166,1387.65Z"
-                fill="#0069b3"
-              />
-              <path d="M5749.947,1390.787h0Z" fill="#0069b3" />
-            </g>
+      <div className={perkRowClass}>
+        <span className="w-5 h-5 mr-1 text-success" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+            <rect x="1" y="5" width="14" height="12" rx="1.5" />
+            <path d="M15 9h4l3 3v5h-7z" />
+            <circle cx="6" cy="19" r="1.6" />
+            <circle cx="18" cy="19" r="1.6" />
           </svg>
-        </div>
-        <div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="211.965"
-            height="40.819"
-            viewBox="0 0 211.965 40.819"
-            className="w-20"
-          >
-            <g transform="translate(-5575.541 -1437.568)">
-              <path
-                d="M5692.9,1459.741h-8.25v8.854s-.363,1.085-1.269,1.085c0,0-1.451,0-1.451-1.085v-10.752s1.179-6.415,7.072-3.524v-2.8s-9.52-3.885-14.687,5.06c0,0-3.627,7.409,2.356,13.011,0,0,2.539,2.711,7.979,2.711,0,0,4.9.181,8.25-2.44v-10.119Zm-40.525,12.288v-20.6h-5.893l-5.349,7.409-4.8-7.409h-6.256v20.691h2.9v-8.493l4.8,7.68,5.712-7.59v8.313Zm19.22-20.782H5668.6v8.584l-5.168-8.4H5654.1v20.51h2.811v-8.4l5.167,8.4h9.52v-20.691Z"
-                fill="#312782"
-                fillRule="evenodd"
-              />
-              <path
-                d="M5625.64,1468.108a13.8,13.8,0,0,0-1.088,1.174,172.749,172.749,0,0,1-25.294.9c-5.349,1.807-7.888.09-9.882-1.536-1.723-.091-3.446-.271-5.259-.362-1.269,1.627-3.807,1.627-7.525-.09-1.541-.633-1.36-1.265.363-2.078,1.36-.542,3.173-.633,6.89,0,.091.181.907.452.907.632,2.176.091,4.08.091,6.255.181,3.536-.271,4.533-3.072,2.992-5.963-1.178-2.169-2.81-2.982-3.717-5.873-2.538-7.59,5.621-8.855,9.338-17.529a2.269,2.269,0,0,1,.907,1.717,7.463,7.463,0,0,1-.454,4.246c-.181.543-.362,1.175-.544,1.807.544.362,1.27-.723,2.086-2.078.453,1.446.09,3.253-1.179,5.512.635-.452,1.269-.994,1.814-1.446.271,1.084-.273,2.62-1.36,4.7.725-.452,1.178-.723,1.994-1.175a6.942,6.942,0,0,1-1.451,3.614c.725-.271,1.27-.994,2-1.265a8.253,8.253,0,0,1-1.27,4.337c.635-.632.816-.452,1.542-1.084a6.931,6.931,0,0,1-.363,2.71c-.544.814-1.087.723-1,1.808.091.451.272.723.725.542,1.269-1.084,2.358-2.259,3.717-3.343,2.176-1.807,2.992-1.717,5.8-1.627,3.174.091,5.621,1.446,8.613,1.807-1.994,1.717-3.263,1.446-5.8,1.446a17.015,17.015,0,0,0,2,.633,6,6,0,0,1-3.989.632c.09.452,1.088.633,1.269.994a5.592,5.592,0,0,1-2.9.361c.181.452.453.9.634,1.446a3.468,3.468,0,0,1-2.81-.09,5.817,5.817,0,0,0,.363,1.174,11.955,11.955,0,0,1-5.259-.542,1.135,1.135,0,0,0,.091.542c.09,2.982,7.071,3.8,17.86,3.434l2.992-.271Z"
-                fill="#ee7d00"
-                fillRule="evenodd"
-              />
-              <path
-                d="M5697.336,1472.176v-20.748h6.232V1461.6l4.111-4.758h6.9l-5.835,5.682,6.63,9.648h-7.293l-3.447-5.418-1.062,1.057v4.361Zm30.234-6.872a12.291,12.291,0,0,1-2.387.793c-1.459.4-2.254.925-2.254,1.586a1.5,1.5,0,0,0,.4,1.057,2.249,2.249,0,0,0,1.327.4,2.766,2.766,0,0,0,3.049-3.04l-.132-.4v-.4Zm.663,6.872-.4-1.454a10.839,10.839,0,0,1-2.652,1.586,11.352,11.352,0,0,1-3.05.4,6.348,6.348,0,0,1-4.111-1.189,4.968,4.968,0,0,1-1.459-3.7,4.1,4.1,0,0,1,1.459-3.3,14.008,14.008,0,0,1,5.3-1.585l1.459-.133c1.857-.265,2.917-.661,2.917-1.586a1.339,1.339,0,0,0-.53-.925,5.216,5.216,0,0,0-1.724-.264,2.394,2.394,0,0,0-1.459.4c-.4.133-.53.529-.663,1.058h-5.967a4.164,4.164,0,0,1,2.122-3.833c1.459-.925,3.448-1.322,6.232-1.322a28.1,28.1,0,0,1,3.448.265,6.5,6.5,0,0,1,2.519,1.057,3.091,3.091,0,0,1,1.592,1.586c.132.4.265.661.4,1.189,0,.4.133.925.133,1.454v8.59a1.663,1.663,0,0,0,.133.793c.132.132.265.4.53.529v.4Zm9.149,0v-15.33h5.7v2.776a5.536,5.536,0,0,1,1.723-2.379,5.668,5.668,0,0,1,3.182-.793h.531v6.078h-.663l-.663-.131a4.385,4.385,0,0,0-2.785.925,3.712,3.712,0,0,0-.795,2.643v6.211Zm18.83-7.8a4.715,4.715,0,0,0,.663,2.775,1.882,1.882,0,0,0,1.857.925,2.1,2.1,0,0,0,1.989-.925,4.722,4.722,0,0,0,.663-2.775,3.8,3.8,0,0,0-.8-2.511,2.325,2.325,0,0,0-3.713,0,4.074,4.074,0,0,0-.663,2.511Zm-5.172,9.515h6.1a1.694,1.694,0,0,0,.53.793,3.943,3.943,0,0,0,1.327.264,2.4,2.4,0,0,0,1.856-.661,5.26,5.26,0,0,0,.531-2.643v-.792a4.807,4.807,0,0,1-1.989,1.057,6.451,6.451,0,0,1-2.387.4,6.166,6.166,0,0,1-5.039-2.115,7.8,7.8,0,0,1-1.989-5.682,8.987,8.987,0,0,1,1.856-5.815,5.648,5.648,0,0,1,4.907-2.246,7.163,7.163,0,0,1,2.917.528,5.658,5.658,0,0,1,2.121,1.851v-1.983h5.569v14.141c0,2.643-.662,4.625-1.988,5.682-1.326,1.19-3.581,1.718-6.763,1.718a10.168,10.168,0,0,1-5.3-1.189,4.9,4.9,0,0,1-2.255-3.3Zm25.063-9.383a5.73,5.73,0,0,0,.663,3.039,2.007,2.007,0,0,0,1.856.925,2.093,2.093,0,0,0,1.989-.925,7.3,7.3,0,0,0,0-6.078,2.093,2.093,0,0,0-1.989-.925,2.007,2.007,0,0,0-1.856.925,5.729,5.729,0,0,0-.663,3.039Zm-6.232,0a7.949,7.949,0,0,1,2.386-6.079c1.459-1.454,3.714-2.115,6.365-2.115a9.168,9.168,0,0,1,6.5,2.115,8.939,8.939,0,0,1,0,12.159,9.172,9.172,0,0,1-6.5,2.114,9.045,9.045,0,0,1-6.365-2.114,7.951,7.951,0,0,1-2.386-6.08Z"
-                fill="#ee7d00"
-                fillRule="evenodd"
-              />
-            </g>
+        </span>
+        <span className="text-success">Free Shipping Over $500</span>
+      </div>
+      <div className={perkRowClass}>
+        <span className="w-5 h-5 mr-1 text-brand-600" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+            <path d="M21 8.5 12 3 3 8.5" />
+            <path d="M3.5 8.5h17V19a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 19Z" />
+            <path d="M9.5 20.5v-6h5v6" />
           </svg>
-        </div>
+        </span>
+        <span className="text-ink-soft">Min. $100</span>
+      </div>
+      <div className="flex items-center justify-end">
+        <span className="bg-canvas rounded-pill px-3 py-1 text-xs text-ink-soft">Secure payment</span>
       </div>
     </div>
   </div>

@@ -13,18 +13,13 @@ export enum SETTINGS_TABS {
 
 const Tabmenu: FC<any> = ({ activeTab, setActiveTab }) => {
   return (
-    <div className="grid grid-cols-2 xl:grid-cols-4 xl:border xl:border-[#00b2b265] rounded-[1.3rem] gap-2 p-2 w-full">
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-4 w-full">
       <TabItem
         text={"Account Information"}
         icon={<SvgMembership />}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         tab={SETTINGS_TABS.PROFILE}
-        style={{
-          text: "text-[#ea5b0c]",
-          bgColor: "bg-[#ea5b0c]",
-          hoverBG: "group-hover:bg-[#ea5b0c] xl:border-transparent border border-[#ea5b0c80]",
-        }}
       />
       <TabItem
         text={"Password Settings"}
@@ -32,11 +27,6 @@ const Tabmenu: FC<any> = ({ activeTab, setActiveTab }) => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         tab={SETTINGS_TABS.PASSWORD}
-        style={{
-          text: "text-[#F9B000]",
-          bgColor: "bg-[#F9B000]",
-          hoverBG: "group-hover:bg-[#F9B000] xl:border-transparent border border-[#F9B00080]",
-        }}
       />
       <TabItem
         text={"Delivery & Invoice Information"}
@@ -44,11 +34,6 @@ const Tabmenu: FC<any> = ({ activeTab, setActiveTab }) => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         tab={SETTINGS_TABS.ADDRESSRECEIPT}
-        style={{
-          text: "text-[#00ACE9]",
-          bgColor: "bg-[#00ACE9]",
-          hoverBG: "group-hover:bg-[#00ACE9] xl:border-transparent border border-[#00ACE980]",
-        }}
       />
       <TabItem
         text={"Sales Information"}
@@ -56,11 +41,6 @@ const Tabmenu: FC<any> = ({ activeTab, setActiveTab }) => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         tab={SETTINGS_TABS.SALESINFO}
-        style={{
-          text: "text-[#4CBEC5]",
-          bgColor: "bg-[#4CBEC5]",
-          hoverBG: "group-hover:bg-[#4CBEC5] xl:border-transparent border border-[#4CBEC580]",
-        }}
       />
       <TabItem
         text={"Shipping Information"}
@@ -68,11 +48,6 @@ const Tabmenu: FC<any> = ({ activeTab, setActiveTab }) => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         tab={SETTINGS_TABS.SHIPMENT}
-        style={{
-          text: "text-[#86bc25]",
-          bgColor: "bg-[#86bc25]",
-          hoverBG: "group-hover:bg-[#86bc25] xl:border-transparent border border-[#86bc2580]",
-        }}
       />
       <TabItem
         text={"Sales Rules"}
@@ -80,11 +55,6 @@ const Tabmenu: FC<any> = ({ activeTab, setActiveTab }) => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         tab={SETTINGS_TABS.SALESRULES}
-        style={{
-          text: "text-[#5E4F9C]",
-          bgColor: "bg-[#5E4F9C]",
-          hoverBG: "group-hover:bg-[#5E4F9C] xl:border-transparent border border-[#5E4F9C80]",
-        }}
       />
       <TabItem
         text={"Notification Settings"}
@@ -92,20 +62,7 @@ const Tabmenu: FC<any> = ({ activeTab, setActiveTab }) => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         tab={SETTINGS_TABS.NOTIFICATION}
-        style={{
-          text: "text-[#E94190]",
-          bgColor: "bg-[#E94190]",
-          hoverBG: "group-hover:bg-[#E94190] xl:border-transparent border border-[#E9419080]",
-        }}
       />
-
-      {/* Temporary tailwind color codes - Do not delete */}
-      <div className="hidden hover:bg-[#f9b000]"></div>
-      <div className="hidden hover:bg-[#00ace9]"></div>
-      <div className="hidden hover:bg-[#4cbec5]"></div>
-      <div className="hidden hover:bg-[#86bc25]"></div>
-      <div className="hidden hover:bg-[#5e4f9c]"></div>
-      <div className="hidden hover:bg-[#E94190]"></div>
     </div>
   );
 };

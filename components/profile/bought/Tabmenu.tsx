@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from "react";
+import { FC } from "react";
 import {
   SvgCanceledOrReturnedShops,
   SvgCompletedShops,
@@ -19,7 +19,7 @@ enum BOUGHT_TABS {
 }
 
 interface TebMenuProps {
-  setActiveTab: Dispatch<SetStateAction<BOUGHT_TABS>>;
+  setActiveTab: (tab: BOUGHT_TABS) => void;
   activeTab: BOUGHT_TABS;
 }
 
@@ -34,7 +34,7 @@ const Tabs = {
 
 const Tabmenu: FC<TebMenuProps> = ({ setActiveTab, activeTab }) => {
   return (
-    <div className="grid grid-cols-2 gap-2 xl:grid-cols-4 xl:p-[0.25rem] rounded-[1.3rem] border-transparent xl:border xl:border-[#00b2b265] w-full">
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-6 w-full">
       <TabItemWithNumbers
         text={"To Be Shipped"}
         icon={<SvgWillBeShipped />}
@@ -42,12 +42,6 @@ const Tabmenu: FC<TebMenuProps> = ({ setActiveTab, activeTab }) => {
         tab={BOUGHT_TABS.WillBeShipped}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        style={{
-          icon: "text-[#E94190]",
-          text: "text-[#E94190]",
-          bgColor: "bg-[#E94190]",
-          hoverBG: "group-hover:bg-[#E94190] xl:border-transparent border border-[#E9419080]",
-        }}
       />
       <TabItemWithNumbers
         text={"Shipped"}
@@ -56,12 +50,6 @@ const Tabmenu: FC<TebMenuProps> = ({ setActiveTab, activeTab }) => {
         tab={BOUGHT_TABS.Shipped}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        style={{
-          icon: "text-[#86BC25]",
-          text: "text-[#86BC25]",
-          bgColor: "bg-[#86BC25]",
-          hoverBG: "group-hover:bg-[#86BC25] xl:border-transparent border border-[#86BC2580]",
-        }}
       />
       <TabItemWithNumbers
         text={"Waiting Approval"}
@@ -70,12 +58,6 @@ const Tabmenu: FC<TebMenuProps> = ({ setActiveTab, activeTab }) => {
         tab={BOUGHT_TABS.WaitingApproval}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        style={{
-          icon: "text-[#FF792E]",
-          text: "text-[#FF792E]",
-          bgColor: "bg-[#FF792E]",
-          hoverBG: "group-hover:bg-[#FF792E] xl:border-transparent border border-[#FF792E80]",
-        }}
       />
       <TabItemWithNumbers
         text={"Received"}
@@ -84,14 +66,7 @@ const Tabmenu: FC<TebMenuProps> = ({ setActiveTab, activeTab }) => {
         tab={BOUGHT_TABS.ReceivedShipment}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        style={{
-          icon: "text-[#00ACE9]",
-          text: "text-[#00ACE9]",
-          bgColor: "bg-[#00ACE9]",
-          hoverBG: "group-hover:bg-[#00ACE9] xl:border-transparent border border-[#00ACE980]",
-        }}
       />
-
       <TabItemWithNumbers
         text={"Completed"}
         icon={<SvgCompletedShops />}
@@ -99,14 +74,7 @@ const Tabmenu: FC<TebMenuProps> = ({ setActiveTab, activeTab }) => {
         tab={BOUGHT_TABS.CompletedShops}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        style={{
-          icon: "text-[#4CBEC5]",
-          text: "text-[#4CBEC5]",
-          bgColor: "bg-[#4CBEC5]",
-          hoverBG: "group-hover:bg-[#4CBEC5] xl:border-transparent border border-[#4CBEC580]",
-        }}
       />
-
       <TabItemWithNumbers
         text={"Cancellations & Returns"}
         icon={<SvgCanceledOrReturnedShops />}
@@ -114,12 +82,6 @@ const Tabmenu: FC<TebMenuProps> = ({ setActiveTab, activeTab }) => {
         tab={BOUGHT_TABS.CanceledOrReturnedShops}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        style={{
-          icon: "text-[#E8336E]",
-          text: "text-[#E8336E]",
-          bgColor: "bg-[#E8336E]",
-          hoverBG: "group-hover:bg-[#E8336E] xl:border-transparent border border-[#E8336E80]",
-        }}
       />
     </div>
   );

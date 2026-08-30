@@ -10,12 +10,10 @@ import { NavbarDropboxIcon, SvgSmartBasket } from "../../../helpers/svgs/navbarS
 import { useRouter } from "next/router";
 import TopCategories from "../../home/TopCategories";
 
-// TODO Tradlia logo is directly inside Link as Image, this should be Link > A > Image.
 const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { asPath } = useRouter();
-  const condition = !asPath.includes("/profile");
   const router = useRouter();
+  const condition = !router.asPath.includes("/profile");
 
   useEffect(() => {
     if (condition) {
@@ -27,12 +25,15 @@ const Navbar: FC = () => {
 
   return (
     <>
-      <nav className="flex-col hidden w-full bg-white xl:flex">
-        <div className="container py-5 mx-auto">
-          <div className="grid grid-cols-6 gap-5">
+      <nav className="hidden flex-col w-full bg-surface border-b border-line xl:flex">
+        <div className="container py-4 mx-auto">
+          <div className="grid grid-cols-6 gap-5 items-center">
             <div className="relative flex w-11/12 col-span-1">
-              <Link href="/">
-                {/* Here an A tag should wrap the Image tag */}
+              <Link
+                href="/"
+                aria-label="Tradlia home"
+                className="relative block h-10 w-32 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+              >
                 <Image
                   src={"/images/navbar/tradlia.svg"}
                   className="left-0 object-contain cursor-pointer"
@@ -44,25 +45,19 @@ const Navbar: FC = () => {
             </div>
             <div className="grid items-center grid-cols-12 col-span-4 gap-12 pl-5">
               {!condition && (
-                <div
-                  className="flex items-center justify-center w-full col-span-3 gap-2 cursor-pointer select-none group"
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
                   onClick={() => setIsOpen((pre: boolean) => !pre)}
+                  className={`flex items-center justify-center w-full col-span-3 gap-2 cursor-pointer select-none rounded-card px-2 py-1.5 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
+                    isOpen ? "text-brand-600" : "text-ink-soft"
+                  }`}
                 >
-                  <div
-                    className={`w-7 h-7 group-hover:text-[#5327A8] text-[#7E8096] transition ease-in-out duration-200 ${
-                      isOpen && "text-[#5327A8]"
-                    }`}
-                  >
+                  <div className="w-7 h-7 shrink-0">
                     <SvgCategory isOpen={isOpen} />
                   </div>
-                  <h3
-                    className={`font-bold text-[#7E8096] text-lg group-hover:text-[#5327A8] transition ease-in-out duration-200 ${
-                      isOpen && "text-[#5327A8]"
-                    }`}
-                  >
-                    Categories
-                  </h3>
-                </div>
+                  <h3 className="font-semibold text-base">Categories</h3>
+                </button>
               )}
               <div className={`flex items-center w-full ${condition ? "col-span-5" : "col-start-4 col-span-8"}`}>
                 <SearchInput />
@@ -71,27 +66,30 @@ const Navbar: FC = () => {
                 <>
                   <Link
                     href="/profile/adverts"
-                    className="bg-gradient-to-r from-[#FFBE00] col-span-3 to-[#FF7B03] text-white px-5 h-10 text-sm rounded-full whitespace-nowrap flex items-center justify-center">
-                    
-                      Add Free Listing
-                    
+                    className="col-span-3 inline-flex items-center justify-center h-10 px-5 text-sm font-semibold whitespace-nowrap rounded-pill bg-amber-400 text-ink transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-amber-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+                  >
+                    Add Free Listing
                   </Link>
                   <Link
                     href="/basket/smart"
-                    className="flex items-center col-span-3 justify-center gap-2 bg-gradient-to-r h-10 from-[#FF516B] to-[#FF0045] text-sm text-white px-5 py-2 rounded-full whitespace-nowrap">
-
+                    className="col-span-3 inline-flex items-center justify-center gap-2 h-10 px-5 py-2 text-sm font-medium whitespace-nowrap rounded-pill border border-line text-ink transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-400 hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+                  >
                     <div className="w-6 h-6">
                       <SvgSmartBasket />
-                    </div>Smart Basket
-                                        
+                    </div>
+                    Smart Basket
                   </Link>
                 </>
               )}
             </div>
             <div className="flex items-center justify-end w-full col-span-1 gap-4">
-              <div className="w-[26px] h-[26px] mt-1 cursor-pointer" onClick={() => router.push("/product")}>
+              <Link
+                href="/product"
+                aria-label="Browse all products"
+                className="flex items-center justify-center w-[26px] h-[26px] mt-1 cursor-pointer text-ink-soft transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 rounded-full"
+              >
                 <NavbarDropboxIcon />
-              </div>
+              </Link>
               <Notification />
               <Messages />
               <BasketDropdown />
@@ -107,7 +105,7 @@ const Navbar: FC = () => {
 };
 
 const SvgCategory: FC<any> = ({ isOpen }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 56 56">
+  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 56 56" aria-hidden="true">
     <g id="Group_895" data-name="Group 895" transform="translate(-4285.842 -86.318)">
       <g id="Group_894" data-name="Group 894">
         <ellipse
@@ -118,8 +116,8 @@ const SvgCategory: FC<any> = ({ isOpen }) => (
           rx="10.888"
           ry="10.743"
           transform="translate(4287.342 87.818)"
-          fill={`${isOpen ? "#5327A8" : "none"}`}
-          stroke={`${isOpen ? "#5327A8" : "currentColor"}`}
+          fill={`${isOpen ? "currentColor" : "none"}`}
+          stroke="currentColor"
           strokeMiterlimit="10"
           strokeWidth="3"
         />
@@ -131,8 +129,8 @@ const SvgCategory: FC<any> = ({ isOpen }) => (
           rx="10.888"
           ry="10.743"
           transform="translate(4318.565 87.818)"
-          fill={`${isOpen ? "#5327A8" : "none"}`}
-          stroke={`${isOpen ? "#5327A8" : "currentColor"}`}
+          fill={`${isOpen ? "currentColor" : "none"}`}
+          stroke="currentColor"
           strokeMiterlimit="10"
           strokeWidth="3"
         />
@@ -144,8 +142,8 @@ const SvgCategory: FC<any> = ({ isOpen }) => (
           rx="10.888"
           ry="10.743"
           transform="translate(4287.342 119.332)"
-          fill={`${isOpen ? "#5327A8" : "none"}`}
-          stroke={`${isOpen ? "#5327A8" : "currentColor"}`}
+          fill={`${isOpen ? "currentColor" : "none"}`}
+          stroke="currentColor"
           strokeMiterlimit="10"
           strokeWidth="3"
         />
@@ -157,8 +155,8 @@ const SvgCategory: FC<any> = ({ isOpen }) => (
           rx="10.888"
           ry="10.743"
           transform="translate(4318.565 119.332)"
-          fill={`${isOpen ? "#5327A8" : "none"}`}
-          stroke={`${isOpen ? "#5327A8" : "currentColor"}`}
+          fill={`${isOpen ? "currentColor" : "none"}`}
+          stroke="currentColor"
           strokeMiterlimit="10"
           strokeWidth="3"
         />
@@ -166,7 +164,5 @@ const SvgCategory: FC<any> = ({ isOpen }) => (
     </g>
   </svg>
 );
-
-// TODO Turkish character causes build error
 
 export default Navbar;

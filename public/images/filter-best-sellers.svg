@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Best Sellers - Trophy -->
+  <circle cx="50" cy="50" r="45" fill="#fff0f0" stroke="#FF516B" stroke-width="3"/>
+  <path d="M50 20 L50 45 M35 35 L65 35" stroke="#FF516B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M30 45 Q30 25 50 20 Q70 25 70 45" stroke="#FF516B" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M35 45 L35 65 M65 45 L65 65" stroke="#FF516B" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="50" cy="68" rx="20" ry="5" fill="#ffe0e0" stroke="#FF516B" stroke-width="2"/>
+</svg>

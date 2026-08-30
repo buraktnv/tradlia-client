@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+  <linearGradient id="g-boxes-prod-01" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66c1bf"/><stop offset="1" stop-color="#00a29d"/></linearGradient>
+  </defs>
+  
+  <ellipse cx="200" cy="352" rx="130" ry="20" fill="#000" opacity="0.14"/>
+  <rect x="108" y="236" width="184" height="108" rx="12" fill="url(#g-boxes-prod-01)"/>
+  <line x1="200" y1="236" x2="200" y2="344" stroke="#ffffff" stroke-width="5" opacity="0.3"/>
+  <rect x="192" y="236" width="16" height="108" fill="#ffffff" opacity="0.25"/>
+  <rect x="128" y="286" width="64" height="34" rx="6" fill="#ffffff" opacity="0.92"/>
+  <rect x="138" y="296" width="44" height="7" rx="3.5" fill="#c9ccd4"/>
+  <rect x="138" y="308" width="28" height="7" rx="3.5" fill="#e4e6ea"/>
+  <rect x="126" y="142" width="148" height="100" rx="12" fill="url(#g-boxes-prod-01)"/>
+  <line x1="200" y1="142" x2="200" y2="242" stroke="#ffffff" stroke-width="5" opacity="0.3"/>
+  <rect x="193" y="142" width="14" height="100" fill="#ffffff" opacity="0.25"/>
+  <rect x="144" y="176" width="52" height="28" rx="6" fill="#ffffff" opacity="0.92"/>
+  <rect x="152" y="186" width="36" height="8" rx="4" fill="#c9ccd4"/>
+
+</svg>

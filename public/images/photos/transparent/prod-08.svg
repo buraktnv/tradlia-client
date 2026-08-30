@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+  <linearGradient id="g-gloves-prod-08" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66c1bf"/><stop offset="1" stop-color="#00a29d"/></linearGradient>
+  </defs>
+  
+  <ellipse cx="200" cy="345" rx="120" ry="20" fill="#000" opacity="0.14"/>
+  <rect x="140" y="90" width="120" height="250" rx="12" fill="url(#g-gloves-prod-08)"/>
+  <rect x="156" y="110" width="88" height="14" rx="6" fill="#ffffff" opacity="0.9"/>
+  <path d="M170 140 L230 140 L230 320 L170 320 Z" fill="#ffffff" opacity="0.9"/>
+  <path d="M182 170 Q188 150 194 170 L194 260 Q188 280 182 260 Z" fill="#e8eaef"/>
+  <path d="M198 170 Q204 150 210 170 L210 260 Q204 280 198 260 Z" fill="#e8eaef"/>
+  <rect x="162" y="300" width="76" height="10" rx="5" fill="#c9ccd4"/>
+
+</svg>

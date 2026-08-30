@@ -9,7 +9,7 @@ const ShipmentModal: FC<any> = ({ setModal, content }) => {
   return (
     <div className="absolute md:fixed top-0 bottom-0 left-0 right-0 z-[999999] w-full h-full">
       <div
-        className={`bg-[#000000be] fixed top-0 bottom-0 left-0 right-0 transition-opacity duration-300 ease-in-out ${
+        className={`bg-ink/60 backdrop-blur-sm fixed top-0 bottom-0 left-0 right-0 transition-opacity duration-300 ease-in-out ${
           fade ? "opacity-100" : "opacity-0"
         }`}
         onClick={() => {
@@ -19,14 +19,14 @@ const ShipmentModal: FC<any> = ({ setModal, content }) => {
       ></div>
       <div className="flex justify-center w-full my-8 h-max">
         <div
-          className={`w-full mx-5 my-6 xl:my-0 xl:mx-0 xl:w-[43.75%] bg-[#F4F5F7] rounded-3xl px-3 py-8 z-10 transition-all duration-300 ease-in-out xl:p-[2rem] ${
+          className={`w-full mx-5 my-6 xl:my-0 xl:mx-0 xl:w-[43.75%] rounded-card border border-line bg-surface shadow-card px-3 py-8 z-10 transition-all duration-300 ease-in-out xl:p-[2rem] ${
             fade ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
           }`}
         >
-          <p className="border border-[#00ACE9] text-[#00ACE9] text-center rounded-full py-2 xl:py-3">
+          <p className="border border-brand-300 text-brand-600 text-center rounded-full py-2 xl:py-3">
             {content.subject}
           </p>
-          <form className="mt-3 text-[#A0A2AF] flex flex-col gap-3 xl:gap-[1.5rem] mb-2">
+          <form className="mt-3 text-ink-muted flex flex-col gap-3 xl:gap-[1.5rem] mb-2">
             <TextInput
               content={{
                 id: 0,

@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import * as U from "../../../helpers/urls";
 import * as Icon from "../../../helpers/svgs/profileSidebar";
@@ -7,7 +8,6 @@ import {
   SvgHome2,
   SvgMail,
   SvgPlus,
-  SvgProfile,
   SvgPhone,
   SvgWhatsapp,
 } from "../../../helpers/svgs/navbarSvg";
@@ -15,6 +15,14 @@ import {
 const profileMenuList = [
   {
     id: 1,
+    url: U.URL_PROFILE_ADVERTS,
+    icon: <Icon.SvgAnnounce />,
+    text: "My Listings",
+    submenu: true,
+    subItems: ["Add New", "Bulk Add Listings", "Published", "Unpublished", "Pending Approval"],
+  },
+  {
+    id: 2,
     url: U.URL_PROFILE_ORDERS_BOUGHT,
     icon: <Icon.SvgOrder />,
     text: "My Orders",
@@ -29,7 +37,7 @@ const profileMenuList = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     url: U.URL_PROFILE_ORDERS_SOLD,
     icon: <Icon.SvgOrder />,
     text: "My Sales",
@@ -44,14 +52,6 @@ const profileMenuList = [
       "Cancellations & Returns",
       "Problematic Orders",
     ],
-  },
-  {
-    id: 3,
-    url: U.URL_PROFILE_ADVERTS,
-    icon: <Icon.SvgAnnounce />,
-    text: "My Listings",
-    submenu: true,
-    subItems: ["Add New", "Bulk Add Listings", "Published", "Unpublished", "Pending Approval"],
   },
   { id: 4, url: U.URL_PROFILE_FEEDBACK, icon: <Icon.SvgOk />, text: "Ratings & Reviews", submenu: false, subItems: [] },
   { id: 5, url: U.URL_PROFILE_MESSAGES, icon: <Icon.SvgMessage />, text: "My Messages", submenu: false, subItems: [] },
@@ -112,52 +112,53 @@ const ProfileNavigation: FC<any> = ({ setIsProfileDropdownShown }) => {
   const router = useRouter();
   return (
     <>
-      <div className="fixed z-[999] inset-0 bg-gray-200 h-screen w-screen">
+      <div className="fixed z-[999] inset-0 bg-canvas h-screen w-screen">
         <div className="flex flex-col w-full h-full">
-          <div className="relative flex flex-col h-32 py-7 w-full bg-[#5327A8] rounded-b-[2rem] p-2 pb-[4.5rem]">
+          <div className="relative flex flex-col h-32 py-7 w-full bg-ink rounded-b-card p-2 pb-[4.5rem]">
             <div className="flex items-center px-4">
               <span
-                className="relative w-8 h-8 p-1 mx-3 rounded-full fill-gray-600 bg-gray-50 "
-                onClick={() => setIsProfileDropdownShown(true)}
+                className="relative w-8 h-8 mx-3 rounded-full overflow-hidden border border-surface/20"
+                aria-hidden="true"
               >
-                <SvgProfile />
+                <Image src={"/images/navbar/iconPersonal.svg"} fill sizes="32px" alt="" />
               </span>
-              <span className="text-lg font-medium text-white ">John Miller</span>
+              <span className="text-lg font-display font-semibold text-surface">John Miller</span>
             </div>
             <div className="flex items-center mx-[20%] gap-4 pt-3">
               <div className="flex flex-col items-center justify-center">
-                <span className="w-6 h-6" onClick={() => setIsProfileDropdownShown(true)}>
+                <span className="w-6 h-6 text-brand-300" onClick={() => setIsProfileDropdownShown(true)}>
                   <SvgExit />
                 </span>
-                <span className="text-[#F2F2F2] font-medium text-xs">Phone</span>
+                <span className="text-surface/70 font-medium text-xs">Phone</span>
               </div>
               <div className="flex flex-col items-center justify-center">
-                <span className="w-6 h-6" onClick={() => setIsProfileDropdownShown(true)}>
+                <span className="w-6 h-6 text-brand-300" onClick={() => setIsProfileDropdownShown(true)}>
                   <SvgMail />
                 </span>
-                <span className="text-[#F2F2F2] font-medium text-xs">WhatsApp</span>
+                <span className="text-surface/70 font-medium text-xs">WhatsApp</span>
               </div>
               <div className="flex flex-col items-center justify-center">
-                <span className="w-6 h-6" onClick={() => setIsProfileDropdownShown(true)}>
+                <span className="w-6 h-6 text-brand-300" onClick={() => setIsProfileDropdownShown(true)}>
                   <SvgWhatsapp />
                 </span>
-                <span className="text-[#F2F2F2] font-medium text-xs">Email</span>
+                <span className="text-surface/70 font-medium text-xs">Email</span>
               </div>
               <div className="flex flex-col items-center justify-center">
-                <span className="w-6 h-6" onClick={() => setIsProfileDropdownShown(true)}>
+                <span className="w-6 h-6 text-brand-300" onClick={() => setIsProfileDropdownShown(true)}>
                   <SvgPhone />
                 </span>
-                <span className="text-[#F2F2F2] font-medium text-xs">Logout</span>
+                <span className="text-surface/70 font-medium text-xs">Logout</span>
               </div>
             </div>
             <div className="rightSide right-4 top-[50px] absolute flex flex-col h-full items-center justify-center gap-1">
-              <button type="button" onClick={() => setIsProfileDropdownShown(false)}>
-                <span>
+              <button type="button" aria-label="Close menu" onClick={() => setIsProfileDropdownShown(false)} className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 rounded-full">
+                <span className="text-surface">
                   <SvgHome2 />
                 </span>
               </button>
               <button type="button"
-                className="w-14 h-14 mt-1 relative fill-gray-600 mx-3 bg-gray-50 border border-[#4CBEC5] rounded-full p-1"
+                aria-label="Close menu"
+                className="w-14 h-14 mt-1 relative fill-ink-soft mx-3 bg-surface border border-line rounded-full p-1 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
                 onClick={() => setIsProfileDropdownShown(false)}
               >
                 <span className="absolute w-5 h-5 right-4 top-4">
@@ -168,9 +169,9 @@ const ProfileNavigation: FC<any> = ({ setIsProfileDropdownShown }) => {
           </div>
           <div className="flex w-full h-full overflow-y-auto">
             {!selectedCategory ? (
-              <div className="flex flex-col px-10 py-6">
-                <button type="button" className="flex items-center justify-start invisible w-full py-2">
-                  <span className="font-semibold text-[#00A29D] ml-8 transform rotate-180">
+              <div className="flex flex-col px-10 py-6 w-full">
+                <button type="button" className="flex items-center justify-start invisible w-full py-2" tabIndex={-1} aria-hidden="true">
+                  <span className="font-semibold text-brand-600 ml-8 transform rotate-180">
                     <SvgArrow />
                   </span>
                 </button>
@@ -188,23 +189,23 @@ const ProfileNavigation: FC<any> = ({ setIsProfileDropdownShown }) => {
                 ))}
               </div>
             ) : (
-              <div className="flex flex-col px-10 py-6">
-                <button type="button" className="flex items-center justify-start w-full py-2" onClick={() => setSelectedCategory(0)}>
-                  <span className="font-semibold text-[#00A29D] ml-8 transform rotate-180">
+              <div className="flex flex-col px-10 py-6 w-full">
+                <button type="button" aria-label="Back to menu" className="flex items-center justify-start w-full py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 rounded-card" onClick={() => setSelectedCategory(0)}>
+                  <span className="font-semibold text-brand-600 ml-8 transform rotate-180">
                     <SvgArrow />
                   </span>
                 </button>
 
-                <button type="button" className="relative flex items-center w-full py-1 mt-2 mb-4">
+                <button type="button" className="relative flex items-center w-full py-1 mt-2 mb-4 rounded-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1">
                   {profileMenuList
                     .filter((el) => el.id === selectedCategory)
                     .map((el) => (
-                      <span className="h-6 w-6 fill-[#4CBEC5]" key={el.id}>
+                      <span className="h-6 w-6 text-brand-600" key={el.id}>
                         {el.icon}
                       </span>
                     ))}
 
-                  <span className="text-left mx-2 font-medium text-[#7E8096]">
+                  <span className="text-left mx-2 font-medium font-display text-ink">
                     {profileMenuList.filter((el) => el.id === selectedCategory)[0]?.text}
                   </span>
                 </button>
@@ -212,14 +213,14 @@ const ProfileNavigation: FC<any> = ({ setIsProfileDropdownShown }) => {
                   .filter((el) => el.id === selectedCategory)[0]
                   .subItems.map((el) => (
                     <button type="button"
-                      className="flex items-center w-full py-1"
+                      className="group flex items-center w-full py-1 rounded-card text-left transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
                       key={el}
                       onClick={() => {
                         setIsProfileDropdownShown(false);
                         router.push(profileMenuList.filter((el) => el.id === selectedCategory)[0]?.url);
                       }}
                     >
-                      <span className="mr-2 ml-8 text-left font-base text-[#7E8096]">{el}</span>
+                      <span className="mr-2 ml-8 text-left font-base text-ink-soft group-hover:text-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none">{el}</span>
                     </button>
                   ))}
               </div>
@@ -247,20 +248,20 @@ const SingleLinkItem: FC<any> = ({ id, url, icon, text, setIsProfileDropdownShow
     <div className="flex flex-col">
       <button type="button" onClick={handleClick}>
         <div
-          className={`flex items-center w-full py-2 ${
-            activePath === url ? "border-[#4CBEC59c]" : "border-transparent hover:border-[#4CBEC59c]"
+          className={`group flex items-center w-full px-3 py-2 rounded-card transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none ${
+            activePath === url ? "bg-brand-100" : "hover:bg-brand-50"
           }`}
         >
-          <span className={`h-6 w-6 fill-[url(#linear-gradient)] `}>{icon}</span>
+          <span className={`h-6 w-6 ${activePath === url ? "text-brand-700" : "text-ink-soft group-hover:text-brand-600"} transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none`}>{icon}</span>
           <h1
-            className={`mx-2 text-left font-medium ${
-              activePath === url ? "text-[#4CBEC5]" : "text-[#7E8096] group-hover:text-[#4CBEC5]"
+            className={`mx-2 text-left font-medium transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none ${
+              activePath === url ? "text-brand-700" : "text-ink-soft group-hover:text-brand-600"
             }`}
           >
             {text}
           </h1>
 
-          <span className={`ml-auto w-3 h-3 text-2xl font-medium text-[#7E8096] ${submenu ? " " : "invisible"}`}>
+          <span className={`ml-auto w-3 h-3 text-2xl font-medium text-ink-muted ${submenu ? " " : "invisible"}`}>
             <SvgPlus />
           </span>
         </div>
@@ -270,7 +271,7 @@ const SingleLinkItem: FC<any> = ({ id, url, icon, text, setIsProfileDropdownShow
 };
 
 const SvgArrow = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 7.884 13.488">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 7.884 13.488" aria-hidden="true">
     <g transform="translate(-320.157 -845.824)">
       <path
         id="Path_34"

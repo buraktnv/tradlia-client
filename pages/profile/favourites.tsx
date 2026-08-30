@@ -6,13 +6,15 @@ import DateDropdown from "../../components/profile/feedback/DateDropdown";
 import FilterDropdown from "../../components/profile/feedback/FilterDropdown";
 import { ProfileLayout } from "../../components/profile/ProfileLayout";
 import { SvgFilterTabIcon1, SvgFilterTabIcon2, SvgSearch } from "../../helpers/svgs/favoriteSvg";
+import useLocalStorage from "../../helpers/hooks/useLocalStorage";
+import { HIRE_ME_COPY } from "../../helpers/config";
 
 const items: any = [
   {
     id: 1,
-    name: "VitaPlus Healing Cream",
-    brand: "Cream 40 ml ",
-    image: "/images/photos/VitaPlus Healing Cream.svg",
+    name: "StackSafe Double-Wall Boxes",
+    brand: "50 pcs ",
+    image: "/images/photos/product-1.svg",
     price: 18.5,
     shipping: 0,
     advertCount: 250,
@@ -20,9 +22,9 @@ const items: any = [
   },
   {
     id: 2,
-    name: "GentleCare Baby",
-    brand: "Tear-Free Shampoo 200 ml",
-    image: "/images/photos/GentleCare Baby.svg",
+    name: "ClearOffice A4 Paper",
+    brand: "500 Sheets 80 gsm",
+    image: "/images/photos/product-15.svg",
     price: 36.5,
     shipping: 1,
     advertCount: 250,
@@ -30,9 +32,9 @@ const items: any = [
   },
   {
     id: 3,
-    name: "Bo Hui Digital Non-contact",
-    brand: "Thermometer",
-    image: "/images/photos/thermometer.svg",
+    name: "MultiCheck Digital TRMS",
+    brand: "Multimeter",
+    image: "/images/photos/product-14.svg",
     price: 23.5,
     shipping: 0,
     advertCount: 250,
@@ -41,7 +43,7 @@ const items: any = [
   {
     id: 4,
     name: "PureSafe 3-Layer Black",
-    brand: "Surgical Mask with Nose Wire 50 pcs",
+    brand: "Dust Mask FFP2 Nose Wire 50 pcs",
     image: "/images/photos/product-2.svg",
     price: 45.5,
     shipping: 1,
@@ -50,9 +52,9 @@ const items: any = [
   },
   {
     id: 5,
-    name: "Oxygenated Water",
-    brand: "100 ml",
-    image: "/images/photos/Oxygenated Water.svg",
+    name: "GripTight Pallet Wrap",
+    brand: "20 µm Roll",
+    image: "/images/photos/product-2.svg",
     price: 4.25,
     shipping: 0,
     advertCount: 250,
@@ -60,9 +62,9 @@ const items: any = [
   },
   {
     id: 6,
-    name: "StrepNaz Orange & ",
-    brand: "Echinacea 24 Lozenges",
-    image: "/images/photos/StrepNaz Herbal.svg",
+    name: "TorqueMax Wood Screws ",
+    brand: "4×40 (500 Count)",
+    image: "/images/photos/product-3.svg",
     price: 8.44,
     shipping: 0,
     advertCount: 250,
@@ -70,8 +72,8 @@ const items: any = [
   },
   {
     id: 7,
-    name: "ThroatEase Lozenges",
-    brand: "Honey-Lemon Flavored 24 Lozenges",
+    name: "WriteWell Gel Pens",
+    brand: "Blue 0.7 mm 10 pcs",
     image: "/images/photos/product-4.svg",
     price: 24.69,
     shipping: 0,
@@ -80,9 +82,9 @@ const items: any = [
   },
   {
     id: 8,
-    name: "Utalk Powder",
-    brand: "100 gr",
-    image: "/images/photos/Utalk.svg",
+    name: "BoltCore Threadlocker",
+    brand: "10 ml",
+    image: "/images/photos/product-4.svg",
     price: 9.9,
     shipping: 1,
     advertCount: 250,
@@ -100,9 +102,9 @@ const items: any = [
   },
   {
     id: 10,
-    name: "GentleCare Baby",
-    brand: "Tear-Free Shampoo 200 ml",
-    image: "/images/photos/GentleCare Baby.svg",
+    name: "ClearOffice A4 Paper",
+    brand: "500 Sheets 80 gsm",
+    image: "/images/photos/product-15.svg",
     price: 45.0,
     shipping: 0,
     advertCount: 250,
@@ -121,8 +123,8 @@ const items: any = [
 
   {
     id: 12,
-    name: "PureCare Nursing Pads",
-    brand: "Manual Breast Pump",
+    name: "SafeGrip Cut-Resistant",
+    brand: "Gloves Level D Pair",
     image: "/images/photos/product-6.svg",
     price: 185.0,
     shipping: 1,
@@ -143,33 +145,30 @@ const filterList = [
 ];
 
 const Favourites: NextPage = () => {
-  const [itemList, setItemList] = useState<any>(items);
+  const [itemList, setItemList] = useLocalStorage<any[]>("favourites", items);
 
   const [cardStyle, setCardStyle] = useState<any>("card");
 
   const deleteCard = (item: any) => {
-    setItemList((pre: any[]) => {
-      pre[pre.indexOf(item)].isFavorite = false;
-      return pre;
-    });
+    setItemList((pre: any[]) => pre.filter((el: any) => el.id !== item.id));
   };
 
   return (
     <ProfileLayout>
-      <div className="flex flex-col w-full xl:px-0 bg-[#F2F2F2] xl:bg-transparent px-3 xl:mx-0">
-        <div className="xl:h-[3rem] flex xl:flex-row flex-col xl:gap-0 gap-3 justify-between xl:pl-8 xl:mx-0 xl:border xl:border-[#00B1B265] xl:bg-[#F4F5F7] xl:rounded-full mb-3 xl:mb-[1.5rem]">
-          <div className="flex justify-around xl:justify-start xl:gap-12 border rounded-full py-2 xl:py-0 border-[#00B1B265] xl:border-0">
-            <div className="flex xl:mx-8">
+      <div className="flex flex-col w-full xl:px-0 bg-canvas xl:bg-transparent px-3 xl:mx-0">
+        <div className="mx-3 mb-3 flex flex-col justify-between gap-3 rounded-card border border-line bg-surface p-2 shadow-card sm:flex-row sm:items-center xl:mx-0 xl:mb-[1.5rem] mt-3 xl:mt-[1.5rem]">
+          <div className="flex flex-wrap items-center justify-around gap-2 py-1 sm:justify-start xl:gap-8">
+            <div className="flex xl:px-2">
               <FilterDropdown filterList={filterList} />
             </div>
-            <div className="flex xl:mx-8">
+            <div className="flex xl:px-2">
               <DateDropdown />
             </div>
           </div>
           <div className="items-center hidden gap-2 xl:flex">
             <div
               className={`w-4 h-4  cursor-pointer ${
-                cardStyle === "card" ? "text-[#4CBEC5]" : "text-[#7E8096] hover:text-[#4CBEC5]"
+                cardStyle === "card" ? "text-brand-500" : "text-ink-muted hover:text-brand-600"
               }`}
               onClick={() => setCardStyle("card")}
             >
@@ -177,42 +176,46 @@ const Favourites: NextPage = () => {
             </div>
             <div
               className={`w-4 h-4  cursor-pointer ${
-                cardStyle === "list" ? "text-[#4CBEC5]" : "text-[#7E8096] hover:text-[#4CBEC5]"
+                cardStyle === "list" ? "text-brand-500" : "text-ink-muted hover:text-brand-600"
               }`}
               onClick={() => setCardStyle("list")}
             >
               <SvgFilterTabIcon2 />
             </div>
           </div>
-          <div className="flex relative ring-1 rounded-full ring-[#4CBEC565] ">
+          <div className="relative flex rounded-full ring-1 ring-brand-200 transition duration-200 focus-within:ring-2 focus-within:ring-brand-400/40">
             <input
               type="search"
               id="search"
               placeholder="Search"
-              className="outline-none bg-white placeholder-[#7E8096] xl:placeholder-[#4CBEC5] px-5 text-left text-[#7E8096] xl:text-[#4CBEC5]  placeholder:font-light w-full  xl:px-20 py-2 rounded-full xl:text-center"
+              className="h-10 w-full rounded-full bg-surface px-5 text-left text-sm text-ink outline-none placeholder:font-light placeholder:text-ink-muted focus-visible:outline-none sm:w-64 xl:w-72"
             />
-            <div className="absolute w-5 h-5 right-4 xl:right-10 top-3.5 text-[#4cbec5]">
+            <div className="absolute w-5 h-5 right-4 xl:right-10 top-3.5 text-brand-500">
               <SvgSearch />
             </div>
           </div>
         </div>
         {cardStyle === "list" ? (
-          <div className="flex flex-col gap-3 xl:gap-[1.5rem]">
-            {itemList &&
-              itemList.map((content: any) => (
-                <SingleCardListStyle key={content.id} content={content} deleteCard={deleteCard} />
-              ))}
-            {itemList.length === 0 && (
-              <div className="flex items-center justify-center w-full h-full">You have no favourite listings. </div>
-            )}
+          itemList.length === 0 ? (
+            <div className="flex w-full items-center justify-center gap-2 rounded-card border border-line bg-surface px-6 py-16 text-center text-ink-muted shadow-card">
+              {HIRE_ME_COPY.favouritesEmpty}
+            </div>
+          ) : (
+            <div className="flex flex-col gap-3 xl:gap-[1.5rem]">
+              {itemList &&
+                itemList.map((content: any) => (
+                  <SingleCardListStyle key={content.id} content={content} deleteCard={deleteCard} />
+                ))}
+            </div>
+          )
+        ) : itemList.length === 0 ? (
+          <div className="flex w-full items-center justify-center gap-2 rounded-card border border-line bg-surface px-6 py-16 text-center text-ink-muted shadow-card">
+            {HIRE_ME_COPY.favouritesEmpty}
           </div>
         ) : (
           <div className="grid w-full h-full grid-cols-2 gap-3 xl:gap-[1.5rem] xl:grid-cols-4">
             {itemList &&
               itemList.map((content: any) => <SingleCard key={content.id} content={content} deleteCard={deleteCard} />)}
-            {itemList.length === 0 && (
-              <div className="flex items-center justify-center w-full h-full">You have no favourite listings. </div>
-            )}
           </div>
         )}
       </div>

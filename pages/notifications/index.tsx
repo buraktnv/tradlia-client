@@ -16,7 +16,7 @@ const notificationsData = [
   },
   {
     id: 3,
-    text: "CardiaPharma has shipped your order",
+    text: "SafeMart has shipped your order",
     time: "Today - 11:00",
     type: "routine",
   },
@@ -28,7 +28,7 @@ const notificationsData = [
   },
   {
     id: 5,
-    text: "Durumedi has shipped your order",
+    text: "GreenLine has shipped your order",
     time: "01 May 2022 - 17:12",
     type: "routine",
   },
@@ -39,32 +39,32 @@ const notificationsData = [
     type: "daily",
   },
   {
-    id: 1,
+    id: 7,
     text: "Jujube Goat Milk Follow-on Formula 400g listing was removed because stock reached zero",
     time: "Today - 11:00",
     type: "daily",
   },
   {
-    id: 2,
+    id: 8,
     text: "You Have a New Order",
     time: "28 May 2022 - 22:15",
     type: "order",
   },
   {
-    id: 3,
-    text: "CardiaPharma has shipped your order",
+    id: 9,
+    text: "SupplyHub has shipped your order",
     time: "Today - 11:00",
     type: "routine",
   },
   {
-    id: 4,
+    id: 10,
     text: "You Have a New Order",
     time: "14 May 2022 - 13:40",
     type: "order",
   },
   {
-    id: 5,
-    text: "Durumedi has shipped your order",
+    id: 11,
+    text: "Partshub has shipped your order",
     time: "01 May 2022 - 17:12",
     type: "routine",
   },
@@ -72,25 +72,33 @@ const notificationsData = [
 
 const Notifications: NextPage = () => {
   return (
-    <div className="container mx-auto xl:my-[1.5rem] my-[2rem] xl:px-[10rem]">
-      <div className="flex flex-col gap-2 px-6 xl:items-start xl:w-full xl:px-0 xl:py-2 xl:pb-8">
-        <div className="flex space-x-1 px-7">
-          <SvgNotification />
-          <h1 className="text-[#4CBEC5] font-medium ">Notifications</h1>
+    <div className="mx-auto container my-8 xl:my-6 xl:px-[10rem]">
+      <div className="flex w-full flex-col gap-3 xl:items-start">
+        <div className="flex items-center gap-2.5 px-4 xl:px-0">
+          <span className="h-5 w-5 fill-current text-brand-500" aria-hidden="true">
+            <SvgNotification />
+          </span>
+          <h1 className="font-display text-lg font-bold text-ink">Notifications</h1>
         </div>
-        <div className="flex flex-col space-y-2 text-xs w-full font-medium text-[#7E8096]">
+        <ul className="flex w-full flex-col gap-2 px-4 font-medium text-ink-soft xl:px-0">
           {notificationsData.map((el) => (
-            <div
+            <li
               key={el.id}
-              className={`flex flex-col-reverse xl:flex-row px-6 py-2 border ${
-                el.type === "daily" && "border-[#9FA2B765]"
-              } ${el.type === "order" ? "border-[#f59b0059]" : "border-[#00b2b23f]"} rounded-3xl justify-between`}
+              className={`flex flex-col-reverse justify-between rounded-card border bg-surface px-5 py-3 text-sm shadow-card transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-50/40 sm:flex-row sm:items-center ${
+                el.type === "daily"
+                  ? "border-line border-l-4 border-l-danger"
+                  : el.type === "order"
+                    ? "border-line border-l-4 border-l-amber-400"
+                    : "border-line border-l-4 border-l-brand-400"
+              }`}
             >
               <p>{el.text}</p>
-              <span className="font-normal text-[#4CBEC5] xl:text-[#7E8096]">{el.time}</span>
-            </div>
+              <span className="mt-1 shrink-0 tabular-nums text-xs font-normal text-ink-muted sm:ml-6 sm:mt-0">
+                {el.time}
+              </span>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </div>
   );

@@ -1,72 +1,78 @@
 import React, { FC } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import useMediaQuery from "../../../helpers/hooks/useMediaQuery";
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
-const CustomizedXAxisTick: FC<any> = (props: any) => {
-  const { x, y, payload } = props;
-
-  return (
-    <g transform={`translate(${x},${y})`}>
-      <text
-        x={-5}
-        y={5}
-        dy={0}
-        textAnchor="end"
-        transform="rotate(-90)"
-        className="fill-[#7E8096] text-sm tracking-wide"
-      >
-        {payload.value.replace("2022", "22")}
-      </text>
-    </g>
-  );
+/** 7706 → "7.7K", 123456 → "123.5K" — keeps long numbers inside the Y axis band. */
+const abbreviateTick = (value: number): string => {
+  if (value >= 1000) {
+    const thousands = value / 1000;
+    return `${thousands % 1 === 0 ? thousands : thousands.toFixed(1)}K`;
+  }
+  return String(value);
 };
-const CustomizedYAxisTick: FC<any> = (props: any) => {
-  const { x, y, payload } = props;
 
-  return (
-    <g transform={`translate(${x},${y})`}>
-      <text x={-5} y={-10} dy={16} textAnchor="end" className="fill-[#7E8096] text-sm tracking-wide">
-        {payload.value}
-      </text>
-    </g>
-  );
-};
+const SERIES = "#1F8B92";
+const GRID = "#E3EBEE";
 
 const CustomTooltip: FC<any> = ({ active, label, payload }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-[#7E8096] rounded-xl text-white p-2 text-sm relative">
-        <div className="absolute w-full h-full"></div>
-        <p className="relative pb-0.5 text-sm font- bold">
-          {label} <span className="absolute bottom-0 left-0 w-5 h-[2px] bg-white"></span>
-        </p>
-        <p className="text-sm leading-snug">Total Sales Amount</p>
-        <p className="text-base font-bold leading-tight">{payload[0].value}</p>
+      <div
+        className="rounded-card bg-surface px-3 py-2 text-sm shadow-pop"
+        style={{ border: `1px solid ${GRID}` }}
+      >
+        <p className="pb-0.5 font-display font-bold text-ink">{label}</p>
+        <p className="text-xs leading-snug text-ink-muted">Total Sales Amount</p>
+        <p className="text-base font-bold leading-tight tabular-nums text-brand-600">{payload[0].value}</p>
       </div>
     );
   }
   return null;
 };
 
-const ChartChard: FC<any> = ({ data, strokeColor }) => {
-  const mobile = !useMediaQuery("(min-width: 768)");
+const tooltipContentStyle = {
+  background: "#FFFFFF",
+  borderRadius: "14px",
+  border: `1px solid ${GRID}`,
+  boxShadow: "0 10px 24px rgba(22,35,43,0.14)",
+  padding: "10px 14px",
+};
+
+const ChartChard: FC<any> = ({ data }) => {
+  const dataMax =
+    data.length > 0 ? Math.max(...data.map((el: any) => el["Total Sales Amount"] ?? 0)) : 0;
   return (
-    <ResponsiveContainer width="100%" height="100%" aspect={mobile ? 1.3 : 2}>
-      <LineChart
-        data={data}
-        className="font-medium text-[#7E8096]"
-        margin={{
-          top: 5,
-          right: 10,
-          left: 5,
-          bottom: 85,
-        }}
-      >
-        <CartesianGrid strokeDasharray="2" horizontal={true} />
-        <XAxis tickSize={5} ticks={data.map((el: any) => el.name)} dataKey="name" tick={<CustomizedXAxisTick />} />
-        <YAxis tickCount={9} type="number" tick={<CustomizedYAxisTick />} />
-        <Tooltip content={<CustomTooltip />} />
-        <Line type="monotone" dataKey="Total Sales Amount" stroke={strokeColor} />
+    <ResponsiveContainer width="100%" height="100%">
+      <LineChart data={data} margin={{ top: 10, right: 16, left: 0, bottom: 4 }}>
+        <CartesianGrid strokeDasharray="2" horizontal={true} vertical={false} stroke={GRID} />
+        <XAxis
+          dataKey="name"
+          interval="preserveStartEnd"
+          tickFormatter={(value: string) => value.replace(".2022", "")}
+          tick={{ fill: "#8FA0AA", fontSize: 12 }}
+          tickLine={false}
+          axisLine={false}
+          tickMargin={8}
+        />
+        <YAxis
+          type="number"
+          width={64}
+          domain={[0, dataMax * 1.1]}
+          tickCount={6}
+          tickFormatter={abbreviateTick}
+          tick={{ fill: "#8FA0AA", fontSize: 12 }}
+          tickLine={false}
+          axisLine={false}
+          tickMargin={4}
+        />
+        <Tooltip content={<CustomTooltip />} contentStyle={tooltipContentStyle} cursor={{ stroke: GRID }} />
+        <Line
+          type="monotone"
+          dataKey="Total Sales Amount"
+          stroke={SERIES}
+          strokeWidth={2}
+          dot={{ r: 3, fill: SERIES, strokeWidth: 0 }}
+          activeDot={{ r: 5 }}
+        />
       </LineChart>
     </ResponsiveContainer>
   );

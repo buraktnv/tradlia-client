@@ -1,266 +1,263 @@
-import { FC, useLayoutEffect, useState } from "react";
+import { FC, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper/types";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import usePrefersReducedMotion from "../../helpers/hooks/usePrefersReducedMotion";
 
 interface SliderImage {
   id: number;
   text1: string;
   text2: string;
-  img1: string;
+  /** slider-bar asset used as the soft background disc */
   url: string;
+  /** transparent product image used as the slide visual */
+  product: string;
+  category: string;
+  /** value for the /category?cat=… link */
+  type: string;
 }
+
+// Industrial/B2B themed slider content using catalog product visuals
 const photos: SliderImage[] = [
   {
     id: 1,
-    text1: "All Your \nFurry Friend's",
-    text2: "Every \nNeed",
-    img1: "/images/main/homepage/pet-slider.svg",
-    url: "/images/photos/slider-pet-1.svg",
+    text1: "Quality Packaging\nSupplies",
+    text2: "At Wholesale\nPrices",
+    url: "/images/main/homepage/slider-bar-1.svg",
+    product: "/images/photos/transparent/prod-13.svg",
+    category: "Packaging & Shipping",
+    type: "packaging",
   },
   {
     id: 2,
-    text1: "All Your \nFurry Friend's2",
-    text2: "Every \nNeed2",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Fasteners\n& Fixings",
+    text2: "Direct from\nManufacturers",
     url: "/images/main/homepage/slider-bar-2.svg",
+    product: "/images/photos/transparent/prod-07.svg",
+    category: "Fasteners",
+    type: "fasteners",
   },
   {
     id: 3,
-    text1: "All Your \nFurry Friend's3",
-    text2: "Every \nNeed3",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Electronics\nComponents",
+    text2: "Certified &\nReliable",
     url: "/images/main/homepage/slider-bar-3.svg",
+    product: "/images/photos/transparent/prod-10.svg",
+    category: "Electronics Components",
+    type: "electronics",
   },
   {
     id: 4,
-    text1: "All Your \nFurry Friend's4",
-    text2: "Every \nNeed4",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Safety Gear\n& Workwear",
+    text2: "Trusted Brands\nfor Your Team",
     url: "/images/main/homepage/slider-bar-4.svg",
+    product: "/images/photos/transparent/prod-02.svg",
+    category: "Safety Gear",
+    type: "safety",
   },
   {
     id: 5,
-    text1: "All Your \nFurry Friend's5",
-    text2: "Every \nNeed5",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Power Tools\n& Accessories",
+    text2: "Pro Grade\nQuality Assured",
     url: "/images/main/homepage/slider-bar-5.svg",
+    product: "/images/photos/transparent/prod-12.svg",
+    category: "Power Tools",
+    type: "tools",
   },
   {
     id: 6,
-    text1: "All Your \nFurry Friend's6",
-    text2: "Every \nNeed6",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Electrical\nSupplies",
+    text2: "Wiring, Breakers\n& Lighting",
     url: "/images/main/homepage/slider-bar-6.svg",
+    product: "/images/photos/transparent/prod-04.svg",
+    category: "Electrical Supplies",
+    type: "electrical",
   },
   {
     id: 7,
-    text1: "All Your \nFurry Friend's7",
-    text2: "Every \nNeed7",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Lab & Measurement\nInstruments",
+    text2: "Precision for\nEvery Workshop",
     url: "/images/main/homepage/slider-bar-7.svg",
+    product: "/images/photos/transparent/prod-11.svg",
+    category: "Lab & Measurement",
+    type: "lab",
   },
   {
     id: 8,
-    text1: "All Your \nFurry Friend's8",
-    text2: "Every \nNeed8",
-    img1: "/images/main/homepage/pet-slider.svg",
+    text1: "Office\n& Facility",
+    text2: "Everything for\nYour Workspace",
     url: "/images/main/homepage/slider-bar-8.svg",
-  },
-  {
-    id: 9,
-    text1: "All Your \nFurry Friend's9",
-    text2: "Every \nNeed9",
-    img1: "/images/main/homepage/pet-slider.svg",
-    url: "/images/main/homepage/slider-bar-9.svg",
-  },
-  {
-    id: 10,
-    text1: "All Your \nFurry Friend's10",
-    text2: "Every \nNeed10",
-    img1: "/images/main/homepage/pet-slider.svg",
-    url: "/images/main/homepage/slider-bar-10.svg",
+    product: "/images/photos/transparent/prod-16.svg",
+    category: "Office & Facility",
+    type: "office",
   },
 ];
 
 const Slider: FC = () => {
-  const [activeImage, setActiveImage] = useState<SliderImage>(photos[0]);
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const swiperRef = useRef<SwiperType | null>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
-  const minSwipeDistance = 50;
-
-  useLayoutEffect(() => {
-    let timer: NodeJS.Timeout | null = null;
-
-    timer = setTimeout(() => {
-      if (activeImage.id !== 10) setActiveImage(photos[activeImage.id]);
-      else setActiveImage(photos[0]);
-    }, 4000);
-
-    return () => {
-      timer && clearTimeout(timer);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeImage]);
-
-  const changeElement = (item: number) => {
-    setActiveImage(photos.filter((el) => el.id === Number(item))[0]);
-  };
-
-  const onTouchStart = (e: any) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e: any) => setTouchEnd(e.targetTouches[0].clientX);
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-    if (isLeftSwipe) {
-      if (activeImage.id !== 10) setActiveImage(photos[activeImage.id]);
-      else setActiveImage(photos[0]);
-    }
-    if (isRightSwipe) {
-      if (activeImage.id !== 1) setActiveImage(photos[Number(activeImage.id) - Number(2)]);
-      else setActiveImage(photos[9]);
-    }
+  const goToSlide = (index: number) => {
+    swiperRef.current?.slideToLoop(index);
   };
 
   return (
     <>
-      <div className="relative flex flex-col px-5 bg-white xl:px-3">
-        <div className="bg-[#F4F5F9] absolute w-[100%] h-[60%] left-0 bottom-0"></div>
-        <div
-          className="container relative mx-auto mb-6 xl:mb-0"
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
-        >
+      <div className="relative flex flex-col overflow-hidden px-5 bg-surface xl:px-3">
+        <div className="bg-canvas absolute w-[100%] h-[60%] left-0 bottom-0" aria-hidden="true"></div>
+        <div className="container relative mx-auto mb-6 xl:mb-0">
           <div className="absolute flex w-full h-full rounded-full">
             <div className="relative w-full h-full xl:h-[400px] drop-shadow-md">
-              <Image src="/images/main/homepage/photoBg.svg" alt="bg" fill sizes="100vw" className="rounded-3xl" />
+              <Image src="/images/main/homepage/photoBg.svg" alt="" aria-hidden="true" fill sizes="100vw" className="rounded-card" />
             </div>
           </div>
-          <div className="flex xl:w-full rounded-[1rem] xl:rounded-[2rem] h-[200px] w-[341px] xl:h-[400px]">
-            <div className="z-10 xl:p-2 xl:m-1 m-1 w-1/2 xl:w-[35%]">
-              <div className="h-full xl:w-full flex flex-col justify-between xl:justify-center xl:rounded-[2.5rem] rounded-[1.3rem] pl-1 pr-3 py-4 xl:p-0 bg-white">
-                <div className="xl:text-4xl leading-5 text-[19px] font-light xl:tracking-normal tracking-tighter text-[#7E8096] mx-3 xl:ml-14">
-                  <p className="whitespace-pre">{activeImage.text1}</p>
-
-                  <div className="xl:text-5xl text-[22px] font-bold text-[#4CBEC5]">
-                    <span className="whitespace-pre">{activeImage.text2}</span>
-                  </div>
-                  <div className="hidden px-10 xl:flex">
-                    <Image src="/images/main/secondSection/heartBeat.svg" alt="Heart Beat" height={36} width={36} />
-                  </div>
-                </div>
-                <div className="m-1 mx-3 xl:ml-14">
-                  <button type="button" className="xl:px-8 px-2 py-1 xl:py-2 text-[10px] xl:text-xl cursor-pointer mt-2 font-light drop-shadow-lg text-white bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] rounded-3xl">
-                    Start Shopping
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-start justify-around py-4 pr-3 bg-transparent xl:pr-0 xl:items-center xl:pl-36 grow">
-              <div className="absolute top-12 left-[25%] xl:left-[20%] z-10 xl:-top-8">
-                <div className="xl:w-[500px] w-[164px] h-[120px] xl:h-[420px]">
-                  <Image
-                    className="object-contain"
-                    src="/images/main/homepage/pet-slider.svg"
-                    fill sizes="100vw"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="h-full">
-                <div className="relative w-32 h-32 xl:w-[400px] xl:h-[320px]">
-                  <Image className="object-contain" src={activeImage.url} fill sizes="100vw" alt="activeImage" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="container hidden mx-auto xl:block">
-          <div className="flex justify-around px-[2.5rem] py-6 mx-auto space-x-6 overflow-x-auto">
+          <button
+            type="button"
+            aria-label="Previous slide"
+            onClick={() => swiperRef.current?.slidePrev()}
+            className="absolute left-3 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/80 shadow-card backdrop-blur transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-surface text-ink-soft hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 xl:flex"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-5 w-5" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            aria-label="Next slide"
+            onClick={() => swiperRef.current?.slideNext()}
+            className="absolute right-3 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/80 shadow-card backdrop-blur transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-surface text-ink-soft hover:text-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 xl:flex"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-5 w-5" aria-hidden="true">
+              <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <Swiper
+            modules={[Autoplay]}
+            loop
+            speed={600}
+            autoplay={
+              prefersReducedMotion
+                ? false
+                : { delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }
+            }
+            className="w-[341px] xl:w-full"
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+          >
             {photos.map((el) => (
-              <button type="button" key={el.id} className={`p-2 relative group cursor-pointer`} onClick={() => setActiveImage(el)}>
-                <div
-                  className={`absolute top-0 left-0 w-full h-full transform transition-all duration-300 ease-in-out group ${
-                    activeImage.url === el.url ? "block" : "opacity-0 group-hover:opacity-100"
+              <SwiperSlide key={el.id}>
+                <div className="relative flex h-[200px] w-[341px] xl:h-[400px] xl:w-full">
+                  <div className="z-10 xl:p-2 xl:m-1 m-1 w-1/2 xl:w-[35%]">
+                    <div className="h-full xl:w-full flex flex-col justify-between xl:justify-center rounded-card pl-1 pr-3 py-4 xl:p-0 bg-surface/95 xl:bg-transparent">
+                      <div className="xl:text-3xl text-[19px] leading-tight font-light xl:tracking-normal tracking-tighter text-ink-soft mx-3 xl:ml-14">
+                        <p className="whitespace-pre">{el.text1}</p>
+
+                        <div className="font-display xl:text-5xl text-[22px] font-semibold leading-[1.05] tracking-tight text-ink mt-2 xl:mt-3">
+                          <span className="whitespace-pre">{el.text2}</span>
+                        </div>
+                        <div className="hidden px-10 xl:flex text-brand-500" aria-hidden="true">
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-9 w-9"
+                          >
+                            <path d="M3 17l6-6 4 4 8-9" />
+                            <path d="M15 6h6v6" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="m-1 mx-3 xl:ml-14">
+                        <Link
+                          href={`/category?cat=${el.type}`}
+                          className="inline-flex items-center justify-center xl:px-8 px-3 py-1.5 xl:py-2 text-[11px] xl:text-base cursor-pointer mt-2 font-semibold text-white bg-ink rounded-pill col-span-3 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1"
+                        >
+                          Shop {el.category}
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="relative grow">
+                    {/* slider-bar asset used as a soft background disc */}
+                    <div className="absolute right-[2%] xl:right-[6%] top-1/2 -translate-y-1/2 pointer-events-none opacity-25 blur-2xl">
+                      <div className="relative w-[200px] h-[200px] xl:w-[400px] xl:h-[400px]">
+                        <Image src={el.url} alt="" aria-hidden="true" fill sizes="100vw" className="rounded-full" />
+                      </div>
+                    </div>
+                    {/* transparent product hero */}
+                    <div className="absolute right-[12%] xl:right-[20%] top-1/2 -translate-y-1/2">
+                      <div className="relative w-[140px] h-[140px] xl:w-[300px] xl:h-[300px]">
+                        <Image
+                          src={el.product}
+                          alt={el.category}
+                          fill
+                          sizes="100vw"
+                          className="object-contain drop-shadow-xl"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+        <div className="container relative hidden mx-auto xl:block">
+          <div className="flex justify-start gap-3 px-[2.5rem] py-5 mx-auto overflow-x-auto hiddenScroll">
+            {photos.map((el, index) => (
+              <button
+                type="button"
+                key={el.id}
+                aria-label={`Show slide ${index + 1}: ${el.category}`}
+                aria-current={activeIndex === index ? "true" : undefined}
+                onClick={() => goToSlide(index)}
+                className={`shrink-0 cursor-pointer rounded-card border px-4 py-2.5 text-left transition-[border-color,background-color,box-shadow] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
+                  activeIndex === index
+                    ? "border-brand-400 bg-brand-50 shadow-card"
+                    : "border-line bg-surface hover:border-brand-300"
+                }`}
+              >
+                <span
+                  className={`block text-[10px] font-semibold uppercase tracking-wider ${
+                    activeIndex === index ? "text-brand-600" : "text-ink-muted"
                   }`}
                 >
-                  <Image src="/images/main/homepage/png-1-2.svg" alt="" fill sizes="100vw" />
-                </div>
-                <div className="absolute top-0 left-0 w-full h-full opacity-40">
-                  <Image src="/images/main/homepage/png-1.svg" alt="" fill sizes="100vw" className="rounded-[1.7rem]" />
-                </div>
-                <div className="relative flex w-20 p-2 h-14">
-                  <Image className="object-contain" src={el.url} fill sizes="100vw" alt="" />
-                </div>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span
+                  className={`block text-xs font-semibold leading-tight mt-0.5 ${
+                    activeIndex === index ? "text-ink" : "text-ink-soft"
+                  }`}
+                >
+                  {el.category}
+                </span>
               </button>
             ))}
           </div>
         </div>
-        <div className="container block mx-auto xl:hidden">
+        <div className="container relative block mx-auto xl:hidden">
           <div className="relative flex justify-center w-full gap-2 py-2 pb-8">
-            <button type="button"
-              onClick={() => changeElement(1)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 1 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(2)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 2 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(3)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 3 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(4)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 4 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(5)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 5 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(6)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 6 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(7)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 7 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(8)}
-              className={`rounded-full p-1 border border-[#4CBEC5] cursor-pointer ${
-                activeImage.id === 8 && "bg-[#4CBEC5]"
-              }`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(9)}
-              className={`rounded-full p-1 border border-[#4CBEC5] ${activeImage.id === 9 && "bg-[#4CBEC5]"}`}
-            ></button>
-            <button type="button"
-              onClick={() => changeElement(10)}
-              className={`rounded-full p-1 border border-[#4CBEC5] ${activeImage.id === 10 && "bg-[#4CBEC5]"}`}
-            ></button>
+            {photos.map((el, index) => (
+              <button
+                type="button"
+                key={el.id}
+                aria-label={`Go to slide ${index + 1}`}
+                aria-current={activeIndex === index ? "true" : undefined}
+                onClick={() => goToSlide(index)}
+                className={`h-2 cursor-pointer rounded-pill transition-[width,background-color] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1 ${
+                  activeIndex === index ? "w-6 bg-brand-400" : "w-2 bg-line hover:bg-ink-muted"
+                }`}
+              ></button>
+            ))}
           </div>
         </div>
       </div>

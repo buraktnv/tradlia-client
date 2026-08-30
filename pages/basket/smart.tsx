@@ -1,384 +1,372 @@
 import { NextPage } from "next";
 import Image from "next/image";
 import { FC, useState } from "react";
-import {
-  SvgCheckMark,
-  SvgClose,
-  SvgPlus,
-  SvgSearch,
-  SvgShopCar,
-  SvgSmartBasket,
-  SvgDomesticCargo,
-} from "../../helpers/svgs/basketSvg";
+import { toast } from "react-toastify";
+import { useBasketContext } from "../../helpers/contexts/BasketContext";
+import { SvgCheckMark, SvgClose, SvgDomesticCargo, SvgPlus, SvgShopCar, SvgSmartBasket } from "../../helpers/svgs/basketSvg";
 
-const Shippingfirm: FC<any> = () => <SvgDomesticCargo />;
+interface SmartProduct {
+  id: number;
+  name: string;
+  brand: string;
+  image: string;
+  price: number;
+}
 
-const confirmBasket: any = {
-  total: "3290,40",
-  baskets: [
-    {
-      products: "2500,50",
-      shipment: "35,00",
-      total: "2535,50",
-      productsList: [
-        {
-          id: 1,
-          image: "/images/photos/StrepNaz Herbal.svg",
-          name: "StrepNaz Orange &",
-          brand: "Echinacea 24 Lozenges",
-          miad: "March 2023",
-          quantity: "15",
-          price: "47.98",
-          total: "719.90 $",
-        },
-        {
-          id: 2,
-          image: "/images/photos/Oxygenated Water.svg",
-          name: "Oxygenated Water",
-          brand: "100 ml",
-          miad: "March 2024",
-          quantity: "25",
-          price: "53.98",
-          total: "1325.00 $",
-        },
-      ],
-    },
-    {
-      products: "719,90",
-      shipment: "35,00",
-      total: "754,90",
-      productsList: [
-        {
-          id: 3,
-          image: "/images/photos/StrepNaz Herbal.svg",
-          name: "StrepNaz Orange &",
-          brand: "Echinacea 24 Lozenges",
-          miad: "March 2023",
-          quantity: "15",
-          price: "47.98",
-          total: "719.90 $",
-        },
-      ],
-    },
-  ],
-};
+const productList: SmartProduct[] = [
+  {
+    id: 1,
+    name: "PureSafe 3-Ply Black",
+    brand: "Dust Mask FFP2 with Valve 5-pack",
+    image: "/images/photos/product-2.svg",
+    price: 47.98,
+  },
+  {
+    id: 2,
+    name: "GripTight Pallet Wrap",
+    brand: "20 µm Roll",
+    image: "/images/photos/product-2.svg",
+    price: 53.98,
+  },
+  {
+    id: 3,
+    name: "TorqueMax Wood Screws",
+    brand: "4×40 (500 Count)",
+    image: "/images/photos/product-3.svg",
+    price: 25.98,
+  },
+  {
+    id: 4,
+    name: "ClearOffice A4 Paper",
+    brand: "500 Sheets 80 gsm",
+    image: "/images/photos/product-15.svg",
+    price: 36.5,
+  },
+  {
+    id: 5,
+    name: "MultiCheck Digital TRMS",
+    brand: "Multimeter",
+    image: "/images/photos/product-14.svg",
+    price: 23.5,
+  },
+];
+
+interface BasketRow {
+  id: number;
+  productId: number | null;
+  qty: number;
+}
+
+const DOMESTIC_SHIPPING = 35;
+
+const formatPrice = (value: number) => `${value.toFixed(2).replace(".", ",")} $`;
+
+const smartInputClass =
+  "rounded-card border border-line bg-surface text-ink-soft outline-none focus:border-brand-400 focus-visible:ring-2 focus-visible:ring-brand-400/30 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none";
+
+const primaryButtonClass =
+  "rounded-pill bg-brand-400 hover:bg-brand-500 active:bg-brand-600 text-white font-semibold transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1";
+
 const SmartBasket: NextPage = () => {
-  const [basketItemList, setBasketItemList] = useState<any>([
-    { id: 0, show: true },
-    { id: 1, show: true },
-    { id: 2, show: true },
-    { id: 3, show: true },
-    { id: 4, show: true },
+  const { addItem } = useBasketContext();
+  const [rows, setRows] = useState<BasketRow[]>([
+    { id: 0, productId: null, qty: 1 },
+    { id: 1, productId: null, qty: 1 },
+    { id: 2, productId: null, qty: 1 },
   ]);
+  const [activePage, setActivePage] = useState<"create" | "basket">("create");
+  const [shelfLifeOnly, setShelfLifeOnly] = useState<boolean>(false);
 
-  const [activePage, setActivePage] = useState<any>("create");
-
-  const handleBasketItem = (index: any) => {
-    setBasketItemList((pre: any) => {
-      pre.splice(index, 1);
-      return pre;
-    });
+  const removeRow = (index: number) => {
+    setRows((pre) => pre.filter((_, i) => i !== index));
   };
 
-  const AddNewBasketItem = () => {
-    if (basketItemList.length < 10) {
-      setBasketItemList((pre: any) => {
-        return [
-          ...pre,
-          {
-            id: Math.random(),
-            show: true,
-          },
-        ];
-      });
+  const addRow = () => {
+    if (rows.length < 10) {
+      setRows((pre) => [...pre, { id: Date.now(), productId: null, qty: 1 }]);
     }
   };
 
+  const updateRow = (index: number, patch: Partial<BasketRow>) => {
+    setRows((pre) => pre.map((row, i) => (i === index ? { ...row, ...patch } : row)));
+  };
+
+  const selected = rows
+    .map((row) => ({ row, product: productList.find((p) => p.id === row.productId) }))
+    .filter((el): el is { row: BasketRow; product: SmartProduct } => Boolean(el.product));
+
+  const productsTotal = selected.reduce((sum, el) => sum + el.product.price * el.row.qty, 0);
+  const shippingTotal = selected.length > 0 ? DOMESTIC_SHIPPING : 0;
+  const grandTotal = productsTotal + shippingTotal;
+
+  const matchRatio =
+    rows.length === 0 ? 0 : Math.round((selected.length / Math.max(rows.length, 1)) * 100);
+
+  const createBasket = () => {
+    if (selected.length === 0) {
+      toast.error("Please select at least one product first.");
+      return;
+    }
+    setActivePage("basket");
+  };
+
+  const addAllToCart = () => {
+    if (selected.length === 0) return;
+    selected.forEach((el) =>
+      addItem({
+        id: el.product.id,
+        name: el.product.name,
+        brand: el.product.brand,
+        image: el.product.image,
+        price: el.product.price * el.row.qty,
+        shipping: 0,
+      })
+    );
+  };
+
   return (
-    <div className="container xl:bg-[#F4F5F7] mx-auto rounded-3xl px-5 pt-2 xl:px-24 xl:py-16 flex flex-col gap-3 xl:w-3/5 mt-[2rem] mb-[3rem] xl:mb-0">
+    <div className="container mx-auto mt-[2rem] mb-[3rem] flex flex-col gap-4 rounded-card bg-canvas px-5 pt-2 xl:w-3/5 xl:px-24 xl:py-10 xl:mb-8 border border-line shadow-card">
       <div className="flex items-center gap-4 px-1 xl:px-0">
-        <div className="w-12 h-12 xl:w-16 xl:h-16 text-[#FB295A]">
+        <div className="h-12 w-12 shrink-0 rounded-pill bg-brand-50 p-2.5 text-brand-600 xl:h-16 xl:w-16">
           <SvgSmartBasket />
         </div>
-
         <div>
-          <h3 className="font-bold text-[#FB295A] text-[13px] xl:text-base">Tradlia Smart Basket</h3>
-          <p className="text-[#7E8096] text-[11px] xl:text-[0.85rem] xl:leading-4 leading-3">
+          <h3 className="font-display text-xs uppercase tracking-wider text-brand-600 font-semibold">
+            Tradlia Smart Basket
+          </h3>
+          <p className="mt-1 text-sm leading-snug text-ink-soft">
             Create your shopping list with up to 10 products.
             <br /> Generate the most profitable basket with a single click.
           </p>
         </div>
       </div>
+      <MatchMeter ratio={matchRatio} />
       {activePage === "create" ? (
         <>
-          <div className="text-[#FB295A] font-medium grid grid-cols-4 xl:grid-cols-5 py-1 pt-3 xl:pt-8">
-            <div className="xl:px-3 text-[13px] leading-[8px] px-3 col-span-3 xl:col-span-4 xl:text-base">
-              Product List
-            </div>
-            <div className="w-full xl:col-start-5 text-[13px] leading-[8px] xl:text-base text-left xl:pr-14 xl:text-center">
-              Qty
-            </div>
+          <div className="grid grid-cols-5 py-1 pt-3 font-medium uppercase tracking-wide text-ink-muted">
+            <div className="col-span-3 px-3 text-xs">Product List</div>
+            <div className="col-span-1 text-left text-xs">Qty</div>
+            <div className="col-span-1"></div>
           </div>
           <div className="grid gap-[1.5rem]">
-            {basketItemList.map((el: any, index: number) => (
-              <BasketItem key={el.id} index={index} show={el.show} setShow={handleBasketItem} />
+            {rows.map((row, index) => (
+              <BasketRow
+                key={row.id}
+                row={row}
+                products={productList}
+                onChange={(patch) => updateRow(index, patch)}
+                onRemove={() => removeRow(index)}
+              />
             ))}
           </div>
-          <div
-            className="flex items-center gap-3 px-3 my-2 cursor-pointer select-none xl:px-4 xl:py-4"
-            onClick={() => AddNewBasketItem()}
+          <button
+            type="button"
+            onClick={addRow}
+            disabled={rows.length >= 10}
+            className="my-2 flex select-none items-center gap-3 px-3 xl:px-4 xl:py-4 self-start rounded-pill focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:opacity-50 disabled:pointer-events-none group"
           >
-            <div className="w-4 xl:w-5 h-5 text-[#FB295A]">
-              <SvgPlus />
-            </div>
-            <p className="font-bold text-[13px] xl:text-base leading-[10px] xl:leading-normal text-[#FB295A]">
-              Add Another Product
-            </p>
-          </div>
+            <span className="flex h-6 w-6 items-center justify-center rounded-pill border border-line bg-surface text-brand-600 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none group-hover:border-brand-300">
+              <span className="block h-3 w-3">
+                <SvgPlus />
+              </span>
+            </span>
+            <p className="text-sm font-semibold text-brand-600">Add Another Product</p>
+          </button>
           <div className="flex items-center justify-start px-4">
-            <label htmlFor="1" className="flex items-center justify-center gap-3 cursor-pointer select-none">
-              <input type="checkbox" className="hidden peer" id="1" />
-              <div className="flex justify-center  items-center w-[23px] h-[23px] rounded-md peer-checked:bg-[#FB295A] text-transparent peer-checked:text-white border-2 border-[#FB295A]">
-                <div className="w-3 h-3">
+            <label htmlFor="shelf-life-only" className="flex items-center justify-center gap-3 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                className="hidden peer"
+                id="shelf-life-only"
+                checked={shelfLifeOnly}
+                onChange={(e) => setShelfLifeOnly(e.target.checked)}
+              />
+              <span className="flex justify-center items-center w-[23px] h-[23px] rounded-md peer-checked:bg-brand-400 peer-checked:border-brand-400 text-transparent peer-checked:text-white border-2 border-line bg-surface transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none peer-focus-visible:ring-2 peer-focus-visible:ring-brand-400">
+                <span className="w-3 h-3">
                   <SvgCheckMark />
-                </div>
-              </div>
-              <p className="font-bold text-[#A0A2AF] text-[13px] leading-[10px] xl:text-base">
-                Only Shelf Life Over 12 Months
-              </p>
+                </span>
+              </span>
+              <p className="text-sm font-medium text-ink-soft">Only Shelf Life Over 12 Months</p>
             </label>
           </div>
           <div className="py-4">
-            <button type="button"
-              className="bg-gradient-to-r from-[#FF516B] to-[#FF0045] text-white px-4 py-3.5 drop-shadow-md xl:py-2 rounded-full w-full xl:w-max text-[13px] leading-3 xl:text-base font-bold"
-              onClick={() => setActivePage("basket")}
-            >
+            <button type="button" onClick={createBasket} className={`${primaryButtonClass} w-full px-4 py-3 text-sm xl:w-max xl:px-10`}>
               Create Smart Basket
             </button>
           </div>
         </>
       ) : (
-        <>
-          <div>
-            {confirmBasket.baskets.map((content: any) => (
-              <ConfirmBasket key={content.id} content={content} />
-            ))}
-          </div>
-          <div className="grid grid-cols-6 gap-3 px-3 text-sm xl:py-3 xl:px-9">
-            <div className="grid xl:col-start-5 xl:h-10 xl:col-span-3 col-span-7 items-center xl:items-center grid-cols-2 gap-2 py-2 border rounded-full text-white bg-gradient-to-r from-[#FF516B] to-[#FF0045] ">
-              <div className="font-medium text-right text-[12px] leading-3 xl:text-sm">Total:</div>
-              <div className="text-base font-bold leading-4">{confirmBasket.total} $</div>
-            </div>
-            <div className="xl:col-start-5 col-span-7 xl:h-10 xl:col-span-3 gap-2 font-medium bg-gradient-to-r from-[#FFBE00] to-[#FF7B03] rounded-full flex justify-center items-center text-white py-2">
-              <div>Add All to Cart</div>
-              <div className="w-5 h-5">
-                <SvgShopCar />
-              </div>
-            </div>
-          </div>
-        </>
+        <ConfirmBasketView
+          selected={selected}
+          productsTotal={productsTotal}
+          shippingTotal={shippingTotal}
+          grandTotal={grandTotal}
+          onAddAll={addAllToCart}
+          onBack={() => setActivePage("create")}
+        />
       )}
     </div>
   );
 };
 
-const ConfirmBasket: FC<any> = ({ content }) => {
-  return (
-    <div className="border rounded-3xl border-[#00b2b280] xl:p-6 bg-white mt-6 text-sm shadow-md">
-      <div className="w-full xl:border-b xl:pb-[1rem] border-[#00B1B2] p-3 flex flex-col gap-6 xl:gap-0 xl:p-0">
-        {content.productsList &&
-          content.productsList.map((content: any) => <ProductCard content={content} key={content.id} />)}
-      </div>
-      <div className="grid items-center grid-cols-3 px-3 xl:py-6 xl:grid-cols-6">
-        <div className="w-full h-6 xl:col-start-4">
-          <Shippingfirm />
-        </div>
-        <div className="flex flex-col col-span-2 gap-2 text-xs leading-3 xl:col-span-2 xl:col-start-5 xl:text-sm">
-          <div className="grid grid-cols-2 gap-1 xl:gap-2">
-            <div className="text-right text-[#7E8096]">Products:</div>
-            <div className="font-bold text-[#7E8096] whitespace-nowrap">{content.products} $</div>
-          </div>
-          <div className="grid grid-cols-2 gap-1 xl:gap-2">
-            <div className="text-right text-[#7E8096]">Domestic Shipping:</div>
-            <div className="font-bold text-[#7E8096] whitespace-nowrap">{content.shipment} $</div>
-          </div>
-        </div>
-        <div className="grid xl:flex xl:col-start-5 xl:col-span-2 xl:h-10 items-center col-span-5 xl:w-full justify-center grid-cols-2 my-3 xl:px-2 gap-2 py-2 border border-[#00b2b266] rounded-full text-[#4CBEC5]">
-          <div className="text-xs font-medium text-right xl:text-sm"> Order Total:</div>
-          <div className="text-[18px] leading-[15px] xl:text-base font-bold">{content.total} $</div>
-        </div>
-      </div>
+const MatchMeter: FC<{ ratio: number }> = ({ ratio }) => (
+  <div className="grid gap-2 px-1 xl:px-0" data-testid="match-meter">
+    <div className="flex items-center justify-between">
+      <p className="font-display text-xs uppercase tracking-wider text-ink-muted font-semibold">Basket Match</p>
+      <p className="font-display text-sm font-semibold text-ink tabular-nums">{ratio}%</p>
     </div>
-  );
-};
-
-const BasketItem: FC<any> = ({ show, setShow, index }) => {
-  const dropdownList = [
-    {
-      id: 1,
-      name: "PureSafe 3-Ply Black",
-      brand: "Surgical Mask with Wire 50-pack",
-      image: "/images/photos/product-2.svg",
-    },
-    {
-      id: 2,
-      name: "PureSafe 3-Ply Black",
-      brand: "Surgical Mask with Wire 50-pack",
-      image: "/images/photos/product-2.svg",
-    },
-    {
-      id: 3,
-      name: "PureSafe 3-Ply Black",
-      brand: "Surgical Mask with Wire 50-pack",
-      image: "/images/photos/product-2.svg",
-    },
-    {
-      id: 4,
-      name: "PureSafe 3-Ply Black",
-      brand: "Surgical Mask with Wire 50-pack",
-      image: "/images/photos/product-2.svg",
-    },
-    {
-      id: 5,
-      name: "PureSafe 3-Ply Black",
-      brand: "Surgical Mask with Wire 50-pack",
-      image: "/images/photos/product-2.svg",
-    },
-  ];
-
-  const [productName, setProductName] = useState<any>("");
-  const [open, setOpen] = useState<boolean>(show);
-
-  const [dropdown, setDropdown] = useState<boolean>(false);
-
-  return (
-    <div className={`${open ? "flex" : "hidden"}`}>
-      {dropdown && <div className="fixed top-0 bottom-0 left-0 right-0" onClick={() => setDropdown(false)}></div>}
-      <div className="grid grid-cols-4 gap-2 xl:grid-cols-5 xl:gap-3">
-        <div className="relative col-span-3 xl:col-span-4">
-          <input
-            type="text"
-            name=""
-            id=""
-            className="w-full xl:px-12 px-9 py-2.5 text-[11px] leading-[8px] xl:text-sm drop-shadow-lg rounded-full shadow-sm outline-none focus:ring-1 ring-[#fb295a8c] text-[#A0A2AF] peer z-10"
-            placeholder="Enter Product Name or Barcode"
-            value={productName}
-            onChange={(e) => {
-              setProductName(() => e.target.value);
-              setDropdown(true);
-            }}
-          />
-          <div className="absolute w-[14px] h-[14px] xl:w-4 xl:h-4 left-3 top-[12px]">
-            <SvgSearch />
-          </div>
-
-          <div
-            className={`absolute gap-3 w-max xl:w-full bg-white rounded-[2rem] top-8 xl:top-10 border border-[#fb295a8c] z-10 p-4 h-80 overflow-x-scroll ${
-              dropdown ? "grid" : "hidden"
-            }`}
-          >
-            {dropdownList &&
-              dropdownList.map((el: any) => (
-                <DropDownItem key={el.id} content={el} setProductName={setProductName} setDropdown={setDropdown} />
-              ))}
-          </div>
-        </div>
-        <div className="col-span-1">
-          <input
-            type="number"
-            name=""
-            id=""
-            className="w-full xl:leading-[1.5rem] px-3 xl:px-12 py-2.5 text-[11px] leading-[8px] xl:text-sm drop-shadow-md rounded-full shadow-sm outline-none focus:ring-1 text-center text-[#A0A2AF] ring-[#fb295a8c] z-10"
-            placeholder="e.g. 2"
-          />
-        </div>
-      </div>
-      <div
-        className="flex items-center px-3"
-        onClick={() => {
-          setShow(index);
-          setOpen((pre) => !pre);
-        }}
-      >
-        <div className="w-[14px] h-[14px] cursor-pointer">
-          <SvgClose />
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const DropDownItem: FC<any> = ({ content, setProductName, setDropdown }) => {
-  return (
     <div
-      className="grid h-16 grid-cols-5 gap-3 rounded-xl mx-1 xl:gap-0 py-1.5 hover:bg-[#F4F5F9] transition-all ease-in-out duration-300 cursor-pointer select-none"
-      onClick={() => {
-        setProductName(content.name + content.brand);
-        setDropdown(false);
-      }}
+      role="progressbar"
+      aria-label="Basket match ratio"
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={ratio}
+      className="h-2 w-full overflow-hidden rounded-pill bg-line"
     >
-      <div className="flex items-center w-full h-full">
-        <div className="relative w-[50px] h-[32px] xl:w-full xl:h-full">
-          <Image src={content.image} alt="" fill sizes="100vw" className="object-contain" />
+      <div
+        className="h-full rounded-pill bg-gradient-to-r from-brand-400 to-brand-600 transition-[width] duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none"
+        style={{ width: `${ratio}%` }}
+      ></div>
+    </div>
+  </div>
+);
+
+const BasketRow: FC<{
+  row: BasketRow;
+  products: SmartProduct[];
+  onChange: (patch: Partial<BasketRow>) => void;
+  onRemove: () => void;
+}> = ({ row, products, onChange, onRemove }) => {
+  return (
+    <div className="grid grid-cols-5 items-center gap-2 xl:gap-3">
+      <div className="relative col-span-3">
+        <select
+          value={row.productId ?? ""}
+          aria-label="Select product"
+          onChange={(e) => onChange({ productId: e.target.value ? Number(e.target.value) : null })}
+          className={`${smartInputClass} w-full appearance-none px-4 py-2.5 text-[12px] xl:px-6 xl:text-sm`}
+        >
+          <option value="" disabled>
+            Select a product…
+          </option>
+          {products.map((product) => (
+            <option key={product.id} value={product.id}>
+              {product.name} — {product.brand}
+            </option>
+          ))}
+        </select>
+        <div className="pointer-events-none absolute right-4 top-3 h-3 w-3 rotate-180 text-brand-600">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 20.115 11.541">
+            <path
+              d="M1353.53,411.979a1.484,1.484,0,0,0,2.1,0l7.525-7.525,7.526,7.525a1.483,1.483,0,0,0,2.1-2.1l-8.575-8.575a1.483,1.483,0,0,0-2.1,0l-8.575,8.575A1.483,1.483,0,0,0,1353.53,411.979Z"
+              transform="translate(-1353.096 -400.873)"
+              fill="currentColor"
+            />
+          </svg>
         </div>
       </div>
-      <div className="col-span-4 flex text-[#7E8096] text-[11px] leading-3 items-center">
-        <div className="font-bold">{content.name}</div>
-        <div>{content.brand}</div>
+      <div className="col-span-1">
+        <input
+          type="number"
+          min={1}
+          aria-label="Quantity"
+          value={row.qty}
+          onChange={(e) => onChange({ qty: Math.max(1, Number(e.target.value) || 1) })}
+          className={`${smartInputClass} w-full px-2 py-2.5 text-center text-[12px] tabular-nums xl:text-sm`}
+        />
+      </div>
+      <div className="col-span-1 flex items-center justify-center">
+        <button
+          type="button"
+          onClick={onRemove}
+          aria-label="Remove product row"
+          className="h-8 w-8 rounded-pill border border-danger/30 bg-surface text-danger transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:bg-dangerTint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+        >
+          <div className="mx-auto h-3 w-3">
+            <SvgClose />
+          </div>
+        </button>
       </div>
     </div>
   );
 };
 
-const ProductCard: FC<any> = ({ content }) => {
+const ConfirmBasketView: FC<{
+  selected: { row: BasketRow; product: SmartProduct }[];
+  productsTotal: number;
+  shippingTotal: number;
+  grandTotal: number;
+  onAddAll: () => void;
+  onBack: () => void;
+}> = ({ selected, productsTotal, shippingTotal, grandTotal, onAddAll, onBack }) => {
   return (
-    <div className="grid grid-cols-12 gap-3 px-4 py-4 xl:py-2 text-sm border border-[#DADADA80] xl:border-none xl:grid-cols-7 xl:px-6 rounded-[1.5rem]">
-      <div className="flex col-span-4 xl:col-span-1 justify-items-start">
-        <div className="relative w-full h-full">
-          <Image className="object-contain" src={content?.image} fill sizes="100vw" alt={content.brand} />
+    <div className="mt-4 flex flex-col gap-4">
+      <div className="rounded-card border border-line bg-surface p-4 shadow-card xl:p-6">
+        <div className="mb-3 flex items-center justify-between border-b border-line pb-3">
+          <p className="font-display text-base font-semibold text-ink">Your Smart Basket</p>
+          <button
+            type="button"
+            onClick={onBack}
+            className="rounded-pill border border-line bg-surface px-4 py-1.5 text-xs font-medium text-ink-soft hover:border-brand-300 hover:text-brand-700 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+          >
+            Edit List
+          </button>
+        </div>
+        <div className="flex flex-col gap-3">
+          {selected.map(({ row, product }) => (
+            <div key={product.id} className="flex items-center gap-4 rounded-card border border-line bg-canvas p-3 xl:p-4">
+              <div className="relative h-14 w-14 shrink-0">
+                <Image className="object-contain" src={product.image} fill sizes="56px" alt={product.name} />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-semibold text-ink">{product.name}</p>
+                <p className="truncate text-xs text-ink-muted">{product.brand}</p>
+              </div>
+              <div className="text-right">
+                <p className="text-xs text-ink-muted tabular-nums">Qty: {row.qty}</p>
+                <p className="whitespace-nowrap text-sm font-display font-bold text-ink tabular-nums">
+                  {formatPrice(product.price * row.qty)}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-      <div className="grid grid-cols-1 col-span-8 gap-1 xl:grid-cols-6 xl:col-span-6">
-        <div className="grid justify-start grid-cols-5 gap-2 xl:py-2 xl:flex xl:flex-col xl:col-span-2">
-          <h3 className="text-[#4CBEC5] font-medium  xl:text-left text-[12px] leading-5 xl:text-sm">Product</h3>
-          <div className="text-[#7E8096] xl:py-1.5 text-[12px] leading-[18px] xl:text-sm col-span-4">
-            <h4 className="font-bold"> {content?.name}</h4> {content?.brand}
+      <div className="rounded-card border border-line bg-surface p-4 shadow-card xl:p-6">
+        <div className="flex items-center gap-2 border-b border-line pb-3">
+          <span className="flex h-8 w-8 items-center justify-center rounded-pill bg-brand-50 text-brand-600">
+            <span className="block h-4 w-4">
+              <SvgDomesticCargo />
+            </span>
+          </span>
+          <p className="font-display text-base font-semibold text-ink">Order Summary</p>
+        </div>
+        <div className="grid grid-cols-3 gap-3 py-4">
+          <div className="flex flex-col gap-1 text-center">
+            <span className="text-xs text-ink-muted">Products</span>
+            <span className="font-display font-semibold text-ink tabular-nums">{formatPrice(productsTotal)}</span>
+          </div>
+          <div className="flex flex-col gap-1 text-center">
+            <span className="text-xs text-ink-muted">Domestic Shipping</span>
+            <span className="font-display font-semibold text-ink tabular-nums">{formatPrice(shippingTotal)}</span>
+          </div>
+          <div className="flex flex-col gap-1 text-center">
+            <span className="text-xs text-ink-muted">Total</span>
+            <span className="font-display text-lg font-bold text-ink tabular-nums">{formatPrice(grandTotal)}</span>
           </div>
         </div>
-        <div className="grid justify-start grid-cols-5 gap-2 xl:py-2 xl:flex xl:flex-col">
-          <h3 className="text-[#4CBEC5] font-medium  xl:text-left text-[12px] leading-5 xl:text-sm">Expiry</h3>
-          <p className="text-[#7E8096] font-medium xl:py-1.5 text-[12px] leading-[18px] xl:text-sm col-span-4">
-            {content?.miad}
-          </p>
-        </div>
-        <div className="grid items-center justify-start grid-cols-5 gap-2 xl:py-2 xl:px-4 xl:flex xl:flex-col">
-          <h3 className="text-[#4CBEC5] font-medium text-left xl:px-2 text-[12px] leading-5 xl:text-sm">Qty</h3>
-          <div className="flex col-span-2 xl:justify-center">
-            <input
-              className="text-[#7E8096] outline-none text-[12px] leading-[18px] xl:text-sm font-medium border rounded-full text-center w-3/4 xl:w-2/3 px-1 xl:px-2 py-0.5 xl:py-1.5 inline-block border-[#00B1B2] bg-[#F4F5F7]"
-              type="number"
-              defaultValue={content?.quantity}
-              placeholder="0"
-            />
-          </div>
-        </div>
-        <div className="grid justify-start grid-cols-5 gap-2 xl:px-2 xl:py-2 xl:flex xl:flex-col">
-          <h3 className="text-[#4CBEC5] font-medium  xl:text-left text-[12px] leading-5 xl:text-sm">Price</h3>
-          <div className="flex w-full col-span-4">
-            <input
-              className="text-[#7E8096] font-medium xl:py-1.5 w-2/3 outline-none text-[12px] leading-[18px] xl:text-sm"
-              defaultValue={content?.price}
-              placeholder="0"
-              type="number"
-            />
-          </div>
-        </div>
-        <div className="grid justify-start grid-cols-5 gap-2 xl:py-2 xl:flex xl:flex-col">
-          <h3 className="text-[#4CBEC5] font-medium  xl:text-left text-[12px] leading-5 xl:text-sm">Amount</h3>
-          <p className="text-[#7E8096] font-medium xl:py-1.5 text-[12px] leading-[18px] xl:text-sm col-span-4">
-            {content?.total}
-          </p>
-        </div>
+      </div>
+      <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
+        <button
+          type="button"
+          onClick={onAddAll}
+          className={`${primaryButtonClass} flex items-center justify-center gap-2 px-8 py-3 text-sm`}
+        >
+          <span>Add All to Cart</span>
+          <span className="block h-5 w-5">
+            <SvgShopCar />
+          </span>
+        </button>
       </div>
     </div>
   );

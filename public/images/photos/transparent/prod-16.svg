@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+  <linearGradient id="g-pens-prod-16" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66c1bf"/><stop offset="1" stop-color="#00a29d"/></linearGradient>
+  </defs>
+  
+  <ellipse cx="200" cy="350" rx="120" ry="18" fill="#000" opacity="0.14"/>
+  
+    <g transform="rotate(-18 146 110)">
+      <rect x="135" y="110" width="22" height="46" rx="9" fill="#30333b"/>
+      <rect x="149" y="116" width="8" height="32" rx="4" fill="#ffffff" opacity="0.3"/>
+      <rect x="135" y="156" width="22" height="116" rx="6" fill="url(#g-pens-prod-16)"/>
+      <rect x="135" y="250" width="22" height="18" rx="6" fill="#30333b" opacity="0.85"/>
+      <path d="M138 268 L154 268 L149 292 L143 292 Z" fill="#30333b"/>
+      <circle cx="146" cy="295" r="3.5" fill="#8fa0aa"/>
+    </g>
+  
+    <g transform="rotate(0 200 96)">
+      <rect x="189" y="96" width="22" height="46" rx="9" fill="#30333b"/>
+      <rect x="203" y="102" width="8" height="32" rx="4" fill="#ffffff" opacity="0.3"/>
+      <rect x="189" y="142" width="22" height="116" rx="6" fill="url(#g-pens-prod-16)"/>
+      <rect x="189" y="236" width="22" height="18" rx="6" fill="#30333b" opacity="0.85"/>
+      <path d="M192 254 L208 254 L203 278 L197 278 Z" fill="#30333b"/>
+      <circle cx="200" cy="281" r="3.5" fill="#8fa0aa"/>
+    </g>
+  
+    <g transform="rotate(18 254 110)">
+      <rect x="243" y="110" width="22" height="46" rx="9" fill="#30333b"/>
+      <rect x="257" y="116" width="8" height="32" rx="4" fill="#ffffff" opacity="0.3"/>
+      <rect x="243" y="156" width="22" height="116" rx="6" fill="url(#g-pens-prod-16)"/>
+      <rect x="243" y="250" width="22" height="18" rx="6" fill="#30333b" opacity="0.85"/>
+      <path d="M246 268 L262 268 L257 292 L251 292 Z" fill="#30333b"/>
+      <circle cx="254" cy="295" r="3.5" fill="#8fa0aa"/>
+    </g>
+
+</svg>

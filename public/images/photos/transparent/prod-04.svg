@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+  <linearGradient id="g-bolts-prod-04" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66c1bf"/><stop offset="1" stop-color="#00a29d"/></linearGradient>
+  </defs>
+  
+  <ellipse cx="200" cy="350" rx="120" ry="20" fill="#000" opacity="0.14"/>
+  
+    <g transform="rotate(-20 150 110)">
+      <polygon points="120,110 135,86 165,86 180,110 165,134 135,134" fill="url(#g-bolts-prod-04)"/>
+      <polygon points="135,97 150, 90 165,97 165,105 135,105" fill="#ffffff" opacity="0.3"/>
+      <rect x="135" y="134" width="30" height="110" fill="url(#g-bolts-prod-04)"/>
+      <path d="M135 244 L165 244 L156 260 L144 260 Z" fill="url(#g-bolts-prod-04)"/>
+      <line x1="135" y1="148" x2="160" y2="151" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="135" y1="161" x2="160" y2="164" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="135" y1="174" x2="160" y2="177" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="135" y1="187" x2="160" y2="190" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="135" y1="200" x2="160" y2="203" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="135" y1="213" x2="160" y2="216" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="135" y1="226" x2="160" y2="229" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+    </g>
+  
+    <g transform="rotate(16 248 124)">
+      <polygon points="218,124 233,100 263,100 278,124 263,148 233,148" fill="url(#g-bolts-prod-04)"/>
+      <polygon points="233,111 248, 104 263,111 263,119 233,119" fill="#ffffff" opacity="0.3"/>
+      <rect x="233" y="148" width="30" height="110" fill="url(#g-bolts-prod-04)"/>
+      <path d="M233 258 L263 258 L254 274 L242 274 Z" fill="url(#g-bolts-prod-04)"/>
+      <line x1="233" y1="162" x2="258" y2="165" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="233" y1="175" x2="258" y2="178" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="233" y1="188" x2="258" y2="191" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="233" y1="201" x2="258" y2="204" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="233" y1="214" x2="258" y2="217" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="233" y1="227" x2="258" y2="230" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="233" y1="240" x2="258" y2="243" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+    </g>
+  
+    <g transform="rotate(0 199 96)">
+      <polygon points="169,96 184,72 214,72 229,96 214,120 184,120" fill="url(#g-bolts-prod-04)"/>
+      <polygon points="184,83 199, 76 214,83 214,91 184,91" fill="#ffffff" opacity="0.3"/>
+      <rect x="184" y="120" width="30" height="128" fill="url(#g-bolts-prod-04)"/>
+      <path d="M184 248 L214 248 L205 264 L193 264 Z" fill="url(#g-bolts-prod-04)"/>
+      <line x1="184" y1="134" x2="209" y2="137" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="184" y1="147" x2="209" y2="150" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="184" y1="160" x2="209" y2="163" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="184" y1="173" x2="209" y2="176" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="184" y1="186" x2="209" y2="189" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="184" y1="199" x2="209" y2="202" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/><line x1="184" y1="212" x2="209" y2="215" stroke="#5b5f6a" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+    </g>
+
+</svg>

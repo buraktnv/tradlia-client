@@ -5,34 +5,33 @@ const ShippingInfo: FC<any> = ({ content }) => {
   const [active, setActive] = useState<boolean>(content.active || false);
   return (
     <div className="flex w-full flex-col text-[12px] leading-3 xl:text-sm">
-      <div
+      <button type="button"
+        aria-expanded={active}
         onClick={() => setActive((pre) => !pre)}
-        className={`flex justify-between items-center px-4 xl:px-6 py-3 rounded-full font-medium border border-[#00B1B2] text-[#4CBEC5] ${
-          !active && "xl:mb-[2rem]"
+        className={`flex items-center justify-between rounded-pill border px-4 font-medium transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 xl:px-5 ${
+          active ? "border-line bg-canvas text-ink" : "border-line bg-surface text-ink-muted hover:bg-canvas"
         }`}
       >
         <p>Shipping Information</p>
-        <div
-          className={`w-4 h-4 xl:mx-4 transform cursor-pointer duration-300 ease-out ${
-            active ? "rotate-0" : "rotate-180"
-          }`}
+        <span
+          className={`h-3 w-3 transform cursor-pointer fill-current duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none ${active ? "rotate-0 text-brand-500" : "rotate-180 text-brand-500"}`}
         >
           <SvgShowMore />
-        </div>
-      </div>
+        </span>
+      </button>
       {active && (
-        <div className="flex flex-col justify-between gap-8 px-3 my-4 xl:px-6">
-          <div className="flex gap-1 text-[#7E8096]">
-            <b className="inline-block font-bold text-[#4CBEC5] min-w-max">Tracking No:</b>
-            {content.trackingNumber}
+        <div className="my-4 flex flex-col justify-between gap-6">
+          <div className="flex gap-1 text-ink-soft">
+            <b className="inline-block min-w-max font-medium text-brand-600">Tracking No:</b>
+            <span className="tabular-nums">{content.trackingNumber}</span>
           </div>
-          <div className="flex justify-between gap-3 xl:justify-start xl:flex-col xl:gap-8">
-            <div className="h-8 xl:h-10 w-32">{content.image}</div>
-            <button type="button" className="flex gap-2 items-center justify-center px-3 py-2 border-[#5327A8] border rounded-full w-max">
-              <div className="xl:w-7 w-5 h-4 xl:h-7 text-[#5327A8]">
+          <div className="flex justify-between gap-3 xl:flex-col xl:justify-start xl:gap-6">
+            <div className="h-8 w-32 text-ink-soft fill-current xl:h-10">{content.image}</div>
+            <button type="button" className="inline-flex w-max items-center justify-center gap-2 rounded-pill border border-line bg-surface px-3 py-2 transition-colors duration-200 ease-[var(--ease-out-soft)] motion-reduce:transition-none hover:border-brand-300 hover:bg-brand-50/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1">
+              <span className="h-4 w-7 fill-current text-brand-600 xl:h-6 xl:w-9">
                 <SvgPrintShipping />
-              </div>
-              <h3 className="font-bold text-[#7E8096] text-[11px] leading-3 xl:text-sm">Track Shipment</h3>
+              </span>
+              <span className="text-[11px] font-medium leading-3 text-ink-soft xl:text-sm">Track Shipment</span>
             </button>
           </div>
         </div>
